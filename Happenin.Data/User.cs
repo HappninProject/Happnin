@@ -43,7 +43,7 @@ namespace Happenin.Data
             if (friend != null)
             {
                 Friends.Add(friend);
-                friend.AddFriend(this);
+                friend.Friends.Add(this);
                 added = true;
             }
 
