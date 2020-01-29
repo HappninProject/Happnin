@@ -1,0 +1,8 @@
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\bin\Debug\netcoreapp3.1\Happenin.Data.deps.json
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\bin\Debug\netcoreapp3.1\Happenin.Data.dll
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\obj\Debug\netcoreapp3.1\Happenin.Data.AssemblyInfoInputs.cache
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\obj\Debug\netcoreapp3.1\Happenin.Data.AssemblyInfo.cs
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\obj\Debug\netcoreapp3.1\Happenin.Data.csprojAssemblyReference.cache
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\bin\Debug\netcoreapp3.1\Happenin.Data.pdb
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\obj\Debug\netcoreapp3.1\Happenin.Data.dll
+C:\Users\Kyle\source\repos\Happenin\Happenin.Data\obj\Debug\netcoreapp3.1\Happenin.Data.pdb
