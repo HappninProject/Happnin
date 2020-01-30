@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Happenin.Data.Tests
@@ -10,8 +13,7 @@ namespace Happenin.Data.Tests
         [Fact]
         public void Event_Create_Success()
         {
-            var eventHappenin = new Event(SampleData.Party, SampleData.Description, SampleData.Location1234Spokane(),
-                SampleData.UserKyle(), SampleData.EventTime,SampleData.Cost, SampleData.AgeRestriction);
+            var eventHappenin = new Event(SampleData.Party, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
             Assert.Equal(SampleData.Party, eventHappenin.Name);
             Assert.Equal(SampleData.Description, eventHappenin.Description);
@@ -25,8 +27,7 @@ namespace Happenin.Data.Tests
         [Fact]
         public void Event_NameNull_ThrowsException()
         {
-            Action act = () => new Event(null, SampleData.Description, SampleData.Location1234Spokane(),
-                SampleData.UserKyle(), SampleData.EventTime,SampleData.Cost, SampleData.AgeRestriction);
+            Action act = () => new Event(null, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -34,8 +35,7 @@ namespace Happenin.Data.Tests
         [Fact]
         public void Event_DescriptionNull_ThrowsException()
         {
-            Action act = () => new Event(SampleData.Party, null, SampleData.Location1234Spokane(),
-                SampleData.UserKyle(), SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction);
+            Action act = () => new Event(SampleData.Party, null, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -43,17 +43,15 @@ namespace Happenin.Data.Tests
         [Fact]
         public void Event_LocationNull_ThrowsException()
         {
-            Action act = () => new Event(SampleData.Party, SampleData.Description, null,
-                SampleData.UserKyle(), SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction);
-
+            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), null);
+            
             Assert.Throws<ArgumentNullException>(act);
         }
 
         [Fact]
         public void Event_UserNull_ThrowsException()
         {
-            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.Location1234Spokane(),
-                null, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction);
+            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , null, SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -85,8 +83,26 @@ namespace Happenin.Data.Tests
             Assert.False(added);
             Assert.Empty(eventHappenin.Attendees);
         }
- 
- 
+
+        [Fact]
+        public async Task Create_Event_DatabaseShouldSaveIt()
+        {
+            var eventId = -1;
+            Event eventHappenin = SampleData.EventParty();
+            
+            using var appDbContext = new AppDbContext(Options);
+            appDbContext.Events.Add(eventHappenin);
+            await appDbContext.SaveChangesAsync();
+            eventId = eventHappenin.Id!.Value;
+            
+            using var appDbContextAssert = new AppDbContext(Options);
+            Event eventFromDb = await appDbContextAssert.Events.Where(e => e.Id == eventId).SingleOrDefaultAsync();
+
+            Assert.Equal(eventHappenin.Name, eventFromDb.Name);
+            Assert.Equal(eventHappenin.Description, eventFromDb.Description);
+            Assert.Equal(eventHappenin.AgeRestriction, eventFromDb.AgeRestriction);
+            Assert.Equal(eventHappenin.Cost, eventFromDb.Cost);
+        }
  
     }
 }

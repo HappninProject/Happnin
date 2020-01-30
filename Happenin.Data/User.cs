@@ -5,11 +5,11 @@ namespace Happenin.Data
 {
     public class User : EntityBase
     {
-        private string _username; 
+        private string _firstName; 
         public string FirstName
         {
-            get => _username;
-            set => _username = value ?? throw new ArgumentNullException(nameof(FirstName));
+            get => _firstName;
+            set => _firstName = value ?? throw new ArgumentNullException(nameof(FirstName));
         }
         
         private string _lastName;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Happenin.Data
 {
-    public class Event : EntityBase
+    public class Event
     {
         private string _name;
 
@@ -21,13 +21,14 @@ namespace Happenin.Data
             get => _description; 
             set => _description = value ?? throw new ArgumentNullException(nameof(Description));
         }
+        public int LocationId { get; set; }
         private Location _location;
-
         public Location Location
         {
             get => _location; 
             set => _location = value ?? throw  new ArgumentNullException(nameof(Location));
         }
+        public int HostId { get; set; }
         private User _host;
 
         public User Host
@@ -40,17 +41,24 @@ namespace Happenin.Data
         public int AgeRestriction { get; set; }
         public List<User> Attendees { get;  } = new List<User>();
 
-        public Event(string name, string description, Location location, 
-            User host, DateTime eventTime, double cost, int ageRestriction)
+        public Event(string name, string description, DateTime eventTime,
+             double cost, int ageRestriction,User host, Location location) 
+            : this(name, description, eventTime, cost, ageRestriction, location.Id!.Value, host.Id.Value)
+        {
+            Location = location;
+            Host = host;
+        }
+
+        private Event(string name, string description, DateTime eventTime, double cost, int ageRestriction, int locationId, int userId)
         {
             Name = name;
             Description = description;
-            Location = location;
-            Host = host;
             EventTime = eventTime;
             Cost = cost;
             AgeRestriction = ageRestriction;
         }
+
+        private Event(){}
 
         public bool AddAttendee(User attendee)
         {

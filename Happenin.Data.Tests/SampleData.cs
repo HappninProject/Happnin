@@ -39,7 +39,7 @@ namespace Happenin.Data.Tests
         public const int AgeRestriction = 42;
 
         public static Event EventParty() => 
-            new Event(Party, Description, Location1234Spokane(),UserKyle(), EventTime, Cost, AgeRestriction);
+            new Event(Party, Description, EventTime, Cost, AgeRestriction, UserKyle(), Location1234Spokane());
         
 
     }
