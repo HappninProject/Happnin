@@ -26,15 +26,24 @@ namespace Happenin.Data
             set => _email = value ?? throw new ArgumentNullException(nameof(LastName));
         }
 
+        private Location _location;
+
+        public Location Location
+        {
+            get => _location;
+            set => _location = value ?? throw new ArgumentNullException(nameof(Location));
+        }
+
         // have to read up more about how to handle passwords in entity framework
         public string Password { get; set; } 
         public List<User> Friends { get; } = new List<User>();
 
-        public User(string firstName, string lastName, string email)
+        public User(string firstName, string lastName, string email, Location location)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            Location = location;
         }
 
         public bool AddFriend(User friend)
