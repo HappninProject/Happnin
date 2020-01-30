@@ -26,6 +26,7 @@ namespace Happenin.Data
             set => _email = value ?? throw new ArgumentNullException(nameof(LastName));
         }
 
+        public int LocationId { get; set; }
         private Location _location;
 
         public Location Location
@@ -38,12 +39,17 @@ namespace Happenin.Data
         public string Password { get; set; } 
         public List<User> Friends { get; } = new List<User>();
 
-        public User(string firstName, string lastName, string email, Location location)
+        public User(string firstName, string lastName, string email, Location location) 
+            : this(firstName, lastName, email)
+        {
+            Location = location;
+        }
+
+        private User(string firstName, string lastName, string email)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            Location = location;
         }
 
         public bool AddFriend(User friend)

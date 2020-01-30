@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Happenin.Data.Tests
 {
-    public class EventTests
+    public class EventTests : BaseTest
     {
         [Fact]
         public void Event_Create_Success()
@@ -84,25 +84,6 @@ namespace Happenin.Data.Tests
             Assert.Empty(eventHappenin.Attendees);
         }
 
-        [Fact]
-        public async Task Create_Event_DatabaseShouldSaveIt()
-        {
-            var eventId = -1;
-            Event eventHappenin = SampleData.EventParty();
-            
-            using var appDbContext = new AppDbContext(Options);
-            appDbContext.Events.Add(eventHappenin);
-            await appDbContext.SaveChangesAsync();
-            eventId = eventHappenin.Id!.Value;
-            
-            using var appDbContextAssert = new AppDbContext(Options);
-            Event eventFromDb = await appDbContextAssert.Events.Where(e => e.Id == eventId).SingleOrDefaultAsync();
-
-            Assert.Equal(eventHappenin.Name, eventFromDb.Name);
-            Assert.Equal(eventHappenin.Description, eventFromDb.Description);
-            Assert.Equal(eventHappenin.AgeRestriction, eventFromDb.AgeRestriction);
-            Assert.Equal(eventHappenin.Cost, eventFromDb.Cost);
-        }
- 
+        
     }
 }

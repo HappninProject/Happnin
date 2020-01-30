@@ -47,5 +47,6 @@ namespace Happenin.Data
             Country = country;
             ZipCode = zipCode;
         }
+
     }
 }

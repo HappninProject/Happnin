@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Text;
 
 namespace Happenin.Data
 {
-    public class Event
+    public class Event : EntityBase
     {
         private string _name;
 
@@ -43,13 +41,13 @@ namespace Happenin.Data
 
         public Event(string name, string description, DateTime eventTime,
              double cost, int ageRestriction,User host, Location location) 
-            : this(name, description, eventTime, cost, ageRestriction, location.Id!.Value, host.Id.Value)
+            : this(name, description, eventTime, cost, ageRestriction)
         {
             Location = location;
             Host = host;
         }
 
-        private Event(string name, string description, DateTime eventTime, double cost, int ageRestriction, int locationId, int userId)
+        private Event(string name, string description, DateTime eventTime, double cost, int ageRestriction)
         {
             Name = name;
             Description = description;
