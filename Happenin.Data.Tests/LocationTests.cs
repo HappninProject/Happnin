@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Happenin.Data.Tests
 { 
-    public class LocationTests
+    public class LocationTests : BaseTest
     {
         [Fact]
         public void Location_CreateLocation_Success()
@@ -58,5 +61,27 @@ namespace Happenin.Data.Tests
 
             Assert.Throws<ArgumentNullException>(act);
         }
+
+        [Fact]
+        public async Task Create_Event_DatabaseShouldSaveIt()
+        {
+            var locationId = -1;
+            Location location = SampleData.Location3456Spokane();
+
+            using var appDbContext = new AppDbContext(Options);
+            appDbContext.Location.Add(location);
+            await appDbContext.SaveChangesAsync();
+            locationId = location.Id!.Value;
+
+            using var appDbContextAssert = new AppDbContext(Options);
+            Location locationFromDb = await appDbContextAssert.Location.Where(e => e.Id == locationId).SingleOrDefaultAsync();
+
+            Assert.Equal(location.Address, locationFromDb.Address);
+            Assert.Equal(location.City, locationFromDb.City);
+            Assert.Equal(location.State, locationFromDb.State);
+            Assert.Equal(location.Country, locationFromDb.Country);
+            Assert.Equal(location.ZipCode, locationFromDb.ZipCode);
+        }
+
     }
 }

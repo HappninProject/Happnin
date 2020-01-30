@@ -6,19 +6,19 @@ namespace Happenin.Data
     public class Event : EntityBase
     {
         private string _name;
-
         public string Name
         {
             get => _name; 
             set => _name = value ?? throw new ArgumentNullException(nameof(Name));
         }
+        
         private string _description;
-
         public string Description
         {
             get => _description; 
             set => _description = value ?? throw new ArgumentNullException(nameof(Description));
         }
+       
         public int LocationId { get; set; }
         private Location _location;
         public Location Location
@@ -26,9 +26,9 @@ namespace Happenin.Data
             get => _location; 
             set => _location = value ?? throw  new ArgumentNullException(nameof(Location));
         }
+        
         public int HostId { get; set; }
         private User _host;
-
         public User Host
         {
             get => _host; 

@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kyle\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj": {}
+    "C:\\Users\\Tikio\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kyle\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj": {
+    "C:\\Users\\Tikio\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kyle\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Tikio\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj",
         "projectName": "Happenin.Data",
-        "projectPath": "C:\\Users\\Kyle\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj",
-        "packagesPath": "C:\\Users\\Kyle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kyle\\source\\repos\\Happenin\\Happenin.Data\\obj\\",
+        "projectPath": "C:\\Users\\Tikio\\source\\repos\\Happenin\\Happenin.Data\\Happenin.Data.csproj",
+        "packagesPath": "C:\\Users\\Tikio\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tikio\\source\\repos\\Happenin\\Happenin.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Kyle\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Tikio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

@@ -40,7 +40,13 @@ namespace Happenin.Data.Tests
 
         public static Event EventParty() => 
             new Event(Party, Description, EventTime, Cost, AgeRestriction, UserKyle(), Location1234Spokane());
-        
+
+        public const string Festival = "Festival";
+        public const string FestivalDescription = "a nice festival";
+        public const double FestivalCost = 15.00;
+        public const int AgeRestrictionFestival = 16;
+        public static Event EventFestival() => 
+            new Event(Festival, FestivalDescription, EventTime, FestivalCost, AgeRestrictionFestival, UserCaleb(), Location3456Spokane());
 
     }
 }
