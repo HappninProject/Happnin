@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin", "Happenin\Happnin.csproj", "{6A830A82-2EE8-45DD-A598-888D847445EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Data", "Happnin.Data\Happnin.Data.csproj", "{74409915-2DAA-4F2E-AAE9-BB827E1DB44E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Data", "Happenin.Data\Happnin.Data.csproj", "{CBF13689-6D56-4471-947E-937D5963C7E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Data.Tests", "Happnin.Data.Tests\Happnin.Data.Tests.csproj", "{7706F827-5ADC-4FCB-902E-28294AEC715A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Data.Tests", "Happenin.Data.Tests\Happnin.Data.Tests.csproj", "{2638EC51-6B9F-4857-BD9A-560C4614405F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin.Data", "Happnin.Data\Happnin.Data.csproj", "{74409915-2DAA-4F2E-AAE9-BB827E1DB44E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin.Data.Tests", "Happnin.Data.Tests\Happnin.Data.Tests.csproj", "{7706F827-5ADC-4FCB-902E-28294AEC715A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin", "Happnin\Happnin.csproj", "{5D52C600-4941-46B1-92AF-C2048FDC9E44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin", "Happnin\Happnin.csproj", "{5D52C600-4941-46B1-92AF-C2048FDC9E44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6A830A82-2EE8-45DD-A598-888D847445EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A830A82-2EE8-45DD-A598-888D847445EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A830A82-2EE8-45DD-A598-888D847445EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A830A82-2EE8-45DD-A598-888D847445EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBF13689-6D56-4471-947E-937D5963C7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBF13689-6D56-4471-947E-937D5963C7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBF13689-6D56-4471-947E-937D5963C7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBF13689-6D56-4471-947E-937D5963C7E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2638EC51-6B9F-4857-BD9A-560C4614405F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2638EC51-6B9F-4857-BD9A-560C4614405F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2638EC51-6B9F-4857-BD9A-560C4614405F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2638EC51-6B9F-4857-BD9A-560C4614405F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74409915-2DAA-4F2E-AAE9-BB827E1DB44E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74409915-2DAA-4F2E-AAE9-BB827E1DB44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74409915-2DAA-4F2E-AAE9-BB827E1DB44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
