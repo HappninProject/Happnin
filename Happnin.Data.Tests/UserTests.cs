@@ -1,9 +1,12 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Happnin.Data.Tests
 {
-    public class UserTests
+    public class UserTests : BaseTest
     {
         [Fact]
         public void User_Create_Success()
@@ -75,6 +78,77 @@ namespace Happnin.Data.Tests
 
             Assert.False(added);
             Assert.Empty(kyle.Friends);
+        }
+
+        [Fact]
+        public async Task Create_User_DatabaseShouldSaveIt()
+        {
+            var userId = -1;
+            User user = SampleData.UserKyle();
+
+            using var appDbContext = new AppDbContext(Options);
+            appDbContext.Users.Add(user);
+            await appDbContext.SaveChangesAsync();
+            userId = user.Id!.Value;
+
+            using var appDbContextAssert = new AppDbContext(Options);
+            User userFromDb = await appDbContextAssert.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
+
+            Assert.NotNull(userFromDb);
+            Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
+            Assert.Equal(SampleData.Smith, userFromDb.LastName);
+            Assert.Equal(SampleData.Email, userFromDb.Email);
+        }
+        
+        [Fact]
+        public async Task Fetch_User_DatabaseShouldReturnItWithLocation()
+        {
+            var userId = -1;
+            User user = SampleData.UserKyle();
+
+            using var appDbContext = new AppDbContext(Options);
+            appDbContext.Users.Add(user);
+            await appDbContext.SaveChangesAsync();
+            userId = user.Id!.Value;
+
+            using var appDbContextAssert = new AppDbContext(Options);
+            User userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
+                .Include(e => e.Location).Where(e => e.Id == userId).SingleOrDefaultAsync();
+            
+            Assert.NotNull(userFromDb);
+            Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
+            Assert.Equal(SampleData.Smith, userFromDb.LastName);
+            Assert.Equal(SampleData.Email, userFromDb.Email);
+            Assert.Equal(user.Location.Id, userFromDb.Location.Id);
+            Assert.Equal(user.Location.Address, userFromDb.Location.Address);
+            Assert.Equal(user.Location.City, user.Location.City);
+        }
+
+        [Fact]
+        public async Task Update_UserUpdated_SavedToDatabase()
+        {
+            var userId = -1;
+            User user = SampleData.UserKyle();
+            using var appDbContext = new AppDbContext(Options);
+            appDbContext.Users.Add(user);
+            await appDbContext.SaveChangesAsync();
+            userId = user.Id!.Value;
+
+            using var appDbContextFetch = new AppDbContext(Options);
+            User userFromDb = await appDbContextFetch.Users.Include(e => e.Location)
+                .Where(e => e.Id == userId).SingleOrDefaultAsync();
+            userFromDb.FirstName = "Updated";
+            userFromDb.Email = "newEmail@main.com";
+            await appDbContextFetch.SaveChangesAsync();
+            
+
+            using var appDbContextAssert = new AppDbContext(Options);
+            userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
+                .Where(e => e.Id == userId).SingleOrDefaultAsync();
+        
+            Assert.Equal("Updated", userFromDb.FirstName);
+            Assert.Equal("newEmail@main.com", userFromDb.Email);
+            Assert.Equal(userId, userFromDb.Id);
         }
 
 

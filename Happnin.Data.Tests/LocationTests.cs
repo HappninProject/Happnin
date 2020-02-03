@@ -63,7 +63,7 @@ namespace Happnin.Data.Tests
         }
 
         [Fact]
-        public async Task Create_Event_DatabaseShouldSaveIt()
+        public async Task Create_Location_DatabaseShouldSaveIt()
         {
             var locationId = -1;
             Location location = SampleData.Location3456Spokane();
@@ -82,6 +82,32 @@ namespace Happnin.Data.Tests
             Assert.Equal(location.Country, locationFromDb.Country);
             Assert.Equal(location.ZipCode, locationFromDb.ZipCode);
         }
+        
+        [Fact]
+        public async Task Update_LocationUpdated_SavedToDatabase()
+        {
+           var locationId = -1;
+            Location location = SampleData.Location3456Spokane();
+
+            using var appDbContext = new AppDbContext(Options);
+            appDbContext.Location.Add(location);
+            await appDbContext.SaveChangesAsync();
+            locationId = location.Id!.Value;
+           
+            using var appDbContextFetch = new AppDbContext(Options);
+            Location locationFromDb = await appDbContextFetch.Location.Where(e => e.Id == locationId).SingleOrDefaultAsync();
+            locationFromDb.Address = "qwerty street";
+            locationFromDb.State = "NY";
+
+            await appDbContextFetch.SaveChangesAsync();
+
+            using var appDbContextAssert = new AppDbContext(Options);
+            locationFromDb = await appDbContextAssert.Location.Where(e => e.Id == locationId).SingleOrDefaultAsync();
+            
+            Assert.Equal("qwerty street", locationFromDb.Address);
+            Assert.Equal("NY", locationFromDb.State);
+        }
+
 
     }
 }
