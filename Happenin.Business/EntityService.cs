@@ -56,7 +56,7 @@ namespace SecretSanta.Business
             return entities;
         }
 
-        public async Task<TEntity> UpdateAsync(int id, TEntity entity)
+        public virtual async Task<TEntity> UpdateAsync(int id, TEntity entity)
         {
             TEntity result = await ApplicationDbContext.Set<TEntity>().SingleAsync(item => item.Id == id);
             Mapper.Map(entity, result);
