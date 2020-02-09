@@ -56,7 +56,6 @@ namespace Happnin.Data
             AgeRestriction = ageRestriction;
         }
 
-        private Event(){}
 
         public bool AddAttendee(User attendee)
         {
