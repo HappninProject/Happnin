@@ -1,12 +1,7 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
-using Happnin.Business.Dto;
+﻿using Happnin.Business.Dto;
 using Happnin.Business.Services;
-using Happnin.Business.Tests;
 using Happnin.Data;
 using Happnin.Data.Tests;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Xunit;
 using User = Happnin.Data.User;
 

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Happnin.Business.Dto;
+﻿using Happnin.Business.Dto;
 using Happnin.Business.Services;
 using Happnin.Data;
 using Happnin.Data.Tests;

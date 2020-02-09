@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace Happnin.Business.Dto
+﻿namespace Happnin.Business.Dto
 {
     public class Event : EventInput, IEntity
     {

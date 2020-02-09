@@ -40,7 +40,7 @@ namespace Happnin.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TDto>> Post(TInputDto input)
+        public async Task<TDto> Post(TInputDto input)
         {
             return await Service.InsertAsync(input);
         }

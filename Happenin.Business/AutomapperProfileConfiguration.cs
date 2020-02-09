@@ -1,8 +1,6 @@
-﻿using System;
-using AutoMapper;
-using System.Reflection;
-using System.Text.RegularExpressions;
+﻿using AutoMapper;
 using Happnin.Data;
+using System.Reflection;
 
 
 namespace Happnin.Business
