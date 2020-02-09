@@ -1,6 +1,6 @@
 using System;
 
-namespace Happenin.Api
+namespace Happnin.Api
 {
     public class WeatherForecast
     {

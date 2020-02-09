@@ -1,6 +1,6 @@
 using System;
 
-namespace Happenin
+namespace Happnin
 {
     public class WeatherForecast
     {

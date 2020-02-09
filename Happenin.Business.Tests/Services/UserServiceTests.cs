@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using Happnin.Business.Dto;
+using Happnin.Business.Services;
 using Happnin.Business.Tests;
 using Happnin.Data;
 using Happnin.Data.Tests;

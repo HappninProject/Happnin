@@ -3,7 +3,7 @@ using Happnin.Business.Dto;
 using Happnin.Data;
 using Location = Happnin.Data.Location;
 
-namespace Happnin.Business
+namespace Happnin.Business.Services
 {
     public class LocationService : EntityService<Dto.Location, LocationInput, Location> , ILocationService
     {

@@ -1,14 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Happnin.Business.Dto;
 using Happnin.Data;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore;
 
-namespace Happnin.Business
+namespace Happnin.Business.Services
 {
     public abstract class EntityService<TDto, TInputDto, TEntity>: IEntityService<TDto, TInputDto>
         where TEntity: EntityBase

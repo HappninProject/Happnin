@@ -8,7 +8,7 @@ using Happnin.Data;
 using Microsoft.EntityFrameworkCore;
 using Event = Happnin.Data.Event;
 
-namespace Happnin.Business
+namespace Happnin.Business.Services
 {
     public class EventService : EntityService<Dto.Event, EventInput, Event> , IEventService
     {

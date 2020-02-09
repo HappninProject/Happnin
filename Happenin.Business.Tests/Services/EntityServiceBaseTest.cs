@@ -1,8 +1,9 @@
-using Happnin.Business.Dto;
 using Happnin.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Happnin.Business.Dto;
+using Happnin.Business.Services;
 using Xunit;
 
 namespace Happnin.Business.Tests

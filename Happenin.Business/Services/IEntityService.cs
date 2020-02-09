@@ -1,8 +1,8 @@
-﻿using Happnin.Business.Dto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Happnin.Business.Dto;
 
-namespace Happnin.Business
+namespace Happnin.Business.Services
 {
     public interface IEntityService<TDto, TInputDto>
         where TInputDto : class
