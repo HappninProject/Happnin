@@ -16,7 +16,7 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <Route path='/fetch-data' component={FetchData} />
-        <Route path='/fetch-data' component={SubmitEvent} />
+        <Route path='/submit-event' component={SubmitEvent} />
       </Layout>
     );
   }

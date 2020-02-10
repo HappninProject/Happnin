@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="axios" Version="0.16.2" />
+    <PackageReference Include="bootstrap" Version="4.4.1" />
+    <PackageReference Include="Bootstrap.DateTimePicker" Version="0.0.11" />
   </ItemGroup>
 
   <ItemGroup>
