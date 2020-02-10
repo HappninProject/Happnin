@@ -40,7 +40,7 @@ namespace Happnin.Data
         public List<User> Attendees { get;  } = new List<User>();
 
         public Event(string name, string description, DateTime eventTime,
-             double cost, int ageRestriction,User host, Location location) 
+             double cost, int ageRestriction, User host, Location location) 
             : this(name, description, eventTime, cost, ageRestriction)
         {
             Location = location;
