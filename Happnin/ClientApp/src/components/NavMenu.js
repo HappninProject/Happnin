@@ -42,6 +42,9 @@ export class NavMenu extends Component {
                 <NavItem>
                     <NavLink tag={Link} className="text-dark" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/fetch-event-data">Events</NavLink>
+                </NavItem>
               </ul>
             </Collapse>
           </Container>

@@ -5,7 +5,6 @@ import 'react-dates/lib/css/_datepicker.css';
 import { SingleDatePicker } from 'react-dates';
 
 import 'rc-time-picker/assets/index.css';
-import ReactDom from 'react-dom';
 import moment from 'moment';
 import TimePicker from 'rc-time-picker';
 const format = 'h:mm a';
@@ -29,7 +28,6 @@ export class SubmitEvent extends Component {
         console.log(event)
         const data = this.state
         console.log("Final data is ", data)
-
     }
 
     handleInputChange = (event) => {
@@ -39,12 +37,11 @@ export class SubmitEvent extends Component {
         })
     }
 
-    //componentDidMount = (event) => {
-    //    fetch('api/Event', {
-    //        method: 'post'
-    //    })
-    //}
-
+    componentDidMount = (event) => {
+        fetch('api/Event', {
+            method: 'post'
+        })
+    }
 
     render() {
         const { eventName, eventDescription } = this.state
@@ -63,8 +60,8 @@ export class SubmitEvent extends Component {
                     <p><input type='text' placeholder='Event Description' value={eventDescription}
                         name='eventDescription' onChange={this.handleInputChange} /></p>   
 
-                    <p><label>Date: </label>
-                    <SingleDatePicker
+                    <label>Date: </label>
+                    <p><SingleDatePicker
                         date={this.state.date} // momentPropTypes.momentObj or null
                         onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                         focused={this.state.focused} // PropTypes.bool
@@ -73,7 +70,7 @@ export class SubmitEvent extends Component {
                         /></p>
 
                     <label>Start Time: </label>
-                    <TimePicker
+                    <p><TimePicker
                         showSecond={false}
                         defaultValue={now}
                         className="xxx"
@@ -81,7 +78,7 @@ export class SubmitEvent extends Component {
                         format={format}
                         use12Hours
                         inputReadOnly
-                    />
+                    /></p>
 
                     <p><button>Submit</button></p>
                 </form> 

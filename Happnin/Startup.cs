@@ -28,11 +28,19 @@ namespace Happnin
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddHttpClient("Happnin.Api");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(builder =>
+                builder.WithOrigins("https://localhost:5001/api/Events"));
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,13 +57,14 @@ namespace Happnin
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+            app.UseMvcWithDefaultRoute();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapControllerRoute(
+            //         name: "default",
+            //         pattern: "{controller}/{action=Index}/{id?}");
+            // });
 
             app.UseSpa(spa =>
             {
