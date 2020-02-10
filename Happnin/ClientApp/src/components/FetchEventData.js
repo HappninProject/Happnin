@@ -5,14 +5,14 @@ export class FetchEventData extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { Events: [], loading: true };
+        this.state = { events: [], loading: true };
     }
 
     componentDidMount() {
         this.populateEventData();
     }
 
-    static renderEventsTable(Events) {
+    static renderEventsTable(events) {
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -26,13 +26,14 @@ export class FetchEventData extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {Events.map(Event =>
-                        <tr key={Event.name}>
-                            <td>{Event.date}</td>
-                            <td>{Event.Host}</td>
-                            <td>{Event.EventTime}</td>
-                            <td>{Event.Cost}</td>
-                            <td>{Event.AgeRestriction}</td>
+                    {events.map(e =>
+                        <tr key={e.name}>
+                            <td>{e.name}</td>
+                            <td>{e.description}</td>
+                            <td>{e.hostId}</td>
+                            <td>{e.eventTime}</td>
+                            <td>{e.cost}</td>
+                            <td>{e.ageRestriction}</td>
                         </tr>
                     )}
                 </tbody>
@@ -43,7 +44,7 @@ export class FetchEventData extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : FetchEventData.renderEventsTable(this.state.Events);
+            : FetchEventData.renderEventsTable(this.state.events);
 
         return (
             <div>
@@ -56,15 +57,11 @@ export class FetchEventData extends Component {
 
     async populateEventData() {
         console.log('before fetch');
-        const response = await fetch('https://localhost:5001/api/Events', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        });
+        const response = await fetch('event');
+        console.log(response);
         console.log('after fetch');
         const data = await response.json();
-        console.log('Got Data', data)
-        this.setState({ Events: data, loading: false });
+        console.log('Got Data', data);
+        this.setState({ events: data, loading: false });
     }
 }

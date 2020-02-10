@@ -16,7 +16,7 @@ namespace Happnin
         }
 
         public IConfiguration Configuration { get; }
-
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,6 +28,16 @@ namespace Happnin
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:5001/",
+                                            "https://localhost:44357");
+                    });
+            });
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
@@ -37,8 +47,7 @@ namespace Happnin
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(builder =>
-                builder.WithOrigins("https://localhost:5001/api/Events"));
+            app.UseCors(MyAllowSpecificOrigins);
 
 
             if (env.IsDevelopment())
