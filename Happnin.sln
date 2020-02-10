@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Data.Tests", "Happn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin", "Happnin\Happnin.csproj", "{5D52C600-4941-46B1-92AF-C2048FDC9E44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happenin.Business", "Happenin.Business\Happenin.Business.csproj", "{7FE35944-BCCF-45FB-ACBB-E011FADDFBF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business", "Happenin.Business\Happnin.Business.csproj", "{7FE35944-BCCF-45FB-ACBB-E011FADDFBF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happenin.Business.Tests", "Happenin.Business.Tests\Happenin.Business.Tests.csproj", "{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business.Tests", "Happenin.Business.Tests\Happnin.Business.Tests.csproj", "{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin.Api", "Happenin.Api\Happnin.Api.csproj", "{A5A1A502-B978-4509-AD34-94242B63420E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin.Api.Tests", "Happnin.Api.Tests\Happnin.Api.Tests.csproj", "{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A1A502-B978-4509-AD34-94242B63420E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A1A502-B978-4509-AD34-94242B63420E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A1A502-B978-4509-AD34-94242B63420E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A1A502-B978-4509-AD34-94242B63420E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

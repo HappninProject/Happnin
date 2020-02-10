@@ -1,14 +1,21 @@
 ﻿using AutoMapper;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using Happnin.Data;
+using System.Reflection;
 
-namespace BlogEngine.Business
+
+namespace Happnin.Business
 {
     public class AutomapperProfileConfiguration : Profile
     {
         public AutomapperProfileConfiguration()
         {
+            CreateMap<User, Dto.User>();
+            CreateMap<Dto.UserInput, User>();
+            CreateMap<Location, Dto.Location>();
+            CreateMap<Dto.LocationInput, Location>();
+            CreateMap<Event, Dto.Event>();
+            CreateMap<Dto.EventInput, Event>();
+
             CreateMap<Event, Event>().ForMember(property => property.Id, option => option.Ignore());
             CreateMap<User, User>().ForMember(property => property.Id, option => option.Ignore());
             CreateMap<Location, Location>().ForMember(property => property.Id, option => option.Ignore());

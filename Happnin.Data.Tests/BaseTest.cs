@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Happnin.Data;
-using Xunit;
+using System;
 
 namespace Happnin.Data.Tests
 {

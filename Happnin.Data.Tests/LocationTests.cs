@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Happnin.Data.Tests
-{ 
+{
     public class LocationTests : BaseTest
     {
         [Fact]

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Happenin
+namespace Happnin
 {
     public class Startup
     {
@@ -16,7 +16,6 @@ namespace Happenin
         }
 
         public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,11 +27,17 @@ namespace Happenin
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddHttpClient("Happnin.Api");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,13 +54,14 @@ namespace Happenin
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+            app.UseMvcWithDefaultRoute();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapControllerRoute(
+            //         name: "default",
+            //         pattern: "{controller}/{action=Index}/{id?}");
+            // });
 
             app.UseSpa(spa =>
             {
