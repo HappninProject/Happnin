@@ -4,6 +4,8 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { FetchEventData } from './components/FetchEventData';
+import { FetchUserData } from './components/FetchUserData';
+import { FetchLocationData } from './components/FetchLocationData';
 import { Counter } from './components/Counter';
 
 import { UserAccount } from './components/UserAccount';
@@ -29,7 +31,8 @@ export default class App extends Component {
 
         <Route path='/submit-event' component={SubmitEvent} />
         <Route path='/fetch-event-data' component={FetchEventData}/>
-
+        <Route path='/fetch-user-data' component={FetchUserData}/>
+        <Route path='/fetch-location-data' component={FetchLocationData}/>
       </Layout>
     );
   }
