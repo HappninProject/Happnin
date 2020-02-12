@@ -25,31 +25,34 @@ export class NavMenu extends Component {
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-          <Container>
-            <NavbarBrand tag={Link} to="/">Happnin</NavbarBrand>
+          <Container className = 'navbar'>
+            <NavbarBrand tag={Link} to="/" className="logo" >Happnin</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                  <NavLink tag={Link} className="subHeadder" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/fetch-location-data">locations</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/fetch-location-data">locations</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/fetch-user-data">Users</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/fetch-user-data">Users</NavLink>
                 </NavItem>
                 <NavItem>
 
-                    <NavLink tag={Link} className="text-dark" to="/user-account">Account</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/user-account">Account</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/user-creation">Sign Up!</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/user-creation">Sign Up!</NavLink>
 
-                    <NavLink tag={Link} className="text-dark" to="/submit-event">Submit Event</NavLink>
+                    
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/fetch-event-data">Events</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/submit-event">Submit Event</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} className="subHeadder" to="/fetch-event-data">Events</NavLink>
 
                 </NavItem>
               </ul>
