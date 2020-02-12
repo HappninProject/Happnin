@@ -32,7 +32,6 @@ export class SubmitEvent extends Component {
             category: '',
             age18Check: '',
             age21Check: '',
-            recurringCheck:''
         }
     }
 
@@ -164,10 +163,6 @@ export class SubmitEvent extends Component {
                     <div class = '21Check'>
                         <label class = 'subHeadder'>21+?</label>
                         <input type = "checkBox" value = {this.state.age21Check} onchenge = {this.handleInputChange}></input>
-                    </div>
-                        <div class = 'recurringCheck'>
-                        <label class = 'subHeadder'>recurring event?</label>
-                        <input type = "checkBox" value = {this.state.recurringCheck} onchenge = {this.handleInputChange}></input>
                     </div>
 
                     <div class = 'submitButton'>

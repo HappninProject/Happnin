@@ -15,6 +15,8 @@ import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 
 import './custom.css'
+import { browseEvents } from './components/browseEvents';
+
 
 export default class App extends Component {
   static displayName = App.name;
@@ -30,7 +32,7 @@ export default class App extends Component {
         <Route path='/user-creation' component={UserCreation} />
 
         <Route path='/submit-event' component={SubmitEvent} />
-        <Route path='/fetch-event-data' component={FetchEventData}/>
+        <Route path='/browseEvents' component={browseEvents}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
         <Route path='/fetch-location-data' component={FetchLocationData}/>
       </Layout>

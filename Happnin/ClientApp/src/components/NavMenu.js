@@ -52,7 +52,7 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeadder" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/fetch-event-data">Events</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/browseEvents">Events</NavLink>
 
                 </NavItem>
               </ul>
