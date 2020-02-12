@@ -13,7 +13,6 @@ import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 
 import './custom.css'
-
 export default class App extends Component {
     static displayName = App.name;
 

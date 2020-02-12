@@ -1,7 +1,10 @@
 ﻿import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './UserCreation.css';
 import { Button } from 'reactstrap';
+import Recaptcha from 'react-recaptcha';
+ 
 
 // are you a robot verification through google api
 //check if zip code is valid
@@ -59,6 +62,10 @@ export class UserCreation extends Component {
                     <input type="checkbox" name="13orolder" required/>
                     <label for="13orolder"> I am 13 or older</label>
                     </div>
+
+                    <Recaptcha
+                        sitekey="6Lf3W9gUAAAAABostmeeDYxgtLyJpsckK4Bei6I-"
+                    />
                     <Button type="submit">Submit</Button>
                 </form>
             </div>
