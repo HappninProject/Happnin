@@ -18,7 +18,11 @@
     "react-scripts": "^3.0.1",
     "reactstrap": "^6.3.0",
     "rimraf": "^2.6.2",
+
     "rimraff": "0.0.1-security"
+
+    "react-recaptcha": "*"
+
   },
   "devDependencies": {
     "ajv": "^6.9.1",
