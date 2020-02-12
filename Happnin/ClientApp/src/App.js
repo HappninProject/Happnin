@@ -15,11 +15,12 @@ import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 
 import './custom.css'
+
 import { browseEvents } from './components/browseEvents';
 
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
   render () {
     return (
@@ -27,10 +28,8 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <Route path='/fetch-data' component={FetchData} />
-
         <Route path='/user-account' component={UserAccount} />
         <Route path='/user-creation' component={UserCreation} />
-
         <Route path='/submit-event' component={SubmitEvent} />
         <Route path='/browseEvents' component={browseEvents}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
