@@ -15,7 +15,7 @@ import { SubmitEvent } from './components/SubmitEvent';
 import './custom.css'
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
   render () {
     return (
@@ -30,7 +30,7 @@ export default class App extends Component {
         <Route path='/submit-event' component={SubmitEvent} />
         <Route path='/fetch-event-data' component={FetchEventData}/>
 
-      </Layout>
+      </Layout>  
     );
   }
 }
