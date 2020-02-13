@@ -9,10 +9,12 @@ namespace Happnin.Data
 
         public CategoryTypes CategoryType { get; set; }
 
-        public Category(CategoryTypes category)
+        public Category(CategoryTypes category) : this()
         {
             CategoryType = category;
         }
+
+        private Category() { }
     }
 
     public enum CategoryTypes
