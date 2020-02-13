@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business.Tests", "H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin.Api", "Happenin.Api\Happnin.Api.csproj", "{A5A1A502-B978-4509-AD34-94242B63420E}"
 EndProject
+<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Happnin.Api.Tests", "Happnin.Api.Tests\Happnin.Api.Tests.csproj", "{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Api.Tests", "Happnin.Api.Tests\Happnin.Api.Tests.csproj", "{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}"
+>>>>>>> Stashed changes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

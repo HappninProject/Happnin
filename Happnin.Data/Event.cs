@@ -35,7 +35,9 @@ namespace Happnin.Data
             set => _host = value ?? throw new ArgumentNullException(nameof(Host));
         }
         public DateTime EventTime { get; set; }
+        public DateTime EndTime { get; set; }
         public double Cost { get; set; }
+        public Category Category { get; set; }
         public int AgeRestriction { get; set; }
         public List<User> Attendees { get;  } = new List<User>();
 
