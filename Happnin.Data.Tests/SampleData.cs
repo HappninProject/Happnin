@@ -31,19 +31,20 @@ namespace Happnin.Data.Tests
 
         public const string Party = "Party";
         public const string Description = "a party";
-        public static DateTime EventTime = DateTime.MaxValue;
+        public static DateTime EventTime = DateTime.Today;
+        public static DateTime EndTime = DateTime.MaxValue;
         public const double Cost = 1.5;
         public const int AgeRestriction = 42;
+        public static Category Category = new Category(CategoryTypes.Festival);
 
         public static Event EventParty() => 
-            new Event(Party, Description, EventTime, Cost, AgeRestriction, UserKyle(), Location1234Spokane());
+            new Event(Party, Description, Category,EventTime, EndTime, Cost, AgeRestriction, UserKyle(), Location1234Spokane());
 
         public const string Festival = "Festival";
         public const string FestivalDescription = "a nice festival";
         public const double FestivalCost = 15.00;
         public const int AgeRestrictionFestival = 16;
         public static Event EventFestival() => 
-            new Event(Festival, FestivalDescription, EventTime, FestivalCost, AgeRestrictionFestival, UserCaleb(), Location3456Spokane());
-
+            new Event(Festival, FestivalDescription,new Category(CategoryTypes.Comedy), EventTime, EndTime, FestivalCost, AgeRestrictionFestival, UserCaleb(), Location3456Spokane());
     }
 }

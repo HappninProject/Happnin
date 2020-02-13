@@ -35,25 +35,43 @@ namespace Happnin.Data
             set => _host = value ?? throw new ArgumentNullException(nameof(Host));
         }
         public DateTime EventTime { get; set; }
-        public DateTime EndTime { get; set; }
+        private DateTime _endTime;
+        public DateTime EndTime 
+        { 
+            get => _endTime;
+            set
+            {
+                if (value > EventTime)
+                {
+                    _endTime = value;
+                }
+                else
+                {
+                    throw new ArgumentException("End time entered must be larger than the event start time");
+                }
+            }
+        }
         public double Cost { get; set; }
-        public Category Category { get; set; }
         public int AgeRestriction { get; set; }
         public List<User> Attendees { get;  } = new List<User>();
-
-        public Event(string name, string description, DateTime eventTime,
-             double cost, int ageRestriction, User host, Location location) 
-            : this(name, description, eventTime, cost, ageRestriction)
+        public int CategoryId { get; set; } 
+        public Category Category { get; set; }
+        public Event(string name, string description, Category category,
+        DateTime eventTime, DateTime endTime, double cost, int ageRestriction, 
+             User host, Location location) 
+            : this(name, description, eventTime, endTime, cost, ageRestriction)
         {
             Location = location;
             Host = host;
+            Category = category;
         }
 
-        private Event(string name, string description, DateTime eventTime, double cost, int ageRestriction)
+        private Event(string name, string description, DateTime eventTime, DateTime endTime, double cost, int ageRestriction)
         {
             Name = name;
             Description = description;
             EventTime = eventTime;
+            EndTime = endTime;
             Cost = cost;
             AgeRestriction = ageRestriction;
         }
