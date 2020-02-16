@@ -5,6 +5,13 @@ namespace Happnin.Data
 {
     public class User : EntityBase
     {
+        private string _userName;
+
+        public string UserName
+        {
+            get => _userName;
+            set => _userName = value ?? throw new ArgumentNullException(nameof(UserName));
+        }
         private string _firstName; 
         public string FirstName
         {
@@ -39,14 +46,15 @@ namespace Happnin.Data
         public string Password { get; set; } 
         public List<User> Friends { get; } = new List<User>();
 
-        public User(string firstName, string lastName, string email, Location location) 
-            : this(firstName, lastName, email)
+        public User(string userName, string firstName, string lastName, string email, Location location) 
+            : this(userName, firstName, lastName, email)
         {
             Location = location;
         }
 
-        private User(string firstName, string lastName, string email)
+        private User(string userName, string firstName, string lastName, string email)
         {
+            UserName = userName;
             FirstName = firstName;
             LastName = lastName;
             Email = email;

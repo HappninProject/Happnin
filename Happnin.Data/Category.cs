@@ -8,6 +8,7 @@ namespace Happnin.Data
     {
 
         public CategoryTypes CategoryType { get; set; }
+        public List<Event> Events { get; } = new List<Event>();
 
         public Category(CategoryTypes category) : this()
         {
