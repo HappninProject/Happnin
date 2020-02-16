@@ -33,12 +33,12 @@ namespace Happnin.Api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddAutoMapper(new [] { typeof(AutomapperProfileConfiguration).Assembly});
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddSwaggerDocument();
-            //services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

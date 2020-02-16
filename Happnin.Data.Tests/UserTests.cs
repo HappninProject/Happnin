@@ -11,7 +11,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_Create_Success()
         {
-            var user = new User(SampleData.Kyle, SampleData.Smith,
+            var user = new User(SampleData.UserNameKyle, SampleData.Kyle, SampleData.Smith,
                 SampleData.Email, SampleData.Location1234Spokane());
 
             Assert.Equal(SampleData.Kyle, user.FirstName);
@@ -25,17 +25,25 @@ namespace Happnin.Data.Tests
         }
 
         [Fact]
+        public void User_UserName_Exception()
+        {
+            Action act = () => new User(null, SampleData.Kyle,SampleData.Smith, SampleData.Email,SampleData.Location1234Spokane());
+            
+            Assert.Throws<ArgumentNullException>(act);
+        }
+
+        [Fact]
         public void User_FirstNameNull_Exception()
         {
-            Action act = () => new User(null, SampleData.Smith, SampleData.Email,SampleData.Location1234Spokane());
-
+            Action act = () => new User(SampleData.UserNameKyle, null, SampleData.Smith, SampleData.Email,SampleData.Location1234Spokane());
+            
             Assert.Throws<ArgumentNullException>(act);
         }
         
         [Fact]
         public void User_LastNameNull_Exception()
         {
-            Action act = () => new User(SampleData.Kyle, null, SampleData.Email, SampleData.Location1234Spokane());
+            Action act = () => new User(SampleData.UserNameKyle, SampleData.Kyle, null, SampleData.Email, SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -43,7 +51,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_EmailNull_Exception()
         {
-            Action act = () => new User(SampleData.Kyle, SampleData.Smith, null, SampleData.Location1234Spokane());
+            Action act = () => new User(SampleData.UserNameKyle, SampleData.Kyle, SampleData.Smith, null, SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -51,7 +59,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_LocationNull_Exception()
         {
-            Action act = () => new User(SampleData.Kyle, SampleData.Smith, SampleData.Email, null);
+            Action act = () => new User(SampleData.UserNameKyle, SampleData.Kyle, SampleData.Smith, SampleData.Email, null);
 
             Assert.Throws<ArgumentNullException>(act);
         }
