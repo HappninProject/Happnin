@@ -2,3 +2,38 @@
 body {
     font-family: 'Montserrat', sans-serif;
 }
+
+.valid {
+    color: green;
+  }
+  
+.valid:before {
+    position: relative;
+    left: -40px;
+    content: "✔";
+}
+
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -40px;
+    content: "✖";
+}
+
+#passwordreq {
+    position: relative;
+    display: none;
+    padding: 10px;
+    left: -12px;
+}
+
+#usernamereq{
+    display: none;
+}
+
+#zipreq{
+    display: none;
+}
