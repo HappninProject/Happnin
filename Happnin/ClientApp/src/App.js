@@ -7,7 +7,7 @@ import { FetchEventData } from './components/FetchEventData';
 import { FetchUserData } from './components/FetchUserData';
 import { FetchLocationData } from './components/FetchLocationData';
 import { Counter } from './components/Counter';
-
+import { Login } from './components/Login';
 import { UserAccount } from './components/UserAccount';
 import { UserCreation } from './components/UserCreation';
 
@@ -33,7 +33,8 @@ export default class App extends Component {
         <Route path='/submit-event' component={SubmitEvent} />
         <Route path='/browseEvents' component={browseEvents}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
-        <Route path='/fetch-location-data' component={FetchLocationData}/>
+        <Route path='/fetch-location-data' component={FetchLocationData} />
+        <Route path='/login' component={Login} />
       </Layout>
     );
   }
