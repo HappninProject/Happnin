@@ -34,7 +34,7 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="subHeadder" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/fetch-location-data">locations</NavLink>
+                    <NavLink tag={Link} className="subHeadder" to="/fetch-location-data">Locations</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeadder" to="/fetch-user-data">Users</NavLink>
