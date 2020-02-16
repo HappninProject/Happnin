@@ -58,9 +58,9 @@ export class SubmitEvent extends Component {
         const { eventName, eventDescription } = this.state
         return (
             <div>
-                <h1 class = 'headder'>Submit Event</h1>
+                <h1 class = 'header'>Submit Event</h1>
                 <form onSubmit={this.handleSubmit}>
-                <h1 class = 'headder'>HOST INFO</h1>
+                <h1 class = 'header'>HOST INFO</h1>
                     <div class = 'hostName'>
                         <label class = 'subHeader'>Host name:</label>
                         <input type = 'text' value = {this.state.hostName} onChange = {this.handleHostName}></input>
@@ -85,7 +85,7 @@ export class SubmitEvent extends Component {
                         <label class = 'subHeader'>Company/organization Contact(phone):</label>
                         <input type = 'text' value = {this.state.companyContact} onChange = {this.handleCompanyContact}></input>
                     </div>
-                <h1 class = 'headder'>EVENT INFO</h1>
+                <h1 class = 'header'>EVENT INFO</h1>
                     <label class = 'subHeader'>Title: {eventName}</label>
                             <input type='text' 
                             placeholder='Event Title' 
