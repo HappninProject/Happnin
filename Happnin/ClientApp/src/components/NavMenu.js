@@ -31,28 +31,28 @@ export class NavMenu extends Component {
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="subHeadder" to="/">Home</NavLink>
+                  <NavLink tag={Link} className="subHeader" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/fetch-location-data">Locations</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/fetch-location-data">locations</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/fetch-user-data">Users</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/fetch-user-data">Users</NavLink>
                 </NavItem>
                 <NavItem>
 
-                    <NavLink tag={Link} className="subHeadder" to="/user-account">Account</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/user-account">Account</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/user-creation">Sign Up!</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/user-creation">Sign Up!</NavLink>
 
                     
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/submit-event">Submit Event</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeadder" to="/browseEvents">Events</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/browseEvents">Events</NavLink>
 
                 </NavItem>
               </ul>
