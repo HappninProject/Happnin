@@ -85,11 +85,7 @@ export class SubmitEvent extends Component {
                         <label class = 'subHeader'>Company/organization Contact(phone):</label>
                         <input type = 'text' value = {this.state.companyContact} onChange = {this.handleCompanyContact}></input>
                     </div>
-<<<<<<< HEAD
-                <h1 class = 'headder'>EVENT INFO</h1>
-=======
                 <h1 class = 'header'>EVENT INFO</h1>
->>>>>>> b54ae1b3ee13939350fc8ab4ad3b958a9b06e44f
                     <label class = 'subHeader'>Title: {eventName}</label>
                             <input type='text' 
                             placeholder='Event Title' 

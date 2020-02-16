@@ -40,32 +40,19 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/fetch-user-data">Users</NavLink>
                 </NavItem>
                 <NavItem>
-<<<<<<< HEAD
-=======
-
->>>>>>> b54ae1b3ee13939350fc8ab4ad3b958a9b06e44f
                     <NavLink tag={Link} className="subHeader" to="/user-account">Account</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/user-creation">Sign Up!</NavLink>
-<<<<<<< HEAD
-=======
-
-                    
->>>>>>> b54ae1b3ee13939350fc8ab4ad3b958a9b06e44f
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/browseEvents">Events</NavLink>
-<<<<<<< HEAD
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/login">Login</NavLink>
-=======
-
->>>>>>> b54ae1b3ee13939350fc8ab4ad3b958a9b06e44f
                 </NavItem>
               </ul>
             </Collapse>
