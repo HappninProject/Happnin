@@ -22,7 +22,7 @@ code {
   padding-left: 10px;
 }
 
-.headder
+.header
 {
   font-family: Montserrat;
   font-style: normal;
@@ -30,7 +30,7 @@ code {
   font-size: 34px;
   line-height: 41px;
 }
-.subHeadder
+.subHeader
 {
   font-family: Montserrat;
   font-style: italic;
@@ -44,4 +44,12 @@ code {
 {
   font-family: Montserrat;
   font-style: normal;
+}
+.text
+{
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
 }
