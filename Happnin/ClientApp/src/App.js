@@ -17,6 +17,8 @@ import { SubmitEvent } from './components/SubmitEvent';
 import './custom.css'
 
 import { browseEvents } from './components/browseEvents';
+import { signIn } from './components/sign-in';
+import { forgotPassword } from './components/forgotPassword';
 
 
 export default class App extends Component {
@@ -34,6 +36,8 @@ export default class App extends Component {
         <Route path='/browseEvents' component={browseEvents}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
         <Route path='/fetch-location-data' component={FetchLocationData}/>
+        <Route path='/sign-in' component={signIn}/>
+        <Route path='/forgotPassword' component={forgotPassword}/>
       </Layout>
     );
   }
