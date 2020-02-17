@@ -49,7 +49,7 @@ namespace Happnin.Business.Services
             return Mapper.Map<TEntity, TDto>(await Query.FirstOrDefaultAsync(x => x.Id == id));
         }
            
-        public async Task<TDto> InsertAsync(TInputDto dto)
+        virtual public async Task<TDto> InsertAsync(TInputDto dto)
         {
             TEntity entity = Mapper.Map<TInputDto, TEntity>(dto);
             ApplicationDbContext.Add(entity);
@@ -57,7 +57,7 @@ namespace Happnin.Business.Services
             return Mapper.Map<TEntity, TDto>(entity);
         }
 
-        public virtual async Task<TDto> UpdateAsync(int id, TInputDto entity)
+        virtual public async Task<TDto> UpdateAsync(int id, TInputDto entity)
         {
             if (await Query.FirstOrDefaultAsync(x => x.Id == id) is TEntity result)
             {

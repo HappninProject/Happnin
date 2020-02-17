@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { SingleDatePicker } from 'react-dates';
-
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 import TimePicker from 'rc-time-picker';
@@ -54,7 +53,6 @@ export class SubmitEvent extends Component {
             method: 'post'
         })
     }
-
 
     render() {
         const { eventName, eventDescription } = this.state
@@ -116,7 +114,6 @@ export class SubmitEvent extends Component {
                                 showSecond={false}
                                 defaultValue={now}
                                 className="xxx"
-                            
                                 format={format}
                                 use12Hours
                                 inputReadOnly
@@ -129,13 +126,10 @@ export class SubmitEvent extends Component {
                                 showSecond={false}
                                 defaultValue={now}
                                 className="xxx"
-                            
                                 format={format}
                                 use12Hours
                                 inputReadOnly
                             ></TimePicker>
-
-                    
                     </div>
                     <div class = 'eventAddress'>
                         <label class = 'subHeader'>Event address:</label>

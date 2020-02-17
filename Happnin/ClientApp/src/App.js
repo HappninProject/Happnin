@@ -7,7 +7,7 @@ import { FetchEventData } from './components/FetchEventData';
 import { FetchUserData } from './components/FetchUserData';
 import { FetchLocationData } from './components/FetchLocationData';
 import { Counter } from './components/Counter';
-
+import { Login } from './components/Login';
 import { UserAccount } from './components/UserAccount';
 import { UserCreation } from './components/UserCreation';
 

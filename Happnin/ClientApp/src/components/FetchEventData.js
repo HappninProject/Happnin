@@ -20,7 +20,9 @@ export class FetchEventData extends Component {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Host</th>
-                        <th>Event Time</th>
+                        <th>Category</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                         <th>Cost</th>
                         <th>Age Restriction</th>
                     </tr>
@@ -31,7 +33,9 @@ export class FetchEventData extends Component {
                             <td>{e.name}</td>
                             <td>{e.description}</td>
                             <td>{e.hostId}</td>
+                            <td>{e.categoryId}</td>
                             <td>{e.eventTime}</td>
+                            <td>{e.endTime}</td>
                             <td>{e.cost}</td>
                             <td>{e.ageRestriction}</td>
                         </tr>

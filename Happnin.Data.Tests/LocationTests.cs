@@ -67,12 +67,12 @@ namespace Happnin.Data.Tests
             Location location = SampleData.Location3456Spokane();
 
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.Location.Add(location);
+            appDbContext.Locations.Add(location);
             await appDbContext.SaveChangesAsync();
             locationId = location.Id!.Value;
 
             using var appDbContextAssert = new AppDbContext(Options);
-            Location locationFromDb = await appDbContextAssert.Location.Where(e => e.Id == locationId).SingleOrDefaultAsync();
+            Location locationFromDb = await appDbContextAssert.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
 
             Assert.Equal(location.Address, locationFromDb.Address);
             Assert.Equal(location.City, locationFromDb.City);
@@ -88,19 +88,19 @@ namespace Happnin.Data.Tests
             Location location = SampleData.Location3456Spokane();
 
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.Location.Add(location);
+            appDbContext.Locations.Add(location);
             await appDbContext.SaveChangesAsync();
             locationId = location.Id!.Value;
            
             using var appDbContextFetch = new AppDbContext(Options);
-            Location locationFromDb = await appDbContextFetch.Location.Where(e => e.Id == locationId).SingleOrDefaultAsync();
+            Location locationFromDb = await appDbContextFetch.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
             locationFromDb.Address = "qwerty street";
             locationFromDb.State = "NY";
 
             await appDbContextFetch.SaveChangesAsync();
 
             using var appDbContextAssert = new AppDbContext(Options);
-            locationFromDb = await appDbContextAssert.Location.Where(e => e.Id == locationId).SingleOrDefaultAsync();
+            locationFromDb = await appDbContextAssert.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
             
             Assert.Equal("qwerty street", locationFromDb.Address);
             Assert.Equal("NY", locationFromDb.State);

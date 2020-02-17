@@ -4,6 +4,9 @@ namespace Happnin.Business.Dto
 {
     public class UserInput
     {
+
+        [Required]
+        public string UserName { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

@@ -11,7 +11,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void Event_Create_Success() 
         {
-            var eventHappenin = new Event(SampleData.Party, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
+            var eventHappenin = new Event(SampleData.Party, SampleData.Description,SampleData.Category, SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
             Assert.Equal(SampleData.Party, eventHappenin.Name);
             Assert.Equal(SampleData.Description, eventHappenin.Description);
@@ -25,7 +25,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void Event_NameNull_ThrowsException()
         {
-            Action act = () => new Event(null, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
+            Action act = () => new Event(null, SampleData.Description, SampleData.Category, SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -33,7 +33,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void Event_DescriptionNull_ThrowsException()
         {
-            Action act = () => new Event(SampleData.Party, null, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
+            Action act = () => new Event(SampleData.Party, null, SampleData.Category,  SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -41,7 +41,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void Event_LocationNull_ThrowsException()
         {
-            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), null);
+            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.Category, SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), null);
             
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -49,7 +49,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void Event_UserNull_ThrowsException()
         {
-            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.EventTime, SampleData.Cost, SampleData.AgeRestriction , null, SampleData.Location1234Spokane());
+            Action act = () => new Event(SampleData.Party, SampleData.Description, SampleData.Category, SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , null, SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
