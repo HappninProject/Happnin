@@ -26,7 +26,6 @@ export class NavMenu extends Component {
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
           <Container className = 'navbar'>
-            <NavbarBrand tag={Link} to="/" className="logo" >Happnin</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
@@ -40,19 +39,22 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/fetch-user-data">Users</NavLink>
                 </NavItem>
                 <NavItem>
-
                     <NavLink tag={Link} className="subHeader" to="/user-account">Account</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/user-creation">Sign Up!</NavLink>
-
-                    
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/browseEvents">Events</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} className="subHeader" to="/login">Login</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} className="subHeader" to="/sign-in">Sign in</NavLink>
 
                 </NavItem>
               </ul>

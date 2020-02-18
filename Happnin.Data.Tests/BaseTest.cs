@@ -18,7 +18,7 @@ namespace Happnin.Data.Tests
             _SqliteConnection?.Dispose();
         }
 
-        private SqliteConnection _SqliteConnection { get; set; }
+        protected SqliteConnection _SqliteConnection { get; set; }
         protected DbContextOptions<AppDbContext> Options { get; set; }
 
         private static ILoggerFactory GetLoggerFactory()

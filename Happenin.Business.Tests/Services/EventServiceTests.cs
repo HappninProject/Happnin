@@ -1,4 +1,5 @@
-﻿using Happnin.Business.Dto;
+﻿using System.Security.Cryptography.X509Certificates;
+using Happnin.Business.Dto;
 using Happnin.Business.Services;
 using Happnin.Data;
 using Happnin.Data.Tests;
@@ -15,13 +16,20 @@ namespace Happnin.Business.Tests
             using var applicationDbContext = new AppDbContext(Options);
             applicationDbContext.Users.Add(SampleData.UserKyle());
             applicationDbContext.Users.Add(SampleData.UserCaleb());
+            applicationDbContext.Categories.Add(SampleData.Category);
             applicationDbContext.SaveChanges();
 
         }
 
         public override (Event entity, Event secondEntity) GetEntities()
         {
-            return (SampleData.EventParty(), SampleData.EventFestival());
+            var party = SampleData.EventParty();
+            party.CategoryId = 1;
+            party.Category = null;
+            var festival = SampleData.EventFestival();
+            festival.CategoryId = 1;
+            festival.Category = null;
+            return (party, festival);
         }
 
         public override (Dto.Event dto, Dto.Event seconDto) GetDtos()
@@ -30,9 +38,11 @@ namespace Happnin.Business.Tests
             Dto.Event partyDto = Mapper.Map<Event, Dto.Event>(SampleData.EventParty());
             partyDto.HostId = 1;
             partyDto.LocationId = 1;
+            partyDto.CategoryId = 1;
             Dto.Event festivalDto = Mapper.Map<Event, Dto.Event>(SampleData.EventFestival());
             festivalDto.HostId = 2;
             festivalDto.LocationId = 2;
+            festivalDto.CategoryId = 1;
             return (partyDto, festivalDto);
         }
 
