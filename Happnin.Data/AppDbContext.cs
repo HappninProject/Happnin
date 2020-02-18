@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Happnin.Data
 {
-    public class AppDbContext : DbContext 
+    public class AppDbContext : IdentityDbContext 
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }

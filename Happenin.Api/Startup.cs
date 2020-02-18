@@ -5,6 +5,7 @@ using Happnin.Business.Services;
 using Happnin.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,12 +24,14 @@ namespace Happnin.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var sqliteConnection = new SqliteConnection("DataSource=:memory:");
-            sqliteConnection.Open();
+            var sqliteConnection = new SqliteConnection("DataSource=Happnin.db");
 
             services.AddDbContext<AppDbContext>(options =>
                 options.EnableSensitiveDataLogging()
                     .UseSqlite(sqliteConnection));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
             
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEventService, EventService>();
@@ -49,6 +52,7 @@ namespace Happnin.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseMvc();
