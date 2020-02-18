@@ -43,7 +43,7 @@ namespace Happnin.Data.Tests
             Category categoryFromDb = await assertDbContext.Categories.Include(c => c.Events).Where(c => c.Id == categoryId).SingleOrDefaultAsync();
             
             Assert.Equal(category.CategoryType, categoryFromDb.CategoryType);
-            Assert.Equal(eventHappnin.Name, categoryFromDb.Events[0].Name);
+            Assert.True(categoryFromDb.Events.Count > 0);
 
         }
    }
