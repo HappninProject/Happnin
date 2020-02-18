@@ -18,7 +18,7 @@ export class UserCreation extends Component {
         $(function() {
             //shows password requirements when user starts input
             $("#password").focus(function() {
-                $('#passwordreq').show();
+                $('#passwordreq').slideDown();
             });
             $("#password").blur(function() {
                 $('#passwordreq').hide();
@@ -26,7 +26,7 @@ export class UserCreation extends Component {
 
             //shows username requirements when user starts input
             $("#username").focus(function() {
-                $('#usernamereq').show();
+                $('#usernamereq').slideDown();
             });
             $("#username").blur(function() {
                 $('#usernamereq').hide();
@@ -34,12 +34,69 @@ export class UserCreation extends Component {
 
             //shows zip code requirements when user starts input
             $("#zip").focus(function() {
-                $('#zipreq').show();
+                $('#zipreq').slideDown();
             });
             $("#zip").blur(function() {
                 $('#zipreq').hide();
             });
 
+            //checks while user is typing to see if username requirements are being met
+            $("#username").keyup(function() {
+                //gets username value
+                var usernameValue = $("#username").val();
+
+                //making sure username only contains alphanumeric characters
+                var regUsername = new RegExp("^[A-Za-z0-9]*$");
+                if (regUsername.test(usernameValue)) {
+                    //add valid class, get rid of invalid class
+                    $('#userAlphaNum').removeClass("invalid").addClass("valid");
+                }
+                else{
+                    $('#userAlphaNum').removeClass("valid").addClass("invalid");
+                }
+
+                if(usernameValue.length >= 4){
+                    $('#userMin').removeClass("invalid").addClass("valid");
+                }
+                else{
+                    $('#userMin').removeClass("valid").addClass("invalid");
+                }
+
+                // var regUsernameMax = new RegExp("^[A-Za-z0-9]{4,15}$");
+                // if (regUsernameMax.test(usernameValue)) {
+                //     //add valid class, get rid of invalid class
+                //     $('#userMax').removeClass("invalid").addClass("valid");
+                // }
+                // else{
+                //     $('#userMax').removeClass("valid").addClass("invalid");
+                // }
+
+                if(usernameValue.length <= 15){
+                    $('#userMax').removeClass("invalid").addClass("valid");
+                }
+                else{
+                    $('#userMax').removeClass("valid").addClass("invalid");
+                }
+
+            });
+
+            $("#zip").keyup(function(){
+                //gets zip code value
+                var zipValue = $("#zip").val();
+
+                //making sure zip code is 5 digits
+                if (zipValue.length == 5) {
+                    //add valid class, get rid of invalid class
+                    $('#zipDigits').removeClass("invalid").addClass("valid");
+                }
+                else{
+                    $('#zipDigits').removeClass("valid").addClass("invalid");
+                    
+                }
+            });
+
+            //checks while user is typing to see if password requirements are being met, and changes font from red to green and
+            //adds a checkmark if requirements are met
             $("#password").keyup(function() {
                 //get password value
                 var value = $("#password").val();
@@ -120,11 +177,13 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                     Username: <br/>
-                        <input id="username" class="rounded" name="username" type="text" pattern="^[A-Za-z0-9]+$" minLength="4" maxLength="15" placeholder="user123" required/>
+                        <input id="username" class="rounded" name="username" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" required/>
                     </label>
                     </div>
                     <div id="usernamereq">
-                        <p>Username must be a minimum length of 4 and a maximum length of 15</p>
+                        <p id="userAlphaNum" class="valid">Username must only contain letters and numbers</p>
+                        <p id="userMin" class="invalid">Username must be have a minimum length of 4</p>
+                        <p id="userMax" class="valid">User must have a maximum length of 15</p>
                     </div>
                     <div>
                     <label>
@@ -135,11 +194,11 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                     Zip code: <br/>
-                        <input id="zip" class="rounded" name="zip" type="text" pattern="\d{5}" maxLength="5" placeholder="99004" required/>
+                        <input id="zip" class="rounded" name="zip" type="number" pattern="^\d{5}$" placeholder="99004" required/>
                     </label>
                     </div>
                     <div id="zipreq">
-                        <p>Zip code must be 5 digits</p>
+                        <p id="zipDigits" class="invalid">Zip code must be 5 digits</p>
                     </div>
                     <div>
                     <label>
