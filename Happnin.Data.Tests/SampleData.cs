@@ -9,14 +9,14 @@ namespace Happnin.Data.Tests
         public const string Email = "e@mail.com";
         public const string UserNameKyle = "KyleIZKewl";
 
-        public static User UserKyle() => new User(UserNameKyle, Kyle, Smith, Email,Location1234Spokane());
+        public static User UserKyle() => new User(Kyle, Smith,Location1234Spokane());
 
         public const string Caleb = "Caleb";
         public const string Walsh = "Walsh";
         public const string CalebEmail = "Caleb@mail.com";
         public const string UserNameCaleb = "CalebIzKewl";
 
-        public static User UserCaleb() => new User(UserNameCaleb, Caleb, Walsh, CalebEmail, Location3456Spokane());
+        public static User UserCaleb() => new User(Caleb, Walsh, Location3456Spokane());
 
         public const string Street = "1234 street"; 
         public const string City = "Spokane";

@@ -11,12 +11,10 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_Create_Success()
         {
-            var user = new User(SampleData.UserNameKyle, SampleData.Kyle, SampleData.Smith,
-                SampleData.Email, SampleData.Location1234Spokane());
+            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane());
 
             Assert.Equal(SampleData.Kyle, user.FirstName);
             Assert.Equal(SampleData.Smith, user.LastName);
-            Assert.Equal(SampleData.Email, user.Email);
             Assert.Equal(SampleData.Street, user.Location.Address);
             Assert.Equal(SampleData.City, user.Location.City);
             Assert.Equal(SampleData.State, user.Location.State);
@@ -24,18 +22,11 @@ namespace Happnin.Data.Tests
             Assert.Equal(SampleData.ZipCode, user.Location.ZipCode);
         }
 
-        [Fact]
-        public void User_UserName_Exception()
-        {
-            Action act = () => new User(null, SampleData.Kyle,SampleData.Smith, SampleData.Email,SampleData.Location1234Spokane());
-            
-            Assert.Throws<ArgumentNullException>(act);
-        }
-
+       
         [Fact]
         public void User_FirstNameNull_Exception()
         {
-            Action act = () => new User(SampleData.UserNameKyle, null, SampleData.Smith, SampleData.Email,SampleData.Location1234Spokane());
+            Action act = () => new User(null, SampleData.Smith,SampleData.Location1234Spokane());
             
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -43,15 +34,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_LastNameNull_Exception()
         {
-            Action act = () => new User(SampleData.UserNameKyle, SampleData.Kyle, null, SampleData.Email, SampleData.Location1234Spokane());
-
-            Assert.Throws<ArgumentNullException>(act);
-        }
-
-        [Fact]
-        public void User_EmailNull_Exception()
-        {
-            Action act = () => new User(SampleData.UserNameKyle, SampleData.Kyle, SampleData.Smith, null, SampleData.Location1234Spokane());
+            Action act = () => new User(SampleData.Kyle, null, SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -59,7 +42,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_LocationNull_Exception()
         {
-            Action act = () => new User(SampleData.UserNameKyle, SampleData.Kyle, SampleData.Smith, SampleData.Email, null);
+            Action act = () => new User(SampleData.Kyle, SampleData.Smith, null);
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -95,17 +78,16 @@ namespace Happnin.Data.Tests
             User user = SampleData.UserKyle();
 
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.Users.Add(user);
+            appDbContext.AppUsers.Add(user);
             await appDbContext.SaveChangesAsync();
-            userId = user.Id!.Value;
+            userId = user.Id!;
 
             using var appDbContextAssert = new AppDbContext(Options);
-            User userFromDb = await appDbContextAssert.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
+            User userFromDb = await appDbContextAssert.AppUsers.Where(e => e.Id == userId).SingleOrDefaultAsync();
 
             Assert.NotNull(userFromDb);
             Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
             Assert.Equal(SampleData.Smith, userFromDb.LastName);
-            Assert.Equal(SampleData.Email, userFromDb.Email);
         }
         
         [Fact]
@@ -115,18 +97,17 @@ namespace Happnin.Data.Tests
             User user = SampleData.UserKyle();
 
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.Users.Add(user);
+            appDbContext.AppUsers.Add(user);
             await appDbContext.SaveChangesAsync();
-            userId = user.Id!.Value;
+            userId = user.Id!;
 
             using var appDbContextAssert = new AppDbContext(Options);
-            User userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
+            User userFromDb = await appDbContextAssert.AppUsers.Include(e => e.Location)
                 .Include(e => e.Location).Where(e => e.Id == userId).SingleOrDefaultAsync();
             
             Assert.NotNull(userFromDb);
             Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
             Assert.Equal(SampleData.Smith, userFromDb.LastName);
-            Assert.Equal(SampleData.Email, userFromDb.Email);
             Assert.Equal(user.Location.Id, userFromDb.Location.Id);
             Assert.Equal(user.Location.Address, userFromDb.Location.Address);
             Assert.Equal(user.Location.City, user.Location.City);
@@ -138,12 +119,12 @@ namespace Happnin.Data.Tests
             var userId = -1;
             User user = SampleData.UserKyle();
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.Users.Add(user);
+            appDbContext.AppUsers.Add(user);
             await appDbContext.SaveChangesAsync();
-            userId = user.Id!.Value;
+            userId = user.Id!;
 
             using var appDbContextFetch = new AppDbContext(Options);
-            User userFromDb = await appDbContextFetch.Users.Include(e => e.Location)
+            User userFromDb = await appDbContextFetch.AppUsers.Include(e => e.Location)
                 .Where(e => e.Id == userId).SingleOrDefaultAsync();
             userFromDb.FirstName = "Updated";
             userFromDb.Email = "newEmail@main.com";
@@ -151,7 +132,7 @@ namespace Happnin.Data.Tests
             
 
             using var appDbContextAssert = new AppDbContext(Options);
-            userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
+            userFromDb = await appDbContextAssert.AppUsers.Include(e => e.Location)
                 .Where(e => e.Id == userId).SingleOrDefaultAsync();
         
             Assert.Equal("Updated", userFromDb.FirstName);

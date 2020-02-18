@@ -14,8 +14,8 @@ namespace Happnin.Business.Tests
         {
             // seeding foreign key value for host and location
             using var applicationDbContext = new AppDbContext(Options);
-            applicationDbContext.Users.Add(SampleData.UserKyle());
-            applicationDbContext.Users.Add(SampleData.UserCaleb());
+            applicationDbContext.AppUsers.Add(SampleData.UserKyle());
+            applicationDbContext.AppUsers.Add(SampleData.UserCaleb());
             applicationDbContext.Categories.Add(SampleData.Category);
             applicationDbContext.SaveChanges();
 

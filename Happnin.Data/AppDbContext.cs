@@ -6,7 +6,7 @@ namespace Happnin.Data
 {
     public class AppDbContext : IdentityDbContext 
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> AppUsers { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Category> Categories { get; set; }

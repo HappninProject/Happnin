@@ -30,7 +30,7 @@ namespace Happnin.Api
                 options.EnableSensitiveDataLogging()
                     .UseSqlite(sqliteConnection));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
             
             services.AddScoped<IUserService, UserService>();

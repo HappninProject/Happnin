@@ -18,7 +18,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Categories.Add(category);
             await appDbContext.SaveChangesAsync();
-            categoryId = category.Id!.Value;
+            categoryId = category.Id;
 
             using var assertDbContext = new AppDbContext(Options);
             Category categoryFromDb = await assertDbContext.Categories.Where(c => c.Id == categoryId).SingleOrDefaultAsync();
@@ -37,7 +37,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Categories.Add(category);
             await appDbContext.SaveChangesAsync();
-            categoryId = category.Id!.Value;
+            categoryId = category.Id;
 
             using var assertDbContext = new AppDbContext(Options);
             Category categoryFromDb = await assertDbContext.Categories.Include(c => c.Events).Where(c => c.Id == categoryId).SingleOrDefaultAsync();
