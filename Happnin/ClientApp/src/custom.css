@@ -73,6 +73,11 @@ code {
   border-width: 5px;
   border-color: black;
   width: 1000px;
-  height: 500px;
   text-align: center;
+  object-fit: cover;
+}
+.sideBar
+{
+  position: absolute;
+  top: 220px;
 }
