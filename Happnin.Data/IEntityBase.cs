@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Happnin.Data.Migrations
+namespace Happnin.Data
 {
     public interface IEntityBase
     {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Happnin.Business.Dto;
 using Happnin.Business.Services;
-using Happnin.Data.Migrations;
 using Xunit;
 
 namespace Happnin.Business.Tests

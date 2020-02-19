@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Happnin.Data.Migrations;
 using Microsoft.AspNetCore.Identity;
 
 namespace Happnin.Data

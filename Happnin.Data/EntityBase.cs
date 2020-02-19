@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Happnin.Data.Migrations;
 
 namespace Happnin.Data
 {

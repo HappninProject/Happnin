@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Happnin.Business.Dto;
 using Happnin.Data;
-using Happnin.Data.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Happnin.Business.Services

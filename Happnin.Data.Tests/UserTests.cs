@@ -11,7 +11,10 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_Create_Success()
         {
-            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane());
+            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane())
+            {
+                Email = "kyle@website.com"
+            };
 
             Assert.Equal(SampleData.Kyle, user.FirstName);
             Assert.Equal(SampleData.Smith, user.LastName);
@@ -20,6 +23,7 @@ namespace Happnin.Data.Tests
             Assert.Equal(SampleData.State, user.Location.State);
             Assert.Equal(SampleData.Country, user.Location.Country);
             Assert.Equal(SampleData.ZipCode, user.Location.ZipCode);
+            Assert.Equal("kyle@website.com", user.Email);
         }
 
        
@@ -78,12 +82,12 @@ namespace Happnin.Data.Tests
             User user = SampleData.UserKyle();
 
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.AppUsers.Add(user);
+            appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
             userId = user.Id!;
 
             using var appDbContextAssert = new AppDbContext(Options);
-            User userFromDb = await appDbContextAssert.AppUsers.Where(e => e.Id == userId).SingleOrDefaultAsync();
+            User userFromDb = await appDbContextAssert.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
 
             Assert.NotNull(userFromDb);
             Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
@@ -97,12 +101,12 @@ namespace Happnin.Data.Tests
             User user = SampleData.UserKyle();
 
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.AppUsers.Add(user);
+            appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
             userId = user.Id!;
 
             using var appDbContextAssert = new AppDbContext(Options);
-            User userFromDb = await appDbContextAssert.AppUsers.Include(e => e.Location)
+            User userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
                 .Include(e => e.Location).Where(e => e.Id == userId).SingleOrDefaultAsync();
             
             Assert.NotNull(userFromDb);
@@ -119,12 +123,12 @@ namespace Happnin.Data.Tests
             var userId = -1;
             User user = SampleData.UserKyle();
             using var appDbContext = new AppDbContext(Options);
-            appDbContext.AppUsers.Add(user);
+            appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
             userId = user.Id!;
 
             using var appDbContextFetch = new AppDbContext(Options);
-            User userFromDb = await appDbContextFetch.AppUsers.Include(e => e.Location)
+            User userFromDb = await appDbContextFetch.Users.Include(e => e.Location)
                 .Where(e => e.Id == userId).SingleOrDefaultAsync();
             userFromDb.FirstName = "Updated";
             userFromDb.Email = "newEmail@main.com";
@@ -132,7 +136,7 @@ namespace Happnin.Data.Tests
             
 
             using var appDbContextAssert = new AppDbContext(Options);
-            userFromDb = await appDbContextAssert.AppUsers.Include(e => e.Location)
+            userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
                 .Where(e => e.Id == userId).SingleOrDefaultAsync();
         
             Assert.Equal("Updated", userFromDb.FirstName);

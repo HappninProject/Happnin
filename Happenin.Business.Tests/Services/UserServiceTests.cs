@@ -1,4 +1,5 @@
-﻿using Happnin.Business.Dto;
+﻿using System.Threading.Tasks;
+using Happnin.Business.Dto;
 using Happnin.Business.Services;
 using Happnin.Data;
 using Happnin.Data.Tests;
@@ -55,6 +56,11 @@ namespace Happnin.Business.Tests
         {
             entity.FirstName = update;
             return entity;
+        }
+
+        public override async Task Update_EntityUpdated_ShouldSaveToDatabase()
+        {
+
         }
     }
 }
