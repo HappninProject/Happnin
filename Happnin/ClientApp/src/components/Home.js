@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
+import { slideShow} from './slideShow';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -11,7 +12,9 @@ export class Home extends Component {
         <table class = 'home'>
           <td>
             <div class = 'homeImages' >
-              <th>PROBROBLY SOME IMAGES OR SOMETHING GOES HERE</th>
+              <slideShow>
+                
+              </slideShow>
             </div>
           </td>
 

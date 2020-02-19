@@ -17,9 +17,11 @@
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^3.0.1",
+    "react-slick": "^0.25.2",
     "reactstrap": "^6.3.0",
     "rimraf": "^2.6.2",
-    "rimraff": "0.0.1-security"
+    "rimraff": "0.0.1-security",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "ajv": "^6.9.1",

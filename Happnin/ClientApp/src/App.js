@@ -19,6 +19,7 @@ import './custom.css'
 import { browseEvents } from './components/browseEvents';
 import { signIn } from './components/sign-in';
 import { forgotPassword } from './components/forgotPassword';
+import { slideShow} from './components/slideShow'
 
 
 export default class App extends Component {
@@ -38,6 +39,7 @@ export default class App extends Component {
         <Route path='/fetch-location-data' component={FetchLocationData}/>
         <Route path='/sign-in' component={signIn}/>
         <Route path='/forgotPassword' component={forgotPassword}/>
+        <Route path='/slideShow' component={slideShow}/>
       </Layout>
     );
   }

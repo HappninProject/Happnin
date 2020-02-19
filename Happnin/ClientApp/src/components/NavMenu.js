@@ -58,6 +58,10 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/sign-in">Sign in</NavLink>
 
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} className="subHeader" to="/slideShow">Slideshowtest</NavLink>
+
+                </NavItem>
               </ul>
             </Collapse>
           </Container>
