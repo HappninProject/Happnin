@@ -6,8 +6,8 @@ import { Button } from 'reactstrap';
 import Recaptcha from 'react-recaptcha';
 import $ from 'jquery';
  
-//create dropdowns for user requirements
 //use bootstrap to make page prettier
+//send email confirmation
 
 export class UserCreation extends Component {
     constructor(props) {
@@ -62,15 +62,6 @@ export class UserCreation extends Component {
                     $('#userMin').removeClass("valid").addClass("invalid");
                 }
 
-                // var regUsernameMax = new RegExp("^[A-Za-z0-9]{4,15}$");
-                // if (regUsernameMax.test(usernameValue)) {
-                //     //add valid class, get rid of invalid class
-                //     $('#userMax').removeClass("invalid").addClass("valid");
-                // }
-                // else{
-                //     $('#userMax').removeClass("valid").addClass("invalid");
-                // }
-
                 if(usernameValue.length <= 15){
                     $('#userMax').removeClass("invalid").addClass("valid");
                 }
@@ -95,8 +86,8 @@ export class UserCreation extends Component {
                 }
             });
 
-            //checks while user is typing to see if password requirements are being met, and changes font from red to green and
-            //adds a checkmark if requirements are met
+            /*checks while user is typing to see if password requirements are being met, and changes font from red to green and
+            adds a checkmark if requirements are met*/
             $("#password").keyup(function() {
                 //get password value
                 var value = $("#password").val();
@@ -157,6 +148,7 @@ export class UserCreation extends Component {
         });
 
     }
+
     render() {
         return (
             <div id="accountform">
@@ -165,56 +157,56 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                         First name: <br/>
-                        <input id="fname" class="rounded" name="fname" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Jane" required/>
+                        <input id="fname" className="rounded" name="fname" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Jane" required/>
                     </label>
                     </div>
                     <div>
                     <label>
                     Last name: <br/>
-                        <input id="lname" class="rounded" name="lname" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Doe" required/>
+                        <input id="lname" className="rounded" name="lname" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Doe" required/>
                     </label>
                     </div>
                     <div>
                     <label>
                     Username: <br/>
-                        <input id="username" class="rounded" name="username" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" required/>
+                        <input id="username" className="rounded" name="username" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" required/>
                     </label>
                     </div>
                     <div id="usernamereq">
-                        <p id="userAlphaNum" class="valid">Username must only contain letters and numbers</p>
-                        <p id="userMin" class="invalid">Username must be have a minimum length of 4</p>
-                        <p id="userMax" class="valid">User must have a maximum length of 15</p>
+                        <p id="userAlphaNum" className="valid">Username must only contain letters and numbers</p>
+                        <p id="userMin" className="invalid">Username must be have a minimum length of 4</p>
+                        <p id="userMax" className="valid">User must have a maximum length of 15</p>
                     </div>
                     <div>
                     <label>
                     Email: <br/>
-                        <input id="email" class="rounded" name="email" type="email" placeholder="example@gmail.com" required/>
+                        <input id="email" className="rounded" name="email" type="email" placeholder="example@gmail.com" required/>
                     </label>
                     </div>
                     <div>
                     <label>
                     Zip code: <br/>
-                        <input id="zip" class="rounded" name="zip" type="number" pattern="^\d{5}$" placeholder="99004" required/>
+                        <input id="zip" className="rounded" name="zip" type="number" pattern="^\d{5}$" placeholder="99004" required/>
                     </label>
                     </div>
                     <div id="zipreq">
-                        <p id="zipDigits" class="invalid">Zip code must be 5 digits</p>
+                        <p id="zipDigits" className="invalid">Zip code must be 5 digits</p>
                     </div>
                     <div>
                     <label>
                     Password: <br/>
-                        <input id="password" class="rounded" name="password" type="password" 
+                        <input id="password" className="rounded" name="password" type="password" 
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$" required/>
                     </label>
                     </div>
                     <div id="passwordreq">
                     <h4>Password must contain the following:</h4>
-                        <p id="lower" class="invalid">At least one lowercase letter</p>
-                        <p id="upper" class="invalid">At least one uppercase letter</p>
-                        <p id="number" class="invalid">A number</p>
-                        <p id="special" class="invalid">At least one special character</p>
-                        <p id="minlength" class="invalid">Minimum 8 characters</p>
-                        <p id="maxlength" class="valid">Maximum 30 characters</p>
+                        <p id="lower" className="invalid">At least one lowercase letter</p>
+                        <p id="upper" className="invalid">At least one uppercase letter</p>
+                        <p id="number" className="invalid">A number</p>
+                        <p id="special" className="invalid">At least one special character</p>
+                        <p id="minlength" className="invalid">Minimum 8 characters</p>
+                        <p id="maxlength" className="valid">Maximum 30 characters</p>
                     </div>
                     <div>
                     <input type="checkbox" name="13orolder" required/>
