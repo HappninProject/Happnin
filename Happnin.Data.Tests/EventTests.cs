@@ -91,7 +91,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Events.Add(eventHappenin);
             await appDbContext.SaveChangesAsync();
-            eventId = eventHappenin.Id!.Value;
+            eventId = eventHappenin.Id;
 
             using var appDbContextAssert = new AppDbContext(Options);
             Event eventFromDb = await appDbContextAssert.Events.Where(e => e.Id == eventId).SingleOrDefaultAsync();
@@ -110,7 +110,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Events.Add(eventHappenin);
             await appDbContext.SaveChangesAsync();
-            eventId = eventHappenin.Id!.Value;
+            eventId = eventHappenin.Id;
 
             using var appDbContextAssert = new AppDbContext(Options);
             Event eventFromDb = await appDbContextAssert.Events.Include(e => e.Host)
@@ -137,7 +137,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Events.Add(eventHappenin);
             await appDbContext.SaveChangesAsync();
-            eventId = eventHappenin.Id!.Value;
+            eventId = eventHappenin.Id;
 
             using var appDbContextFetch = new AppDbContext(Options);
             Event eventFromDb = await appDbContextFetch.Events.Include(e => e.Host)

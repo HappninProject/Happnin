@@ -9,7 +9,7 @@ using Xunit;
 namespace Happnin.Business.Tests
 {
     public abstract class EntityServiceBaseTest<TDto, TInputDto, TEntity> : BaseTests 
-        where TEntity : EntityBase
+        where TEntity : class, IEntityBase
         where TInputDto : class
         where TDto : class, TInputDto, IEntity
     {
@@ -58,7 +58,7 @@ namespace Happnin.Business.Tests
             TInputDto inputDto = Mapper.Map<TEntity, TDto>(updateEntityFromDb);
 
 
-            await service.UpdateAsync(secondEntity.Id!.Value, inputDto);
+            await service.UpdateAsync(secondEntity.Id, inputDto);
 
             using AppDbContext dbContextAssert = new AppDbContext(Options);
             TEntity entityFromDb = await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == entity.Id);
@@ -79,7 +79,7 @@ namespace Happnin.Business.Tests
             await dbContext.Set<TEntity>().AddAsync(secondEntity);
             await dbContext.SaveChangesAsync();
             
-            bool deleted = await service.DeleteAsync(entity.Id!.Value);
+            bool deleted = await service.DeleteAsync(entity.Id);
             using AppDbContext dbContextAssert = new AppDbContext(Options);
             TEntity entityFromDb =  await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == entity.Id);
             TEntity secondEntityFromDb = await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == secondEntity.Id);
@@ -144,7 +144,7 @@ namespace Happnin.Business.Tests
             await dbContext.Set<TEntity>().AddAsync(secondEntity);
             await dbContext.SaveChangesAsync();
 
-            TDto entityFromDb = await service.FetchByIdAsync(entity.Id!.Value);
+            TDto entityFromDb = await service.FetchByIdAsync(entity.Id!);
             TDto entityDto = Mapper.Map<TEntity, TDto>(entity);
             
             AssertDtosAreEqual(entityDto, entityFromDb);
