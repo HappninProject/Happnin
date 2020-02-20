@@ -1,14 +1,13 @@
 ﻿import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { SingleDatePicker } from 'react-dates';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 import TimePicker from 'rc-time-picker';
+import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 const format = 'h:mm a';
 const now = moment().hour(0).minute(0);
-
 
 export class SubmitEvent extends Component {
     static displayName = SubmitEvent.name;
@@ -57,59 +56,53 @@ export class SubmitEvent extends Component {
     render() {
         const { eventName, eventDescription } = this.state
         return (
-            <div>
-                <h1 class = 'header'>Submit Event</h1>
+            <div style={{marginBottom: '2em'}}>
+                <h1 class = 'header'>Submit an Event</h1>
                 <form onSubmit={this.handleSubmit}>
-                <h1 class = 'header'>EVENT INFO</h1>
-                    <div class = 'hostName'>
-                        <label class = 'subHeader'>Host name:</label>
-                        <input type = 'text' value = {this.state.hostName} onChange = {this.handleHostName}></input>
+                    <div class="form-group">
+                    <label for="inputTitle">Title:</label>
+                        <input id="inputTitle" class="form-control" name="fname" type="text" pattern="^[A-Za-z]+$" 
+                            minLength="1" maxLength="40" placeholder="Title" required/>
                     </div>
 
-                    <div class = 'hostEmail'>
-                        <label class = 'subHeader'>Host Email:</label>
-                        <input type = 'text' value = {this.state.hostEmail} onChange = {this.handleHostEmail}></input>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                            <textarea id="description" class="form-control" cols="50" rows="5"  
+                                minLength="1" maxLength="200" required></textarea>
                     </div>
 
-                    <div class = 'hostPhone'>
-                        <label class = 'subHeader'>Host Phone:</label>
-                        <input type = 'text' value = {this.state.phone} onChange = {this.handlePhone}></input>
+                    <div class = 'form-group'>
+                        <label for="hostName">Host name:</label>
+                            <input id="hostName" class="form-control" name="fname" type="text" pattern="^[A-Za-z]+$" 
+                                minLength="1" maxLength="40" placeholder="Jane" required/>
                     </div>
 
-                    {/* <div class = 'companyName'>
-                        <label class = 'subHeader'>Company or organization name:</label>
-                        <input type = 'text' value = {this.state.companyName} onChange = {this.handleCompanyName}></input>
-                    </div> */}
+                    <div class = 'form-group'>
+                    <label for="hostEmail">Host Email:</label>
+                        <input id="hostEmail" class="form-control" name="fname" type="text" pattern="^[A-Za-z]+$" 
+                            minLength="1" maxLength="40" placeholder="Jane" required/>
+                    </div>
 
-                    <div class = 'companyContact'>
-                        <label class = 'subHeader'>Contact(phone):</label>
-                        <input type = 'text' value = {this.state.companyContact} onChange = {this.handleCompanyContact}></input>
+                    <div class = 'form-group'>
+                        <label for="phone">Contact(phone):</label>
+                        <input id="phone" type='text' class="form-control" value={this.state.companyContact} onChange={this.handleCompanyContact}></input>
                     </div>
-                
-                    <label class = 'subHeader'>Title: {eventName}</label>
-                            <input type='text' 
-                            placeholder='Event Title' 
-                            value={eventName}
-                            name='eventName' 
-                            onChange={this.handleInputChange}></input>
-                    <div class = 'eventDescription'>
-                        <div class = 'eventDescription'>
-                        <label class = 'subHeader'>Event description:</label>
-                         <textarea value = {this.state.EventDescription} onChange = {this.handleInputChange}></textarea>
-                </div> 
-                    </div>
-                    <div class = 'eventDate'>
-                        <label class = 'subHeader'>Date: </label>
+
+                    <div class = 'form-group'>
+                        <label for="datePicker">Date:<br/> 
                             <SingleDatePicker
                                 date={this.state.date} // momentPropTypes.momentObj or null
+                                class="form-control"
                                 onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                                 focused={this.state.focused} // PropTypes.bool
                                 onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                                id="your_unique_id" // PropTypes.string.isRequired,
+                                id="datePicker" // PropTypes.string.isRequired,
                             ></SingleDatePicker>
+                        </label>
                     </div>
-                    <div class = 'startTime'>
-                        <label class = 'subHeader'>Start Time: </label>
+
+                    <div class = 'startTime'> 
+                        <label class = 'subHeader'>Start Time: <br/>
                             <TimePicker
                                 showSecond={false}
                                 defaultValue={now}
@@ -118,10 +111,11 @@ export class SubmitEvent extends Component {
                                 use12Hours
                                 inputReadOnly
                             ></TimePicker>
+                        </label>
                     </div>
 
                     <div class = 'endTime'>
-                        <label class = 'subHeader'>End Time: </label>
+                        <label class = 'subHeader'>End Time: <br/>
                             <TimePicker
                                 showSecond={false}
                                 defaultValue={now}
@@ -130,19 +124,20 @@ export class SubmitEvent extends Component {
                                 use12Hours
                                 inputReadOnly
                             ></TimePicker>
+                        </label>
                     </div>
-                    <div class = 'eventAddress'>
-                        <label class = 'subHeader'>Event address:</label>
-                        <input type = 'text' value = {this.state.eventAddress} onChange = {this.handleInputChange}></input>
+                    <div class="form-group">
+                        <label for="address" class='subHeader'>Event address:</label>
+                        <input id="address" type='text' class="form-control" value = {this.state.eventAddress} onChange={this.handleInputChange}></input>
                     </div>
 
-                    <div class = 'eventZip'>
-                        <label class = 'subHeader'>Event ZIP:</label>
-                        <input type = 'text' value = {this.state.eventZip} onChange = {this.handleInputChange}></input>
+                    <div class='form-group'>
+                        <label for="zip" class='subHeader'>Event ZIP:</label>
+                        <input type='text' id="zip" class="form-control" value = {this.state.eventZip} onChange={this.handleInputChange}></input>
                     </div>
-                    <div class = 'eventCategory'>
-                        <label class = 'subHeader'>Event category:</label>
-                        <select value = {this.state.category} onChange={this.handleInputChange}>
+                    <div class = 'categorySelect'>
+                        <label for="categorySelect" >Event category:    </label>
+                        <select id="categorySelect" value = {this.state.category} class="form-control" onChange={this.handleInputChange}>
                                     <option value="Music">Music</option>
                                     <option value="Comedy">Comedy</option>
                                     <option value="Culture">Culture</option>
@@ -152,15 +147,17 @@ export class SubmitEvent extends Component {
                     <div class ='image'>
                         Image: <input type='file'/>
                     </div>
-                    <div class = '18Check'>
-                        <label class = 'subHeader'>18+?</label>
-                        <input type = "checkBox" value = {this.state.age18Check} onchange = {this.handleInputChange}></input>
-                        <label class = 'subHeader'>21+?</label>
-                        <input type = "checkBox" value = {this.state.age21Check} onchange = {this.handleInputChange}></input>
-                    </div>
 
-                    <div class = 'submitButton'>
-                        <button>Submit</button>
+                    {['checkbox'].map(type => (
+                    <div key={`inline-${type}`} className="mb-3">
+                        <Form.Check inline label="18+?" type={type} id={`inline-${type}-1`} />
+                        <Form.Check inline label="21+?" type={type} id={`inline-${type}-2`} />
+                        
+                    </div>
+                    ))}
+
+                    <div class='submitButton'>
+                        <button variant="outline-primary">Submit</button>
                     </div>
                 </form> 
             </div>

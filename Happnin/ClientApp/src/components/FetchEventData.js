@@ -19,8 +19,6 @@ export class FetchEventData extends Component {
             <div>
                  {events.map(eventinfo => <HappninEvent key={eventinfo.id}{...eventinfo}/>)}
             </div>
-         
-
         );
     }
 

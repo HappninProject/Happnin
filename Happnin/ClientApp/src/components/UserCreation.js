@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './UserCreation.css';
 import { Button } from 'reactstrap';
 import Recaptcha from 'react-recaptcha';
@@ -127,10 +126,10 @@ export class UserCreation extends Component {
                         <p>Username must be a minimum length of 4 and a maximum length of 15</p>
                     </div>
                     <div>
-                    <label>
-                    Email: <br/>
-                        <input id="email" class="rounded" name="email" type="email" placeholder="example@gmail.com" required/>
-                    </label>
+                        <label>
+                        Email: <br/>
+                            <input id="email" class="rounded" name="email" type="email" placeholder="example@gmail.com" required/>
+                        </label>
                     </div>
                     <div>
                     <label>
