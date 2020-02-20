@@ -7,9 +7,9 @@ export class EventList extends React.Component {
         const e = this.props;
         return(
             <div className='eventlist'>
-         //   <span className='eventlisttext'>&#3C;EventList/&#x3E;</span>
             {e.eventinfoarray.map(eventinfo => <HappninEvent key={eventinfo.id}{...eventinfo}/>)}
             </div>
         );
     }
+    // <!-- <span className='eventlisttext'>&#3C;EventList/&#x3E;</span> -->
 }

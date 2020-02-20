@@ -13,6 +13,8 @@ import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 import { browseEvents } from './components/browseEvents';
 import { EventList } from './components/EventList';
+import { signIn } from './components/sign-in';
+import { forgotPassword } from './components/forgotPassword';
 import './custom.css'
 
 export default class App extends Component {
@@ -21,14 +23,6 @@ export default class App extends Component {
   state = {
     eventinfoarray: [],
   }
-
-
-
-import { browseEvents } from './components/browseEvents';
-import { signIn } from './components/sign-in';
-import { forgotPassword } from './components/forgotPassword';
-
-
 
 
   render () {

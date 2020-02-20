@@ -16,9 +16,9 @@ export class FetchEventData extends Component {
     static renderEventsTable(events) {
         return (
 
-            <div>
-                 {events.map(eventinfo => <HappninEvent key={eventinfo.id}{...eventinfo}/>)}
-            </div>
+            //<div>
+            //     {events.map(eventinfo => <HappninEvent key={eventinfo.id}{...eventinfo}/>)}
+            //</div>
          
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
