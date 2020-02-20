@@ -60,7 +60,7 @@ export class SubmitEvent extends Component {
             <div>
                 <h1 class = 'header'>Submit Event</h1>
                 <form onSubmit={this.handleSubmit}>
-                <h1 class = 'header'>HOST INFO</h1>
+                <h1 class = 'header'>EVENT INFO</h1>
                     <div class = 'hostName'>
                         <label class = 'subHeader'>Host name:</label>
                         <input type = 'text' value = {this.state.hostName} onChange = {this.handleHostName}></input>
@@ -76,16 +76,16 @@ export class SubmitEvent extends Component {
                         <input type = 'text' value = {this.state.phone} onChange = {this.handlePhone}></input>
                     </div>
 
-                    <div class = 'companyName'>
+                    {/* <div class = 'companyName'>
                         <label class = 'subHeader'>Company or organization name:</label>
                         <input type = 'text' value = {this.state.companyName} onChange = {this.handleCompanyName}></input>
-                    </div>
+                    </div> */}
 
                     <div class = 'companyContact'>
-                        <label class = 'subHeader'>Company/organization Contact(phone):</label>
+                        <label class = 'subHeader'>Contact(phone):</label>
                         <input type = 'text' value = {this.state.companyContact} onChange = {this.handleCompanyContact}></input>
                     </div>
-                <h1 class = 'header'>EVENT INFO</h1>
+                
                     <label class = 'subHeader'>Title: {eventName}</label>
                             <input type='text' 
                             placeholder='Event Title' 
@@ -149,12 +149,12 @@ export class SubmitEvent extends Component {
                                     <option value="Festival">Festival</option>
                         </select> 
                     </div>
+                    <div class ='image'>
+                        Image: <input type='file'/>
+                    </div>
                     <div class = '18Check'>
                         <label class = 'subHeader'>18+?</label>
                         <input type = "checkBox" value = {this.state.age18Check} onchange = {this.handleInputChange}></input>
-                    </div>
-
-                    <div class = '21Check'>
                         <label class = 'subHeader'>21+?</label>
                         <input type = "checkBox" value = {this.state.age21Check} onchange = {this.handleInputChange}></input>
                     </div>
