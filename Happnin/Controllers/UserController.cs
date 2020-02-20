@@ -25,8 +25,8 @@ namespace Happnin.Controllers
         {
             var httpClient = ClientFactory.CreateClient("Happnin.Api");
             var client = new UserClient(httpClient);
-            ICollection<User> events = await client.GetAllAsync();
-            return events; 
+            ICollection<User> users = await client.GetAllAsync();
+            return users; 
         } 
     }
 }

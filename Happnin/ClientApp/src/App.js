@@ -24,6 +24,11 @@ export default class App extends Component {
 
 
 
+import { browseEvents } from './components/browseEvents';
+import { signIn } from './components/sign-in';
+import { forgotPassword } from './components/forgotPassword';
+
+
 
 
   render () {
@@ -39,8 +44,9 @@ export default class App extends Component {
         <Route path='/test-list' component={EventList} />
         <Route path='/fetch-event-data' component={FetchEventData}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
-        <Route path='/fetch-location-data' component={FetchLocationData} />
-        <Route path='/login' component={Login} />
+        <Route path='/fetch-location-data' component={FetchLocationData}/>
+        <Route path='/sign-in' component={signIn}/>
+        <Route path='/forgotPassword' component={forgotPassword}/>
       </Layout>
     );
   }

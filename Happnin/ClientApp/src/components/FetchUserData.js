@@ -17,6 +17,7 @@ export class FetchUserData extends Component {
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
+                        <th>User Name</th>
                         <th>First Name</th>
                         <th>LastName</th>
                         <th>Email</th>
@@ -25,7 +26,8 @@ export class FetchUserData extends Component {
                 </thead>
                 <tbody>
                     {users.map(u =>
-                        <tr key={u.firstName}>
+                        <tr key={u.userName}>
+                            <td>{u.userName}</td>
                             <td>{u.firstName}</td>
                             <td>{u.lastName}</td>
                             <td>{u.email}</td>

@@ -1,4 +1,5 @@
-﻿using Happnin.Business.Dto;
+﻿using System.Threading.Tasks;
+using Happnin.Business.Dto;
 using Happnin.Business.Services;
 using Happnin.Data;
 using Happnin.Data.Tests;
@@ -13,8 +14,8 @@ namespace Happnin.Business.Tests
         {
             // seeding foreign key value of location for user.
             using var applicationDbContext = new AppDbContext(Options);
-            applicationDbContext.Location.Add(SampleData.Location1234Spokane());
-            applicationDbContext.Location.Add(SampleData.Location3456Spokane());
+            applicationDbContext.Locations.Add(SampleData.Location1234Spokane());
+            applicationDbContext.Locations.Add(SampleData.Location3456Spokane());
             applicationDbContext.SaveChanges();
         } 
         
@@ -55,6 +56,11 @@ namespace Happnin.Business.Tests
         {
             entity.FirstName = update;
             return entity;
+        }
+
+        public override async Task Update_EntityUpdated_ShouldSaveToDatabase()
+        {
+
         }
     }
 }
