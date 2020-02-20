@@ -11,39 +11,34 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_Create_Success()
         {
-            var user = new User(SampleData.Kyle, SampleData.Smith,
-                SampleData.Email, SampleData.Location1234Spokane());
+            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane())
+            {
+                Email = "kyle@website.com"
+            };
 
             Assert.Equal(SampleData.Kyle, user.FirstName);
             Assert.Equal(SampleData.Smith, user.LastName);
-            Assert.Equal(SampleData.Email, user.Email);
             Assert.Equal(SampleData.Street, user.Location.Address);
             Assert.Equal(SampleData.City, user.Location.City);
             Assert.Equal(SampleData.State, user.Location.State);
             Assert.Equal(SampleData.Country, user.Location.Country);
             Assert.Equal(SampleData.ZipCode, user.Location.ZipCode);
+            Assert.Equal("kyle@website.com", user.Email);
         }
 
+       
         [Fact]
         public void User_FirstNameNull_Exception()
         {
-            Action act = () => new User(null, SampleData.Smith, SampleData.Email,SampleData.Location1234Spokane());
-
+            Action act = () => new User(null, SampleData.Smith,SampleData.Location1234Spokane());
+            
             Assert.Throws<ArgumentNullException>(act);
         }
         
         [Fact]
         public void User_LastNameNull_Exception()
         {
-            Action act = () => new User(SampleData.Kyle, null, SampleData.Email, SampleData.Location1234Spokane());
-
-            Assert.Throws<ArgumentNullException>(act);
-        }
-
-        [Fact]
-        public void User_EmailNull_Exception()
-        {
-            Action act = () => new User(SampleData.Kyle, SampleData.Smith, null, SampleData.Location1234Spokane());
+            Action act = () => new User(SampleData.Kyle, null, SampleData.Location1234Spokane());
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -51,7 +46,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_LocationNull_Exception()
         {
-            Action act = () => new User(SampleData.Kyle, SampleData.Smith, SampleData.Email, null);
+            Action act = () => new User(SampleData.Kyle, SampleData.Smith, null);
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -89,7 +84,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
-            userId = user.Id!.Value;
+            userId = user.Id!;
 
             using var appDbContextAssert = new AppDbContext(Options);
             User userFromDb = await appDbContextAssert.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
@@ -97,7 +92,6 @@ namespace Happnin.Data.Tests
             Assert.NotNull(userFromDb);
             Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
             Assert.Equal(SampleData.Smith, userFromDb.LastName);
-            Assert.Equal(SampleData.Email, userFromDb.Email);
         }
         
         [Fact]
@@ -109,7 +103,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
-            userId = user.Id!.Value;
+            userId = user.Id!;
 
             using var appDbContextAssert = new AppDbContext(Options);
             User userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
@@ -118,7 +112,6 @@ namespace Happnin.Data.Tests
             Assert.NotNull(userFromDb);
             Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
             Assert.Equal(SampleData.Smith, userFromDb.LastName);
-            Assert.Equal(SampleData.Email, userFromDb.Email);
             Assert.Equal(user.Location.Id, userFromDb.Location.Id);
             Assert.Equal(user.Location.Address, userFromDb.Location.Address);
             Assert.Equal(user.Location.City, user.Location.City);
@@ -132,7 +125,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
-            userId = user.Id!.Value;
+            userId = user.Id!;
 
             using var appDbContextFetch = new AppDbContext(Options);
             User userFromDb = await appDbContextFetch.Users.Include(e => e.Location)

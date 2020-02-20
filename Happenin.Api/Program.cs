@@ -1,6 +1,7 @@
 using System;
 using Happnin.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -16,7 +17,7 @@ namespace Happnin.Api
             {
                 IServiceProvider services = scope.ServiceProvider;
                 using var context = services.GetRequiredService<AppDbContext>();
-                context.Database.EnsureCreated();
+                context.Database.Migrate();
             }
             host.Run();
         }

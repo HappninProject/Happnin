@@ -14,6 +14,8 @@ import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 import { browseEvents } from './components/browseEvents';
 import { EventList } from './components/EventList';
+import { signIn } from './components/sign-in';
+import { forgotPassword } from './components/forgotPassword';
 import './custom.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './react_dates_overrides.css'
@@ -26,6 +28,10 @@ export default class App extends Component {
     eventinfoarray: [],
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> afef9e134782a8be308af59d4988c5cd92bb7884
   render () {
     return (
       <Layout>
@@ -39,8 +45,9 @@ export default class App extends Component {
         <Route path='/test-list' component={EventList} />
         <Route path='/fetch-event-data' component={FetchEventData}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
-        <Route path='/fetch-location-data' component={FetchLocationData} />
-        <Route path='/login' component={Login} />
+        <Route path='/fetch-location-data' component={FetchLocationData}/>
+        <Route path='/sign-in' component={signIn}/>
+        <Route path='/forgotPassword' component={forgotPassword}/>
       </Layout>
     );
   }

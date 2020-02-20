@@ -20,7 +20,7 @@ namespace Happnin.Api.Tests.Controllers
     {
         public abstract TDto CreateDto();
         public abstract BaseController<TDto,TInputDto> GetController(TService service);
-        private IMapper Mapper { get; } = AutomapperProfileConfiguration.CreateMapper();
+        protected IMapper Mapper { get; } = AutomapperProfileConfiguration.CreateMapper();
         protected BaseControllerTests()
         {
         }
@@ -100,7 +100,7 @@ namespace Happnin.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task Post_ValidItem_Inserted()
+        public virtual async Task Post_ValidItem_Inserted()
         {
             TDto dto = CreateDto();
             TInputDto entityInput = Mapper.Map<TDto, TInputDto>(dto);
