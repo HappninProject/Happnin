@@ -46,15 +46,19 @@ code {
   line-height: 19px;
 }
 
-<<<<<<< HEAD
+
 .form-control:not(#categorySelect) {
   width: 50% !important;
 }
 
-.category-select
+#categorySelect
 {
-  width: 200%;
-=======
+  width: 50%;
+}
+
+.category-select {
+    width: 200%;
+}
 .eventTable 
 {
   border-style: solid;
@@ -76,6 +80,6 @@ code {
   border-color: black;
   width: 1000px;
   height: 500px;
->>>>>>> afef9e134782a8be308af59d4988c5cd92bb7884
+
 }
 

@@ -28,10 +28,6 @@ export default class App extends Component {
     eventinfoarray: [],
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> afef9e134782a8be308af59d4988c5cd92bb7884
   render () {
     return (
       <Layout>
