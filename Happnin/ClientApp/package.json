@@ -10,6 +10,7 @@
     "oidc-client": "^1.9.0",
     "rc-time-picker": "^3.7.3",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-dates": "^21.8.0",
     "react-dom": "^16.12.0",
     "react-recaptcha": "^2.3.10",
@@ -18,8 +19,7 @@
     "react-scripts": "^3.0.1",
     "reactstrap": "^6.3.0",
     "rimraf": "^2.6.2",
-    "rimraff": "0.0.1-security",
-    "react-recaptcha": "*"
+    "rimraff": "0.0.1-security"
   },
   "devDependencies": {
     "ajv": "^6.9.1",

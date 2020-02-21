@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './UserCreation.css';
 import { Button } from 'reactstrap';
 import Recaptcha from 'react-recaptcha';
@@ -205,57 +204,45 @@ export class UserCreation extends Component {
 
         return (
             <div id="accountform">
-                <h1>Create Account</h1>
+                <h1 class="header">Sign Up!</h1>
                 <form>
-                    <div>
-                    <label>
-                        First name: <br/>
-                        <input id="fname" class="rounded" name="firstName" type="text" pattern="^[A-Za-z]+$" 
-                        minLength="1" maxLength="40" placeholder="Jane" 
-                        value={this.state.user.firstName} onChange={this.handleInputChange} required/>
-                    </label>
+                    <div class="form-group">
+                        <label>First name:</label>
+                        <input id="fname" class="form-control" name="firstName" type="text" pattern="^[A-Za-z]+$" 
+                            minLength="1" maxLength="40" placeholder="Jane" 
+                            value={this.state.user.firstName} onChange={this.handleInputChange} required/>
                     </div>
-                    <div>
-                    <label>
-                    Last name: <br/>
-                        <input id="lname" class="rounded" name="lastName" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Doe"
-                         value={this.state.user.lastName} onChange={this.handleInputChange} required/>
-                    </label>
+                    <div class="form-group">
+                        <label>Last name:</label>
+                        <input id="lname" class="form-control" name="lastName" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Doe"
+                            value={this.state.user.lastName} onChange={this.handleInputChange} required/>
                     </div>
-                    <div>
-                    <label>
-                    Username: <br/>
-                        <input id="username" class="rounded" name="userName" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" 
-                        value={this.state.user.firstName} onChange={this.handleInputChange} required/>
-                    </label>
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input id="username" class="form-control" name="userName" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" 
+                            value={this.state.user.firstName} onChange={this.handleInputChange} required/>
                     </div>
                     <div id="usernamereq">
                         <p id="userAlphaNum" className="valid">Username must only contain letters and numbers</p>
                         <p id="userMin" className="invalid">Username must be have a minimum length of 4</p>
                         <p id="userMax" className="valid">User must have a maximum length of 15</p>
                     </div>
-                    <div>
-                    <label>
-                    Email: <br/>
-                        <input id="email" class="rounded" name="email" type="email" placeholder="example@gmail.com"
-                        value={this.state.user.email} onChange={this.handleInputChange} required/>
-                    </label>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input id="email" class="form-control" name="email" type="email" placeholder="example@gmail.com"
+                            value={this.state.user.email} onChange={this.handleInputChange} required/>
                     </div>
-                    <div>
-                    <label>
-                    Zip code: <br/>
-                        <input id="zip" class="rounded" name="zipcode" type="number" pattern="^\d{5}$" placeholder="99004" onFocus={this.showOrHide} onBlur={this.showOrHide}
+                    <div className="form-group">
+                    <label>Zip code: </label>
+                        <input id="zip" className="rounded form-control" name="zipcode" type="number" pattern="^\d{5}$" placeholder="99004" onFocus={this.showOrHide} onBlur={this.showOrHide}
                          onKeyUp={this.validateZip} required/>
-                    </label>
                         {this.state.show && <p id="zipDigits" className="invalid">Zip code must be 5 digits</p>}
                     </div>
-                    <div>
-                    <label>
-                    Password: <br/>
-                        <input id="password" class="rounded" name="password" type="password" 
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input id="password" class="form-control" name="password" type="password" 
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$" 
                         value={this.state.user.password} onChange={this.handleInputChange} required/>
-                    </label>
                     </div>
                     <div id="passwordreq">
                     <h4>Password must contain the following:</h4>
