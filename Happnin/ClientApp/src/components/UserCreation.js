@@ -12,6 +12,14 @@ import $ from 'jquery';
 export class UserCreation extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            focus: false,
+            firstname: '',
+            lastname: '',
+            username: '',
+            email: '',
+            zip: ''
+        }
     }
 
     componentDidMount() {
@@ -33,12 +41,12 @@ export class UserCreation extends Component {
             });
 
             //shows zip code requirements when user starts input
-            $("#zip").focus(function() {
+/*            $("#zip").focus(function() {
                 $('#zipreq').slideDown();
             });
             $("#zip").blur(function() {
                 $('#zipreq').hide();
-            });
+            });*/
 
             //checks while user is typing to see if username requirements are being met
             $("#username").keyup(function() {
@@ -149,7 +157,24 @@ export class UserCreation extends Component {
 
     }
 
+    handleFocus = (event) => {
+        event.preventDefault();
+        this.setState({ focus: true });
+    };
+
+    handlBlur = (event) => {
+        event.preventDefault();
+        this.setState({ focus: false });
+    };
+
     render() {
+        const focus = this.state.focus;
+        let zipDiv;
+
+        if (focus) {
+            
+        }
+
         return (
             <div id="accountform">
                 <h1>Create Account</h1>
@@ -186,7 +211,8 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                     Zip code: <br/>
-                        <input id="zip" className="rounded" name="zip" type="number" pattern="^\d{5}$" placeholder="99004" required/>
+                            <input id="zip" className="rounded" name="zip" type="number" pattern="^\d{5}$" placeholder="99004" required
+                                onFocus={this.handleFocus} onBlur={this.handleBlur}/>
                     </label>
                     </div>
                     <div id="zipreq">
