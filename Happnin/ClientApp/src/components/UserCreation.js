@@ -12,14 +12,31 @@ import $ from 'jquery';
 export class UserCreation extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            focus: false,
-            firstname: '',
-            lastname: '',
-            username: '',
-            email: '',
-            zip: ''
+
+        this.state = { 
+            user: { 
+            userName: '',
+            firstName : '',
+            lastName : '',
+            locationId : 1,
+            password: '',
+            email: ''          
+        }, 
+            loading: true
         }
+    }
+
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            user : {
+                [name] : value
+            } 
+        });
+        console.log(this.state)
     }
 
     componentDidMount() {
@@ -152,9 +169,7 @@ export class UserCreation extends Component {
                     $('#special').removeClass("valid").addClass("invalid");
                 }
             });
-            
         });
-
     }
 
     handleFocus = (event) => {
@@ -166,6 +181,7 @@ export class UserCreation extends Component {
         event.preventDefault();
         this.setState({ focus: false });
     };
+
 
     render() {
         const focus = this.state.focus;
@@ -182,19 +198,23 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                         First name: <br/>
-                        <input id="fname" className="rounded" name="fname" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Jane" required/>
+                        <input id="fname" class="rounded" name="firstName" type="text" pattern="^[A-Za-z]+$" 
+                        minLength="1" maxLength="40" placeholder="Jane" 
+                        value={this.state.user.firstName} onChange={this.handleInputChange} required/>
                     </label>
                     </div>
                     <div>
                     <label>
                     Last name: <br/>
-                        <input id="lname" className="rounded" name="lname" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Doe" required/>
+                        <input id="lname" class="rounded" name="lastName" type="text" pattern="^[A-Za-z]+$" minLength="1" maxLength="40" placeholder="Doe"
+                         value={this.state.user.lastName} onChange={this.handleInputChange} required/>
                     </label>
                     </div>
                     <div>
                     <label>
                     Username: <br/>
-                        <input id="username" className="rounded" name="username" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" required/>
+                        <input id="username" class="rounded" name="userName" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" 
+                        value={this.state.user.firstName} onChange={this.handleInputChange} required/>
                     </label>
                     </div>
                     <div id="usernamereq">
@@ -205,14 +225,14 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                     Email: <br/>
-                        <input id="email" className="rounded" name="email" type="email" placeholder="example@gmail.com" required/>
+                        <input id="email" class="rounded" name="email" type="email" placeholder="example@gmail.com"
+                        value={this.state.user.email} onChange={this.handleInputChange} required/>
                     </label>
                     </div>
                     <div>
                     <label>
                     Zip code: <br/>
-                            <input id="zip" className="rounded" name="zip" type="number" pattern="^\d{5}$" placeholder="99004" required
-                                onFocus={this.handleFocus} onBlur={this.handleBlur}/>
+                        <input id="zip" class="rounded" name="zipcode" type="number" pattern="^\d{5}$" placeholder="99004" required/>
                     </label>
                     </div>
                     <div id="zipreq">
@@ -221,8 +241,9 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                     Password: <br/>
-                        <input id="password" className="rounded" name="password" type="password" 
-                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$" required/>
+                        <input id="password" class="rounded" name="password" type="password" 
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$" 
+                        value={this.state.user.password} onChange={this.handleInputChange} required/>
                     </label>
                     </div>
                     <div id="passwordreq">

@@ -69,7 +69,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Locations.Add(location);
             await appDbContext.SaveChangesAsync();
-            locationId = location.Id!.Value;
+            locationId = location.Id;
 
             using var appDbContextAssert = new AppDbContext(Options);
             Location locationFromDb = await appDbContextAssert.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
@@ -90,7 +90,7 @@ namespace Happnin.Data.Tests
             using var appDbContext = new AppDbContext(Options);
             appDbContext.Locations.Add(location);
             await appDbContext.SaveChangesAsync();
-            locationId = location.Id!.Value;
+            locationId = location.Id;
            
             using var appDbContextFetch = new AppDbContext(Options);
             Location locationFromDb = await appDbContextFetch.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();

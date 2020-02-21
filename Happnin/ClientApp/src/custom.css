@@ -33,7 +33,6 @@ code {
 .subHeader
 {
   font-family: Montserrat;
-  font-style: italic;
   font-weight: 500;
   font-size: 22px;
   line-height: 27px;
@@ -43,7 +42,8 @@ code {
 .logo
 {
   font-family: Montserrat;
-  font-style: normal;
+  font-style: bold;
+  font-size: 32px;
 }
 .text
 {
@@ -53,6 +53,7 @@ code {
   font-size: 14px;
   line-height: 19px;
 }
+
 .eventTable 
 {
   border-style: solid;
@@ -75,3 +76,4 @@ code {
   width: 1000px;
   height: 500px;
 }
+
