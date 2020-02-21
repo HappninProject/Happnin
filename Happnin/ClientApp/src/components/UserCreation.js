@@ -20,10 +20,13 @@ export class UserCreation extends Component {
             lastName : '',
             locationId : 1,
             password: '',
-            email: ''          
+            email: '',
         }, 
-            loading: true
+            loading: true,
+            show: false,
+            isValidZip: false   
         }
+        this.validateZip = this.validateZip.bind(this);
     }
 
     handleInputChange = (event) => {
@@ -40,6 +43,7 @@ export class UserCreation extends Component {
     }
 
     componentDidMount() {
+
         $(function() {
             //shows password requirements when user starts input
             $("#password").focus(function() {
@@ -96,20 +100,20 @@ export class UserCreation extends Component {
 
             });
 
-            $("#zip").keyup(function(){
-                //gets zip code value
-                var zipValue = $("#zip").val();
+            // $("#zip").keyup(function(){
+            //     //gets zip code value
+            //     var zipValue = $("#zip").val();
 
-                //making sure zip code is 5 digits
-                if (zipValue.length == 5) {
-                    //add valid class, get rid of invalid class
-                    $('#zipDigits').removeClass("invalid").addClass("valid");
-                }
-                else{
-                    $('#zipDigits').removeClass("valid").addClass("invalid");
+            //     //making sure zip code is 5 digits
+            //     if (zipValue.length == 5) {
+            //         //add valid class, get rid of invalid class
+            //         $('#zipDigits').removeClass("invalid").addClass("valid");
+            //     }
+            //     else{
+            //         $('#zipDigits').removeClass("valid").addClass("invalid");
                     
-                }
-            });
+            //     }
+            // });
 
             /*checks while user is typing to see if password requirements are being met, and changes font from red to green and
             adds a checkmark if requirements are met*/
@@ -172,16 +176,24 @@ export class UserCreation extends Component {
         });
     }
 
-    handleFocus = (event) => {
-        event.preventDefault();
-        this.setState({ focus: true });
-    };
 
-    handlBlur = (event) => {
-        event.preventDefault();
-        this.setState({ focus: false });
-    };
+    //this shows or hides the dropdowns that are focused on
+    showOrHide = () => this.setState((currentState) => ({show: !currentState.show}));
 
+    validateZip(event){
+        var zipValue = $("#zip").val();
+        if(zipValue.length == 5){
+            this.setState({isValidZip: true});
+            console.log("Zip is valid");
+        }
+        else{
+            this.setState({isValidZip: false});
+            console.log("Zip is not valid");
+        }
+    }
+
+
+    
 
     render() {
         const focus = this.state.focus;
@@ -232,11 +244,10 @@ export class UserCreation extends Component {
                     <div>
                     <label>
                     Zip code: <br/>
-                        <input id="zip" class="rounded" name="zipcode" type="number" pattern="^\d{5}$" placeholder="99004" required/>
+                        <input id="zip" class="rounded" name="zipcode" type="number" pattern="^\d{5}$" placeholder="99004" onFocus={this.showOrHide} onBlur={this.showOrHide}
+                         onKeyUp={this.validateZip} required/>
                     </label>
-                    </div>
-                    <div id="zipreq">
-                        <p id="zipDigits" className="invalid">Zip code must be 5 digits</p>
+                        {this.state.show && <p id="zipDigits" className="invalid">Zip code must be 5 digits</p>}
                     </div>
                     <div>
                     <label>

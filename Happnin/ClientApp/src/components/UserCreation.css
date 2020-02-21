@@ -34,9 +34,9 @@ body {
     display: none;
 }
 
-#zipreq{
+/* #zipreq{
     display: none;
-}
+} */
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #A0A0A0;
