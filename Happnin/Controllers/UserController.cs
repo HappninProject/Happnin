@@ -27,6 +27,15 @@ namespace Happnin.Controllers
             var client = new UserClient(httpClient);
             ICollection<User> users = await client.GetAllAsync();
             return users; 
-        } 
+        }
+
+        [HttpPost]
+        public async Task<User> Post(UserInput user)
+        {
+            var httpClient = ClientFactory.CreateClient("Happnin.Api");
+            var client = new UserClient(httpClient);
+            var res = await client.PostAsync(user);
+            return res;
+        }
     }
 }
