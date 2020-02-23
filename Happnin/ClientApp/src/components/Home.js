@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
+import Carousel, { Dots } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -11,7 +13,11 @@ export class Home extends Component {
         <table class = 'home'>
           <td>
             <div class = 'homeImages' >
-              <th>PROBROBLY SOME IMAGES OR SOMETHING GOES HERE</th>
+            <Carousel infinite autoPlay = {5000} animationSpeed={1000}>
+              <img class = 'images'src={'https://media.istockphoto.com/photos/monroe-street-bridge-in-spokane-wa-picture-id163641699'}/>
+              <img class = 'images'src={'https://media.istockphoto.com/photos/downtown-spokane-washington-skyline-and-the-spokane-river-picture-id1125710637'} />
+              <img class = 'images'src={'https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206'} />              
+            </Carousel>
             </div>
           </td>
 
