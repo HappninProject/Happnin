@@ -51,7 +51,22 @@ export class UserCreation extends Component {
                 [name] : value
             } 
         });
+<<<<<<< Updated upstream
         console.log(this.state)
+=======
+    }
+
+    async handleSubmit(event){
+        event.preventDefault();
+        console.log(JSON.stringify(this.state.user))
+        await fetch('user', {
+            method: 'POST',
+            body: JSON.stringify(this.state.user),
+            headers: { 'Content-Type' : 'application/json'}
+        }).then(res => res.json())
+        .then(response => console.log('Success: ', JSON.stringify(response)))
+        .then(error => console.error('error:',error));
+>>>>>>> Stashed changes
     }
 
     componentDidMount() {
