@@ -4,6 +4,7 @@ body {
 }
 
 .valid {
+    left: 10px;
     color: green;
   }
   
@@ -14,6 +15,7 @@ body {
 }
 
 .invalid {
+    left: 10px;
     color: red;
 }
 
@@ -34,19 +36,17 @@ body {
     display: none;
 }
 
-/* #zipreq{
-    display: none;
-} */
+/*changing placeholder color*/
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
     color: #A0A0A0;
-    opacity: 1; /* Firefox */
+    opacity: 1;
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
     color: #A0A0A0;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+::-ms-input-placeholder {
     color: #A0A0A0;
 }
