@@ -43,18 +43,30 @@ export class UserCreation extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleInputChange = (event) => {
+    handleInputChange = (event) =>  {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
+        
         this.setState({
-            user : {
+            user : { 
                 ...this.state.user,
                 [name] : value
             } 
         });
-        console.log(this.state)
+        console.log(this.user)
+    }
+
+    async handleSubmit(event){
+        event.preventDefault();
+        console.log(JSON.stringify(this.state.user))
+        await fetch('user', {
+            method: 'POST',
+            body: JSON.stringify(this.state.user),
+            headers: { 'Content-Type' : 'application/json'}
+        }).then(res => res.json())
+        .then(response => console.log('Success: ', JSON.stringify(response)))
+        .then(error => console.error('error:',error));
     }
 
     async handleSubmit(event){
@@ -112,9 +124,9 @@ export class UserCreation extends Component {
     render() {
         return (
             <div id="accountform">
-                <h1 className="header">Sign Up!</h1>
-                <form onSubmit={this.handleSubmit}> 
-                    <div className="form-group">
+                <h1 class="header">Sign Up!</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <div class="form-group">
                         <label>First name:</label>
                         <input id="fname" className="form-control" name="firstName" type="text" pattern="^[A-Za-z]+$" 
                             minLength="1" maxLength="40" placeholder="Jane" 
