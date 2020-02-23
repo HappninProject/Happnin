@@ -19,7 +19,7 @@ export class UserCreation extends Component {
             lastName : '',
             locationId : 1,
             password: '',
-            email: '',
+            email: ''
         }, 
             loading: true,
             showZip: false,
@@ -98,7 +98,9 @@ export class UserCreation extends Component {
     }
 
     //this makes sure the username is valid, then add the valid or invalid classes accordingly
+    //TODO: get rid of console.log
     validateUsername(event){
+        console.log("validateUsername called!");
         var usernameValue = $("#username").val();
         var regAlpha = new RegExp("^[A-Za-z0-9]*$");
         regAlpha.test(usernameValue) && usernameValue.length > 0? this.setState({isValidUserAlpha: true}) : this.setState({isValidUserAlpha: false});
@@ -140,7 +142,7 @@ export class UserCreation extends Component {
                     <div className="form-group">
                         <label>Username:</label>
                         <input id="username" className="form-control" name="userName" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" 
-                            value={this.state.user.firstName} onChange={this.handleInputChange} onFocus={this.showOrHideUser} 
+                            value={this.state.user.userName} onChange={this.handleInputChange} onFocus={this.showOrHideUser} 
                             onBlur={this.showOrHideUser} onKeyUp={this.validateUsername} required/>
                             {this.state.showUser &&
                                 <p id="userAlphaNum" className={this.state.isValidUserAlpha ? "valid":"invalid"}>Username must only contain
