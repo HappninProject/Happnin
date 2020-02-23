@@ -12,7 +12,6 @@ import { UserAccount } from './components/UserAccount';
 import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 import { browseEvents } from './components/browseEvents';
-import { EventList } from './components/EventList';
 import './custom.css'
 
 export default class App extends Component {
@@ -36,7 +35,6 @@ export default class App extends Component {
         <Route path='/user-creation' component={UserCreation} />
         <Route path='/submit-event' component={SubmitEvent} />
         <Route path='/browseEvents' component={browseEvents} />
-        <Route path='/test-list' component={EventList} />
         <Route path='/fetch-event-data' component={FetchEventData}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
         <Route path='/fetch-location-data' component={FetchLocationData} />
