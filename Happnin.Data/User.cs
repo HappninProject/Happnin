@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace Happnin.Data
 {
-    public class User : EntityBase
+    public class User : IdentityUser<int>, IEntityBase
     {
         private string _firstName; 
         public string FirstName
@@ -19,13 +20,6 @@ namespace Happnin.Data
             set => _lastName =  value ?? throw new ArgumentNullException(nameof(LastName));
         }
 
-        private string _email;
-        public string Email 
-        { 
-            get => _email;
-            set => _email = value ?? throw new ArgumentNullException(nameof(LastName));
-        }
-
         public int LocationId { get; set; }
         private Location _location;
 
@@ -35,21 +29,18 @@ namespace Happnin.Data
             set => _location = value ?? throw new ArgumentNullException(nameof(Location));
         }
 
-        // have to read up more about how to handle passwords in entity framework
-        public string Password { get; set; } 
         public List<User> Friends { get; } = new List<User>();
 
-        public User(string firstName, string lastName, string email, Location location) 
-            : this(firstName, lastName, email)
+        public User(string firstName, string lastName, Location location) 
+            : this(firstName, lastName)
         {
             Location = location;
         }
 
-        private User(string firstName, string lastName, string email)
+        private User(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
-            Email = email;
         }
 
         public bool AddFriend(User friend)

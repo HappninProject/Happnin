@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
+import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
@@ -12,7 +13,13 @@ import { UserAccount } from './components/UserAccount';
 import { UserCreation } from './components/UserCreation';
 import { SubmitEvent } from './components/SubmitEvent';
 import { browseEvents } from './components/browseEvents';
+import { EventList } from './components/EventList';
+import { signIn } from './components/sign-in';
+import { forgotPassword } from './components/forgotPassword';
 import './custom.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './react_dates_overrides.css'
+
 
 export default class App extends Component {
     static displayName = App.name;
@@ -20,10 +27,6 @@ export default class App extends Component {
   state = {
     eventinfoarray: [],
   }
-
-
-
-
 
   render () {
     return (
@@ -35,10 +38,12 @@ export default class App extends Component {
         <Route path='/user-creation' component={UserCreation} />
         <Route path='/submit-event' component={SubmitEvent} />
         <Route path='/browseEvents' component={browseEvents} />
+        <Route path='/test-list' component={EventList} />
         <Route path='/fetch-event-data' component={FetchEventData}/>
         <Route path='/fetch-user-data' component={FetchUserData}/>
-        <Route path='/fetch-location-data' component={FetchLocationData} />
-        <Route path='/login' component={Login} />
+        <Route path='/fetch-location-data' component={FetchLocationData}/>
+        <Route path='/sign-in' component={signIn}/>
+        <Route path='/forgotPassword' component={forgotPassword}/>
       </Layout>
     );
   }
