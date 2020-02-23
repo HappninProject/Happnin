@@ -51,9 +51,7 @@ export class UserCreation extends Component {
                 [name] : value
             } 
         });
-<<<<<<< Updated upstream
         console.log(this.state)
-=======
     }
 
     async handleSubmit(event){
@@ -66,7 +64,6 @@ export class UserCreation extends Component {
         }).then(res => res.json())
         .then(response => console.log('Success: ', JSON.stringify(response)))
         .then(error => console.error('error:',error));
->>>>>>> Stashed changes
     }
 
     componentDidMount() {
