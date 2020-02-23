@@ -39,6 +39,8 @@ export class UserCreation extends Component {
         this.validateZip = this.validateZip.bind(this);
         this.validateUsername = this.validateUsername.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange = (event) => {
@@ -48,6 +50,7 @@ export class UserCreation extends Component {
 
         this.setState({
             user : {
+                ...this.state.user,
                 [name] : value
             } 
         });
@@ -110,7 +113,7 @@ export class UserCreation extends Component {
         return (
             <div id="accountform">
                 <h1 className="header">Sign Up!</h1>
-                <form>
+                <form onSubmit={this.handleSubmit}> 
                     <div className="form-group">
                         <label>First name:</label>
                         <input id="fname" className="form-control" name="firstName" type="text" pattern="^[A-Za-z]+$" 
