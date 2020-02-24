@@ -1,5 +1,4 @@
 ﻿import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import "./UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
