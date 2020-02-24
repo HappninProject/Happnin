@@ -10,6 +10,7 @@ namespace Happnin.Business
         public AutomapperProfileConfiguration()
         {
             CreateMap<User, Dto.User>();
+            CreateMap<Dto.User, User>();
             CreateMap<Dto.UserInput, User>();
             CreateMap<Location, Dto.Location>();
             CreateMap<Dto.LocationInput, Location>();

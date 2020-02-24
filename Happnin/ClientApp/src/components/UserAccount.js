@@ -13,7 +13,7 @@ export class UserAccount extends Component {
         return (
             <div class="container">
                     <div class="row">
-                    <div class="col align-self-start col-sm border rounded white-div">
+                    <div class="col align-self-start col-xs border rounded white-div">
                             <div class="row text-center">
                                 <img src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png" class="img-fluid mt-0" alt="profile image"></img>
                                 <h3 class = 'header'>Jane Doe </h3>

@@ -2,9 +2,9 @@
 
 namespace Happnin.Data
 {
-    public class EntityBase
+    public class EntityBase : IEntityBase
     {
         [Required]
-        public int? Id { get; protected set; }
+        public int Id { get; set; }
     }
 }
