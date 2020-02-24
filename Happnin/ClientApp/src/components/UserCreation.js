@@ -140,7 +140,7 @@ export class UserCreation extends Component {
                     <div className="form-group">
                         <label>Username:</label>
                         <input id="username" className="form-control" name="userName" type="text" pattern="^[A-Za-z0-9]{4,15}$" placeholder="user123" 
-                            value={this.state.user.firstName} onChange={this.handleInputChange} onFocus={this.showOrHideUser} 
+                            value={this.state.user.userName} onChange={this.handleInputChange} onFocus={this.showOrHideUser} 
                             onBlur={this.showOrHideUser} onKeyUp={this.validateUsername} required/>
                             {this.state.showUser &&
                                 <p id="userAlphaNum" className={this.state.isValidUserAlpha ? "valid":"invalid"}>Username must only contain
