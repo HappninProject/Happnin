@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
-import $ from "jquery";
 
 //use bootstrap to make page prettier
 //send email confirmation
