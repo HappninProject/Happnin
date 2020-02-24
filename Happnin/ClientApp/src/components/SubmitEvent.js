@@ -23,59 +23,70 @@ export class SubmitEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventName: "",
-      eventDescription: "",
-      date: null,
-      hostEmail: "",
-      phone: "",
-      eventAddress: "",
-      eventZip: "",
-      eventDate: "",
-      eventStart: "",
-      eventEnd: "",
-      category: "",
-      age18Check: "",
-      age21Check: ""
+      event : {
+        name : "",
+        description: "",
+        locationId: 1,
+        categoryId: 1,
+        hostId: 1,
+        eventTime: "2020-02-26T05:21:52.102Z",
+        endTime: "2020-02-27T05:21:52.102Z",
+        cost: 42.00,
+        ageRestriction: 0
+      }
     };
+  
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit = event => {
+  async handleSubmit(event) {
     event.preventDefault();
-    console.log(event);
-    const data = this.state;
-    console.log("Final data is ", data);
+    console.log(JSON.stringify(this.state.event));
+    await fetch("event", {
+      method: "POST",
+      body: JSON.stringify(this.state.event),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => res.json())
+      .then(response => console.log("Success: ", JSON.stringify(response)))
+      .then(error => console.error("error:", error));
   };
 
   handleInputChange = event => {
     event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+   
     this.setState({
-      [event.target.name]: event.target.value
+      event: {
+        ...this.state.event,
+        [name]: value
+      }
     });
+      console.log(this.state.event);
   };
 
   componentDidMount = event => {
-    fetch("api/Event", {
-      method: "post"
-    });
   };
 
   render() {
-    const { eventName, eventDescription } = this.state;
     return (
       <div style={{ marginBottom: "2em" }}>
         <h1 class="header">Submit an Event</h1>
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">
-            <label for="inputTitle">Title:</label>
+            <label for="inputName">Name:</label>
             <input
-              id="inputTitle"
+              id="inputName"
               class="form-control"
               name="fname"
               type="text"
-              pattern="^[A-Za-z]+$"
-              minLength="1"
-              maxLength="40"
+              name="name"
               placeholder="Title"
+              value={this.state.event.name}
+              onChange={this.handleInputChange}
               required
             />
           </div>
@@ -87,133 +98,29 @@ export class SubmitEvent extends Component {
               class="form-control"
               cols="50"
               rows="5"
+              description="description"
+              name="description"
               minLength="1"
               maxLength="200"
+              value={this.state.event.description}
+              onChange={this.handleInputChange}
               required
             ></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="hostName">Host name:</label>
-            <input
-              id="hostName"
-              class="form-control"
-              name="fname"
-              type="text"
-              pattern="^[A-Za-z]+$"
-              minLength="1"
-              maxLength="40"
-              placeholder="Jane"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="hostEmail">Host Email:</label>
-            <input
-              id="hostEmail"
-              class="form-control"
-              name="fname"
-              type="text"
-              pattern="^[A-Za-z]+$"
-              minLength="1"
-              maxLength="40"
-              placeholder="Jane"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Contact(phone):</label>
-            <input
-              id="phone"
-              type="text"
-              class="form-control"
-              value={this.state.companyContact}
-              onChange={this.handleCompanyContact}
-            ></input>
-          </div>
-
-          <div class="form-group">
-            <label for="datePicker">
-              Date:
-              <br />
-              <SingleDatePicker
-                date={this.state.date} // momentPropTypes.momentObj or null
-                class="form-control"
-                onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-                focused={this.state.focused} // PropTypes.bool
-                onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                id="datePicker" // PropTypes.string.isRequired,
-              ></SingleDatePicker>
-            </label>
-          </div>
-
-          <div class="startTime">
-            <label class="subHeader">
-              Start Time: <br />
-              <TimePicker
-                showSecond={false}
-                defaultValue={now}
-                className="xxx"
-                format={format}
-                use12Hours
-                inputReadOnly
-              ></TimePicker>
-            </label>
-          </div>
-
-          <div class="endTime">
-            <label class="subHeader">
-              End Time:
-              <br />
-              <TimePicker
-                showSecond={false}
-                defaultValue={now}
-                className="xxx"
-                format={format}
-                use12Hours
-                inputReadOnly
-              ></TimePicker>
-            </label>
-          </div>
-          <div class="form-group">
-            <label for="address" class="subHeader">
-              Event address:
-            </label>
-            <input
-              id="address"
-              type="text"
-              class="form-control"
-              value={this.state.eventAddress}
-              onChange={this.handleInputChange}
-            ></input>
-          </div>
-
-          <div class="form-group">
-            <label for="zip" class="subHeader">
-              Event ZIP:
-            </label>
-            <input
-              type="text"
-              id="zip"
-              class="form-control"
-              value={this.state.eventZip}
-              onChange={this.handleInputChange}
-            ></input>
-          </div>
           <div class="categorySelect">
             <label for="categorySelect">Event category:</label>
             <select
               id="categorySelect"
-              value={this.state.category}
+              value={this.state.event.categoryId}
               class="form-control"
+              name="categoryId"
               onChange={this.handleInputChange}
             >
-              <option value="Music">Music</option>
-              <option value="Comedy">Comedy</option>
-              <option value="Culture">Culture</option>
-              <option value="Festival">Festival</option>
+              <option value="1">Music</option>
+              <option value="2">Comedy</option>
+              <option value="3">Culture</option>
+              <option value="4">Festival</option>
             </select>
           </div>
           <div class="image">
@@ -225,13 +132,19 @@ export class SubmitEvent extends Component {
               <Form.Check
                 inline
                 label="18+?"
+                value="18"
                 type={type}
+                name="ageRestriction"
+                onChange={this.handleInputChange}
                 id={`inline-${type}-1`}
               />
               <Form.Check
                 inline
                 label="21+?"
                 type={type}
+                value="21"
+                name="ageRestriction"
+                onChange={this.handleInputChange}
                 id={`inline-${type}-2`}
               />
             </div>
