@@ -29,5 +29,14 @@ namespace Happnin.Controllers
             ICollection<Event> events = await client.GetAllAsync();
             return events; 
         }
+
+        [HttpPost]
+        public async Task<Event> Post(EventInput eventInput)
+        {
+            var httpClient = ClientFactory.CreateClient("Happnin.Api");
+            var client = new EventClient(httpClient);
+            var newEvent = await client.PostAsync(eventInput);
+            return newEvent;
+        }
     }
 }
