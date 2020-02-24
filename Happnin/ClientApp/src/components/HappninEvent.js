@@ -27,18 +27,15 @@ export class HappninEvent extends React.Component {
                                     Host ID: <b>{e.hostId}</b> <br/>
                                     Category: <b>{e.categoryId}</b> <br/>
                                     Age Restriction: <b>{e.ageRestriction}</b> <br/>
-                                    Start Time: {e.eventTime}<br/>
-                                    End Time: {e.endTime}  <br/>
-                                    Start Time: {e.eventTime}</p>
+                                    Start Time: <b>{e.eventTime}</b><br/>
+                                    End Time: <b>{e.endTime}</b> <br/></p>
                             </div>
                         </div> 
                     </Col>
                     </Row>
                 </Container>
-                
             </div>
             </Card>
-
                 )
     }
 }

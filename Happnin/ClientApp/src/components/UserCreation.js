@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
+import {Redirect} from "react-router-dom";
 
 //use bootstrap to make page prettier
 //send email confirmation
@@ -68,6 +69,7 @@ export class UserCreation extends Component {
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
       .then(error => console.error("error:", error));
+      this.setState({redirectToHome: true}) 
   }
 
   componentDidMount() {}
@@ -135,6 +137,12 @@ export class UserCreation extends Component {
   }
 
   render() {
+
+    const redirectToHome = this.state.redirectToHome;
+    if (redirectToHome === true) {
+      return <Redirect to="/fetch-user-data" />
+  }
+
     return (
       <div id="accountform" class="submit">
         <h1 class="header">Sign Up!</h1>
