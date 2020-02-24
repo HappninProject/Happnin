@@ -90,7 +90,6 @@ export class UserCreation extends Component {
   }
 
   //this makes sure the username is valid, then add the valid or invalid classes accordingly
-  //TODO: get rid of console.log
   validateUsername(event) {
     const target = event.target;
     const usernameValue = target.value;
@@ -249,7 +248,7 @@ export class UserCreation extends Component {
             )}
           </div>
           <div className="form-group">
-            <label for="profile_pic">Profile Picture: </label>
+            <label hmtlFor="profile_pic">Profile Picture: </label>
             <br />
             <input id="profile_pic" name="profile_pic" type="file" />
           </div>

@@ -44,7 +44,6 @@ export class SubmitEvent extends Component {
   }
 
   async handleSubmit(event) {
-
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
     await fetch("event", {

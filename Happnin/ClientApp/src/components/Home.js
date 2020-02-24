@@ -106,18 +106,15 @@ export class Home extends Component {
 
           </td>
         </table>
-
         <div class="submit">
         <h1 id="tabelLabel" >Events</h1>
         <p>Got these events from our server DAWG</p>
 
         {contents}
-        </div>
-
+        </div>    
+      </div>
                   
       </div>
-
-      
     
     );
   }
