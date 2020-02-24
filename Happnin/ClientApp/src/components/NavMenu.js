@@ -26,7 +26,7 @@ export class NavMenu extends Component {
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
           <Container className = 'navbar'>
-            <NavbarBrand tag={Link} to="/" className="logo" >h</NavbarBrand>
+            <NavbarBrand tag={Link} to="/" className="logo" >H</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
@@ -34,7 +34,7 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="subHeader" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/fetch-location-data">locations</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/fetch-location-data">Locations</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/fetch-user-data">Users</NavLink>
@@ -52,7 +52,7 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/fetch-event-data">Events</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/login">Login</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/test-list">Test List</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/sign-in">Sign in</NavLink>
