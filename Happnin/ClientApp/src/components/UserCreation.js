@@ -136,7 +136,7 @@ export class UserCreation extends Component {
 
   render() {
     return (
-      <div id="accountform">
+      <div id="accountform" class="submit">
         <h1 class="header">Sign Up!</h1>
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">

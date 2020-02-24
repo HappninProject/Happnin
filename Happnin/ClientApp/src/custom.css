@@ -36,12 +36,12 @@ code {
 
 
 .form-control:not(#categorySelect) {
-  width: 50% !important;
+  width: 30% !important;
 }
 
 #categorySelect
 {
-  width: 50%;
+  width: 30%;
 }
 
 .category-select {
@@ -58,21 +58,18 @@ code {
 .event-table
 {
   border-collapse: separate;
-  
-
 }
 .homeImages
 {
   border-style: solid;
   border-radius: 5px;
-  border-width: 5px;
+  border-width: 1px;
   border-color: black;
   width: 900px;
   text-align: center;
   object-fit:cover;
 
 }
-
 
 .sidebar-data
 {
@@ -103,5 +100,26 @@ code {
 .page
 {
  margin-left: 0;
+}
+.card
+{
+  border-radius: 20px;
+  width: 50rem;
+}
+
+.happninevent
+{
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  padding-left: 6rem !important;
+
+}
+.submit{
+  margin-bottom: 2em;
+}
+#accountform{
+  margin-bottom: 2em;
 }
 

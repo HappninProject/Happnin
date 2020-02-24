@@ -57,13 +57,13 @@ export class signIn extends Component {
               <div>
                 <label class = 'header'>SIGN IN:</label>
 
-                <div>
+                <div className="form-group">
                     <label class = 'subHeader'>user name:</label>
-                    <input name="userName" type = 'text' value = {this.state.userName} onChange = {this.handleInputChange}></input>
+                    <input name="userName" type = 'text' className="form-control" value = {this.state.userName} onChange = {this.handleInputChange}></input>
                 </div>
-                <div>
+                    <div className="form-group">
                     <label class = 'subHeader'>password:</label>
-                    <input name="password" type = 'password' value = {this.state.password} onChange = {this.handleInputChange}></input>
+                        <input name="password" type='password' className="form-control" value = {this.state.password} onChange = {this.handleInputChange}></input>
                 </div>
 
                 <div>
