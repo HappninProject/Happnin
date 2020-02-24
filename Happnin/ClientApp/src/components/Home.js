@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import { Link } from "react-router-dom";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -67,7 +68,7 @@ export class Home extends Component {
             <div class = 'eventTable' >
               <th class = 'eventsHeader'>FRIENDS EVENTS:</th>
                 <tr>
-                  <td class = 'event'> test </td>
+                  <td class = 'event'> THIS TABLE WILL ONLY SHOW UP IF SIGNED IN TO AN ACCOUNT WHICH HAS FRIENDS </td>
                 </tr>
             </div>
 
