@@ -11,50 +11,82 @@ export class Home extends Component {
       <div>
         <div class = 'header'>WELCOME TO HAPPNIN'</div>
         <table class = 'home'>
-          <td>
+            <td>
             <div class = 'homeImages' >
-            <Carousel infinite autoPlay = {5000} animationSpeed={1000}>
-              <img class = 'images'src={'https://media.istockphoto.com/photos/monroe-street-bridge-in-spokane-wa-picture-id163641699'}/>
-              <img class = 'images'src={'https://media.istockphoto.com/photos/downtown-spokane-washington-skyline-and-the-spokane-river-picture-id1125710637'} />
-              <img class = 'images'src={'https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206'} />              
-            </Carousel>
+              <Carousel infinite autoPlay = {5000} animationSpeed={1000}>
+                <img class = 'images'src={'https://media.istockphoto.com/photos/monroe-street-bridge-in-spokane-wa-picture-id163641699'}/>
+                <img class = 'images'src={'https://media.istockphoto.com/photos/downtown-spokane-washington-skyline-and-the-spokane-river-picture-id1125710637'} />
+                <img class = 'images'src={'https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206'} />              
+              </Carousel>
+              </div>
+            </td>
+            <tc>
+              <div>
+              <table class = 'sideBar'>
+                <tr class = 'sidebar-data'> 
+                  <div>
+                    <td>
+                      SIGN IN!
+                    </td>
+                  </div>
+                </tr>
+
+                <tr class = 'sidebar-data'>
+                  <div>
+                    <td>
+                      SIGN UP
+                    </td>
+                  </div>
+                </tr>
+           
+                <tr class = 'sidebar-data'>
+                  <div>
+                    <td>
+                      BROWSE EVENTS
+                    </td>
+                  </div>
+                </tr>
+    
+              </table>
+              </div>
+            </tc>
+        </table>
+        <table class = 'event-table'>
+          <td>
+
+            <div class = 'eventTable' >
+              <th class = 'eventsHeader'>UPCOMING EVENTS:</th>
+                <tr>
+                  <td class = 'event'> test </td>
+                </tr>
             </div>
+
+          </td>
+          <td>
+
+            <div class = 'eventTable' >
+              <th class = 'eventsHeader'>FRIENDS EVENTS:</th>
+                <tr>
+                  <td class = 'event'> test </td>
+                </tr>
+            </div>
+
           </td>
 
-              <td>
-                <table class = 'sideBar'>
+          <td>
 
-                  <tr>
-                      <div class = 'eventTable' >
-                          <th class = 'eventsHeader'>UPCOMING EVENTS:</th>
-                          <tr>
-                            <td class = 'event'> test </td>
-                          </tr>
-                      </div>
-                  </tr>
+            <div class = 'eventTable' >
+              <th class = 'eventsHeader'>POPULAR EVENTS:</th>
+                <tr>
+                  <td class = 'event'> test </td>
+                </tr>
+            </div>
 
-                  <tr>
-                      <div class = 'eventTable' >
-                          <th class = 'eventsHeader'>FRIENDS EVENTS:</th>
-                            <tr>
-                              <td class = 'event'> test </td>
-                            </tr>
-                      </div>
-                  </tr>
-
-                  <tr>
-                      <div class = 'eventTable' >
-                          <th class = 'eventsHeader'>POPULAR EVENTS:</th>
-                            <tr>
-                              <td class = 'event'> test </td>
-                            </tr>
-                      </div>
-                  </tr>
-
-                </table>
-              </td>
-          </table>
+          </td>
+        </table>
+                  
       </div>
+    
     );
   }
 }
