@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import { Link } from "react-router-dom";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -13,48 +14,6 @@ export class Home extends Component {
         <table class = 'home'>
             <td>
             <div class = 'homeImages' >
-<<<<<<< HEAD
-            <Carousel infinite autoPlay = {5000} animationSpeed={1000}>
-              <img class = 'images'src={'https://media.istockphoto.com/photos/monroe-street-bridge-in-spokane-wa-picture-id163641699'}/>
-              <img class = 'images'src={'https://media.istockphoto.com/photos/downtown-spokane-washington-skyline-and-the-spokane-river-picture-id1125710637'} />
-              <img class = 'images'src={'https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206'} />              
-            </Carousel>
-            </div>
-            </td>
-              <td>
-                <table class = 'sideBar'>
-
-                  <tr>
-                      <div class = 'eventTable' >
-                          <th class = 'eventsHeader'>UPCOMING EVENTS:</th>
-                          <tr>
-                            <td class = 'event'> test </td>
-                          </tr>
-                      </div>
-                  </tr>
-
-                  <tr>
-                      <div class = 'eventTable' >
-                          <th class = 'eventsHeader'>FRIENDS EVENTS:</th>
-                            <tr>
-                              <td class = 'event'> test </td>
-                            </tr>
-                      </div>
-                  </tr>
-
-                  <tr>
-                      <div class = 'eventTable' >
-                          <th class = 'eventsHeader'>POPULAR EVENTS:</th>
-                            <tr>
-                              <td class = 'event'> test </td>
-                            </tr>
-                      </div>
-                  </tr>
-
-                </table>
-              </td>
-          </table>
-=======
               <Carousel infinite autoPlay = {5000} animationSpeed={1000}>
                 <img class = 'images'src={'https://media.istockphoto.com/photos/monroe-street-bridge-in-spokane-wa-picture-id163641699'}/>
                 <img class = 'images'src={'https://media.istockphoto.com/photos/downtown-spokane-washington-skyline-and-the-spokane-river-picture-id1125710637'} />
@@ -109,7 +68,7 @@ export class Home extends Component {
             <div class = 'eventTable' >
               <th class = 'eventsHeader'>FRIENDS EVENTS:</th>
                 <tr>
-                  <td class = 'event'> test </td>
+                  <td class = 'event'> THIS TABLE WILL ONLY SHOW UP IF SIGNED IN TO AN ACCOUNT WHICH HAS FRIENDS </td>
                 </tr>
             </div>
 
@@ -127,7 +86,6 @@ export class Home extends Component {
           </td>
         </table>
                   
->>>>>>> master
       </div>
     
     );

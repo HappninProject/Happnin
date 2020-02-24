@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,NavbarText } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
@@ -49,7 +49,34 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/fetch-event-data">Events</NavLink>
+                  <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                      Events
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                    <DropdownItem>
+                      Music
+                    </DropdownItem>
+                    <DropdownItem>
+                      Culture
+                    </DropdownItem>
+                    <DropdownItem>
+                      Arts
+                    </DropdownItem>
+                    <DropdownItem>
+                      Culture
+                    </DropdownItem>
+                    <DropdownItem>
+                      Comedy
+                    </DropdownItem>
+                    <DropdownItem>
+                      Culture
+                    </DropdownItem>
+                    <DropdownItem>
+                      Festivals/Multi-day
+                    </DropdownItem>
+                  </DropdownMenu>
+                  </UncontrolledDropdown>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/test-list">Test List</NavLink>
@@ -58,6 +85,7 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/sign-in">Sign in</NavLink>
 
                 </NavItem>
+
               </ul>
             </Collapse>
           </Container>

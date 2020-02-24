@@ -67,21 +67,10 @@ code {
   border-radius: 5px;
   border-width: 5px;
   border-color: black;
-<<<<<<< HEAD
-  width: 1000px;
-  text-align: center;
-  object-fit: cover;
-}
-.sideBar
-{
-  position: absolute;
-  top: 220px;
-=======
   width: 900px;
   text-align: center;
   object-fit:cover;
 
->>>>>>> master
 }
 
 
