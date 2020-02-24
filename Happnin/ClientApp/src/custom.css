@@ -53,7 +53,7 @@ code {
   border-radius: 5px;
   border-width: 5px;
   border-color: black;
-  width: 300px;
+  width: 298px;
 }
 .event-table
 {
@@ -67,7 +67,7 @@ code {
   border-radius: 5px;
   border-width: 5px;
   border-color: black;
-  width: 1000px;
+  width: 900px;
   text-align: center;
   object-fit:cover;
 
@@ -86,7 +86,7 @@ code {
   line-height: 41px;
   border-color: black;
   border-collapse: separate;
-  border-spacing:3.1em;
+  border-spacing:2.45em;
   text-align: center;
   background-color: #B67B94;
 }
@@ -98,5 +98,10 @@ code {
 {
   position: absolute;
   top:130px;
+  width: 100px;
+}
+.page
+{
+ margin-left: 0;
 }
 
