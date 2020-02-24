@@ -69,12 +69,12 @@ export class EditAccount extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-5 float-right border rounded white-div my-auto">
+            <div className="col-5 ml-2 float-right border rounded white-div my-auto">
               <h1 id="aboutHeading" className="header">
                 ABOUT
               </h1>
               <a
-                className="float-right"
+                className="float-right border btn mt-2"
                 role="button"
                 title="Edit Fields"
                 onClick={this.handleEditOtherFields.bind(this)}
