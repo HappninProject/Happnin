@@ -29,7 +29,7 @@ export default class App extends Component {
   }
 
   render () {
-    return (
+    return ( 
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />

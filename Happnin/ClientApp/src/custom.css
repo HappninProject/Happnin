@@ -13,14 +13,7 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-.App {
-  border-style: solid;
-  border-width: 5px;
-  background: #33efc2; opacity: 75%;
-  border-color: #B67B94; 
-  border-radius: 25px;
-  padding-left: 10px;
-}
+
 
 .header
 {
@@ -31,12 +24,7 @@ code {
   line-height: 41px;
 }
 
-.logo
-{
-  font-family: Montserrat;
-  font-style: bold;
-  font-size: 32px;
-}
+
 .text
 {
   font-family: Open Sans;
@@ -67,10 +55,11 @@ code {
   border-color: black;
   width: 300px;
 }
-.eventsHeader
+.event-table
 {
- background-color: #B67B94;
- width: 300px; 
+  border-collapse: separate;
+  
+
 }
 .homeImages
 {
@@ -84,9 +73,30 @@ code {
 
 }
 
+
+.sidebar-data
+{
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 5px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 41px;
+  border-color: black;
+  border-collapse: separate;
+  border-spacing:3.1em;
+  text-align: center;
+  background-color: #B67B94;
+}
+.sidebar-data:hover
+{
+  background-color: #33efc2;
+}
 .sideBar
 {
   position: absolute;
-  top: 220px;
+  top:130px;
 }
 
