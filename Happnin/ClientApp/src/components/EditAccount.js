@@ -8,12 +8,7 @@ export class EditAccount extends Component {
   constructor(props) {
     super(props);
 
-  }
-
-  render() {
-    return (
-      <div id="editAccount">
-        <h3>Edit Account Page Goes Here</h3>
+  
 
     //TODO: eventually remove the hardcoded values
     //These values are temporarily hard-coded
@@ -37,7 +32,8 @@ export class EditAccount extends Component {
   handleEditOtherFields = () =>
     this.setState(currentState => ({
       editOtherFields: !currentState.editOtherFields
-    }));
+    })
+    )
 
   render() {
     return (
@@ -162,4 +158,5 @@ export class EditAccount extends Component {
       </div>
     );
   }
+
 }
