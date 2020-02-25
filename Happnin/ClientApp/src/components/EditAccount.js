@@ -1,10 +1,20 @@
 import React, { Component } from "react";
+
 import { NavLink, Link } from "react-router-dom";
+
 import "./EditAccount.css";
 
 export class EditAccount extends Component {
   constructor(props) {
     super(props);
+
+  }
+
+  render() {
+    return (
+      <div id="editAccount">
+        <h3>Edit Account Page Goes Here</h3>
+
     //TODO: eventually remove the hardcoded values
     //These values are temporarily hard-coded
     //TODO: make sure regex is used for each input to only accept valid values
@@ -148,6 +158,7 @@ export class EditAccount extends Component {
           </div>
         </form>
         <div className="float-right mt-2"></div>
+
       </div>
     );
   }
