@@ -29,7 +29,7 @@ export class UserAccount extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-3 border rounded white-div">
+          <div className="col-sm border rounded white-div">
             <div className="row text-center">
               <img
                 src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png"
@@ -48,6 +48,7 @@ export class UserAccount extends Component {
             </div>
           </div>
           <div className="col-5 float-right border rounded white-div">
+
             <h1 className="header">ABOUT</h1>
             <p className="subHeader">Username: {this.state.user.userName}</p>
             <div>

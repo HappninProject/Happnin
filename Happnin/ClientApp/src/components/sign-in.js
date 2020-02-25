@@ -56,25 +56,25 @@ export class signIn extends Component {
         <div>
           <label class="header">SIGN IN:</label>
 
-          <div>
+          <div class="form-group">
             <label htmlFor="userName" class="subHeader">
               Username:&nbsp;
             </label>
             <input
               name="userName"
-              className="rounded"
+              class="form-control"
               type="text"
               value={this.state.userName}
               onChange={this.handleInputChange}
             ></input>
           </div>
-          <div>
+          <div class="form-group">
             <label htmlFor="password" class="subHeader">
               Password:&nbsp;
             </label>
             <input
               name="password"
-              className="rounded"
+              class="form-control"
               type="password"
               value={this.state.password}
               onChange={this.handleInputChange}
