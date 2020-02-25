@@ -49,40 +49,13 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
-                  <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                      Events
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                    <DropdownItem>
-                      Music
-                    </DropdownItem>
-                    <DropdownItem>
-                      Culture
-                    </DropdownItem>
-                    <DropdownItem>
-                      Arts
-                    </DropdownItem>
-                    <DropdownItem>
-                      Culture
-                    </DropdownItem>
-                    <DropdownItem>
-                      Comedy
-                    </DropdownItem>
-                    <DropdownItem>
-                      Culture
-                    </DropdownItem>
-                    <DropdownItem>
-                      Festivals/Multi-day
-                    </DropdownItem>
-                  </DropdownMenu>
-                  </UncontrolledDropdown>
+                    <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} className="subHeader" to="/test-list">Test List</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/sign-in">Sign in</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/browseEvents">browse events</NavLink>
 
                 </NavItem>
 
