@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,NavbarText } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
@@ -49,16 +49,11 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/submit-event">Submit Event</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/fetch-event-data">Events</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/test-list">Test List</NavLink>
+                    <NavLink tag={Link} className="subHeader" to="/sign-in">Sign in</NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink tag={Link} className="subHeader" to="/browseEvents">browse events</NavLink>
-
-                </NavItem>
-
               </ul>
             </Collapse>
           </Container>

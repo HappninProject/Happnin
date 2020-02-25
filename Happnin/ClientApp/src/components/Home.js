@@ -89,7 +89,7 @@ export class Home extends Component {
             <div class = 'eventTable' >
               <th class = 'eventsHeader'>FRIENDS EVENTS:</th>
                 <tr>
-                  <td class = 'event'> THIS TABLE WILL ONLY SHOW UP IF SIGNED IN TO AN ACCOUNT WHICH HAS FRIENDS </td>
+                  <td class = 'event'> test </td>
                 </tr>
             </div>
 
@@ -113,8 +113,10 @@ export class Home extends Component {
         {contents}
         </div>    
       </div>
-    );
                   
+      </div>
+    
+    );
   }
 
   async populateEventData() {

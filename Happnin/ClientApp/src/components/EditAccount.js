@@ -7,7 +7,15 @@ import "./EditAccount.css";
 export class EditAccount extends Component {
   constructor(props) {
     super(props);
-       //TODO: eventually remove the hardcoded values
+
+  }
+
+  render() {
+    return (
+      <div id="editAccount">
+        <h3>Edit Account Page Goes Here</h3>
+
+    //TODO: eventually remove the hardcoded values
     //These values are temporarily hard-coded
     //TODO: make sure regex is used for each input to only accept valid values
     this.state = {
@@ -23,8 +31,13 @@ export class EditAccount extends Component {
       },
       editOtherFields: false
     };
-
   }
+
+  //this makes the fields editable when they're clicked on
+  handleEditOtherFields = () =>
+    this.setState(currentState => ({
+      editOtherFields: !currentState.editOtherFields
+    }));
 
   render() {
     return (

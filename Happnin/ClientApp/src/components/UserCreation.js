@@ -248,7 +248,7 @@ export class UserCreation extends Component {
             )}
           </div>
           <div className="form-group">
-            <label for="profile_pic">Profile Picture: </label>
+            <label hmtlFor="profile_pic">Profile Picture: </label>
             <br />
             <input id="profile_pic" name="profile_pic" type="file" />
           </div>
