@@ -7,6 +7,7 @@ import Recaptcha from "react-recaptcha";
 //use bootstrap to make page prettier
 //send email confirmation
 //profile picture needs to be stored somewhere
+//try to put password value updating into one function
 
 export class UserCreation extends Component {
   constructor(props) {
@@ -19,12 +20,14 @@ export class UserCreation extends Component {
         lastName: "",
         locationId: 1,
         password: "",
+        passwordConfirm: "",
         email: ""
       },
       loading: true,
       showZip: false,
       showUser: false,
       showPassReq: false,
+      showConfirmReq: false,
       isValidZip: false,
       isValidUserAlpha: false,
       isValidUserMin: false,
@@ -34,13 +37,17 @@ export class UserCreation extends Component {
       isValidPassNum: false,
       isValidPassMin: false,
       isValidPassMax: true,
-      isValidPassSpecial: false
+      isValidPassSpecial: false,
+      passwordsMatch: false,
+      reCaptchaResponse: false
     };
     this.validateZip = this.validateZip.bind(this);
     this.validateUsername = this.validateUsername.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onPassChange = this.onPassChange.bind(this);
+    this.onPassConfirmChange = this.onPassConfirmChange.bind(this);
   }
 
   handleInputChange = event => {
@@ -59,6 +66,13 @@ export class UserCreation extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    if (
+      !this.state.reCaptchaResponse ||
+      this.state.reCaptchaResponse.trim().length === 0
+    ) {
+      alert("Please verify that you're not a robot!");
+      return { success: false, message: "Captcha is required." };
+    }
     console.log(JSON.stringify(this.state.user));
     await fetch("user", {
       method: "POST",
@@ -70,8 +84,6 @@ export class UserCreation extends Component {
       .then(error => console.error("error:", error));
   }
 
-  componentDidMount() {}
-
   //these show or hide dropdowns if input is clicked on
   showOrHideZip = () =>
     this.setState(currentState => ({ showZip: !currentState.showZip }));
@@ -79,6 +91,10 @@ export class UserCreation extends Component {
     this.setState(currentState => ({ showUser: !currentState.showUser }));
   showOrHidePassReq = () =>
     this.setState(currentState => ({ showPassReq: !currentState.showPassReq }));
+  showOrHideConfirmPass = () =>
+    this.setState(currentState => ({
+      showConfirmReq: !currentState.showConfirmReq
+    }));
 
   //this makes sure that the zip code is valid, then add the valid or invalid classes accordingly
   validateZip(event) {
@@ -105,7 +121,21 @@ export class UserCreation extends Component {
       : this.setState({ isValidUserMax: false });
   }
 
-  //this makes sure the password is valid, then add the valid or invalid classes accordingly
+  //for some reason handleInputChange isn't working for passwords, so this is used to set password
+  onPassChange(event) {
+    this.setState({
+      password: event.target.value
+    });
+  }
+
+  //see function description above, same but for confirming password
+  onPassConfirmChange(event) {
+    this.setState({
+      passwordConfirm: event.target.value
+    });
+  }
+
+  //makes sure the password is valid, then add the valid or invalid classes accordingly
   validatePassword(event) {
     const target = event.target;
     const passValue = target.value;
@@ -133,6 +163,31 @@ export class UserCreation extends Component {
       : this.setState({ isValidPassSpecial: false });
   }
 
+  //makes sure the password entered and re-entered match
+  checkPasswordsMatch = () => {
+    let pass = this.state.password;
+    let passConfirm = this.state.passwordConfirm;
+
+    if (pass === passConfirm) {
+      this.setState({ passwordsMatch: true });
+    } else {
+      this.setState({ passwordsMatch: false });
+    }
+  };
+
+  //for the recaptcha, makign sure that the user clicks on it before submitting
+  verifyCallback = response => {
+    console.log(response);
+    this.setState({
+      reCaptchaResponse: response
+    });
+  };
+
+  //also for the recaptcha to prevent form from submitting without being clicked
+  callback = () => {
+    console.log("Done!!!!");
+  };
+
   render() {
     return (
       <div id="accountform" class="submit">
@@ -145,9 +200,7 @@ export class UserCreation extends Component {
               className="form-control"
               name="firstName"
               type="text"
-              pattern="^[A-Za-z]+$"
-              minLength="1"
-              maxLength="40"
+              pattern="^[A-Za-z]{1,40}$"
               placeholder="Jane"
               value={this.state.user.firstName}
               onChange={this.handleInputChange}
@@ -161,9 +214,7 @@ export class UserCreation extends Component {
               className="form-control"
               name="lastName"
               type="text"
-              pattern="^[A-Za-z]+$"
-              minLength="1"
-              maxLength="40"
+              pattern="^[A-Za-z]{1,40}$"
               placeholder="Doe"
               value={this.state.user.lastName}
               onChange={this.handleInputChange}
@@ -236,6 +287,7 @@ export class UserCreation extends Component {
               onFocus={this.showOrHideZip}
               onBlur={this.showOrHideZip}
               onKeyUp={this.validateZip}
+              onChange={this.handleInputChange}
               required
             />
             {this.state.showZip && (
@@ -260,8 +312,7 @@ export class UserCreation extends Component {
               name="password"
               type="password"
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$"
-              value={this.state.user.password}
-              onChange={this.handleInputChange}
+              onChange={this.onPassChange}
               onFocus={this.showOrHidePassReq}
               onBlur={this.showOrHidePassReq}
               onKeyUp={this.validatePassword}
@@ -316,13 +367,45 @@ export class UserCreation extends Component {
               </p>
             )}
           </div>
-          <div>
-            <input type="checkbox" name="13orolder" required />
-            <label htmlFor="13orolder"> I am 13 or older</label>
+          <div className="form-group">
+            <label>Confirm password:</label>
+            <input
+              id="passwordConfirm"
+              className="form-control"
+              name="passwordConfirm"
+              type="password"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$"
+              onChange={this.onPassConfirmChange}
+              onKeyUp={this.checkPasswordsMatch}
+              onFocus={this.showOrHideConfirmPass}
+              onBlur={this.showOrHideConfirmPass}
+              errorMessage="Passwords do not match"
+              validate={this.state.passwordsMatch}
+              required
+            />
+            {this.state.showConfirmReq && (
+              <p
+                id="match"
+                className={this.state.passwordsMatch ? "valid" : "invalid"}
+              >
+                Passwords must match
+              </p>
+            )}
           </div>
-
-          <Recaptcha sitekey="6Lf3W9gUAAAAABostmeeDYxgtLyJpsckK4Bei6I-" />
-          <br />
+          <div className="form-group">
+            <input type="checkbox" name="13orolder" required />
+            <label htmlFor="13orolder">&nbsp;I am 13 or older</label>
+          </div>
+          <div className="form-group">
+            <Recaptcha
+              sitekey="6Lf3W9gUAAAAABostmeeDYxgtLyJpsckK4Bei6I-"
+              render="explicit"
+              onloadCallback={this.callback}
+              verifyCallback={this.verifyCallback}
+              required
+            />
+            <br />
+          </div>
           <Button type="submit">Submit</Button>
         </form>
       </div>
