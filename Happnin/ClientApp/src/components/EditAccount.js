@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-
-
 import "./EditAccount.css";
 
 export class EditAccount extends Component {
   constructor(props) {
     super(props);
 
-  
-
     //TODO: eventually remove the hardcoded values
     //These values are temporarily hard-coded
     //TODO: make sure regex is used for each input to only accept valid values
+    //try using Moment.js for dates
+    //update user infromation in database
     this.state = {
       user: {
         userName: "fakeUser1",
@@ -23,16 +21,17 @@ export class EditAccount extends Component {
         phone: "(509) 555-5555",
         eventsOfInterest: ["Music", "Comedy", "Cultural"]
       },
-      editOtherFields: false
+      editOtherFields: false,
+      anchorClicked: false
     };
   }
 
   //this makes the fields editable when they're clicked on
   handleEditOtherFields = () =>
     this.setState(currentState => ({
-      editOtherFields: !currentState.editOtherFields
-    })
-    )
+      editOtherFields: !currentState.editOtherFields,
+      anchorClicked: !this.state.anchorClicked
+    }));
 
   render() {
     return (
@@ -82,19 +81,20 @@ export class EditAccount extends Component {
                 href = "void(0)"
                 className="float-right border btn mt-2"
                 role="button"
-                title="Edit Fields"
                 onClick={this.handleEditOtherFields.bind(this)}
               >
-                Edit fields
+                {this.state.anchorClicked ? "Done" : "Edit fields"}
               </a>
               <div>
                 <label htmlFor="usernameInput">Username:&nbsp;</label>
                 <input
                   name="usernameInput"
                   type="text"
+                  pattern="^[A-Za-z0-9]{4,15}$"
+                  title="Username should only contain lowercase letters, uppercase letters, and numbers. It must be between 4 and 15 characters."
                   placeholder={this.state.user.userName}
                   disabled={!this.state.editOtherFields}
-                ></input>
+                />
               </div>
               <div>
                 <label htmlFor="fNameInput">First name:&nbsp;</label>
@@ -102,61 +102,48 @@ export class EditAccount extends Component {
                   name="fNameInput"
                   type="text"
                   placeholder={this.state.user.firstName}
+                  pattern="^[A-Za-z]{1,40}$"
+                  title="First name should only contain lowercase and uppercase letters. It must be between 1 and 40 characters."
                   disabled={!this.state.editOtherFields}
-                ></input>
+                />
               </div>
               <div>
                 <label htmlFor="lNameInput">Last name:&nbsp;</label>
                 <input
                   name="lNameInput"
                   type="text"
+                  pattern="^[A-Za-z]{1,40}$"
+                  title="Last name should only contain lowercase and uppercase letters. It must be between 1 and 40 characters."
                   placeholder={this.state.user.lastName}
                   disabled={!this.state.editOtherFields}
-                ></input>
+                />
               </div>
               <div>
                 <label htmlFor="cityInput">City:&nbsp;</label>
                 <input
                   name="cityInput"
                   type="text"
+                  pattern="^[A-Za-z/\s]{1,50}$"
                   placeholder={this.state.user.city}
+                  title="City should only contain lowercase and uppercase letters. It must be between 1 and 50 characters."
                   disabled={!this.state.editOtherFields}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="bdayInput">Birthday:&nbsp;</label>
-                <input
-                  name="bdayInput"
-                  type="text"
-                  placeholder={this.state.user.birthday}
-                  disabled={!this.state.editOtherFields}
-                ></input>
+                />
               </div>
               <div>
                 <label htmlFor="emailInput">Email:&nbsp;</label>
                 <input
                   name="emailInput"
                   type="email"
+                  title="Email should be in the format example@mail.com"
                   placeholder={this.state.user.email}
                   disabled={!this.state.editOtherFields}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="phoneInput">Phone:&nbsp;</label>
-                <input
-                  name="phoneInput"
-                  type="text"
-                  placeholder={this.state.user.phone}
-                  disabled={!this.state.editOtherFields}
-                ></input>
+                />
               </div>
             </div>
           </div>
         </form>
         <div className="float-right mt-2"></div>
-
       </div>
     );
   }
-
 }
