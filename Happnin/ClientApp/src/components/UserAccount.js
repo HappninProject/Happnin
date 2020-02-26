@@ -36,10 +36,19 @@ export class UserAccount extends Component {
                 className="img-fluid mt-0"
                 alt="profile image"
               ></img>
-              <h3 className="header mx-auto">Jane Doe </h3>
+              <h3 className="header mx-auto">
+                {this.state.user.firstName + " " + this.state.user.lastName}
+              </h3>
+            </div>
+            <div className="row-3">
+              <div className="col rounded white-div align-middle">
+                <h4>User Bio</h4>
+                <p>I think I'm stuck in a simulation</p>
+              </div>
             </div>
           </div>
-          <div className="col-lg float-right border rounded white-div">
+          <div className="col-5 float-right border rounded white-div">
+
             <h1 className="header">ABOUT</h1>
             <p className="subHeader">Username: {this.state.user.userName}</p>
             <div>
@@ -71,9 +80,10 @@ export class UserAccount extends Component {
               </p>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div></div>
+          <div className="col-4 float-right border rounded white-div">
+            <h1 className="header">Upcoming Events</h1>
+            <p>No upcoming events for you yet!</p>
+          </div>
         </div>
         <div className="float-right mt-2">
           <Link to="/edit-account">
