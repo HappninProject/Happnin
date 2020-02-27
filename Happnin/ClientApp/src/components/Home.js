@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Carousel from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
+
 import { HappninEvent } from './HappninEvent';
 
 export class Home extends Component {
@@ -31,47 +30,7 @@ export class Home extends Component {
     return (
       <div>
         <div class = 'header'>WELCOME TO HAPPNIN'</div>
-        <table class = 'home'>
-            <td>
-            <div class = 'homeImages' >
-              <Carousel infinite autoPlay = {5000} animationSpeed={1000}>
-                <img class = 'images'src={'https://media.istockphoto.com/photos/monroe-street-bridge-in-spokane-wa-picture-id163641699'} alt = 'slide1'/>
-                <img class = 'images'src={'https://media.istockphoto.com/photos/downtown-spokane-washington-skyline-and-the-spokane-river-picture-id1125710637'} alt = 'slide2' />
-                <img class = 'images'src={'https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206'} alt = 'slide3' />              
-              </Carousel>
-              </div>
-            </td>
-            <tc>
-              <div>
-              <table class = 'sideBar'>
-                <tr class = 'sidebar-data'> 
-                  <div>
-                    <td>
-                      SIGN IN!
-                    </td>
-                  </div>
-                </tr>
 
-                <tr class = 'sidebar-data'>
-                  <div>
-                    <td>
-                      SIGN UP
-                    </td>
-                  </div>
-                </tr>
-           
-                <tr class = 'sidebar-data'>
-                  <div>
-                    <td>
-                      BROWSE EVENTS
-                    </td>
-                  </div>
-                </tr>
-    
-              </table>
-              </div>
-            </tc>
-        </table>
         <table class = 'event-table'>
           <td>
 
