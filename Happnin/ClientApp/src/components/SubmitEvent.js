@@ -34,9 +34,9 @@ export class SubmitEvent extends Component {
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.00,
-        ageRestriction: 0,
-        redirectToHome: false
-      }
+        ageRestriction: 500,
+      },
+     // redirectToHome: false
     };
   
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -54,7 +54,7 @@ export class SubmitEvent extends Component {
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
           .then(error => console.error("error:", error));
-       this.setState({redirectToHome: true}) 
+      // this.setState({redirectToHome: true}) 
 
   };
 
