@@ -29,13 +29,13 @@ export class SubmitEvent extends Component {
         name : "",
         description: "",
         locationId: 1,
-        categoryId: 1,
+        categoryId: 2,
         hostId: 1,
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.00,
-        ageRestriction: 500,
-      },
+        ageRestriction: 500
+      }
      // redirectToHome: false
     };
   
@@ -55,8 +55,7 @@ export class SubmitEvent extends Component {
       .then(response => console.log("Success: ", JSON.stringify(response)))
           .then(error => console.error("error:", error));
       // this.setState({redirectToHome: true}) 
-
-  };
+  }
 
   handleInputChange = event => {
     event.preventDefault();
@@ -78,10 +77,10 @@ export class SubmitEvent extends Component {
 
   render() {
 
-    const redirectToHome = this.state.redirectToHome;
-    if (redirectToHome === true) {
-      return <Redirect to="/fetch-event-data" />
-  }
+  //   const redirectToHome = this.state.redirectToHome;
+  //   if (redirectToHome === true) {
+  //     return <Redirect to="/fetch-event-data" />
+  // }
 
     return (
       <div class="submit" > 
