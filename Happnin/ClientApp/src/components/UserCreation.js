@@ -1,5 +1,4 @@
 ﻿import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import "./UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
@@ -100,7 +99,7 @@ export class UserCreation extends Component {
   validateZip(event) {
     const target = event.target;
     const zipValue = target.value;
-    zipValue.length == 5
+    zipValue.length === 5
       ? this.setState({ isValidZip: true })
       : this.setState({ isValidZip: false });
   }

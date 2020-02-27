@@ -44,7 +44,7 @@ export class EditAccount extends Component {
                 <img
                   src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png"
                   className="img-fluid mt-0"
-                  alt="profile image"
+                  alt="profile avatar"
                 ></img>
                 <div>
                   <label className="mx-auto" htmlFor="profile_pic">
@@ -78,6 +78,7 @@ export class EditAccount extends Component {
                 ABOUT
               </h1>
               <a
+                href = "void(0)"
                 className="float-right border btn mt-2"
                 role="button"
                 onClick={this.handleEditOtherFields.bind(this)}
