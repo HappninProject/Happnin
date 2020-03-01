@@ -65,42 +65,22 @@ code {
   border-radius: 5px;
   border-width: 1px;
   border-color: black;
-  width: 900px;
+  width: 2500px;
+  height: 200px;
   text-align: center;
-  object-fit:cover;
+  object-fit: cover;
+  margin-right: auto;
+  position: relative;
+  right: 395px;
+}
+.images
+{
+  object-fit: cover;
+  width: 2500px;
+  height: 200px;
+}
 
-}
 
-.sidebar-data
-{
-  border-style: solid;
-  border-radius: 5px;
-  border-width: 5px;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 28px;
-  line-height: 41px;
-  border-color: black;
-  border-collapse: separate;
-  border-spacing:2.45em;
-  text-align: center;
-  background-color: #B67B94;
-}
-.sidebar-data:hover
-{
-  background-color: #33efc2;
-}
-.sideBar
-{
-  position: absolute;
-  top:130px;
-  width: 100px;
-}
-.page
-{
- margin-left: 0;
-}
 .card
 {
   border-radius: 20px;
@@ -122,4 +102,3 @@ code {
 #accountform{
   margin-bottom: 2em;
 }
-
