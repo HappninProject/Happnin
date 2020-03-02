@@ -16,6 +16,7 @@ import { EditAccount } from "./components/EditAccount";
 import { forgotPassword } from "./components/forgotPassword";
 import { PendingEmailValidation } from "./components/PendingEmailValidation";
 import { EmailValidated } from "./components/EmailValidated";
+import { PassResetSent } from "./components/PassResetSent";
 import "./custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./react_dates_overrides.css";
@@ -45,6 +46,7 @@ export default class App extends Component {
         <Route path="/edit-account" component={EditAccount} />
         <Route path="/pending-email" component={PendingEmailValidation} />
         <Route path="/email-validated" component={EmailValidated} />
+        <Route path="/reset-email-sent" component={PassResetSent} />
       </Layout>
     );
   }

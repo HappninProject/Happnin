@@ -1,14 +1,16 @@
-﻿import React, { Component } from 'react';
-import './EventList.css';
-import { HappninEvent } from './HappninEvent';
+﻿import React, { Component } from "react";
+import "./EventList.css";
+import { HappninEvent } from "./HappninEvent";
 
 export class EventList extends React.Component {
-    render() {
-        const e = this.props;
-        return(
-            <div className='eventlist'>
-                {e.eventinfoarray.map(eventinfo => <HappninEvent key={eventinfo.id}{...eventinfo}/>)}
-            </div>
-        );
-    }
+  render() {
+    const e = this.props;
+    return (
+      <div className="eventlist container-fluid">
+        {e.eventinfoarray.map(eventinfo => (
+          <HappninEvent key={eventinfo.id} {...eventinfo} />
+        ))}
+      </div>
+    );
+  }
 }

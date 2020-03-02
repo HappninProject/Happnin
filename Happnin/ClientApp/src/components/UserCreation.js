@@ -2,6 +2,7 @@
 import "./UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { withRouter } from "react-router-dom";
 
 //use bootstrap to make page prettier
@@ -41,8 +42,6 @@ export class UserCreation extends Component {
       passwordsMatch: false,
       reCaptchaResponse: false
     };
-    this.validatePassword = this.validatePassword.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -194,7 +193,7 @@ export class UserCreation extends Component {
 
   render() {
     return (
-      <div id="accountform" class="submit">
+      <div id="accountform" className="container-fluid">
         <h1 class="header">Sign Up!</h1>
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">
