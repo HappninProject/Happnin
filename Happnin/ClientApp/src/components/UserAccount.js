@@ -67,9 +67,6 @@ export class UserAccount extends Component {
               <p className="subHeader">Email: {this.state.user.email}</p>
             </div>
             <div>
-              <p className="subHeader">Phone: {this.state.user.phone}</p>
-            </div>
-            <div>
               <p className="subHeader">
                 Types of events I'm interested in:
                 {this.state.user.eventsOfInterest.map(event => (
