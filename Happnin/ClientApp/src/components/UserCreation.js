@@ -19,9 +19,9 @@ export class UserCreation extends Component {
         lastName: "",
         locationId: 1,
         password: "",
-        passwordConfirm: "",
         email: ""
       },
+      passwordConfirm: "",
       loading: true,
       showZip: false,
       showUser: false,
@@ -76,7 +76,9 @@ export class UserCreation extends Component {
     await fetch("user", {
       method: "POST",
       body: JSON.stringify(this.state.user),
-      headers: { "Content-Type": "application/json" }
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
@@ -125,6 +127,11 @@ export class UserCreation extends Component {
     this.setState({
       password: event.target.value
     });
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.handleInputChange(event);
   }
 
   //see function description above, same but for confirming password
@@ -184,7 +191,7 @@ export class UserCreation extends Component {
 
   //also for the recaptcha to prevent form from submitting without being clicked
   callback = () => {
-    console.log("Done!!!!");
+    console.log("Done!");
   };
 
   render() {

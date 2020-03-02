@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./UserAccount.css";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //need to figure out how to access user information from database and use those props in page
 
@@ -47,7 +47,6 @@ export class UserAccount extends Component {
             </div>
           </div>
           <div className="col-5 float-right border rounded white-div">
-
             <h1 className="header">ABOUT</h1>
             <p className="subHeader">Username: {this.state.user.userName}</p>
             <div>
