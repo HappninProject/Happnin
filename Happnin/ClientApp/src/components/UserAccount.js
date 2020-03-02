@@ -73,7 +73,7 @@ export class UserAccount extends Component {
               <p className="subHeader">
                 Types of events I'm interested in:
                 {this.state.user.eventsOfInterest.map(event => (
-                  <li>{event}</li>
+                  <li key={event.id}>{event}</li>
                 ))}
               </p>
             </div>
