@@ -2,6 +2,7 @@
 import "./UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
+import { withRouter } from "react-router-dom";
 
 //use bootstrap to make page prettier
 //send email confirmation
@@ -19,9 +20,9 @@ export class UserCreation extends Component {
         lastName: "",
         locationId: 1,
         password: "",
-        passwordConfirm: "",
         email: ""
       },
+      passwordConfirm: "",
       loading: true,
       showZip: false,
       showUser: false,
@@ -40,13 +41,9 @@ export class UserCreation extends Component {
       passwordsMatch: false,
       reCaptchaResponse: false
     };
-    this.validateZip = this.validateZip.bind(this);
-    this.validateUsername = this.validateUsername.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onPassChange = this.onPassChange.bind(this);
-    this.onPassConfirmChange = this.onPassConfirmChange.bind(this);
   }
 
   handleInputChange = event => {
@@ -76,11 +73,14 @@ export class UserCreation extends Component {
     await fetch("user", {
       method: "POST",
       body: JSON.stringify(this.state.user),
-      headers: { "Content-Type": "application/json" }
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
       .then(error => console.error("error:", error));
+    this.props.history.push("/pending-email");
   }
 
   //these show or hide dropdowns if input is clicked on
@@ -96,16 +96,16 @@ export class UserCreation extends Component {
     }));
 
   //this makes sure that the zip code is valid, then add the valid or invalid classes accordingly
-  validateZip(event) {
+  validateZip = event => {
     const target = event.target;
     const zipValue = target.value;
     zipValue.length === 5
       ? this.setState({ isValidZip: true })
       : this.setState({ isValidZip: false });
-  }
+  };
 
   //this makes sure the username is valid, then add the valid or invalid classes accordingly
-  validateUsername(event) {
+  validateUsername = event => {
     const target = event.target;
     const usernameValue = target.value;
     var regAlpha = new RegExp("^[A-Za-z0-9]*$");
@@ -118,24 +118,29 @@ export class UserCreation extends Component {
     usernameValue.length <= 15
       ? this.setState({ isValidUserMax: true })
       : this.setState({ isValidUserMax: false });
-  }
+  };
 
   //for some reason handleInputChange isn't working for passwords, so this is used to set password
-  onPassChange(event) {
+  onPassChange = event => {
     this.setState({
       password: event.target.value
     });
-  }
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.handleInputChange(event);
+  };
 
   //see function description above, same but for confirming password
-  onPassConfirmChange(event) {
+  onPassConfirmChange = event => {
     this.setState({
       passwordConfirm: event.target.value
     });
-  }
+  };
 
   //makes sure the password is valid, then add the valid or invalid classes accordingly
-  validatePassword(event) {
+  validatePassword = event => {
     const target = event.target;
     const passValue = target.value;
     var regLower = new RegExp("[a-z]");
@@ -160,7 +165,7 @@ export class UserCreation extends Component {
     regSpecial.test(passValue)
       ? this.setState({ isValidPassSpecial: true })
       : this.setState({ isValidPassSpecial: false });
-  }
+  };
 
   //makes sure the password entered and re-entered match
   checkPasswordsMatch = () => {
@@ -184,7 +189,7 @@ export class UserCreation extends Component {
 
   //also for the recaptcha to prevent form from submitting without being clicked
   callback = () => {
-    console.log("Done!!!!");
+    console.log("Done!");
   };
 
   render() {
