@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using IdentityServer4.EntityFramework.Options;
+using Microsoft.Extensions.Options;
 
 namespace Happnin.Data.Tests
 {
@@ -45,7 +47,7 @@ namespace Happnin.Data.Tests
                 .EnableSensitiveDataLogging()
                 .Options;
 
-            using (var context = new AppDbContext(Options))
+            using (var context = new AppDbContext(Options, null))
             {
                 context.Database.EnsureCreated();
             }

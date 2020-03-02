@@ -1,7 +1,7 @@
 ﻿namespace Happnin.Business.Dto
 {
-    public class User : UserInput, IEntity
+    public class User : UserInput
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

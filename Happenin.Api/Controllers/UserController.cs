@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Happnin.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,7 @@ namespace Happnin.Api.Controllers
             SignInManager = signInManager;
         }
 
+        [ValidateAntiForgeryToken]
         public override async Task<User> Post(UserInput userInput)
         {
             if (ModelState.IsValid)
@@ -43,6 +45,7 @@ namespace Happnin.Api.Controllers
         }
         [HttpPost]
         [Route("SignOn")]
+        [ValidateAntiForgeryToken]
         public async Task<bool> SignOn(string username, string password)
         {
             var result = await SignInManager.PasswordSignInAsync(username, password, false, false);

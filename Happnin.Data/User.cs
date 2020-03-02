@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Happnin.Data
 {
-    public class User : IdentityUser<int>, IEntityBase
+    public class User : IdentityUser
     {
         private string _firstName; 
         public string FirstName

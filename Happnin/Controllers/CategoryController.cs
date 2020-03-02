@@ -11,9 +11,9 @@ namespace Happnin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationController : BaseController<Location, LocationInput>
+    public class CategoryController : BaseController<Category, CategoryInput>
     {
-        public LocationController(ILocationService service) : base(service)
+        public CategoryController(ICategoryService service) : base(service)
         {
         }
     }
