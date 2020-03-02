@@ -1,3 +1,5 @@
+using Happnin.Business;
+using Happnin.Business.Services;
 using Happnin.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
 
 namespace Happnin
 {
@@ -33,8 +36,16 @@ namespace Happnin
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddAutoMapper(new [] { typeof(AutomapperProfileConfiguration).Assembly});
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

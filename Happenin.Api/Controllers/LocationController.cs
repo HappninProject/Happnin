@@ -7,7 +7,7 @@ using Happnin.Business.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Happnin.Controllers
+namespace Happnin.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

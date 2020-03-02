@@ -77,7 +77,7 @@ export class Home extends Component {
   }
 
   async populateEventData() {
-    const response = await fetch('event');
+    const response = await fetch('api/Event');
     console.log(response);
     const data = await response.json();
     console.log('Got Data', data);

@@ -16,15 +16,15 @@ namespace Happnin.Controllers
     {
         public UserManager<Data.User> UserManager { get; }
         public SignInManager<Data.User> SignInManager { get; }
+        protected IUserService Service { get; }
         public IMapper Mapper { get; } =  AutomapperProfileConfiguration.CreateMapper();
 
         public UserController(IUserService service, UserManager<Data.User> userManager, SignInManager<Data.User> signInManager)
         {
+            Service = service;
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
-        protected IUserService Service { get; }
 
         [HttpGet]
         public async Task<IEnumerable<Business.Dto.User>> Get() => await Service.FetchAllAsync();

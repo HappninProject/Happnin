@@ -66,12 +66,12 @@ namespace Happnin.Data.Tests
             var locationId = -1;
             Location location = SampleData.Location3456Spokane();
 
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Locations.Add(location);
             await appDbContext.SaveChangesAsync();
             locationId = location.Id;
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             Location locationFromDb = await appDbContextAssert.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
 
             Assert.Equal(location.Address, locationFromDb.Address);
@@ -87,19 +87,19 @@ namespace Happnin.Data.Tests
            var locationId = -1;
             Location location = SampleData.Location3456Spokane();
 
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Locations.Add(location);
             await appDbContext.SaveChangesAsync();
             locationId = location.Id;
            
-            using var appDbContextFetch = new AppDbContext(Options);
+            using var appDbContextFetch = new AppDbContext(Options, null);
             Location locationFromDb = await appDbContextFetch.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
             locationFromDb.Address = "qwerty street";
             locationFromDb.State = "NY";
 
             await appDbContextFetch.SaveChangesAsync();
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             locationFromDb = await appDbContextAssert.Locations.Where(e => e.Id == locationId).SingleOrDefaultAsync();
             
             Assert.Equal("qwerty street", locationFromDb.Address);

@@ -47,7 +47,7 @@ namespace Happnin.Data.Tests
                 .EnableSensitiveDataLogging()
                 .Options;
 
-            using (var context = new AppDbContext(Options, null))
+            using (var context = new AppDbContext(Options,  new OptionsWrapper<OperationalStoreOptions>(new OperationalStoreOptions())))
             {
                 context.Database.EnsureCreated();
             }
