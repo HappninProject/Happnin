@@ -28,8 +28,7 @@ export class HappninEvent extends Component {
                                     Category: <b>{e.categoryId}</b> <br/>
                                     Age Restriction: <b>{e.ageRestriction}</b> <br/>
                                     Start Time: {e.eventTime}<br/>
-                                    End Time: {e.endTime}  <br/>
-                                    Start Time: {e.eventTime}</p>
+                                    End Time: {e.endTime}  <br/></p>
                             </div>
                         </div> 
                     </Col>
