@@ -81,9 +81,9 @@ namespace Happnin.Controllers
         }
         [HttpPost]
         [Route("SignOn")]
-        public async Task<bool> SignOn(string username, string password)
+        public async Task<bool> SignOn(UserInput user)
         {
-            var result = await SignInManager.PasswordSignInAsync(username, password, false, false);
+            var result = await SignInManager.PasswordSignInAsync(user.UserName, user.Password, false, false);
             if (result.Succeeded)
             {
                 return true;

@@ -73,7 +73,7 @@ export class UserCreation extends Component {
       return { success: false, message: "Captcha is required." };
     }
     console.log(JSON.stringify(this.state.user));
-    await fetch("user", {
+    await fetch("api/User", {
       method: "POST",
       body: JSON.stringify(this.state.user),
       headers: { "Content-Type": "application/json" }

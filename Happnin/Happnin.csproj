@@ -43,10 +43,6 @@
 
   <ItemGroup>
 
-    <None Include="C:\Users\Salem\Documents\EWU Winter 2020\Senior Project\hourLogging\9.2.20UserCreationDoneForNow" Link="9.2.20UserCreationDoneForNow" />
-    <None Include="C:\Users\Salem\Documents\EWU Winter 2020\Senior Project\hourLogging\9.2.20UserCreationPartwayThrough, changed validation method.js" Link="9.2.20UserCreationPartwayThrough, changed validation method.js" />
-    <None Include="C:\Users\Salem\Documents\EWU Winter 2020\Senior Project\hourLogging\9.2.20UserCreationPartwayThrough.js" Link="9.2.20UserCreationPartwayThrough.js" />
-
     <ProjectReference Include="..\Happenin.Business\Happnin.Business.csproj" />
 
   </ItemGroup>

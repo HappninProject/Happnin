@@ -3,8 +3,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';
 
 export class Login extends Component {
+   
+    constructor(props){
+        super(props)
+        this.state = {
+            username: "",
+            password: ""
+        }
+    }
+
+   
+    async handleSubmit(event){
+        
+    }
+
     render() {
         return (
+          <form onSubmit={this.handleSubmit}>
             <div>
                 <div>
                     <h2>Log In</h2>
@@ -23,6 +38,7 @@ export class Login extends Component {
                 <p>forgot password?</p>
                 <Button type="sign up">Create Account</Button>
             </div>
+         </form>
         )
     }
 }
