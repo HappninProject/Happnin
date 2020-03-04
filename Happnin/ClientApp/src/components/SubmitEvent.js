@@ -18,7 +18,7 @@ export class SubmitEvent extends Component {
         name : "",
         description: "",
         locationId: 1,
-        categoryId: 2,
+        categoryId: 1,
         hostId: 1,
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
@@ -35,7 +35,7 @@ export class SubmitEvent extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
-    await fetch("event", {
+    await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
       headers: { "Content-Type": "application/json" }
@@ -80,7 +80,7 @@ export class SubmitEvent extends Component {
             <input
               id="inputName"
               class="form-control"
-              name="fname"
+              name="name"
               type="text"
               placeholder="Title"
               value={this.state.event.name}
