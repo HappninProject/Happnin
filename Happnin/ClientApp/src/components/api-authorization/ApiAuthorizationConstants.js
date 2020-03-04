@@ -1,4 +1,4 @@
-export const ApplicationName = 'TestFolder';
+export const ApplicationName = 'Happnin';
 
 export const QueryParameterNames = {
   ReturnUrl: 'returnUrl',

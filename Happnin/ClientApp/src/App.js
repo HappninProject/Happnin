@@ -14,6 +14,8 @@ import { browseEvents } from './components/browseEvents';
 import { signIn } from './components/sign-in';
 import { EditAccount } from './components/EditAccount';
 import { forgotPassword } from './components/forgotPassword';
+import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
+import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import './custom.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './react_dates_overrides.css'
@@ -42,6 +44,7 @@ export default class App extends Component {
         <Route path='/sign-in' component={signIn}/>
         <Route path='/forgotPassword' component={forgotPassword} />
         <Route path='/edit-account' component={EditAccount} />
+        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
   }
