@@ -15,8 +15,8 @@ import { forgotPassword } from "./components/forgotPassword";
 import { PendingEmailValidation } from "./components/PendingEmailValidation";
 import { EmailValidated } from "./components/EmailValidated";
 import { PassResetSent } from "./components/PassResetSent";
-import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
-import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import ApiAuthorizationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
+import { ApplicationPaths } from "./components/api-authorization/ApiAuthorizationConstants";
 import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
@@ -45,7 +45,10 @@ export default class App extends Component {
         <Route path="/pending-email" component={PendingEmailValidation} />
         <Route path="/email-validated" component={EmailValidated} />
         <Route path="/reset-email-sent" component={PassResetSent} />
-        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+        <Route
+          path={ApplicationPaths.ApiAuthorizationPrefix}
+          component={ApiAuthorizationRoutes}
+        />
       </Layout>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
 import { NavMenu } from "./NavMenu";
+import { Footer } from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
@@ -38,6 +39,7 @@ export class Layout extends Component {
         </div>
         <NavMenu />
         <Container className="page">{this.props.children}</Container>
+        <Footer />
       </div>
     );
   }
