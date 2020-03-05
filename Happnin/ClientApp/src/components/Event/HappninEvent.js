@@ -1,17 +1,17 @@
 ﻿import React, { Component } from 'react';
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import "./UserCreation.css";
-import logo from '../images/DefaultEvent.png';
+import "../../styles/UserCreation.css";
+import logo from '../../images/happninHLogoThumb.png';
 import { Row, Col} from 'react-bootstrap';
 
 export class HappninEvent extends Component {
     render() {
         const e = this.props;
         return (
-            <Card>
+           
             <div class="card" >
-                <Container>
+            
                     <Row around="xs">
                     <Col xs={2} >
                         <Card.Img variant="left" src={logo} rounded style={{padding: 20}}/>
@@ -33,10 +33,10 @@ export class HappninEvent extends Component {
                         </div> 
                     </Col>
                     </Row>
-                </Container>
+             
                 
             </div>
-            </Card>
+            
 
                 )
     }

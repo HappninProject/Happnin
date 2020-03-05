@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./forgotPassword.css";
+import "../styles/forgotPassword.css";
 import { withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
