@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react";
-import "./UserCreation.css";
+import "../../styles/UserCreation.css";
 import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -193,6 +193,7 @@ export class UserCreation extends Component {
 
   render() {
     return (
+      <div class="card">
       <div id="accountform" className="container-fluid">
         <h1 class="header">Sign Up!</h1>
         <form onSubmit={this.handleSubmit}>
@@ -412,6 +413,8 @@ export class UserCreation extends Component {
           <Button type="submit">Submit</Button>
         </form>
       </div>
+      </div>
+
     );
   }
 }

@@ -31,11 +31,11 @@ code {
 }
 
 .form-control:not(#categorySelect) {
-  width: 30% !important;
+  width: 40% !important;
 }
 
 #categorySelect {
-  width: 30%;
+  width: 40%;
 }
 
 .category-select {
@@ -43,9 +43,9 @@ code {
 }
 .eventTable {
   border-style: solid;
-  border-radius: 5px;
-  border-width: 5px;
-  border-color: black;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: gray;
   width: 298px;
 }
 .event-table {
@@ -73,6 +73,11 @@ code {
 .card {
   border-radius: 20px;
   width: 50rem;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.10);
 }
 
 .happninevent {
@@ -92,4 +97,8 @@ code {
 html,
 body {
   overflow-x: hidden;
+}
+
+.submitButton{
+  background-color: #4CAF50; 
 }
