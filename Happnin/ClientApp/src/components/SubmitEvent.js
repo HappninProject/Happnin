@@ -2,11 +2,9 @@
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "rc-time-picker/assets/index.css";
-import {Redirect} from "react-router-dom";
-
-import {
-  Form
-} from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form } from "react-bootstrap";
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -14,20 +12,26 @@ export class SubmitEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      event : {
-        name : "",
+      event: {
+        name: "",
         description: "",
         locationId: 1,
         categoryId: 2,
         hostId: 1,
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
+<<<<<<< HEAD
         cost: 42.00,
         ageRestriction: 500
+=======
+        cost: 42.0,
+        ageRestriction: 500,
+       // redirectToHome: false
+>>>>>>> aa08c5c3fdfa564d1f21e8dbd94fa027aaac8a08
       }
      // redirectToHome: false
     };
-  
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -42,8 +46,13 @@ export class SubmitEvent extends Component {
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
+<<<<<<< HEAD
           .then(error => console.error("error:", error));
       // this.setState({redirectToHome: true}) 
+=======
+      .then(error => console.error("error:", error));
+  //  this.setState({ redirectToHome: true });
+>>>>>>> aa08c5c3fdfa564d1f21e8dbd94fa027aaac8a08
   }
 
   handleInputChange = event => {
@@ -51,28 +60,21 @@ export class SubmitEvent extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-   
+
     this.setState({
       event: {
         ...this.state.event,
         [name]: value
       }
     });
-      console.log(this.state.event);
+    console.log(this.state.event);
   };
 
-  componentDidMount = event => {
-  };
+  componentDidMount = event => {};
 
   render() {
-
-  //   const redirectToHome = this.state.redirectToHome;
-  //   if (redirectToHome === true) {
-  //     return <Redirect to="/fetch-event-data" />
-  // }
-
     return (
-      <div class="submit" > 
+      <div class="submit container-fluid">
         <h1 class="header">Submit an Event</h1>
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">
@@ -80,10 +82,10 @@ export class SubmitEvent extends Component {
             <input
               id="inputName"
               class="form-control"
-              name="fname"
+              name="name"
               type="text"
               placeholder="Title"
-              value={this.state.event.name}
+              value={this.state.event.inputName}
               onChange={this.handleInputChange}
               required
             />
@@ -148,7 +150,7 @@ export class SubmitEvent extends Component {
             </div>
           ))}
 
-            <button type="submit">Submit</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./EditAccount.css";
 
 export class EditAccount extends Component {
@@ -7,9 +8,9 @@ export class EditAccount extends Component {
 
     //TODO: eventually remove the hardcoded values
     //These values are temporarily hard-coded
-    //TODO: make sure regex is used for each input to only accept valid values
     //try using Moment.js for dates
-    //update user infromation in database
+    //update user information in database
+    //make sure to store bio in backend, right now it's not stored in frontend or back
     this.state = {
       user: {
         userName: "fakeUser1",
@@ -26,6 +27,21 @@ export class EditAccount extends Component {
     };
   }
 
+  //called when values are changed
+  handleInputChange = event => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      user: {
+        ...this.state.user,
+        [name]: value
+      }
+    });
+    console.log(this.user);
+  };
+
   //this makes the fields editable when they're clicked on
   handleEditOtherFields = () =>
     this.setState(currentState => ({
@@ -33,11 +49,13 @@ export class EditAccount extends Component {
       anchorClicked: !this.state.anchorClicked
     }));
 
+  submitForm = event => {};
+
   render() {
     return (
       <div id="editAccount" className="container-fluid">
         <h3 className="text-center">Edit Account</h3>
-        <form id="editAccount">
+        <form id="editAccount" onSubmit="submitForm">
           <div className="row justify-content-center">
             <div className="col-3 border rounded white-div">
               <div className="row mx-auto">
@@ -78,12 +96,11 @@ export class EditAccount extends Component {
                 ABOUT
               </h1>
               <a
-                href = "void(0)"
                 className="float-right border btn mt-2"
                 role="button"
-                onClick={this.handleEditOtherFields.bind(this)}
+                onClick={this.handleEditOtherFields}
               >
-                {this.state.anchorClicked ? "Done" : "Edit fields"}
+                {this.state.anchorClicked ? "Cancel" : "Edit fields"}
               </a>
               <div>
                 <label htmlFor="usernameInput">Username:&nbsp;</label>
@@ -94,6 +111,7 @@ export class EditAccount extends Component {
                   title="Username should only contain lowercase letters, uppercase letters, and numbers. It must be between 4 and 15 characters."
                   placeholder={this.state.user.userName}
                   disabled={!this.state.editOtherFields}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div>
@@ -105,6 +123,7 @@ export class EditAccount extends Component {
                   pattern="^[A-Za-z]{1,40}$"
                   title="First name should only contain lowercase and uppercase letters. It must be between 1 and 40 characters."
                   disabled={!this.state.editOtherFields}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div>
@@ -116,6 +135,7 @@ export class EditAccount extends Component {
                   title="Last name should only contain lowercase and uppercase letters. It must be between 1 and 40 characters."
                   placeholder={this.state.user.lastName}
                   disabled={!this.state.editOtherFields}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div>
@@ -127,6 +147,7 @@ export class EditAccount extends Component {
                   placeholder={this.state.user.city}
                   title="City should only contain lowercase and uppercase letters. It must be between 1 and 50 characters."
                   disabled={!this.state.editOtherFields}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div>
@@ -137,7 +158,11 @@ export class EditAccount extends Component {
                   title="Email should be in the format example@mail.com"
                   placeholder={this.state.user.email}
                   disabled={!this.state.editOtherFields}
+                  onChange={this.handleInputChange}
                 />
+              </div>
+              <div id="submitButton">
+                <input type="submit"></input>
               </div>
             </div>
           </div>
