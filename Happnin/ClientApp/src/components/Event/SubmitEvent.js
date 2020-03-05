@@ -74,6 +74,7 @@ export class SubmitEvent extends Component {
 
   render() {
     return (
+      <div class="card">
       <div class="submit container-fluid">
         <h1 class="header">Submit an Event</h1>
         <form onSubmit={this.handleSubmit}>
@@ -85,7 +86,7 @@ export class SubmitEvent extends Component {
               name="name"
               type="text"
               placeholder="Title"
-              value={this.state.event.inputName}
+              value={this.state.event.name}
               onChange={this.handleInputChange}
               required
             />
@@ -150,9 +151,11 @@ export class SubmitEvent extends Component {
             </div>
           ))}
 
-          <button type="submit">Submit</button>
+          <button className="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
+      </div>
+
     );
   }
 }
