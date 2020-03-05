@@ -20,29 +20,36 @@ export class browseEvents extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div>
+        <h3>Events</h3>
+        <div className="text-center">
           <label className="subHeader">
-            search for event name: {this.state.eventNameSearch}
+            Search by event name:&nbsp;{this.state.eventNameSearch}
           </label>
           <input
             type="text"
+            className="rounded"
             value={this.state.eventNameSearch}
             onChange={this.handleInputChange}
           ></input>
 
           <label className="subHeader">
-            events near zip: {this.state.eventZipSearch}
+            &nbsp;&nbsp;Search by zip code:&nbsp;{this.state.eventZipSearch}
           </label>
           <input
             type="text"
+            className="rounded"
             value={this.state.eventZipSearch}
             onChange={this.handleInputChange}
           ></input>
 
           <label className="subHeader">
-            events by category: {this.state.eventSearch}
+            &nbsp;&nbsp;Events by category:&nbsp;{this.state.eventSearch}
           </label>
-          <select value={this.state.category} onChange={this.handleInputChange}>
+          <select
+            className="rounded"
+            value={this.state.category}
+            onChange={this.handleInputChange}
+          >
             <option value="Music">Music</option>
             <option value="Comedy">Comedy</option>
             <option value="Culture">Culture</option>
