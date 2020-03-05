@@ -40,7 +40,7 @@ export class signIn extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     console.log(JSON.stringify(this.state.user));
-    await fetch("user/SignOn", {
+    await fetch("api/User/SignOn", {
       method: "POST",
       body: JSON.stringify(this.state.user),
       headers: { "Content-Type": "application/json" }

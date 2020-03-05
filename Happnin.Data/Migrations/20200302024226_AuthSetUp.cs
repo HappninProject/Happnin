@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Happnin.Data.Migrations
 {
-    public partial class updatedDb : Migration
+    public partial class AuthSetUp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,7 @@ namespace Happnin.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -36,6 +35,23 @@ namespace Happnin.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DeviceCodes",
+                columns: table => new
+                {
+                    UserCode = table.Column<string>(maxLength: 200, nullable: false),
+                    DeviceCode = table.Column<string>(maxLength: 200, nullable: false),
+                    SubjectId = table.Column<string>(maxLength: 200, nullable: true),
+                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
+                    CreationTime = table.Column<DateTime>(nullable: false),
+                    Expiration = table.Column<DateTime>(nullable: false),
+                    Data = table.Column<string>(maxLength: 50000, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeviceCodes", x => x.UserCode);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -53,12 +69,29 @@ namespace Happnin.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PersistedGrants",
+                columns: table => new
+                {
+                    Key = table.Column<string>(maxLength: 200, nullable: false),
+                    Type = table.Column<string>(maxLength: 50, nullable: false),
+                    SubjectId = table.Column<string>(maxLength: 200, nullable: true),
+                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
+                    CreationTime = table.Column<DateTime>(nullable: false),
+                    Expiration = table.Column<DateTime>(nullable: true),
+                    Data = table.Column<string>(maxLength: 50000, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersistedGrants", x => x.Key);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RoleId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -77,8 +110,8 @@ namespace Happnin.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,7 +130,7 @@ namespace Happnin.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -110,10 +143,10 @@ namespace Happnin.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,9 +157,9 @@ namespace Happnin.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -144,6 +177,7 @@ namespace Happnin.Data.Migrations
                     Description = table.Column<string>(nullable: true),
                     LocationId = table.Column<int>(nullable: false),
                     HostId = table.Column<int>(nullable: false),
+                    HostId1 = table.Column<string>(nullable: true),
                     EventTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Cost = table.Column<double>(nullable: false),
@@ -171,8 +205,7 @@ namespace Happnin.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -191,7 +224,7 @@ namespace Happnin.Data.Migrations
                     LastName = table.Column<string>(nullable: true),
                     LocationId = table.Column<int>(nullable: false),
                     EventId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,19 +302,40 @@ namespace Happnin.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DeviceCodes_DeviceCode",
+                table: "DeviceCodes",
+                column: "DeviceCode",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeviceCodes_Expiration",
+                table: "DeviceCodes",
+                column: "Expiration");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_CategoryId",
                 table: "Events",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_HostId",
+                name: "IX_Events_HostId1",
                 table: "Events",
-                column: "HostId");
+                column: "HostId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_LocationId",
                 table: "Events",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersistedGrants_Expiration",
+                table: "PersistedGrants",
+                column: "Expiration");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersistedGrants_SubjectId_ClientId_Type",
+                table: "PersistedGrants",
+                columns: new[] { "SubjectId", "ClientId", "Type" });
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetUsers_UserId",
@@ -316,18 +370,18 @@ namespace Happnin.Data.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Events_AspNetUsers_HostId",
+                name: "FK_Events_AspNetUsers_HostId1",
                 table: "Events",
-                column: "HostId",
+                column: "HostId1",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Events_AspNetUsers_HostId",
+                name: "FK_Events_AspNetUsers_HostId1",
                 table: "Events");
 
             migrationBuilder.DropTable(
@@ -344,6 +398,12 @@ namespace Happnin.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "DeviceCodes");
+
+            migrationBuilder.DropTable(
+                name: "PersistedGrants");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

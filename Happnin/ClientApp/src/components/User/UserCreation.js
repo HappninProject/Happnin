@@ -69,7 +69,7 @@ export class UserCreation extends Component {
       return { success: false, message: "Captcha is required." };
     }
     console.log(JSON.stringify(this.state.user));
-    await fetch("user", {
+    await fetch("api/User", {
       method: "POST",
       body: JSON.stringify(this.state.user),
       headers: {
@@ -122,7 +122,10 @@ export class UserCreation extends Component {
   //for some reason handleInputChange isn't working for passwords, so this is used to set password
   onPassChange = event => {
     this.setState({
-      password: event.target.value
+      user : {
+        ...this.state.user,
+        password: event.target.value
+      }
     });
     const target = event.target;
     const value = target.value;
@@ -134,7 +137,7 @@ export class UserCreation extends Component {
   //see function description above, same but for confirming password
   onPassConfirmChange = event => {
     this.setState({
-      passwordConfirm: event.target.value
+        passwordConfirm: event.target.value
     });
   };
 

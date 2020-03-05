@@ -13,7 +13,7 @@ namespace Happnin.Business.Tests
         public EventServiceTests()
         {
             // seeding foreign key value for host and location
-            using var applicationDbContext = new AppDbContext(Options);
+            using var applicationDbContext = new AppDbContext(Options, null);
             applicationDbContext.Users.Add(SampleData.UserKyle());
             applicationDbContext.Users.Add(SampleData.UserCaleb());
             applicationDbContext.Categories.Add(SampleData.Category);

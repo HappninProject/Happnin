@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Happnin.Business.Dto;
 using Happnin.Business.Services;
+using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace Happnin.Business.Tests
@@ -28,7 +29,7 @@ namespace Happnin.Business.Tests
         [Fact]
         public virtual async Task InsertAsync_TwoEntities_Success()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
             (TDto entity, TDto secondEntity) = GetDtos();
             
@@ -43,7 +44,7 @@ namespace Happnin.Business.Tests
         [Fact]
         virtual public async Task Update_EntityUpdated_ShouldSaveToDatabase()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
             (TEntity entity, TEntity secondEntity) = GetEntities();
 
@@ -52,7 +53,7 @@ namespace Happnin.Business.Tests
             await dbContext.Set<TEntity>().AddAsync(secondEntity);
             await dbContext.SaveChangesAsync();
             
-            using AppDbContext dbContextFetch = new AppDbContext(Options);
+            using AppDbContext dbContextFetch = new AppDbContext(Options, null);
             TEntity updateEntityFromDb = await dbContextFetch.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == entity.Id);
             updateEntityFromDb = UpdateEntity(updateEntityFromDb, "This was updated");
             TInputDto inputDto = Mapper.Map<TEntity, TDto>(updateEntityFromDb);
@@ -60,7 +61,7 @@ namespace Happnin.Business.Tests
 
             await service.UpdateAsync(secondEntity.Id, inputDto);
 
-            using AppDbContext dbContextAssert = new AppDbContext(Options);
+            using AppDbContext dbContextAssert = new AppDbContext(Options, null);
             TEntity entityFromDb = await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == entity.Id);
             TEntity secondEntityFromDb = await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == secondEntity.Id);
 
@@ -71,7 +72,7 @@ namespace Happnin.Business.Tests
         [Fact]
         public async Task Delete_OneEntity_RemovesOnlyOne()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
             (TEntity entity, TEntity secondEntity) = GetEntities();
 
@@ -80,7 +81,7 @@ namespace Happnin.Business.Tests
             await dbContext.SaveChangesAsync();
             
             bool deleted = await service.DeleteAsync(entity.Id);
-            using AppDbContext dbContextAssert = new AppDbContext(Options);
+            using AppDbContext dbContextAssert = new AppDbContext(Options, null);
             TEntity entityFromDb =  await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == entity.Id);
             TEntity secondEntityFromDb = await dbContextAssert.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == secondEntity.Id);
 
@@ -92,7 +93,7 @@ namespace Happnin.Business.Tests
         [Fact]
         public async Task Delete_IdNotFound_ReturnsFalse()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
 
             bool deleted = await service.DeleteAsync(42);
@@ -103,7 +104,7 @@ namespace Happnin.Business.Tests
         [Fact]
         virtual public async Task FetchAll_RetrievesAllEntities_Success()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
             (TEntity entity, TEntity secondEntity) = GetEntities();
 
@@ -125,7 +126,7 @@ namespace Happnin.Business.Tests
         [Fact]
         public async Task FetchAll_EmptyDataBase_ReturnsEmpty()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
 
             List<TDto> entities = await service.FetchAllAsync();
@@ -136,7 +137,7 @@ namespace Happnin.Business.Tests
         [Fact]
         virtual public async Task Fetch_RetrievesOneEntity_Success()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
             (TEntity entity, TEntity secondEntity) = GetEntities();
 
@@ -153,7 +154,7 @@ namespace Happnin.Business.Tests
         [Fact]
         public async Task Fetch_IdNotFound_ReturnNulls()
         {
-            using AppDbContext dbContext = new AppDbContext(Options);
+            using AppDbContext dbContext = new AppDbContext(Options, null);
             EntityService<TDto, TInputDto, TEntity> service = GetService(dbContext);
 
             TDto entity = await service.FetchByIdAsync(42);

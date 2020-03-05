@@ -18,5 +18,6 @@ namespace Happnin.Business.Dto
         public string Email { get; set; }
         [Required]
         public int? LocationId { get; set; }
+
     }
 }

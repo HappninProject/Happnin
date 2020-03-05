@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Collapse,
   Container,
@@ -8,6 +8,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import { LoginMenu } from './api-authorization/LoginMenu';
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
@@ -97,7 +98,9 @@ export class NavMenu extends Component {
                     Sign In
                   </NavLink>
                 </NavItem>
-              </ul>
+                <LoginMenu>
+                </LoginMenu>           
+                </ul>
             </Collapse>
           </Container>
         </Navbar>

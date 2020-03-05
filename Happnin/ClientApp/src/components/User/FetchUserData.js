@@ -55,7 +55,7 @@ export class FetchUserData extends Component {
 
     async populateUsersData() {
         console.log('before fetch');
-        const response = await fetch('user');
+        const response = await fetch('api/User');
         console.log(response);
         console.log('after fetch');
         const data = await response.json();

@@ -78,15 +78,15 @@ namespace Happnin.Data.Tests
         [Fact]
         public async Task Create_User_DatabaseShouldSaveIt()
         {
-            var userId = -1;
+            var userId = "";
             User user = SampleData.UserKyle();
 
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
             userId = user.Id!;
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             User userFromDb = await appDbContextAssert.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
 
             Assert.NotNull(userFromDb);
@@ -97,15 +97,15 @@ namespace Happnin.Data.Tests
         [Fact]
         public async Task Fetch_User_DatabaseShouldReturnItWithLocation()
         {
-            var userId = -1;
+            var userId = "";
             User user = SampleData.UserKyle();
 
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
             userId = user.Id!;
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             User userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
                 .Include(e => e.Location).Where(e => e.Id == userId).SingleOrDefaultAsync();
             
@@ -120,14 +120,14 @@ namespace Happnin.Data.Tests
         [Fact]
         public async Task Update_UserUpdated_SavedToDatabase()
         {
-            var userId = -1;
+            var userId = "";
             User user = SampleData.UserKyle();
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Users.Add(user);
             await appDbContext.SaveChangesAsync();
             userId = user.Id!;
 
-            using var appDbContextFetch = new AppDbContext(Options);
+            using var appDbContextFetch = new AppDbContext(Options, null);
             User userFromDb = await appDbContextFetch.Users.Include(e => e.Location)
                 .Where(e => e.Id == userId).SingleOrDefaultAsync();
             userFromDb.FirstName = "Updated";
@@ -135,7 +135,7 @@ namespace Happnin.Data.Tests
             await appDbContextFetch.SaveChangesAsync();
             
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
                 .Where(e => e.Id == userId).SingleOrDefaultAsync();
         
