@@ -127,10 +127,6 @@ export class UserCreation extends Component {
         password: event.target.value
       }
     });
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
     this.handleInputChange(event);
   };
 
