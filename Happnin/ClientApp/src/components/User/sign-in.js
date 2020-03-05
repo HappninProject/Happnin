@@ -52,45 +52,48 @@ export class signIn extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label class="header">Sign In:</label>
-
-            <div class="form-group">
-              <label htmlFor="userName" class="subHeader">
-                Username:&nbsp;
-              </label>
-              <input
-                name="userName"
-                class="form-control"
-                type="text"
-                value={this.state.userName}
-                onChange={this.handleInputChange}
-              ></input>
-            </div>
-            <div class="form-group">
-              <label htmlFor="password" class="subHeader">
-                Password:&nbsp;
-              </label>
-              <input
-                name="password"
-                class="form-control"
-                type="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-              ></input>
-            </div>
-
+      <div class="card">
+        <div className="container-fluid">
+          <form onSubmit={this.handleSubmit}>
             <div>
-              <button>Submit</button>
+              <label class="header">Sign In:</label>
+
+              <div class="form-group">
+                <label htmlFor="userName" class="subHeader">
+                  Username:&nbsp;
+                </label>
+                <input
+                  name="userName"
+                  class="form-control"
+                  type="text"
+                  value={this.state.userName}
+                  onChange={this.handleInputChange}
+                ></input>
+              </div>
+              <div class="form-group">
+                <label htmlFor="password" class="subHeader">
+                  Password:&nbsp;
+                </label>
+                <input
+                  name="password"
+                  class="form-control"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                ></input>
+              </div>
+
+              <div>
+                <button class="submitButton" id="submitButton" type="submit">Submit</button>
+              </div>
+              <div>
+                <Link to="forgotPassword">Forgot password?</Link>
+              </div>
             </div>
-            <div>
-              <Link to="forgotPassword">Forgot password?</Link>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
+      
     );
   }
 }

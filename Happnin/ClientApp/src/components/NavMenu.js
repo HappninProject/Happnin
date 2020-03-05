@@ -11,7 +11,8 @@ import {
 import { LoginMenu } from './api-authorization/LoginMenu';
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./NavMenu.css";
+import "../styles/NavMenu.css";
+import logo from '../images/happninHLogoSmall.png';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -40,7 +41,7 @@ export class NavMenu extends Component {
         >
           <Container className="navbar">
             <NavbarBrand tag={Link} to="/" className="logo">
-              H
+              <img id="logo" class="d-inline-block mr-1" alt="Logo" src={logo}/> 
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse
