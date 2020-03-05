@@ -53,7 +53,9 @@ export class FetchLocationData extends Component {
     }
 
     async populateLocationData() {
-        const response = await fetch('location');
+        console.log('in populate data')
+        const response = await fetch('/api/Location/');
+        console.log('after fetch')
         console.log(response);
         const data = await response.json();
         console.log('Got Data', data);

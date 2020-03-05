@@ -1,6 +1,6 @@
 ﻿import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./UserAccount.css";
+import "../../styles/UserAccount.css";
 import { Link } from "react-router-dom";
 
 //need to figure out how to access user information from database and use those props in page
@@ -26,6 +26,7 @@ export class UserAccount extends Component {
 
   render() {
     return (
+      <div class="card">
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm border rounded white-div">
@@ -88,6 +89,8 @@ export class UserAccount extends Component {
           </Link>
         </div>
       </div>
+      </div>
+
     );
   }
 }

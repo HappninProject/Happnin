@@ -20,10 +20,10 @@ export class SubmitEvent extends Component {
         hostId: 1,
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
-        cost: 42.0,
-        ageRestriction: 0,
-        redirectToHome: false
+        cost: 42.00,
+        ageRestriction: 500
       }
+     // redirectToHome: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -33,15 +33,15 @@ export class SubmitEvent extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
-    await fetch("event", {
+    await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
       headers: { "Content-Type": "application/json" }
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
-      .then(error => console.error("error:", error));
-    this.setState({ redirectToHome: true });
+          .then(error => console.error("error:", error));
+      // this.setState({redirectToHome: true}) 
   }
 
   handleInputChange = event => {
@@ -62,12 +62,8 @@ export class SubmitEvent extends Component {
   componentDidMount = event => {};
 
   render() {
-    const redirectToHome = this.state.redirectToHome;
-    if (redirectToHome === true) {
-      return <Redirect to="/fetch-event-data" />;
-    }
-
     return (
+      <div class="card">
       <div class="submit container-fluid">
         <h1 class="header">Submit an Event</h1>
         <form onSubmit={this.handleSubmit}>
@@ -76,7 +72,7 @@ export class SubmitEvent extends Component {
             <input
               id="inputName"
               class="form-control"
-              name="fname"
+              name="name"
               type="text"
               placeholder="Title"
               value={this.state.event.name}
@@ -144,9 +140,11 @@ export class SubmitEvent extends Component {
             </div>
           ))}
 
-          <button type="submit">Submit</button>
+          <button className="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
+      </div>
+
     );
   }
 }

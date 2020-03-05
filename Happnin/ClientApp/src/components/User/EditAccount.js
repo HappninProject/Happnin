@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./EditAccount.css";
+import "../../styles/EditAccount.css";
 
 export class EditAccount extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { HappninEvent } from "./HappninEvent";
+import { HappninEvent } from "./Event/HappninEvent";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -38,22 +38,21 @@ export class Home extends Component {
 
         <table class="event-table">
           <td>
-            <div class="eventTable">
-              <th class="eventsHeader">UPCOMING EVENTS:</th>
-              <tr>
-                <td class="event"> test </td>
-              </tr>
-            </div>
+              <div class="eventTable">
+                <th class="eventsHeader">UPCOMING EVENTS:</th>
+                <tr>
+                  <td class="event"> test </td>
+                </tr>
+              </div>
           </td>
           <td>
-            <div class="eventTable">
-              <th class="eventsHeader">FRIENDS EVENTS:</th>
-              <tr>
-                <td class="event"> test </td>
-              </tr>
-            </div>
+              <div class="eventTable">
+                <th class="eventsHeader">FRIENDS EVENTS:</th>
+                <tr>
+                  <td class="event"> test </td>
+                </tr>
+              </div>
           </td>
-
           <td>
             <div class="eventTable">
               <th class="eventsHeader">POPULAR EVENTS:</th>
@@ -74,7 +73,7 @@ export class Home extends Component {
   }
 
   async populateEventData() {
-    const response = await fetch("event");
+    const response = await fetch('api/Event');
     console.log(response);
     const data = await response.json();
     console.log("Got Data", data);

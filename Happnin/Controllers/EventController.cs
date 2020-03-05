@@ -1,42 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Happnin.ClientApi;
-using Microsoft.AspNetCore.Http;
+﻿using Happnin.Business.Dto;
+using Happnin.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Happnin.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class EventController : Controller
+    public class EventController : BaseController<Event, EventInput>
     {
-        private IHttpClientFactory ClientFactory { get; }
-
-        public EventController(IHttpClientFactory clientFactory)
+        public EventController(IEventService service) : base(service)
         {
-            ClientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
-        }
-
-        // GET: Event
-        [HttpGet]
-        public async Task<IEnumerable<Event>> Get()
-        {
-            var httpClient = ClientFactory.CreateClient("Happnin.Api");
-            var client = new EventClient(httpClient);
-            ICollection<Event> events = await client.GetAllAsync();
-            return events; 
-        }
-
-        [HttpPost]
-        public async Task<Event> Post(EventInput eventInput)
-        {
-            var httpClient = ClientFactory.CreateClient("Happnin.Api");
-            var client = new EventClient(httpClient);
-            var newEvent = await client.PostAsync(eventInput);
-            return newEvent;
         }
     }
 }
