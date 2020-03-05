@@ -1,11 +1,11 @@
 /* Provide sufficient contrast against white background */
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 a {
   color: #0366d6;
 }
 
 code {
-  color: #E01A76;
+  color: #e01a76;
 }
 
 .btn-primary {
@@ -14,9 +14,7 @@ code {
   border-color: #1861ac;
 }
 
-
-.header
-{
+.header {
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
@@ -24,9 +22,7 @@ code {
   line-height: 41px;
 }
 
-
-.text
-{
+.text {
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
@@ -34,33 +30,28 @@ code {
   line-height: 19px;
 }
 
-
 .form-control:not(#categorySelect) {
   width: 30% !important;
 }
 
-#categorySelect
-{
+#categorySelect {
   width: 30%;
 }
 
 .category-select {
-    width: 200%;
+  width: 200%;
 }
-.eventTable 
-{
+.eventTable {
   border-style: solid;
   border-radius: 5px;
   border-width: 5px;
   border-color: black;
   width: 298px;
 }
-.event-table
-{
+.event-table {
   border-collapse: separate;
 }
-.homeImages
-{
+.homeImages {
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
@@ -73,32 +64,32 @@ code {
   position: relative;
   right: 395px;
 }
-.images
-{
+.images {
   object-fit: cover;
   width: 2500px;
   height: 200px;
 }
 
-
-.card
-{
+.card {
   border-radius: 20px;
   width: 50rem;
 }
 
-.happninevent
-{
+.happninevent {
   border-radius: 20px;
 
   overflow: hidden;
 
   padding-left: 6rem !important;
+}
+.submit {
+  margin-bottom: 2em;
+}
+#accountform {
+  margin-bottom: 2em;
+}
 
-}
-.submit{
-  margin-bottom: 2em;
-}
-#accountform{
-  margin-bottom: 2em;
+html,
+body {
+  overflow-x: hidden;
 }

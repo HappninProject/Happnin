@@ -2,11 +2,9 @@
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "rc-time-picker/assets/index.css";
-import {Redirect} from "react-router-dom";
-
-import {
-  Form
-} from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form } from "react-bootstrap";
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -14,8 +12,8 @@ export class SubmitEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      event : {
-        name : "",
+      event: {
+        name: "",
         description: "",
         locationId: 1,
         categoryId: 1,
@@ -27,7 +25,7 @@ export class SubmitEvent extends Component {
       }
      // redirectToHome: false
     };
-  
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -51,28 +49,21 @@ export class SubmitEvent extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-   
+
     this.setState({
       event: {
         ...this.state.event,
         [name]: value
       }
     });
-      console.log(this.state.event);
+    console.log(this.state.event);
   };
 
-  componentDidMount = event => {
-  };
+  componentDidMount = event => {};
 
   render() {
-
-  //   const redirectToHome = this.state.redirectToHome;
-  //   if (redirectToHome === true) {
-  //     return <Redirect to="/fetch-event-data" />
-  // }
-
     return (
-      <div class="submit" > 
+      <div class="submit container-fluid">
         <h1 class="header">Submit an Event</h1>
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">
@@ -83,7 +74,7 @@ export class SubmitEvent extends Component {
               name="name"
               type="text"
               placeholder="Title"
-              value={this.state.event.name}
+              value={this.state.event.inputName}
               onChange={this.handleInputChange}
               required
             />
@@ -148,7 +139,7 @@ export class SubmitEvent extends Component {
             </div>
           ))}
 
-            <button type="submit">Submit</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     );

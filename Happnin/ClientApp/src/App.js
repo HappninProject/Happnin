@@ -22,14 +22,14 @@ import './react_dates_overrides.css'
 
 
 export default class App extends Component {
-    static displayName = App.name;
+  static displayName = App.name;
 
   state = {
-    eventinfoarray: [],
-  }
+    eventinfoarray: []
+  };
 
-  render () {
-    return ( 
+  render() {
+    return (
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
