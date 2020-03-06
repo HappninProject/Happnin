@@ -24,13 +24,13 @@ export class Footer extends Component {
               <Link to="/">Home</Link>
             </li>
             <li className="list-inline-item">
-              <Link to="/">About</Link>
+              <Link to="/About">About</Link>
             </li>
             <li className="list-inline-item">
-              <a href="#">Terms</a>
+              <Link to="/Terms">Terms</Link>
             </li>
             <li className="list-inline-item">
-              <a href="#">Privacy Policy</a>
+              <Link to="/Privacy">Privacy Policy</Link>
             </li>
           </ul>
           <p className="copyright">Happnin © 2020</p>

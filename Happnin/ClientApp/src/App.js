@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
+import { About } from "./components/About";
+import { Terms } from "./components/Terms";
+import { Privacy } from "./components/Privacy";
 import { FetchEventData } from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
@@ -45,6 +48,10 @@ export default class App extends Component {
         <Route path="/pending-email" component={PendingEmailValidation} />
         <Route path="/email-validated" component={EmailValidated} />
         <Route path="/reset-email-sent" component={PassResetSent} />
+        <Route path="/About" component={About} />
+        <Route path="/Terms" component={Terms} />
+        <Route path="/Privacy" component={Privacy} />
+
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
