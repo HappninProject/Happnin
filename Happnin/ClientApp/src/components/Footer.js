@@ -24,7 +24,7 @@ export class Footer extends Component {
               <Link to="/">Home</Link>
             </li>
             <li className="list-inline-item">
-              <a href="#">About</a>
+              <Link to="/">About</Link>
             </li>
             <li className="list-inline-item">
               <a href="#">Terms</a>
