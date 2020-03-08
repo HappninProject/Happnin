@@ -20,10 +20,10 @@ export class SubmitEvent extends Component {
         hostId: 1,
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
-        cost: 42.00,
+        cost: 42.0,
         ageRestriction: 500
       }
-     // redirectToHome: false
+      // redirectToHome: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,8 +40,8 @@ export class SubmitEvent extends Component {
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
-          .then(error => console.error("error:", error));
-      // this.setState({redirectToHome: true}) 
+      .then(error => console.error("error:", error));
+    // this.setState({redirectToHome: true})
   }
 
   handleInputChange = event => {
@@ -64,87 +64,89 @@ export class SubmitEvent extends Component {
   render() {
     return (
       <div class="card">
-      <div class="submit container-fluid">
-        <h1 class="header">Submit an Event</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div class="form-group">
-            <label for="inputName">Name:</label>
-            <input
-              id="inputName"
-              class="form-control"
-              name="name"
-              type="text"
-              placeholder="Title"
-              value={this.state.event.name}
-              onChange={this.handleInputChange}
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea
-              id="description"
-              class="form-control"
-              cols="50"
-              rows="5"
-              description="description"
-              name="description"
-              minLength="1"
-              maxLength="200"
-              value={this.state.event.description}
-              onChange={this.handleInputChange}
-              required
-            ></textarea>
-          </div>
-
-          <div class="categorySelect">
-            <label for="categorySelect">Event category:</label>
-            <select
-              id="categorySelect"
-              value={this.state.event.categoryId}
-              class="form-control"
-              name="categoryId"
-              onChange={this.handleInputChange}
-            >
-              <option value="1">Music</option>
-              <option value="2">Comedy</option>
-              <option value="3">Culture</option>
-              <option value="4">Festival</option>
-            </select>
-          </div>
-          <div class="image">
-            Image: <input id="imageUpload" type="file" />
-          </div>
-
-          {["checkbox"].map(type => (
-            <div key={`inline-${type}`} className="mb-3">
-              <Form.Check
-                inline
-                label="18+?"
-                value="18"
-                type={type}
-                name="ageRestriction"
+        <div class="submit container-fluid">
+          <h1 class="header">Submit an Event</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div class="form-group">
+              <label for="inputName">Name:</label>
+              <input
+                id="inputName"
+                class="form-control"
+                name="name"
+                type="text"
+                placeholder="Title"
+                value={this.state.event.name}
                 onChange={this.handleInputChange}
-                id={`inline-${type}-1`}
-              />
-              <Form.Check
-                inline
-                label="21+?"
-                type={type}
-                value="21"
-                name="ageRestriction"
-                onChange={this.handleInputChange}
-                id={`inline-${type}-2`}
+                required
               />
             </div>
-          ))}
 
-          <button className="btn btn-primary" type="submit">Submit</button>
-        </form>
-      </div>
-      </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea
+                id="description"
+                class="form-control"
+                cols="50"
+                rows="5"
+                description="description"
+                name="description"
+                minLength="1"
+                maxLength="200"
+                value={this.state.event.description}
+                onChange={this.handleInputChange}
+                required
+              ></textarea>
+            </div>
 
+            <div class="categorySelect">
+              <label for="categorySelect">Event category:</label>
+              <select
+                id="categorySelect"
+                value={this.state.event.categoryId}
+                class="form-control"
+                name="categoryId"
+                onChange={this.handleInputChange}
+              >
+                <option value="1">Music</option>
+                <option value="2">Comedy</option>
+                <option value="3">Culture</option>
+                <option value="4">Festival</option>
+              </select>
+            </div>
+            <br />
+            <div class="image">
+              Image: <input id="imageUpload" type="file" />
+            </div>
+            <br />
+            {["checkbox"].map(type => (
+              <div key={`inline-${type}`} className="mb-3">
+                <Form.Check
+                  inline
+                  label="18+?"
+                  value="18"
+                  type={type}
+                  name="ageRestriction"
+                  onChange={this.handleInputChange}
+                  id={`inline-${type}-1`}
+                />
+                <Form.Check
+                  inline
+                  label="21+?"
+                  type={type}
+                  value="21"
+                  name="ageRestriction"
+                  onChange={this.handleInputChange}
+                  id={`inline-${type}-2`}
+                />
+              </div>
+            ))}
+
+            <button className="btn primaryButton" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     );
   }
 }

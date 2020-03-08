@@ -6,8 +6,8 @@ import "../styles/Footer.css";
 export class Footer extends Component {
   render() {
     return (
-      <div className="footer-basic container-fluid">
-        <footer className="container-fluid ng-white border-top shadow-sm rounded py-2">
+      <div className="footer-basic rounded container-fluid">
+        <footer className="container-fluid">
           <div className="social">
             <a href="#">
               <ion-icon name="logo-instagram"></ion-icon>
