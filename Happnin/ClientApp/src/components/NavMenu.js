@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Collapse,
   Container,
@@ -8,11 +8,11 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import { LoginMenu } from './api-authorization/LoginMenu';
+import { LoginMenu } from "./api-authorization/LoginMenu";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
-import logo from '../images/happninHLogoSmall.png';
+import logo from "../images/happninHLogoSmall.png";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -34,14 +34,16 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <header className="container-fluid">
-        <Navbar
-          className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
-          light
-        >
+      <header className="container-fluid rounded">
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3" light>
           <Container className="navbar">
             <NavbarBrand tag={Link} to="/" className="logo">
-              <img id="logo" class="d-inline-block mr-1" alt="Logo" src={logo}/> 
+              <img
+                id="logo"
+                class="d-inline-block mr-1"
+                alt="Logo"
+                src={logo}
+              />
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse
@@ -98,9 +100,8 @@ export class NavMenu extends Component {
                     Sign In
                   </NavLink>
                 </NavItem>
-                <LoginMenu>
-                </LoginMenu>           
-                </ul>
+                <LoginMenu></LoginMenu>
+              </ul>
             </Collapse>
           </Container>
         </Navbar>
