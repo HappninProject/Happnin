@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    Layout = "/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -14,6 +15,18 @@
             <div class="form-group">
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode"></label>
+                <input asp-for="ZipCode" class="form-control" disabled />
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>

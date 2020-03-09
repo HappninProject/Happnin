@@ -24,6 +24,9 @@ namespace Happnin.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ZipCode{ get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -41,8 +44,10 @@ namespace Happnin.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
+            FirstName = user.FirstName;
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            LastName = user.LastName;
+            ZipCode = user.ZipCode;
             Username = userName;
 
             Input = new InputModel
