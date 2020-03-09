@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Happnin.Api.Controllers;
 using Happnin.Business.Dto;
 using Happnin.Business.Services;
+using Happnin.Controllers;
 using Happnin.Data;
 using Category = Happnin.Business.Dto.Category;
 
-namespace Happnin.Api.Tests.Controllers
+namespace Happnin.Tests.Controllers
 {
     public class CategoryControllerTests : BaseControllerTests<ICategoryService, Category, CategoryInput>
     {

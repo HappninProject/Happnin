@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 //send email confirmation
 //profile picture needs to be stored somewhere
 //try to put password value updating into one function
+//make sure user can't submit form if passwords don't match
 
 export class UserCreation extends Component {
   constructor(props) {
@@ -66,7 +67,11 @@ export class UserCreation extends Component {
       this.state.reCaptchaResponse.trim().length === 0
     ) {
       alert("Please verify that you're not a robot!");
-      return { success: false, message: "Captcha is required." };
+      return { success: false, message: "Captcha is required" };
+    }
+    if (!this.state.passwordsMatch) {
+      alert("Please make sure that password fields match!");
+      return { success: false, message: "Password fields don't match" };
     }
     console.log(JSON.stringify(this.state.user));
     await fetch("api/User", {
@@ -411,7 +416,9 @@ export class UserCreation extends Component {
               />
               <br />
             </div>
-            <Button type="submit">Submit</Button>
+            <Button className="btn primaryButton" type="submit">
+              Submit
+            </Button>
           </form>
         </div>
       </div>

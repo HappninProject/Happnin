@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Happenin.Api\Happnin.Api.csproj" />
     <ProjectReference Include="..\Happenin.Business\Happnin.Business.csproj" />
+    <ProjectReference Include="..\Happnin\Happnin.csproj" />
   </ItemGroup>
 
 </Project>

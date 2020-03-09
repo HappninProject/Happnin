@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../../styles/sign-in.css";
 
 export class signIn extends Component {
   constructor(props) {
@@ -84,16 +85,19 @@ export class signIn extends Component {
               </div>
 
               <div>
-                <button class="submitButton" id="submitButton" type="submit">Submit</button>
+                <button className="rounded primaryButton btn" type="submit">
+                  Submit
+                </button>
               </div>
               <div>
-                <Link to="forgotPassword">Forgot password?</Link>
+                <Link className="tertiaryText hoverColor" to="forgotPassword">
+                  Forgot password?
+                </Link>
               </div>
             </div>
           </form>
         </div>
       </div>
-      
     );
   }
 }

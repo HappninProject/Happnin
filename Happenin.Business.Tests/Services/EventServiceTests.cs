@@ -1,10 +1,14 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Happnin.Business.Dto;
 using Happnin.Business.Services;
 using Happnin.Data;
 using Happnin.Data.Tests;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Event = Happnin.Data.Event;
+using User = Happnin.Data.User;
 
 namespace Happnin.Business.Tests
 {
@@ -16,6 +20,8 @@ namespace Happnin.Business.Tests
             using var applicationDbContext = new AppDbContext(Options, null);
             applicationDbContext.Users.Add(SampleData.UserKyle());
             applicationDbContext.Users.Add(SampleData.UserCaleb());
+            applicationDbContext.Locations.Add(SampleData.Location1234Spokane());
+            applicationDbContext.Locations.Add(SampleData.Location3456Spokane());
             applicationDbContext.Categories.Add(SampleData.Category);
             applicationDbContext.SaveChanges();
 
@@ -35,12 +41,15 @@ namespace Happnin.Business.Tests
         public override (Dto.Event dto, Dto.Event seconDto) GetDtos()
         {
             // need to set foreign keys to the seeded values
+            using var applicationDbContext = new AppDbContext(Options, null);
+            var usersTask = applicationDbContext.Users.ToListAsync();
+            var users = usersTask.Result;
             Dto.Event partyDto = Mapper.Map<Event, Dto.Event>(SampleData.EventParty());
-            partyDto.HostId = 1;
+            partyDto.HostId = users[0].Id;
             partyDto.LocationId = 1;
             partyDto.CategoryId = 1;
             Dto.Event festivalDto = Mapper.Map<Event, Dto.Event>(SampleData.EventFestival());
-            festivalDto.HostId = 2;
+            festivalDto.HostId = users[1].Id;
             festivalDto.LocationId = 2;
             festivalDto.CategoryId = 1;
             return (partyDto, festivalDto);

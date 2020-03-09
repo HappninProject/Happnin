@@ -12,28 +12,29 @@ export class Layout extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="homeImages">
-          <Carousel infinite autoPlay={5000} animationSpeed={1000}>
+        <div>
+          <Carousel
+            className="carousel slide"
+            infinite
+            autoPlay={5000}
+            animationSpeed={1000}
+          >
             <img
-              className="images"
-              src={
-                "https://previews.123rf.com/images/digidreamgrafix/digidreamgrafix1303/digidreamgrafix130300239/18728539-spokane-washington-skyline-panorama-on-a-cloudy-day.jpg"
-              }
-              alt="slide1"
+              className="item w-100"
+              src={"https://images5.alphacoders.com/349/thumb-1920-349660.jpg"}
+              alt="A concert with people raising their hands up"
             />
             <img
-              className="images"
+              className="item w-100"
               src={
-                "https://c8.alamy.com/comp/WX7MH3/panoramic-view-spokane-washington-downtown-city-skyline-WX7MH3.jpg"
+                "https://seattle.cbslocal.com/wp-content/uploads/sites/15909838/2016/05/thinkstockphotos-518756776.jpg?w=1024&h=576&crop=1"
               }
-              alt="slide2"
+              alt="A comedy club with a microphone in focus"
             />
             <img
-              className="images"
-              src={
-                "https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206"
-              }
-              alt="slide3"
+              className="item w-100"
+              src={"https://cdn.wallpapersafari.com/75/78/Hzj0JM.jpeg"}
+              alt="Fireworks"
             />
           </Carousel>
         </div>
