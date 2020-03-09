@@ -11,7 +11,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_Create_Success()
         {
-            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane())
+            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane()
             {
                 Email = "kyle@website.com"
             };

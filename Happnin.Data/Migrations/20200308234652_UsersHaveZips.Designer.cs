@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Happnin.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200302024226_AuthSetUp")]
-    partial class AuthSetUp
+    [Migration("20200308234652_UsersHaveZips")]
+    partial class UsersHaveZips
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,9 +133,6 @@ namespace Happnin.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -172,11 +169,12 @@ namespace Happnin.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
-
-                    b.HasIndex("LocationId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -347,12 +345,10 @@ namespace Happnin.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("TEXT");
@@ -389,12 +385,10 @@ namespace Happnin.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
@@ -428,12 +422,6 @@ namespace Happnin.Data.Migrations
                     b.HasOne("Happnin.Data.Event", null)
                         .WithMany("Attendees")
                         .HasForeignKey("EventId");
-
-                    b.HasOne("Happnin.Data.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.HasOne("Happnin.Data.User", null)
                         .WithMany("Friends")

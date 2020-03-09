@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Happnin.Data.Migrations
 {
-    public partial class AuthSetUp : Migration
+    public partial class UsersHaveZips : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -143,8 +143,8 @@ namespace Happnin.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -158,8 +158,8 @@ namespace Happnin.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -222,7 +222,7 @@ namespace Happnin.Data.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    LocationId = table.Column<int>(nullable: false),
+                    ZipCode = table.Column<string>(nullable: true),
                     EventId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -235,12 +235,6 @@ namespace Happnin.Data.Migrations
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -279,11 +273,6 @@ namespace Happnin.Data.Migrations
                 name: "IX_AspNetUsers_EventId",
                 table: "AspNetUsers",
                 column: "EventId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_LocationId",
-                table: "AspNetUsers",
-                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
