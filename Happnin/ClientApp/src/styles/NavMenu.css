@@ -1,14 +1,14 @@
 ﻿a.navbar-brand {
   white-space: normal;
-  margin-right: 0;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-html {
-  font-size: 16px;
-}
+
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
@@ -16,12 +16,6 @@ html {
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
 
-.logo {
-  font-family: Montserrat;
-  font-style: bold;
-  font-size: 32px;
-}
-
 header {
-  background-color: #33efc2;
+  background-color: #2ccb92;
 }

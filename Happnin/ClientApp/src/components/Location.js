@@ -8,8 +8,6 @@ export class Location extends Component{
 
     }
 
-
-
     render(){
         return(
             <div>
@@ -50,7 +48,7 @@ export class Location extends Component{
 
                 <ZipCode/>
 
-                <button className="btn btn-primary" type="submit">Submit</button>
+                <button className="btn primaryButton" type="submit">Submit</button>
             </div>
         );
     }

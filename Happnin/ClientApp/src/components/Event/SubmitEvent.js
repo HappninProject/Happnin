@@ -149,6 +149,11 @@ export class SubmitEvent extends Component {
                         onChange={this.handleInputChange}
                         clearIcon={null}/>
 
+          <div class="form-group"> 
+              <span class="input-group-addon">$</span>
+              <input type="number" value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+          </div>
+
           <div class="image">
             Image: <input id="imageUpload" type="file" />
           </div>
