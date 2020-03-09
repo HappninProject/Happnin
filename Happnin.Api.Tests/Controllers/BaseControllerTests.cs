@@ -1,17 +1,17 @@
 ﻿using System;
-using AutoMapper;
-using Happnin.Api.Controllers;
-using Happnin.Business;
-using Happnin.Business.Dto;
-using Happnin.Business.Services;
-using Moq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Happnin.Business;
+using Happnin.Business.Dto;
+using Happnin.Business.Services;
+using Happnin.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Xunit;
 
-namespace Happnin.Api.Tests.Controllers
+namespace Happnin.Tests.Controllers
 {
     public abstract class BaseControllerTests<TService, TDto, TInputDto>
         where TService : class, IEntityService<TDto, TInputDto>
