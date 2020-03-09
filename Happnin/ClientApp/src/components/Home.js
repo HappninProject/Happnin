@@ -38,20 +38,20 @@ export class Home extends Component {
 
         <table class="event-table">
           <td>
-              <div class="eventTable">
-                <th class="eventsHeader">UPCOMING EVENTS:</th>
-                <tr>
-                  <td class="event"> test </td>
-                </tr>
-              </div>
+            <div class="eventTable">
+              <th class="eventsHeader">UPCOMING EVENTS:</th>
+              <tr>
+                <td class="event"> test </td>
+              </tr>
+            </div>
           </td>
           <td>
-              <div class="eventTable">
-                <th class="eventsHeader">FRIENDS EVENTS:</th>
-                <tr>
-                  <td class="event"> test </td>
-                </tr>
-              </div>
+            <div class="eventTable">
+              <th class="eventsHeader">FRIENDS EVENTS:</th>
+              <tr>
+                <td class="event"> test </td>
+              </tr>
+            </div>
           </td>
           <td>
             <div class="eventTable">
@@ -73,8 +73,11 @@ export class Home extends Component {
   }
 
   async populateEventData() {
-    const response = await fetch("event");
+    const response = await fetch("api/Event");
     console.log(response);
+    //temp
+    const time = await fetch("api/Event/eventTime");
+    console.log(time);
     const data = await response.json();
     console.log("Got Data", data);
     this.setState({ events: data, loading: false });

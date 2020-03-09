@@ -1,9 +1,9 @@
-﻿using Happnin.Api.Controllers;
+﻿using System;
 using Happnin.Business.Dto;
 using Happnin.Business.Services;
-using System;
+using Happnin.Controllers;
 
-namespace Happnin.Api.Tests.Controllers
+namespace Happnin.Tests.Controllers
 {
     public class LocationControllerTests : BaseControllerTests<ILocationService, Location, LocationInput>
     {

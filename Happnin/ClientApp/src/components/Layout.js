@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
 import { NavMenu } from "./NavMenu";
+import { Footer } from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import confetti from '../images/jason-leung-Xaanw0s0pMk-unsplash.jpg'
-import nightCity from '../images/samvidh-ramanathan-9PaGKXIPUHQ-unsplash.jpg'
-import food from '../images/phil-hei-6XvN2bN6P8o-unsplash.jpg'
-
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -15,23 +12,35 @@ export class Layout extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="homeImages">
-          <Carousel infinite autoPlay={10000} animationSpeed={1000}>
+        <div>
+          <Carousel
+            className="carousel slide"
+            infinite
+            autoPlay={5000}
+            animationSpeed={1000}
+          >
             <img
-              className="images"
-              src={confetti}
-              alt="slide1"
+              className="item w-100"
+              src={"https://images5.alphacoders.com/349/thumb-1920-349660.jpg"}
+              alt="A concert with people raising their hands up"
             />
             <img
-              className="images"
-              src={nightCity}
-              alt="slide2"
+              className="item w-100"
+              src={
+                "https://seattle.cbslocal.com/wp-content/uploads/sites/15909838/2016/05/thinkstockphotos-518756776.jpg?w=1024&h=576&crop=1"
+              }
+              alt="A comedy club with a microphone in focus"
             />
-
+            <img
+              className="item w-100"
+              src={"https://cdn.wallpapersafari.com/75/78/Hzj0JM.jpeg"}
+              alt="Fireworks"
+            />
           </Carousel>
         </div>
         <NavMenu />
         <Container className="page">{this.props.children}</Container>
+        <Footer />
       </div>
     );
   }

@@ -51,22 +51,9 @@ code {
 .event-table {
   border-collapse: separate;
 }
-.homeImages {
-  border-style: solid;
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: black;
-  width: 2500px;
-  height: 200px;
-  text-align: center;
-  object-fit: cover;
-  margin-right: auto;
-  position: relative;
-  right: 395px;
-}
-.images {
-  object-fit: cover;
-  width: 2500px;
+
+.carousel {
+  overflow: hidden;
   height: 200px;
 }
 
@@ -77,7 +64,7 @@ code {
   margin-left: auto;
   margin-right: auto;
   padding: 40px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .happninevent {
@@ -99,8 +86,33 @@ body {
   overflow-x: hidden;
 }
 
-.submitButton{
-  background-color: #4CAF50; 
+/*styles according to UI kit for buttons, text, and divs*/
+
+.tertiaryText {
+  color: #b1ed82;
+}
+
+.primaryButton {
+  background-color: #b67b94;
+  border-color: #b67b94;
+  color: white;
+}
+
+.primaryButton:hover {
+  background-color: #f5aecb;
+  border-color: #f5aecb;
+  color: white;
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #b67b94;
+  border: solid;
+  border-color: #b67b94;
+}
+.secondaryButton:hover {
+  color: #f5aecb;
+  border-color: #f5aecb;
 }
 
 .react-datetime-picker{

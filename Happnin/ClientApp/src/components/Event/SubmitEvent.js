@@ -5,6 +5,7 @@ import "rc-time-picker/assets/index.css";
 import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
+import authService from '../api-authorization/AuthorizeService';
 import moment from 'moment';
 import MomentInput from 'react-moment-input';
 import TimePicker from 'rc-time-picker';
@@ -18,18 +19,19 @@ export class SubmitEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isAuthenticated : false,
       event: {
         name: "",
         description: "",
         locationId: 1,
-        categoryId: 2,
-        hostId: 1,
+        categoryId: 1,
+        hostId: "",
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.0,
-        ageRestriction: 500,
-       // redirectToHome: false
+        ageRestriction: 500
       }
+      // redirectToHome: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -39,15 +41,15 @@ export class SubmitEvent extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
-    await fetch("event", {
+    await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
       headers: { "Content-Type": "application/json" }
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
-      .then(error => console.error("error:", error));
-  //  this.setState({ redirectToHome: true });
+          .then(error => console.error("error:", error));
+    // this.setState({redirectToHome: true})
   }
 
   handleInputChange = event => {
@@ -65,14 +67,24 @@ export class SubmitEvent extends Component {
     console.log(this.state.event);
   };
 
-  componentDidMount = event => {};
+  componentDidMount = event => {
+    this._subscription = authService.subscribe(() => this.populateState());
+    this.populateState();
+  };
+
+  async populateState() {
+        const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
+        this.setState({
+            isAuthenticated,
+            event: {
+              ...this.state.event,
+              hostId: user && user.sub
+            }
+        });
+        console.log(user);
+    }
 
   render() {
-    // const redirectToHome = this.state.redirectToHome;
-    // if (redirectToHome === true) {
-    //   return <Redirect to="/fetch-event-data" />;
-    // }
-
     return (
       <div class="card">
       <div class="submit container-fluid">
@@ -97,22 +109,22 @@ export class SubmitEvent extends Component {
             />
           </div>
 
-          <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea
-              id="description"
-              class="form-control"
-              cols="50"
-              rows="5"
-              description="description"
-              name="description"
-              minLength="1"
-              maxLength="200"
-              value={this.state.event.description}
-              onChange={this.handleInputChange}
-              required
-            ></textarea>
-          </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea
+                id="description"
+                class="form-control"
+                cols="50"
+                rows="5"
+                description="description"
+                name="description"
+                minLength="1"
+                maxLength="200"
+                value={this.state.event.description}
+                onChange={this.handleInputChange}
+                required
+              ></textarea>
+            </div>
 
           <div class="categorySelect">
             <label for="categorySelect">Event category:</label>
@@ -164,11 +176,12 @@ export class SubmitEvent extends Component {
             </div>
           ))}
 
-          <button className="btn btn-primary" type="submit">Submit</button>
-        </form>
+            <button className="btn primaryButton" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
-      </div>
-
     );
   }
 }

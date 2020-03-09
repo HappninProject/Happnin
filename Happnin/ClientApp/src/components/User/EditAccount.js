@@ -19,9 +19,10 @@ export class EditAccount extends Component {
         city: "Spokane",
         birthday: "02/23/1995",
         email: "fakeemail@gmail.com",
-        phone: "(509) 555-5555",
+        phone: "5095555555",
         eventsOfInterest: ["Music", "Comedy", "Cultural"]
       },
+      bio: "",
       editOtherFields: false,
       anchorClicked: false
     };
@@ -48,6 +49,12 @@ export class EditAccount extends Component {
       editOtherFields: !currentState.editOtherFields,
       anchorClicked: !this.state.anchorClicked
     }));
+
+  onBioChange = event => {
+    this.setState({
+      bio: event.target.value
+    });
+  };
 
   submitForm = event => {};
 
@@ -87,11 +94,12 @@ export class EditAccount extends Component {
                     form="editAccount"
                     placeholder="I think I'm stuck in a simulation"
                     disabled={!this.state.editOtherFields}
+                    onChange={this.onBioChange}
                   ></textarea>
                 </div>
               </div>
             </div>
-            <div className="col-5 ml-2 float-right border rounded white-div my-auto">
+            <div className="col-5 ml-2 float-right border rounded white-div align-self-center py-5">
               <h1 id="aboutHeading" className="header">
                 ABOUT
               </h1>

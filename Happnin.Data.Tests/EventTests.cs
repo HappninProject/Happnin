@@ -11,15 +11,15 @@ namespace Happnin.Data.Tests
         [Fact]
         public void Event_Create_Success() 
         {
-            var eventHappenin = new Event(SampleData.Party, SampleData.Description,SampleData.Category, SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
+            var eventHappnin = new Event(SampleData.Party, SampleData.Description,SampleData.Category, SampleData.EventTime, SampleData.EndTime, SampleData.Cost, SampleData.AgeRestriction , SampleData.UserKyle(), SampleData.Location1234Spokane());
 
-            Assert.Equal(SampleData.Party, eventHappenin.Name);
-            Assert.Equal(SampleData.Description, eventHappenin.Description);
-            Assert.Equal(SampleData.Location1234Spokane().City, eventHappenin.Location.City);
-            Assert.Equal(SampleData.Kyle, eventHappenin.Host.FirstName);
-            Assert.Equal(SampleData.EventTime, eventHappenin.EventTime);
-            Assert.Equal(SampleData.Cost, eventHappenin.Cost);
-            Assert.Equal(SampleData.AgeRestriction, eventHappenin.AgeRestriction);
+            Assert.Equal(SampleData.Party, eventHappnin.Name);
+            Assert.Equal(SampleData.Description, eventHappnin.Description);
+            Assert.Equal(SampleData.Location1234Spokane().City, eventHappnin.Location.City);
+            Assert.Equal(SampleData.Kyle, eventHappnin.Host.FirstName);
+            Assert.Equal(SampleData.EventTime, eventHappnin.EventTime);
+            Assert.Equal(SampleData.Cost, eventHappnin.Cost);
+            Assert.Equal(SampleData.AgeRestriction, eventHappnin.AgeRestriction);
         }
 
         [Fact]
@@ -88,12 +88,12 @@ namespace Happnin.Data.Tests
             var eventId = -1;
             Event eventHappenin = SampleData.EventParty();
 
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Events.Add(eventHappenin);
             await appDbContext.SaveChangesAsync();
             eventId = eventHappenin.Id;
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             Event eventFromDb = await appDbContextAssert.Events.Where(e => e.Id == eventId).SingleOrDefaultAsync();
 
             Assert.Equal(eventHappenin.Name, eventFromDb.Name);
@@ -107,12 +107,12 @@ namespace Happnin.Data.Tests
             var eventId = -1;
             Event eventHappenin = SampleData.EventParty();
 
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Events.Add(eventHappenin);
             await appDbContext.SaveChangesAsync();
             eventId = eventHappenin.Id;
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             Event eventFromDb = await appDbContextAssert.Events.Include(e => e.Host)
                 .Include(e => e.Location).Where(e => e.Id == eventId).SingleOrDefaultAsync();
 
@@ -134,19 +134,19 @@ namespace Happnin.Data.Tests
         {
             var eventId = -1;
             Event eventHappenin = SampleData.EventParty();
-            using var appDbContext = new AppDbContext(Options);
+            using var appDbContext = new AppDbContext(Options, null);
             appDbContext.Events.Add(eventHappenin);
             await appDbContext.SaveChangesAsync();
             eventId = eventHappenin.Id;
 
-            using var appDbContextFetch = new AppDbContext(Options);
+            using var appDbContextFetch = new AppDbContext(Options, null);
             Event eventFromDb = await appDbContextFetch.Events.Include(e => e.Host)
                 .Include(e => e.Location).Where(e => e.Id == eventId).SingleOrDefaultAsync();
             eventFromDb.Cost = 12.00;
             eventFromDb.Host = SampleData.UserCaleb();
             await appDbContextFetch.SaveChangesAsync();
 
-            using var appDbContextAssert = new AppDbContext(Options);
+            using var appDbContextAssert = new AppDbContext(Options, null);
             eventFromDb = await appDbContextAssert.Events.Include(e => e.Host)
                 .Include(e => e.Location).Where(e => e.Id == eventId).SingleOrDefaultAsync();
         
