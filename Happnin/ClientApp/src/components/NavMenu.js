@@ -76,16 +76,6 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="subHeader" to="/user-account">
-                    Account
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="subHeader" to="/user-creation">
-                    Sign Up!
-                  </NavLink>
-                </NavItem>
-                <NavItem>
                   <NavLink tag={Link} className="subHeader" to="/submit-event">
                     Submit Event
                   </NavLink>

@@ -20,24 +20,15 @@ namespace Happnin.Data
             set => _lastName =  value ?? throw new ArgumentNullException(nameof(LastName));
         }
 
-        public int LocationId { get; set; }
-        private Location _location;
-
-        public Location Location
+        private string _zipCode;
+        public string ZipCode
         {
-            get => _location;
-            set => _location = value ?? throw new ArgumentNullException(nameof(Location));
+            get => _zipCode;
+            set => _zipCode = value ?? throw new ArgumentNullException(nameof(ZipCode));
         }
 
         public List<User> Friends { get; } = new List<User>();
-
-        public User(string firstName, string lastName, Location location) 
-            : this(firstName, lastName)
-        {
-            Location = location;
-        }
-
-        private User(string firstName, string lastName)
+        public User(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;

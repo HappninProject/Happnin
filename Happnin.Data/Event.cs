@@ -27,7 +27,7 @@ namespace Happnin.Data
             set => _location = value ?? throw  new ArgumentNullException(nameof(Location));
         }
         
-        public int HostId { get; set; }
+        public string HostId { get; set; }
         private User _host;
         public User Host
         {

@@ -32,19 +32,12 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path="/" component={Home} />
-        <Route path="/user-account" component={UserAccount} />
-        <Route path="/user-creation" component={UserCreation} />
         <Route path="/submit-event" component={SubmitEvent} />
         <Route path="/browseEvents" component={browseEvents} />
         <Route path="/fetch-event-data" component={FetchEventData} />
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
-        <Route path="/sign-in" component={signIn} />
         <Route path="/forgotPassword" component={forgotPassword} />
-        <Route path="/edit-account" component={EditAccount} />
-        <Route path="/pending-email" component={PendingEmailValidation} />
-        <Route path="/email-validated" component={EmailValidated} />
-        <Route path="/reset-email-sent" component={PassResetSent} />
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}

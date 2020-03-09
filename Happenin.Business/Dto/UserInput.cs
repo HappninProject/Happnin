@@ -17,7 +17,6 @@ namespace Happnin.Business.Dto
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        public int? LocationId { get; set; }
-
+        public string ZipCode { get; set; }
     }
 }
