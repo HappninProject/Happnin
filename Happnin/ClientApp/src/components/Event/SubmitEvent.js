@@ -5,7 +5,13 @@ import "rc-time-picker/assets/index.css";
 import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
-import authService from "../api-authorization/AuthorizeService";
+import authService from '../api-authorization/AuthorizeService';
+import moment from 'moment';
+import MomentInput from 'react-moment-input';
+import TimePicker from 'rc-time-picker';
+import DateTimePicker from 'react-datetime-picker';
+import { Location } from "../Location.js";
+
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -83,23 +89,28 @@ export class SubmitEvent extends Component {
 
   render() {
     return (
-      <div className="card">
-        <div className="submit container-fluid">
-          <h1 className="header">Submit an Event</h1>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label for="inputName">Name:</label>
-              <input
-                id="inputName"
-                className="form-control"
-                name="name"
-                type="text"
-                placeholder="Title"
-                value={this.state.event.name}
-                onChange={this.handleInputChange}
-                required
-              />
-            </div>
+      <div class="card">
+      <div class="submit container-fluid">
+        <h1 class="header">Submit an Event</h1>
+
+        <Location/>
+
+
+
+        <form onSubmit={this.handleSubmit}>
+          <div class="form-group">
+            <label for="inputName">Name:</label>
+            <input
+              id="inputName"
+              class="form-control"
+              name="name"
+              type="text"
+              placeholder="Title"
+              value={this.state.event.name}
+              onChange={this.handleInputChange}
+              required
+            />
+          </div>
 
             <div className="form-group">
               <label for="description">Description:</label>
@@ -118,49 +129,61 @@ export class SubmitEvent extends Component {
               ></textarea>
             </div>
 
-            <div className="categorySelect">
-              <label for="categorySelect">Event category:</label>
-              <select
-                id="categorySelect"
-                value={this.state.event.categoryId}
-                className="form-control"
-                name="categoryId"
+          <div class="categorySelect">
+            <label for="categorySelect">Event category:</label>
+            <select
+              id="categorySelect"
+              value={this.state.event.categoryId}
+              class="form-control"
+              name="categoryId"
+              onChange={this.handleInputChange}
+            >
+              <option value="1">Music</option>
+              <option value="2">Comedy</option>
+              <option value="3">Culture</option>
+              <option value="4">Festival</option>
+            </select>
+            </div>
+
+
+
+                    <DateTimePicker 
+                        value={this.state.date}
+                        onChange={this.handleInputChange}
+                        clearIcon={null}/>
+
+          <div class="form-group"> 
+              <span class="input-group-addon">$</span>
+              <input type="number" value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+          </div>
+
+          <div class="image">
+            Image: <input id="imageUpload" type="file" />
+          </div>
+
+          {["checkbox"].map(type => (
+            <div key={`inline-${type}`} className="mb-3">
+              <Form.Check
+                inline
+                label="18+?"
+                value="18"
+                type={type}
+                name="ageRestriction"
                 onChange={this.handleInputChange}
-              >
-                <option value="1">Music</option>
-                <option value="2">Comedy</option>
-                <option value="3">Culture</option>
-                <option value="4">Festival</option>
-              </select>
+                id={`inline-${type}-1`}
+              />
+              <Form.Check
+                inline
+                label="21+?"
+                type={type}
+                value="21"
+                name="ageRestriction"
+                onChange={this.handleInputChange}
+                id={`inline-${type}-2`}
+              />
             </div>
-            <br />
-            <div className="image">
-              Image: <input id="imageUpload" type="file" />
-            </div>
-            <br />
-            {["checkbox"].map(type => (
-              <div key={`inline-${type}`} classNameName="mb-3">
-                <Form.Check
-                  inline
-                  label="18+?"
-                  value="18"
-                  type={type}
-                  name="ageRestriction"
-                  onChange={this.handleInputChange}
-                  id={`inline-${type}-1`}
-                />
-                <Form.Check
-                  inline
-                  label="21+?"
-                  type={type}
-                  value="21"
-                  name="ageRestriction"
-                  onChange={this.handleInputChange}
-                  id={`inline-${type}-2`}
-                />
-              </div>
-            ))}
-            <br />
+          ))}
+
             <button className="btn primaryButton" type="submit">
               Submit
             </button>

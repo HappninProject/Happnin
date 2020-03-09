@@ -2,6 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 /* Uses blue for anchor/link color */
+/* Provide sufficient contrast against white background */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap");
 a {
   color: #0366d6;
 }
@@ -64,8 +66,8 @@ label {
   margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.2), 5px 5px 17px -5px rgba(0, 0, 0, 0.1);
 }
 
 .happninevent {
@@ -114,4 +116,23 @@ body {
 .secondaryButton:hover {
   color: #f5aecb;
   border-color: #f5aecb;
+}
+
+.react-datetime-picker{
+  margin: 20px;
+}
+
+#buyTicketsButton{
+  float: right;
+  margin-right: 20px;
+}
+
+.card-title{
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.eventImage{
+  padding-top: 1000px;
 }

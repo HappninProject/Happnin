@@ -12,25 +12,25 @@ import { LoginMenu } from "./api-authorization/LoginMenu";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
-import logo from "../images/happninHLogoSmall.png";
+import logo from "../images/happninHLogoCircle.png";
 
 export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+    static displayName = NavMenu.name;
 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
+        this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.state = {
+          collapsed: true
+        };
+    }
 
-  toggleNavbar() {
+    toggleNavbar() {
     this.setState({
-      collapsed: !this.state.collapsed
+        collapsed: !this.state.collapsed
     });
-  }
+    }
 
   render() {
     return (

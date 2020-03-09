@@ -5,6 +5,7 @@ import { Footer } from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
+import nightLife from '../images/samvidh-ramanathan-9PaGKXIPUHQ-unsplash.jpg';
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -14,11 +15,16 @@ export class Layout extends Component {
       <div className="container-fluid">
         <div>
           <Carousel
-            className="carousel slide"
+            className="carousel"
             infinite
-            autoPlay={5000}
-            animationSpeed={1000}
+            autoPlay={20000}
+            animationSpeed={10000}
           >
+            <img
+              className="item w-100"
+              src={nightLife}
+              alt="A busy urban street at night"
+            />
             <img
               className="item w-100"
               src={"https://images5.alphacoders.com/349/thumb-1920-349660.jpg"}

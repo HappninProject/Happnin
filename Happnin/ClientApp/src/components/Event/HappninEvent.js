@@ -14,21 +14,23 @@ export class HappninEvent extends Component {
             
                     <Row around="xs">
                     <Col xs={2} >
-                        <Card.Img variant="left" src={logo} rounded style={{padding: 20}}/>
+                        <Card.Img className="eventImage" variant="left" src={logo} rounded style={{padding: 5}}/>
                     </Col>
                     <Col xs={10} horizontal='right'>
                         <div class="card-body" className='happninevent'>
-                            <img src={e.avatar_url} alt = 'profile avatar'/>
+                            
                             <div className='eventinfo'>
                                 <h5 class="card-title">{e.name}</h5>
                                 <p class="card-text" >
-                                    Description: <b>{e.description}</b> <br/> 
-                                    Cost: <b>{e.cost}</b> <br/> 
-                                    Host ID: <b>{e.hostId}</b> <br/>
+                                    {e.description} <br/> 
+                                    Cost: <b>{e.cost}</b>
+                                    Age Restriction: <b>{e.ageRestriction}</b> <br/> <br/> 
+                                
                                     Category: <b>{e.categoryId}</b> <br/>
-                                    Age Restriction: <b>{e.ageRestriction}</b> <br/>
+                                    
                                     Start Time: {e.eventTime}<br/>
                                     End Time: {e.endTime}  <br/></p>
+                                    <button id="buyTicketsButton" className="btn btn-primary" >Buy Tickets</button>
                             </div>
                         </div> 
                     </Col>
