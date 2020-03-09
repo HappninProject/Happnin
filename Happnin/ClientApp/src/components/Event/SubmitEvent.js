@@ -5,6 +5,7 @@ import "rc-time-picker/assets/index.css";
 import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
+import authService from '../api-authorization/AuthorizeService';
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -12,18 +13,18 @@ export class SubmitEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isAuthenticated : false,
       event: {
         name: "",
         description: "",
         locationId: 1,
         categoryId: 1,
-        hostId: 1,
+        hostId: "",
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.00,
         ageRestriction: 500
       }
-     // redirectToHome: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,7 +42,6 @@ export class SubmitEvent extends Component {
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
           .then(error => console.error("error:", error));
-      // this.setState({redirectToHome: true}) 
   }
 
   handleInputChange = event => {
@@ -59,7 +59,22 @@ export class SubmitEvent extends Component {
     console.log(this.state.event);
   };
 
-  componentDidMount = event => {};
+  componentDidMount = event => {
+    this._subscription = authService.subscribe(() => this.populateState());
+    this.populateState();
+  };
+
+  async populateState() {
+        const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
+        this.setState({
+            isAuthenticated,
+            event: {
+              ...this.state.event,
+              hostId: user && user.sub
+            }
+        });
+        console.log(user);
+    }
 
   render() {
     return (
