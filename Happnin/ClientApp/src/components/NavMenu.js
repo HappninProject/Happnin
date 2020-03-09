@@ -34,8 +34,8 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <header className="container-fluid rounded">
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3" light>
+      <header className="container-fluid rounded shadow-sm">
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm mb-5" light>
           <Container className="navbar">
             <NavbarBrand tag={Link} to="/" className="logo">
               <img
@@ -53,14 +53,14 @@ export class NavMenu extends Component {
             >
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="subHeader" to="/">
+                  <NavLink tag={Link} className="navHeader" to="/">
                     Home
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink
                     tag={Link}
-                    className="subHeader"
+                    className="navHeader"
                     to="/fetch-location-data"
                   >
                     Locations
@@ -69,24 +69,24 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink
                     tag={Link}
-                    className="subHeader"
+                    className="navHeader"
                     to="/fetch-user-data"
                   >
                     Users
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="subHeader" to="/submit-event">
+                  <NavLink tag={Link} className="navHeader" to="/submit-event">
                     Submit Event
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="subHeader" to="/browseEvents">
+                  <NavLink tag={Link} className="navHeader" to="/browseEvents">
                     Events
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="subHeader" to="/sign-in">
+                  <NavLink tag={Link} className="navHeader" to="/sign-in">
                     Sign In
                   </NavLink>
                 </NavItem>

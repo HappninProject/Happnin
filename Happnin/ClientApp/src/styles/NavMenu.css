@@ -1,11 +1,10 @@
-﻿a.navbar-brand {
+﻿@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+/* a.navbar-brand {
   white-space: normal;
   margin-right: 0;
-}
+} */
 
-html {
-  font-size: 16px;
-}
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -20,6 +19,11 @@ html {
   font-family: Montserrat;
   font-style: bold;
   font-size: 32px;
+}
+
+.navHeader {
+  font-family: Montserrat;
+  font-size: 20px;
 }
 
 header {

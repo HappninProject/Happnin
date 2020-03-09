@@ -1,32 +1,33 @@
-/* Provide sufficient contrast against white background */
+/* Importing Montserrat and Open Sans fonts */
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+/* Uses blue for anchor/link color */
 a {
   color: #0366d6;
 }
 
-code {
-  color: #e01a76;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
 .header {
-  font-family: Montserrat;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: bold;
   font-size: 28px;
   line-height: 41px;
 }
 
-.text {
-  font-family: Open Sans;
+/* For subheaders on page */
+.subHeader {
+  font-family: "Montserrat";
+  font-size: 20px;
+  font-style: italic;
+}
+
+/* Makes body text and labels text Open Sans and 16px */
+body,
+label {
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 19px;
 }
 
@@ -45,13 +46,12 @@ code {
   border-style: solid;
   border-radius: 6px;
   border-width: 1px;
-  border-color: gray;
-  width: 298px;
 }
 .event-table {
   border-collapse: separate;
 }
 
+/* Height of images in carousel is limited to 200px, the rest is hidden */
 .carousel {
   overflow: hidden;
   height: 200px;
@@ -59,11 +59,12 @@ code {
 
 .card {
   border-radius: 20px;
-  width: 50rem;
-  margin: 20px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
-  padding: 40px;
+  padding: 20px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.1);
 }
 

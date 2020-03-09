@@ -5,7 +5,7 @@ import "rc-time-picker/assets/index.css";
 import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
-import authService from '../api-authorization/AuthorizeService';
+import authService from "../api-authorization/AuthorizeService";
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -13,7 +13,7 @@ export class SubmitEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated : false,
+      isAuthenticated: false,
       event: {
         name: "",
         description: "",
@@ -42,7 +42,7 @@ export class SubmitEvent extends Component {
     })
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
-          .then(error => console.error("error:", error));
+      .then(error => console.error("error:", error));
     // this.setState({redirectToHome: true})
   }
 
@@ -67,28 +67,31 @@ export class SubmitEvent extends Component {
   };
 
   async populateState() {
-        const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
-        this.setState({
-            isAuthenticated,
-            event: {
-              ...this.state.event,
-              hostId: user && user.sub
-            }
-        });
-        console.log(user);
-    }
+    const [isAuthenticated, user] = await Promise.all([
+      authService.isAuthenticated(),
+      authService.getUser()
+    ]);
+    this.setState({
+      isAuthenticated,
+      event: {
+        ...this.state.event,
+        hostId: user && user.sub
+      }
+    });
+    console.log(user);
+  }
 
   render() {
     return (
-      <div class="card">
-        <div class="submit container-fluid">
-          <h1 class="header">Submit an Event</h1>
+      <div className="card">
+        <div className="submit container-fluid">
+          <h1 className="header">Submit an Event</h1>
           <form onSubmit={this.handleSubmit}>
-            <div class="form-group">
+            <div className="form-group">
               <label for="inputName">Name:</label>
               <input
                 id="inputName"
-                class="form-control"
+                className="form-control"
                 name="name"
                 type="text"
                 placeholder="Title"
@@ -98,11 +101,11 @@ export class SubmitEvent extends Component {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="description">Description:</label>
               <textarea
                 id="description"
-                class="form-control"
+                className="form-control"
                 cols="50"
                 rows="5"
                 description="description"
@@ -115,12 +118,12 @@ export class SubmitEvent extends Component {
               ></textarea>
             </div>
 
-            <div class="categorySelect">
+            <div className="categorySelect">
               <label for="categorySelect">Event category:</label>
               <select
                 id="categorySelect"
                 value={this.state.event.categoryId}
-                class="form-control"
+                className="form-control"
                 name="categoryId"
                 onChange={this.handleInputChange}
               >
@@ -131,12 +134,12 @@ export class SubmitEvent extends Component {
               </select>
             </div>
             <br />
-            <div class="image">
+            <div className="image">
               Image: <input id="imageUpload" type="file" />
             </div>
             <br />
             {["checkbox"].map(type => (
-              <div key={`inline-${type}`} className="mb-3">
+              <div key={`inline-${type}`} classNameName="mb-3">
                 <Form.Check
                   inline
                   label="18+?"
@@ -157,7 +160,7 @@ export class SubmitEvent extends Component {
                 />
               </div>
             ))}
-
+            <br />
             <button className="btn primaryButton" type="submit">
               Submit
             </button>

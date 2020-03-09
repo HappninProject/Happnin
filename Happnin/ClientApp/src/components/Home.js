@@ -33,37 +33,39 @@ export class Home extends Component {
       Home.renderEventsTable(this.state.events)
     );
     return (
-      <div className="container-fluid">
-        <div class="header">WELCOME TO HAPPNIN'</div>
+      <div className="container-fluid card">
+        <h1 className="header">Welcome to Happnin</h1>
 
-        <table class="event-table">
+        <table className="event-table">
           <td>
-            <div class="eventTable">
-              <th class="eventsHeader">UPCOMING EVENTS:</th>
+            <div className="eventTable">
+              <th className="eventsHeader">Upcoming Events:</th>
               <tr>
-                <td class="event"> test </td>
+                <td className="event"> test </td>
               </tr>
             </div>
           </td>
           <td>
-            <div class="eventTable">
-              <th class="eventsHeader">FRIENDS EVENTS:</th>
+            <div className="eventTable">
+              <th className="eventsHeader">Friends' Events:</th>
               <tr>
-                <td class="event"> test </td>
+                <td className="event"> test </td>
               </tr>
             </div>
           </td>
           <td>
-            <div class="eventTable">
-              <th class="eventsHeader">POPULAR EVENTS:</th>
+            <div className="eventTable">
+              <th className="eventsHeader">Popular Events:</th>
               <tr>
-                <td class="event"> test </td>
+                <td className="event"> test </td>
               </tr>
             </div>
           </td>
         </table>
-        <div class="submit">
-          <h1 id="tabelLabel">Events</h1>
+        <div className="submit">
+          <h1 id="tabelLabel" className="header">
+            Events
+          </h1>
           <p>Got these events from our server DAWG</p>
 
           {contents}

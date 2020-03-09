@@ -6,7 +6,7 @@ import "../styles/Footer.css";
 export class Footer extends Component {
   render() {
     return (
-      <div className="footer-basic rounded container-fluid">
+      <div className="footer-basic rounded container-fluid shadow-sm">
         <footer className="container-fluid">
           <div className="social">
             <a href="#">
@@ -24,13 +24,16 @@ export class Footer extends Component {
               <Link to="/">Home</Link>
             </li>
             <li className="list-inline-item">
-              <Link to="/About">About</Link>
+              <Link to="/about">About</Link>
             </li>
             <li className="list-inline-item">
-              <Link to="/Terms">Terms</Link>
+              <Link to="/contact-us">Contact Us</Link>
             </li>
             <li className="list-inline-item">
-              <Link to="/Privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms</Link>
+            </li>
+            <li className="list-inline-item">
+              <Link to="/privacy">Privacy Policy</Link>
             </li>
           </ul>
           <p className="copyright">Happnin © 2020</p>
