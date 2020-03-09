@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
+import { About } from "./components/About";
+import { Terms } from "./components/Terms";
+import { Privacy } from "./components/Privacy";
 import { FetchEventData } from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
@@ -37,7 +40,6 @@ export default class App extends Component {
         <Route path="/fetch-event-data" component={FetchEventData} />
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
-        <Route path="/forgotPassword" component={forgotPassword} />
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
