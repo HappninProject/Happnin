@@ -20,6 +20,7 @@ export class SubmitEvent extends Component {
     super(props);
     this.state = {
       isAuthenticated: false,
+      location: null,
       event: {
         name: "",
         description: "",
@@ -91,13 +92,12 @@ export class SubmitEvent extends Component {
     return (
       <div class="card">
       <div class="submit container-fluid">
-        <h1 class="header">Submit an Event</h1>
+        <h1 class="header">Tell Us About Your Event</h1>
 
         <Location/>
 
-
-
         <form onSubmit={this.handleSubmit}>
+        <h3>What is your event?</h3>
           <div class="form-group">
             <label for="inputName">Name:</label>
             <input
@@ -145,16 +145,35 @@ export class SubmitEvent extends Component {
             </select>
             </div>
 
+          <div class="form-group">
+            <label>Test Input:</label>
+            <input 
+            type="datetime-local"
+            name="eventTime"
+            value={this.state.eventTime}
+            onChange={this.handleInputChange}
+            className="form-control"/>
+          </div>
 
 
-                    <DateTimePicker 
-                        value={this.state.date}
-                        onChange={this.handleInputChange}
-                        clearIcon={null}/>
+          <DateTimePicker 
+              value={this.state.date}
+              onChange={this.handleInputChange}
+              clearIcon={null}/>
 
           <div class="form-group"> 
-              <span class="input-group-addon">$</span>
-              <input type="number" value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+              <label for="costId">Cost:</label>
+              <input 
+
+                type="number" 
+                name="cost"
+                value={this.state.event.cost}
+                min="0.00" step="0.50" 
+                data-number-to-fixed="4" 
+                data-number-stepfactor="100" 
+                class="form-control currency" 
+                id="costId" 
+                onChange={this.handleInputChange}/>
           </div>
 
           <div class="image">

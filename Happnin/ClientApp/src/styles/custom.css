@@ -99,6 +99,7 @@ body {
   background-color: #b67b94;
   border-color: #b67b94;
   color: white;
+  margin-bottom: 30px;
 }
 
 .primaryButton:hover {
