@@ -11,18 +11,13 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_Create_Success()
         {
-            var user = new User(SampleData.Kyle, SampleData.Smith, SampleData.Location1234Spokane()
+            var user = new User(SampleData.Kyle, SampleData.Smith)
             {
                 Email = "kyle@website.com"
             };
 
             Assert.Equal(SampleData.Kyle, user.FirstName);
             Assert.Equal(SampleData.Smith, user.LastName);
-            Assert.Equal(SampleData.Street, user.Location.Address);
-            Assert.Equal(SampleData.City, user.Location.City);
-            Assert.Equal(SampleData.State, user.Location.State);
-            Assert.Equal(SampleData.Country, user.Location.Country);
-            Assert.Equal(SampleData.ZipCode, user.Location.ZipCode);
             Assert.Equal("kyle@website.com", user.Email);
         }
 
@@ -30,7 +25,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_FirstNameNull_Exception()
         {
-            Action act = () => new User(null, SampleData.Smith,SampleData.Location1234Spokane());
+            Action act = () => new User(null, SampleData.Smith);
             
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -38,15 +33,7 @@ namespace Happnin.Data.Tests
         [Fact]
         public void User_LastNameNull_Exception()
         {
-            Action act = () => new User(SampleData.Kyle, null, SampleData.Location1234Spokane());
-
-            Assert.Throws<ArgumentNullException>(act);
-        }
-
-        [Fact]
-        public void User_LocationNull_Exception()
-        {
-            Action act = () => new User(SampleData.Kyle, SampleData.Smith, null);
+            Action act = () => new User(SampleData.Kyle, null);
 
             Assert.Throws<ArgumentNullException>(act);
         }
@@ -94,28 +81,6 @@ namespace Happnin.Data.Tests
             Assert.Equal(SampleData.Smith, userFromDb.LastName);
         }
         
-        [Fact]
-        public async Task Fetch_User_DatabaseShouldReturnItWithLocation()
-        {
-            var userId = "";
-            User user = SampleData.UserKyle();
-
-            using var appDbContext = new AppDbContext(Options, null);
-            appDbContext.Users.Add(user);
-            await appDbContext.SaveChangesAsync();
-            userId = user.Id!;
-
-            using var appDbContextAssert = new AppDbContext(Options, null);
-            User userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
-                .Include(e => e.Location).Where(e => e.Id == userId).SingleOrDefaultAsync();
-            
-            Assert.NotNull(userFromDb);
-            Assert.Equal(SampleData.Kyle, userFromDb.FirstName);
-            Assert.Equal(SampleData.Smith, userFromDb.LastName);
-            Assert.Equal(user.Location.Id, userFromDb.Location.Id);
-            Assert.Equal(user.Location.Address, userFromDb.Location.Address);
-            Assert.Equal(user.Location.City, user.Location.City);
-        }
 
         [Fact]
         public async Task Update_UserUpdated_SavedToDatabase()
@@ -128,16 +93,14 @@ namespace Happnin.Data.Tests
             userId = user.Id!;
 
             using var appDbContextFetch = new AppDbContext(Options, null);
-            User userFromDb = await appDbContextFetch.Users.Include(e => e.Location)
-                .Where(e => e.Id == userId).SingleOrDefaultAsync();
+            User userFromDb = await appDbContextFetch.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
             userFromDb.FirstName = "Updated";
             userFromDb.Email = "newEmail@main.com";
             await appDbContextFetch.SaveChangesAsync();
             
 
             using var appDbContextAssert = new AppDbContext(Options, null);
-            userFromDb = await appDbContextAssert.Users.Include(e => e.Location)
-                .Where(e => e.Id == userId).SingleOrDefaultAsync();
+            userFromDb = await appDbContextAssert.Users.Where(e => e.Id == userId).SingleOrDefaultAsync();
         
             Assert.Equal("Updated", userFromDb.FirstName);
             Assert.Equal("newEmail@main.com", userFromDb.Email);

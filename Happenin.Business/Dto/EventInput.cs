@@ -9,7 +9,7 @@ namespace Happnin.Business.Dto
         public string Description { get; set; }
         public int LocationId { get; set; }
         public int CategoryId { get; set; }
-        public int HostId { get; set; }
+        public string HostId { get; set; }
         [DataType(DataType.Time)]
         public DateTime EventTime { get; set; }
         [DataType(DataType.Time)]

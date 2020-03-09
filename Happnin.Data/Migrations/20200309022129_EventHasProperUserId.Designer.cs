@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Happnin.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200308234652_UsersHaveZips")]
-    partial class UsersHaveZips
+    [Migration("20200309022129_EventHasProperUserId")]
+    partial class EventHasProperUserId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,10 +56,7 @@ namespace Happnin.Data.Migrations
                     b.Property<DateTime>("EventTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("HostId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("HostId1")
+                    b.Property<string>("HostId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LocationId")
@@ -72,7 +69,7 @@ namespace Happnin.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("HostId1");
+                    b.HasIndex("HostId");
 
                     b.HasIndex("LocationId");
 
@@ -408,7 +405,7 @@ namespace Happnin.Data.Migrations
 
                     b.HasOne("Happnin.Data.User", "Host")
                         .WithMany()
-                        .HasForeignKey("HostId1");
+                        .HasForeignKey("HostId");
 
                     b.HasOne("Happnin.Data.Location", "Location")
                         .WithMany()

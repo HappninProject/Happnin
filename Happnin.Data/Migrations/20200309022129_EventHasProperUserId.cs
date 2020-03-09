@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Happnin.Data.Migrations
 {
-    public partial class UsersHaveZips : Migration
+    public partial class EventHasProperUserId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -176,8 +176,7 @@ namespace Happnin.Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     LocationId = table.Column<int>(nullable: false),
-                    HostId = table.Column<int>(nullable: false),
-                    HostId1 = table.Column<string>(nullable: true),
+                    HostId = table.Column<string>(nullable: true),
                     EventTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Cost = table.Column<double>(nullable: false),
@@ -307,9 +306,9 @@ namespace Happnin.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_HostId1",
+                name: "IX_Events_HostId",
                 table: "Events",
-                column: "HostId1");
+                column: "HostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_LocationId",
@@ -359,9 +358,9 @@ namespace Happnin.Data.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Events_AspNetUsers_HostId1",
+                name: "FK_Events_AspNetUsers_HostId",
                 table: "Events",
-                column: "HostId1",
+                column: "HostId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
@@ -370,7 +369,7 @@ namespace Happnin.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Events_AspNetUsers_HostId1",
+                name: "FK_Events_AspNetUsers_HostId",
                 table: "Events");
 
             migrationBuilder.DropTable(

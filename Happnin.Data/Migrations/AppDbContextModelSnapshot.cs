@@ -54,10 +54,7 @@ namespace Happnin.Data.Migrations
                     b.Property<DateTime>("EventTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("HostId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("HostId1")
+                    b.Property<string>("HostId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LocationId")
@@ -70,7 +67,7 @@ namespace Happnin.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("HostId1");
+                    b.HasIndex("HostId");
 
                     b.HasIndex("LocationId");
 
@@ -406,7 +403,7 @@ namespace Happnin.Data.Migrations
 
                     b.HasOne("Happnin.Data.User", "Host")
                         .WithMany()
-                        .HasForeignKey("HostId1");
+                        .HasForeignKey("HostId");
 
                     b.HasOne("Happnin.Data.Location", "Location")
                         .WithMany()
