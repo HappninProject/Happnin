@@ -27,70 +27,73 @@ export class UserAccount extends Component {
   render() {
     return (
       <div class="card">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm border rounded white-div">
-            <div className="row text-center">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png"
-                className="img-fluid mt-0"
-                alt="User Avatar"
-              ></img>
-              <h3 className="header mx-auto">
-                {this.state.user.firstName + " " + this.state.user.lastName}
-              </h3>
-            </div>
-            <div className="row-3">
-              <div className="col rounded white-div align-middle">
-                <h4>User Bio</h4>
-                <p>I think I'm stuck in a simulation</p>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm border rounded white-div">
+              <div className="row text-center">
+                <img
+                  src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png"
+                  className="img-fluid mt-0"
+                  alt="User Avatar"
+                ></img>
+                <h3 className="header mx-auto">
+                  {this.state.user.firstName + " " + this.state.user.lastName}
+                </h3>
+              </div>
+              <div className="row-3">
+                <div className="col rounded white-div align-middle">
+                  <h4>User Bio</h4>
+                  <p>I think I'm stuck in a simulation</p>
+                </div>
               </div>
             </div>
+            <div className="col-5 float-right border rounded white-div">
+              <h1 className="header">ABOUT</h1>
+              <p className="subHeader">Username: {this.state.user.userName}</p>
+              <div>
+                <p className="subHeader">
+                  First name: {this.state.user.firstName}
+                </p>
+              </div>
+              <div>
+                <p className="subHeader">
+                  Last name: {this.state.user.lastName}
+                </p>
+              </div>
+              <div>
+                <p className="subHeader">City: {this.state.user.city}</p>
+              </div>
+              <div>
+                <p className="subHeader">
+                  Birthday: {this.state.user.birthday}
+                </p>
+              </div>
+              <div>
+                <p className="subHeader">Email: {this.state.user.email}</p>
+              </div>
+              <div>
+                <p className="subHeader">
+                  Types of events I'm interested in:
+                  {this.state.user.eventsOfInterest.map(event => (
+                    <li key={event.id}>{event}</li>
+                  ))}
+                </p>
+              </div>
+            </div>
+            <div className="col-4 float-right border rounded white-div">
+              <h1 className="header">Upcoming Events</h1>
+              <p>No upcoming events for you yet!</p>
+            </div>
           </div>
-          <div className="col-5 float-right border rounded white-div">
-            <h1 className="header">ABOUT</h1>
-            <p className="subHeader">Username: {this.state.user.userName}</p>
-            <div>
-              <p className="subHeader">
-                First name: {this.state.user.firstName}
-              </p>
-            </div>
-            <div>
-              <p className="subHeader">Last name: {this.state.user.lastName}</p>
-            </div>
-            <div>
-              <p className="subHeader">City: {this.state.user.city}</p>
-            </div>
-            <div>
-              <p className="subHeader">Birthday: {this.state.user.birthday}</p>
-            </div>
-            <div>
-              <p className="subHeader">Email: {this.state.user.email}</p>
-            </div>
-            <div>
-              <p className="subHeader">
-                Types of events I'm interested in:
-                {this.state.user.eventsOfInterest.map(event => (
-                  <li key={event.id}>{event}</li>
-                ))}
-              </p>
-            </div>
-          </div>
-          <div className="col-4 float-right border rounded white-div">
-            <h1 className="header">Upcoming Events</h1>
-            <p>No upcoming events for you yet!</p>
+          <div className="float-right mt-2">
+            <Link to="/edit-account">
+              <button id="btnEditAccount" className="btn secondaryButton">
+                Edit Profile
+              </button>
+            </Link>
           </div>
         </div>
-        <div className="float-right mt-2">
-          <Link to="/edit-account">
-            <button id="btnEditAccount" className="border rounded">
-              Edit Profile
-            </button>
-          </Link>
-        </div>
       </div>
-      </div>
-
     );
   }
 }

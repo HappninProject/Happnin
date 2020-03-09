@@ -2,6 +2,7 @@
 
 .footer-basic {
   padding: 40px 0;
+  background-color: #b67b94;
 }
 
 .footer-basic ul {
@@ -44,6 +45,7 @@
   margin: 0 5px;
   color: inherit;
   opacity: 0.75;
+  background-color: #b1ed82;
 }
 
 .footer-basic .social > a:hover {
@@ -54,6 +56,6 @@
   margin-top: 15px;
   text-align: center;
   font-size: 13px;
-  color: #aaa;
+  color: #b1ed82;
   margin-bottom: 0;
 }
