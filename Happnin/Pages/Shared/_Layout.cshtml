@@ -52,6 +52,18 @@
     <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+
+    @Html.React("Showcase", new
+{
+    //Just my own initial data needed
+    showcaseItems = showcaseItems
+    , navigationItems = landingPageItems
+})
+
+<script src="http://fb.me/react-0.12.2.min.js"></script>
+<script src="@Url.Content("~/scripts/showcase.jsx")"></script> <!-- Needed to keep this -->
+@Html.ReactInitJavaScript()
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

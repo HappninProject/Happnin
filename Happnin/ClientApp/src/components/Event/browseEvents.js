@@ -19,8 +19,8 @@ export class browseEvents extends Component {
   };
   render() {
     return (
-      <div className="container-fluid">
-        <h3>Events</h3>
+      <div className="container-fluid card">
+        <h1 className="header">Events</h1>
         <div className="text-center">
           <label className="subHeader">
             Search by event name:&nbsp;{this.state.eventNameSearch}
@@ -56,6 +56,7 @@ export class browseEvents extends Component {
             <option value="Festival">Festival</option>
           </select>
         </div>
+        <br />
         <div>
           <FetchEventData></FetchEventData>
         </div>
