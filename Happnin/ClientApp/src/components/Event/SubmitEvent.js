@@ -2,13 +2,9 @@
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "rc-time-picker/assets/index.css";
-import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
 import authService from '../api-authorization/AuthorizeService';
-import moment from 'moment';
-import MomentInput from 'react-moment-input';
-import TimePicker from 'rc-time-picker';
 import DateTimePicker from 'react-datetime-picker';
 import { Location } from "../Location.js";
 

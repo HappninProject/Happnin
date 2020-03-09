@@ -3,11 +3,6 @@ import { ZipCode } from "./ZipCode.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export class Location extends Component{
-    constructor(props) {
-        super(props);
-
-    }
-
     render(){
         return(
             <div>
