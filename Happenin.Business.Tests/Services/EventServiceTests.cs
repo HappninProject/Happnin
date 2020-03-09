@@ -20,6 +20,8 @@ namespace Happnin.Business.Tests
             using var applicationDbContext = new AppDbContext(Options, null);
             applicationDbContext.Users.Add(SampleData.UserKyle());
             applicationDbContext.Users.Add(SampleData.UserCaleb());
+            applicationDbContext.Locations.Add(SampleData.Location1234Spokane());
+            applicationDbContext.Locations.Add(SampleData.Location3456Spokane());
             applicationDbContext.Categories.Add(SampleData.Category);
             applicationDbContext.SaveChanges();
 
@@ -80,11 +82,6 @@ namespace Happnin.Business.Tests
         {
             entity.Description = update;
             return entity;
-        }
-
-        public override async Task InsertAsync_TwoEntities_Success()
-        {
-            //TODO Fix this test? or the functionality
         }
     }
 }
