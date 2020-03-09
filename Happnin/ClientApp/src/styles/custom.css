@@ -1,5 +1,5 @@
 /* Provide sufficient contrast against white background */
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap");
 a {
   color: #0366d6;
 }
@@ -101,4 +101,18 @@ body {
 
 .submitButton{
   background-color: #4CAF50; 
+}
+
+.react-datetime-picker{
+  margin: 20px;
+}
+
+#buyTicketsButton{
+  float: right;
+  margin-right: 20px;
+}
+
+.card-title{
+  font-weight: 700;
+  font-size: 30px;
 }

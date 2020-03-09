@@ -4,6 +4,10 @@ import { NavMenu } from "./NavMenu";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
+import confetti from '../images/jason-leung-Xaanw0s0pMk-unsplash.jpg'
+import nightCity from '../images/samvidh-ramanathan-9PaGKXIPUHQ-unsplash.jpg'
+import food from '../images/phil-hei-6XvN2bN6P8o-unsplash.jpg'
+
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -12,28 +16,18 @@ export class Layout extends Component {
     return (
       <div className="container-fluid">
         <div className="homeImages">
-          <Carousel infinite autoPlay={5000} animationSpeed={1000}>
+          <Carousel infinite autoPlay={10000} animationSpeed={1000}>
             <img
               className="images"
-              src={
-                "https://previews.123rf.com/images/digidreamgrafix/digidreamgrafix1303/digidreamgrafix130300239/18728539-spokane-washington-skyline-panorama-on-a-cloudy-day.jpg"
-              }
+              src={confetti}
               alt="slide1"
             />
             <img
               className="images"
-              src={
-                "https://c8.alamy.com/comp/WX7MH3/panoramic-view-spokane-washington-downtown-city-skyline-WX7MH3.jpg"
-              }
+              src={nightCity}
               alt="slide2"
             />
-            <img
-              className="images"
-              src={
-                "https://media.istockphoto.com/photos/clock-tower-at-riverfront-park-in-spokane-on-a-sunny-day-picture-id171367206"
-              }
-              alt="slide3"
-            />
+
           </Carousel>
         </div>
         <NavMenu />

@@ -5,6 +5,12 @@ import "rc-time-picker/assets/index.css";
 import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
+import moment from 'moment';
+import MomentInput from 'react-moment-input';
+import TimePicker from 'rc-time-picker';
+import DateTimePicker from 'react-datetime-picker';
+import { Location } from "../Location.js";
+
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -71,6 +77,11 @@ export class SubmitEvent extends Component {
       <div class="card">
       <div class="submit container-fluid">
         <h1 class="header">Submit an Event</h1>
+
+        <Location/>
+
+
+
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">
             <label for="inputName">Name:</label>
@@ -117,7 +128,15 @@ export class SubmitEvent extends Component {
               <option value="3">Culture</option>
               <option value="4">Festival</option>
             </select>
-          </div>
+            </div>
+
+
+
+                    <DateTimePicker 
+                        value={this.state.date}
+                        onChange={this.handleInputChange}
+                        clearIcon={null}/>
+
           <div class="image">
             Image: <input id="imageUpload" type="file" />
           </div>

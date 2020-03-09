@@ -18,7 +18,7 @@ export class HappninEvent extends Component {
                     </Col>
                     <Col xs={10} horizontal='right'>
                         <div class="card-body" className='happninevent'>
-                            <img src={e.avatar_url} alt = 'profile avatar'/>
+                            
                             <div className='eventinfo'>
                                 <h5 class="card-title">{e.name}</h5>
                                 <p class="card-text" >
@@ -29,6 +29,7 @@ export class HappninEvent extends Component {
                                     Age Restriction: <b>{e.ageRestriction}</b> <br/>
                                     Start Time: {e.eventTime}<br/>
                                     End Time: {e.endTime}  <br/></p>
+                                    <button id="buyTicketsButton" className="btn btn-primary" >Buy Tickets</button>
                             </div>
                         </div> 
                     </Col>
