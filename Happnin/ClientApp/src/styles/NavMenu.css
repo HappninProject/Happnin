@@ -1,4 +1,6 @@
-﻿a.navbar-brand {
+﻿@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+/* a.navbar-brand {
   white-space: normal;
   margin-right: auto;
   margin-top: auto;
@@ -14,6 +16,17 @@
 
 .box-shadow {
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  font-family: Montserrat;
+  font-style: bold;
+  font-size: 32px;
+}
+
+.navHeader {
+  font-family: Montserrat;
+  font-size: 20px;
 }
 
 header {
