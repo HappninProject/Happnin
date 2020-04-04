@@ -54,11 +54,14 @@ export class SubmitEvent extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+    console.log(target.type)
+    console.log(value)
+    console.log(name)
 
     this.setState({
       event: {
         ...this.state.event,
-        [name]: value
+        [name]: name === 'cost' || name === 'categoryId' ? parseFloat(value) : value
       }
     });
     console.log(this.state.event);
@@ -142,7 +145,7 @@ export class SubmitEvent extends Component {
             </div>
 
           <div class="form-group">
-            <label>Test Input:</label>
+            <label>Start Time:</label>
             <input 
             type="datetime-local"
             name="eventTime"
@@ -150,12 +153,16 @@ export class SubmitEvent extends Component {
             onChange={this.handleInputChange}
             className="form-control"/>
           </div>
-
-
-          <DateTimePicker 
-              value={this.state.date}
-              onChange={this.handleInputChange}
-              clearIcon={null}/>
+          
+          <div class="form-group">
+            <label>End Time:</label>
+            <input 
+            type="datetime-local"
+            name="endTime"
+            value={this.state.endTime}
+            onChange={this.handleInputChange}
+            className="form-control"/>
+          </div>
 
           <div class="form-group"> 
               <label for="costId">Cost:</label>
