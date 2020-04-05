@@ -61,7 +61,7 @@ export class SubmitEvent extends Component {
     this.setState({
       event: {
         ...this.state.event,
-        [name]: name === 'cost' || name === 'categoryId' ? parseFloat(value) : value
+        [name]: name === 'cost' || name === 'categoryId' || name === 'ageRestriction' ? parseFloat(value) : value
       }
     });
     console.log(this.state.event);
