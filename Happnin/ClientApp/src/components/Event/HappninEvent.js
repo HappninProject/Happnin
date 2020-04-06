@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
 import "../../styles/UserCreation.css";
 import logo from '../../images/happninHLogoThumb.png';
 import { Row, Col} from 'react-bootstrap';

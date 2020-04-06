@@ -3,7 +3,8 @@ import { ZipCode } from "./ZipCode.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export class Location extends Component{
-    constructor(props) {
+
+constructor(props) {
         super(props);
         this.state = {
             location: {
@@ -47,7 +48,6 @@ export class Location extends Component{
           .then(response => console.log("Success: ", JSON.stringify(response)))
           .then(error => console.error("error:", error));
       }
-
     render(){
         return(
             <form onSubmit={this.handleSubmit}>

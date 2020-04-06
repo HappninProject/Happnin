@@ -2,13 +2,9 @@
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "rc-time-picker/assets/index.css";
-import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
 import authService from '../api-authorization/AuthorizeService';
-import moment from 'moment';
-import MomentInput from 'react-moment-input';
-import TimePicker from 'rc-time-picker';
 import DateTimePicker from 'react-datetime-picker';
 import { Location } from "../Location.js";
 
@@ -20,7 +16,6 @@ export class SubmitEvent extends Component {
     super(props);
     this.state = {
       isAuthenticated: false,
-      redirectToHome: false,
       location: null,
       event: {
         name: "",
@@ -33,7 +28,7 @@ export class SubmitEvent extends Component {
         cost: 42.0,
         ageRestriction: 500
       }
-      
+      // redirectToHome: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -51,7 +46,7 @@ export class SubmitEvent extends Component {
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
       .then(error => console.error("error:", error));
-    
+    // this.setState({redirectToHome: true})
   }
 
   handleInputChange = event => {
@@ -59,11 +54,14 @@ export class SubmitEvent extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+    console.log(target.type)
+    console.log(value)
+    console.log(name)
 
     this.setState({
       event: {
         ...this.state.event,
-        [name]: value
+        [name]: name === 'cost' || name === 'categoryId' || name === 'ageRestriction' ? parseFloat(value) : value
       }
     });
     console.log(this.state.event);
@@ -155,7 +153,7 @@ export class SubmitEvent extends Component {
             onChange={this.handleInputChange}
             className="form-control"/>
           </div>
-
+          
           <div class="form-group">
             <label>End Time:</label>
             <input 
