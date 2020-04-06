@@ -85,11 +85,6 @@ export class NavMenu extends Component {
                     Events
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="navHeader" to="/sign-in">
-                    Sign In
-                  </NavLink>
-                </NavItem>
                 <LoginMenu></LoginMenu>
               </ul>
             </Collapse>
