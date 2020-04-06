@@ -30,6 +30,7 @@ export class HappninEvent extends Component {
                                     Age Restriction: <b>{e.ageRestriction}</b> <br/> <br/> 
                                     Category: <b>{e.categoryId}</b> <br/>
                                         {startTime} - {endTime}  <br/></p>
+                                        <button className="btn secondaryButton" >Add to Favorites</button>
                                     <button id="buyTicketsButton" className="btn btn-primary" >Buy Tickets</button>
                             </div>
                         </div> 

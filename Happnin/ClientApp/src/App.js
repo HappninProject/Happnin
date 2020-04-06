@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router";
 import { Layout } from "./components/Layout";
+import { Location } from "./components/Location";
 import { Home } from "./components/Home";
 import { About } from "./components/About";
 import { Terms } from "./components/Terms";
@@ -38,6 +39,7 @@ export default class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />
         <Route path="/browseEvents" component={browseEvents} />
+        <Route path="/submit-location" component={Location} />
         <Route path="/fetch-event-data" component={FetchEventData} />
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />

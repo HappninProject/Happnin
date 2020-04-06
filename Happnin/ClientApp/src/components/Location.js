@@ -50,6 +50,7 @@ export class Location extends Component{
 
     render(){
         return(
+            <form onSubmit={this.handleSubmit}>
             <div>
                 <h3>Where is your event?</h3>
                 <div class="form-group">
@@ -145,6 +146,8 @@ export class Location extends Component{
 
                 <button className="btn primaryButton" type="submit">Submit</button>
             </div>
+            </form>
+
         );
     }
 

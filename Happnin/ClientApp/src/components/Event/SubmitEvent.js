@@ -20,6 +20,7 @@ export class SubmitEvent extends Component {
     super(props);
     this.state = {
       isAuthenticated: false,
+      redirectToHome: false,
       location: null,
       event: {
         name: "",
@@ -32,7 +33,7 @@ export class SubmitEvent extends Component {
         cost: 42.0,
         ageRestriction: 500
       }
-      // redirectToHome: false
+      
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -50,7 +51,7 @@ export class SubmitEvent extends Component {
       .then(res => res.json())
       .then(response => console.log("Success: ", JSON.stringify(response)))
       .then(error => console.error("error:", error));
-    // this.setState({redirectToHome: true})
+    
   }
 
   handleInputChange = event => {
@@ -146,7 +147,7 @@ export class SubmitEvent extends Component {
             </div>
 
           <div class="form-group">
-            <label>Test Input:</label>
+            <label>Start Time:</label>
             <input 
             type="datetime-local"
             name="eventTime"
@@ -155,11 +156,15 @@ export class SubmitEvent extends Component {
             className="form-control"/>
           </div>
 
-
-          <DateTimePicker 
-              value={this.state.date}
-              onChange={this.handleInputChange}
-              clearIcon={null}/>
+          <div class="form-group">
+            <label>End Time:</label>
+            <input 
+            type="datetime-local"
+            name="endTime"
+            value={this.state.endTime}
+            onChange={this.handleInputChange}
+            className="form-control"/>
+          </div>
 
           <div class="form-group"> 
               <label for="costId">Cost:</label>
