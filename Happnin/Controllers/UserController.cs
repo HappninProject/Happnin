@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Happnin.Controllers
 {
@@ -19,15 +21,21 @@ namespace Happnin.Controllers
         protected IUserService Service { get; }
         public IMapper Mapper { get; } =  AutomapperProfileConfiguration.CreateMapper();
 
-        public UserController(IUserService service, UserManager<Data.User> userManager, SignInManager<Data.User> signInManager)
+        private ILogger Logger { get; }
+
+        public UserController(IUserService service,
+            UserManager<Data.User> userManager, 
+            SignInManager<Data.User> signInManager, 
+            ILogger<UserController> logger)
         {
             Service = service;
             UserManager = userManager;
             SignInManager = signInManager;
+            Logger = logger;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Business.Dto.User>> Get() => await Service.FetchAllAsync();
+        public async Task<IEnumerable<User>> Get() => await Service.FetchAllAsync();
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -74,11 +82,37 @@ namespace Happnin.Controllers
 
             if (result.Succeeded)
             {
+                var token = UserManager.GenerateEmailConfirmationTokenAsync(user);
+                var confirmationLink = Url.Action("ConfirmEmail", "User", new {userId = user.Id, token = token});
+
+                Logger.Log(LogLevel.Warning, confirmationLink);
+
                 await SignInManager.SignInAsync(user, false);
             }
 
             return await Task.FromResult(Mapper.Map<Data.User, User>(user));
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+            }
+
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+            }
+
+            var result = await UserManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+            }
+
+            return null;
+        }
+
         [HttpPost]
         [Route("SignOn")]
         public async Task<bool> SignOn(UserInput user)
