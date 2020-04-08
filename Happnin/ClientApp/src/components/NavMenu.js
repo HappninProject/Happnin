@@ -13,8 +13,11 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
 import logo from "../images/happninHLogoCircle.png";
+import ReactWeather from 'react-open-weather';
+import 'react-open-weather/lib/css/ReactWeather.css';
 
 export class NavMenu extends Component {
+  
     static displayName = NavMenu.name;
 
     constructor(props) {
@@ -86,6 +89,14 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
                 <LoginMenu></LoginMenu>
+                <ReactWeather
+                  forecast="today"
+                  //obviously this will be removed and used as a global
+                  apikey=" c8f563efec9edd5b35f0b4324f97df52"
+                  type="city"
+                  //this will be updated with the users location data
+                  city="Spokane"
+                />
               </ul>
             </Collapse>
           </Container>
