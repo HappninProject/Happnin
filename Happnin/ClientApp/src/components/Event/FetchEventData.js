@@ -1,6 +1,6 @@
 ﻿import React, { Component } from "react";
 import { HappninEvent } from "./HappninEvent";
-import GoogleMapReact from "google-map-react";
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 export class FetchEventData extends Component {
@@ -8,7 +8,7 @@ export class FetchEventData extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { events: [], loading: true };
+    this.state = {events: [], loading: true,lat:  47.491255,lng: -117.582624,zoom: 13};
   }
 
   componentDidMount() {
@@ -45,17 +45,16 @@ export class FetchEventData extends Component {
     return (
       <div>
         <div style={{ height: "100vh", width: "100%" }}>
-          <GoogleMapReact
-            //add api key to the map so we can place events and such
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
-            <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
-            />
-          </GoogleMapReact>
+        <Map 
+                 center={[this.state.lat, this.state.lng]} 
+                 zoom={this.state.zoom} 
+                 style={{ width: '100%', height: '100vh'}}
+              >
+                <TileLayer
+                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
+                />
+             </Map>
         </div>
         <h1 id="tabelLabel" className="header">
           Events
