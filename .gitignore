@@ -353,4 +353,5 @@ MigrationBackup/
 .ionide/
 
 # database
-*.db
+*.db*
+
