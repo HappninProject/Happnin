@@ -8,7 +8,7 @@ export class FetchEventData extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {events: [], loading: true,lat:  47.491255,lng: -117.582624,zoom: 13};
+    this.state = {events: [], loading: true,lat:  47.491255,lng: -117.582624,zoom: 13,position: [47.491255, -117.582624]};
   }
 
   componentDidMount() {
@@ -54,6 +54,9 @@ export class FetchEventData extends Component {
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
                 />
+                <Marker position={this.state.position}>
+                  <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+                </Marker>
              </Map>
         </div>
         <h1 id="tabelLabel" className="header">
