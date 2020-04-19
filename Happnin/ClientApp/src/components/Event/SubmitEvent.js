@@ -2,7 +2,6 @@
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "rc-time-picker/assets/index.css";
-import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
 import authService from "../api-authorization/AuthorizeService";
@@ -23,8 +22,8 @@ export class SubmitEvent extends Component {
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.0,
-        ageRestriction: 500
-      }
+        ageRestriction: 500,
+      },
       // redirectToHome: false
     };
 
@@ -38,15 +37,15 @@ export class SubmitEvent extends Component {
     await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     })
-      .then(res => res.json())
-      .then(response => console.log("Success: ", JSON.stringify(response)))
-      .then(error => console.error("error:", error));
+      .then((res) => res.json())
+      .then((response) => console.log("Success: ", JSON.stringify(response)))
+      .then((error) => console.error("error:", error));
     // this.setState({redirectToHome: true})
   }
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     event.preventDefault();
     const target = event.target;
     const value = target.value;
@@ -55,13 +54,13 @@ export class SubmitEvent extends Component {
     this.setState({
       event: {
         ...this.state.event,
-        [name]: value
-      }
+        [name]: value,
+      },
     });
     console.log(this.state.event);
   };
 
-  componentDidMount = event => {
+  componentDidMount = (event) => {
     this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
   };
@@ -69,14 +68,14 @@ export class SubmitEvent extends Component {
   async populateState() {
     const [isAuthenticated, user] = await Promise.all([
       authService.isAuthenticated(),
-      authService.getUser()
+      authService.getUser(),
     ]);
     this.setState({
       isAuthenticated,
       event: {
         ...this.state.event,
-        hostId: user && user.sub
-      }
+        hostId: user && user.sub,
+      },
     });
     console.log(user);
   }
@@ -138,7 +137,7 @@ export class SubmitEvent extends Component {
               Image: <input id="imageUpload" type="file" />
             </div>
             <br />
-            {["checkbox"].map(type => (
+            {["checkbox"].map((type) => (
               <div key={`inline-${type}`} classNameName="mb-3">
                 <Form.Check
                   inline

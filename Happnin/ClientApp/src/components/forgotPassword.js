@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../styles/ForgotPassword.css";
-import { withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //TODO: actually send an email, right now this submit goes nowhere

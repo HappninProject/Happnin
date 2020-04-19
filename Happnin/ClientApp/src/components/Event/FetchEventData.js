@@ -57,7 +57,7 @@ export class FetchEventData extends Component {
             />
           </GoogleMapReact>
         </div>
-        <h1 id="tabelLabel" className="header">
+        <h1 id="tableLabel" className="header">
           Events
         </h1>
         <p>Got these events from our server DAWG</p>
