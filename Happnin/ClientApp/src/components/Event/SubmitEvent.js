@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
 import authService from '../api-authorization/AuthorizeService'
 import { Redirect } from "react-router-dom";
-//import { Link, redirectToHome } from "react-router-dom";
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -25,13 +24,23 @@ export class SubmitEvent extends Component {
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.0,
-    }
-  }
+        ageRestriction: 500
+      },
+      location : { 
+          address: "",
+          city: "",
+          state: "",
+          country: "US",
+          zipCode: ""
+      },
+      redirectToHome: false
+    };
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLocation = this.handleSubmitLocation.bind(this);
     this.handleInputLocationChange = this.handleInputLocationChange.bind(this);
-}
+  }
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -39,7 +48,7 @@ export class SubmitEvent extends Component {
     await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     })
       .then(res => res.json())
       .then(
@@ -108,7 +117,7 @@ export class SubmitEvent extends Component {
     console.log(this.state);
   };
 
-  componentDidMount = (event) => {
+  componentDidMount = event => {
     this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
   };
@@ -126,7 +135,7 @@ export class SubmitEvent extends Component {
       }
     });
     console.log(user);
-  };
+  }
 
   onDataChanged(newData){
     console.log("in onDataChanged")
@@ -134,7 +143,7 @@ export class SubmitEvent extends Component {
       console.log('location has been defined');
     })
     console.log(this.state)
-  };
+  }
 
   render() {
     const redirectToHomeRef = this.state.redirectToHome;
@@ -362,6 +371,7 @@ export class SubmitEvent extends Component {
               />
             </div>
           ))}
+
             <button className="btn primaryButton" type="submit">
               Submit
             </button>
