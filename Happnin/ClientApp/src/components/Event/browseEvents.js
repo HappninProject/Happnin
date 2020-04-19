@@ -4,7 +4,7 @@ import { FetchEventData } from "./FetchEventData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export class BrowseEvents extends Component {
+export class browseEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,10 +14,10 @@ export class BrowseEvents extends Component {
       startDate: new Date(),
     };
   }
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 

@@ -9,13 +9,7 @@ import { FetchEventData } from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
 import { SubmitEvent } from "./components/Event/SubmitEvent";
-import { BrowseEvents } from "./components/Event/BrowseEvents";
-import { signIn } from "./components/User/sign-in";
-import { EditAccount } from "./components/User/EditAccount";
-import { ForgotPassword } from "./components/ForgotPassword";
-import { PendingEmailValidation } from "./components/PendingEmailValidation";
-import { EmailValidated } from "./components/EmailValidated";
-import { PassResetSent } from "./components/PassResetSent";
+import { browseEvents } from "./components/Event/browseEvents";
 import ApiAuthorizationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
 import { ApplicationPaths } from "./components/api-authorization/ApiAuthorizationConstants";
 import { ContactUs } from "./components/ContactUs";
@@ -27,7 +21,7 @@ export default class App extends Component {
   static displayName = App.name;
 
   state = {
-    eventinfoarray: [],
+    eventinfoarray: []
   };
 
   render() {
@@ -35,7 +29,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />
-        <Route path="/BrowseEvents" component={BrowseEvents} />
+        <Route path="/browseEvents" component={browseEvents} />
         <Route path="/fetch-event-data" component={FetchEventData} />
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
