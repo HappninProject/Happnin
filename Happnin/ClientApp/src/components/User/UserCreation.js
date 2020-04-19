@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import Recaptcha from "react-recaptcha";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { withRouter } from "react-router-dom";
+import { ZipCode } from "../ZipCode";
 
 //use bootstrap to make page prettier
 //send email confirmation
@@ -109,7 +110,26 @@ export class UserCreation extends Component {
       ? this.setState({ isValidZip: true })
       : this.setState({ isValidZip: false });
   };
+  ////these show or hide dropdowns if input is clicked on
+  //showOrHideZip = () =>
+  //  this.setState(currentState => ({ showZip: !currentState.showZip }));
+  //showOrHideUser = () =>
+  //  this.setState(currentState => ({ showUser: !currentState.showUser }));
+  //showOrHidePassReq = () =>
+  //  this.setState(currentState => ({ showPassReq: !currentState.showPassReq }));
+  //showOrHideConfirmPass = () =>
+  //  this.setState(currentState => ({
+  //    showConfirmReq: !currentState.showConfirmReq
+  //  }));
 
+  ////this makes sure that the zip code is valid, then add the valid or invalid classes accordingly
+  //validateZip = event => {
+  //  const target = event.target;
+  //  const zipValue = target.value;
+  //  zipValue.length === 5
+  //    ? this.setState({ isValidZip: true })
+  //    : this.setState({ isValidZip: false });
+  //};
   //this makes sure the username is valid, then add the valid or invalid classes accordingly
   validateUsername = (event) => {
     const target = event.target;
@@ -284,8 +304,12 @@ export class UserCreation extends Component {
                 onChange={this.handleInputChange}
                 required
               />
-            </div>
-            <div className="form-group">
+              </div>
+
+                <ZipCode/>
+
+
+          /*  <div className="form-group">
               <label>Zip code: </label>
               <input
                 id="zip"
@@ -308,7 +332,7 @@ export class UserCreation extends Component {
                   Zip code must be 5 digits
                 </p>
               )}
-            </div>
+            </div> */
             <div className="form-group">
               <label hmtlFor="profile_pic">Profile Picture: </label>
               <br />

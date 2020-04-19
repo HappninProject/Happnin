@@ -9,13 +9,13 @@ export class Footer extends Component {
       <div className="footer-basic rounded container-fluid shadow-sm">
         <footer className="container-fluid">
           <div className="social">
-            <a href="#">
+            <a href="#Home">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
-            <a href="#">
+            <a href="#Home">
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
-            <a href="#">
+            <a href="#Home">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </div>

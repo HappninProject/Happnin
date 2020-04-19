@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 /* Uses blue for anchor/link color */
+/* Provide sufficient contrast against white background */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap");
+
+@import url(https://unpkg.com/leaflet@1.6.0/dist/leaflet.css);
 a {
   color: #0366d6;
 }
@@ -64,8 +68,8 @@ label {
   margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.2), 5px 5px 17px -5px rgba(0, 0, 0, 0.1);
 }
 
 .happninevent {
@@ -81,7 +85,18 @@ label {
 #accountform {
   margin-bottom: 2em;
 }
-
+#filterName{
+  margin: auto;
+}
+#filterZip{
+  padding-left: 1.5em;
+}
+#filterCategory{
+  padding-right: 6em;
+}
+#filterDate{
+  padding-left: 4em;
+}
 html,
 body {
   overflow-x: hidden;
@@ -97,6 +112,7 @@ body {
   background-color: #b67b94;
   border-color: #b67b94;
   color: white;
+  margin-bottom: 30px;
 }
 
 .primaryButton:hover {
@@ -114,4 +130,23 @@ body {
 .secondaryButton:hover {
   color: #f5aecb;
   border-color: #f5aecb;
+}
+
+.react-datetime-picker{
+  margin: 20px;
+}
+
+#buyTicketsButton{
+  float: right;
+  margin-right: 20px;
+}
+
+.card-title{
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.eventImage{
+  padding-top: 1000px;
 }

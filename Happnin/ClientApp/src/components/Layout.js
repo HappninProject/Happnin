@@ -8,6 +8,7 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import fireworks from "../images/fireworks.jpeg";
 import crowd from "../images/crowd.jpg";
 import microphone from "../images/microphone.jpg";
+import nightLife from '../images/samvidh-ramanathan-9PaGKXIPUHQ-unsplash.jpg';
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -17,11 +18,16 @@ export class Layout extends Component {
       <div className="container-fluid">
         <div>
           <Carousel
-            className="carousel slide"
+            className="carousel"
             infinite
-            autoPlay={5000}
-            animationSpeed={1000}
+            autoPlay={20000}
+            animationSpeed={10000}
           >
+            <img
+              className="item w-100"
+              src={nightLife}
+              alt="A busy urban street at night"
+            />
             <img
               className="item w-100"
               src={crowd}

@@ -12,25 +12,51 @@ import { LoginMenu } from "./api-authorization/LoginMenu";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
-import logo from "../images/happninHLogoSmall.png";
-
+import logo from "../images/happninHLogoCircle.png";
 export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+  
+    static displayName = NavMenu.name;
+    constructor(props) {
+        super(props);
+        this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.state = {
+          collapsed: true,
+          loading: true,
+          weather:null,
+          city_name:null,
+          latitude:null,
+          longitude:null
+        };
+        /*this.getLocation = this.getLocation.bind(this);
+        this.getCordinates = this.getCordinates.bind(this);
+        this.getLocation();*/
+    }
+   /* getLocation() {
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(this.getCordinates);
+      }
+    }
+    getCordinates(position){
+      console.log(position.coords.latitude);
+      this.setState({
+        latitude:position.coords.latitude,
+        longitude:position.coords.longitude
+      })
+    }*/
+    async componentDidMount() {
+      const url = " https://api.openweathermap.org/data/2.5/weather?q=Spokane&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
+      console.log(url);
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      this.setState({ weather: data.main, city_name : data.name, loading: false})
+    }
 
-  constructor(props) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true,
-    };
-  }
-
-  toggleNavbar() {
+    toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  }
+    }
 
   render() {
     return (
@@ -86,6 +112,13 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
                 <LoginMenu></LoginMenu>
+                  <div>
+                    {this.state.loading || !this.state.weather ?(
+                        <div>loading weather</div>
+                      ):(
+                        <div>the weather in {this.state.city_name} is {this.state.weather.temp} degrees</div>
+                      )}
+                  </div>
               </ul>
             </Collapse>
           </Container>

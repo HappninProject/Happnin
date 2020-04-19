@@ -1,13 +1,16 @@
 ﻿@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-/* a.navbar-brand {
+ a.navbar-brand {
   white-space: normal;
-  margin-right: 0;
-} */
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
@@ -27,5 +30,5 @@
 }
 
 header {
-  background-color: #33efc2;
+  background-color: #2ccb92;
 }

@@ -8,8 +8,6 @@ import { Privacy } from "./components/Privacy";
 import { FetchEventData } from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
-import { UserAccount } from "./components/User/UserAccount";
-import { UserCreation } from "./components/User/UserCreation";
 import { SubmitEvent } from "./components/Event/SubmitEvent";
 import { BrowseEvents } from "./components/Event/BrowseEvents";
 import { signIn } from "./components/User/sign-in";
