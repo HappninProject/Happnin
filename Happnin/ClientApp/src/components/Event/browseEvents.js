@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FetchEventData } from "./FetchEventData";
 
-export class browseEvents extends Component {
+export class BrowseEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
       eventNameSearch: "",
       eventZipSearch: "",
-      eventCategory: ""
+      eventCategory: "",
     };
   }
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
   render() {

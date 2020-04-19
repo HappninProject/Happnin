@@ -6,7 +6,7 @@ import {
   NavbarBrand,
   NavbarToggler,
   NavItem,
-  NavLink
+  NavLink,
 } from "reactstrap";
 import { LoginMenu } from "./api-authorization/LoginMenu";
 import { Link } from "react-router-dom";
@@ -22,13 +22,13 @@ export class NavMenu extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
     };
   }
 
   toggleNavbar() {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
     });
   }
 
@@ -81,13 +81,8 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="navHeader" to="/browseEvents">
+                  <NavLink tag={Link} className="navHeader" to="/BrowseEvents">
                     Events
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="navHeader" to="/sign-in">
-                    Sign In
                   </NavLink>
                 </NavItem>
                 <LoginMenu></LoginMenu>
