@@ -25,13 +25,13 @@ export class SubmitEvent extends Component {
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.0,
-    };
-
+    }
+  }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLocation = this.handleSubmitLocation.bind(this);
     this.handleInputLocationChange = this.handleInputLocationChange.bind(this);
-  }
+}
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -116,17 +116,17 @@ export class SubmitEvent extends Component {
   async populateState() {
     const [isAuthenticated, user] = await Promise.all([
       authService.isAuthenticated(),
-      authService.getUser(),
+      authService.getUser()
     ]);
     this.setState({
       isAuthenticated,
       event: {
         ...this.state.event,
-        hostId: user && user.sub,
-      },
+        hostId: user && user.sub
+      }
     });
     console.log(user);
-  }
+  };
 
   onDataChanged(newData){
     console.log("in onDataChanged")
@@ -134,7 +134,7 @@ export class SubmitEvent extends Component {
       console.log('location has been defined');
     })
     console.log(this.state)
-  }
+  };
 
   render() {
     const redirectToHomeRef = this.state.redirectToHome;
