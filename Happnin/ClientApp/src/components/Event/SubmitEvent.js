@@ -25,16 +25,6 @@ export class SubmitEvent extends Component {
         eventTime: "2020-02-26T05:21:52.102Z",
         endTime: "2020-02-27T05:21:52.102Z",
         cost: 42.0,
-        ageRestriction: 500
-      },
-      location : { 
-          address: "",
-          city: "",
-          state: "",
-          country: "US",
-          zipCode: ""
-      },
-      redirectToHome: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -49,7 +39,7 @@ export class SubmitEvent extends Component {
     await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(
@@ -118,7 +108,7 @@ export class SubmitEvent extends Component {
     console.log(this.state);
   };
 
-  componentDidMount = event => {
+  componentDidMount = (event) => {
     this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
   };
@@ -126,14 +116,14 @@ export class SubmitEvent extends Component {
   async populateState() {
     const [isAuthenticated, user] = await Promise.all([
       authService.isAuthenticated(),
-      authService.getUser()
+      authService.getUser(),
     ]);
     this.setState({
       isAuthenticated,
       event: {
         ...this.state.event,
-        hostId: user && user.sub
-      }
+        hostId: user && user.sub,
+      },
     });
     console.log(user);
   }
@@ -372,7 +362,6 @@ export class SubmitEvent extends Component {
               />
             </div>
           ))}
-
             <button className="btn primaryButton" type="submit">
               Submit
             </button>

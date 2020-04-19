@@ -18,7 +18,7 @@ export class FetchEventData extends Component {
   static renderEventsTable(events) {
     return (
       <div>
-        {events.map(eventinfo => (
+        {events.map((eventinfo) => (
           <HappninEvent key={eventinfo.id} {...eventinfo} />
         ))}
       </div>
@@ -28,9 +28,9 @@ export class FetchEventData extends Component {
   static defaultProps = {
     center: {
       lat: 47.491255,
-      lng: -117.582624
+      lng: -117.582624,
     },
-    zoom: 11
+    zoom: 11,
   };
 
   render() {
@@ -56,7 +56,7 @@ export class FetchEventData extends Component {
                 />
              </Map>
         </div>
-        <h1 id="tabelLabel" className="header">
+        <h1 id="tableLabel" className="header">
           Events
         </h1>
         <p>Got these events from our server DAWG</p>
