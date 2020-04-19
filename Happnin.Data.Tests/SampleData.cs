@@ -49,5 +49,13 @@ namespace Happnin.Data.Tests
         public const int AgeRestrictionFestival = 16;
         public static Event EventFestival() => 
             new Event(Festival, FestivalDescription, Category, EventTime, EndTime, FestivalCost, AgeRestrictionFestival, UserCaleb(), Location3456Spokane());
+
+        public const string UserId = "IAmAUserThisShouldBeAGUID";
+        public const string UserIdOther = "IdToLookAtThatStuff";
+        public const int EventId = 42;
+        public const int EventIdOther = 24;
+        public static Attending AttendingSomething() => new Attending{EventId = EventId, UserId = UserId};
+        public static Attending AttendingSomethingElse() => new Attending{EventId = EventIdOther, UserId = UserIdOther};
+
     }
 }
