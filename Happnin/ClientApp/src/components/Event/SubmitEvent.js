@@ -4,7 +4,9 @@ import "react-dates/lib/css/_datepicker.css";
 import "rc-time-picker/assets/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
-import authService from '../api-authorization/AuthorizeService';
+import authService from '../api-authorization/AuthorizeService'
+import { Redirect } from "react-router-dom";
+//import { Link, redirectToHome } from "react-router-dom";
 
 export class SubmitEvent extends Component {
   static displayName = SubmitEvent.name;
@@ -50,9 +52,11 @@ export class SubmitEvent extends Component {
       headers: { "Content-Type": "application/json" }
     })
       .then(res => res.json())
-      .then(response => console.log("Success: ", JSON.stringify(response)))
-      //.then(error => console.error("error:", error));
-    this.setState({redirectToHome: true})
+      .then(
+        response => {
+              console.log(JSON.stringify(response));
+              this.setState({redirectToHome: true});
+      })
   }
 
   async handleSubmitLocation(event) {
@@ -143,6 +147,12 @@ export class SubmitEvent extends Component {
   }
 
   render() {
+    const redirectToHomeRef = this.state.redirectToHome;
+    console.log(redirectToHomeRef)
+    if (redirectToHomeRef === true){
+        return <Redirect to="/"/>
+    }
+
     return (
       <div class="card">
       <div class="submit container-fluid">
