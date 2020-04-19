@@ -8,8 +8,8 @@ using Happnin.Business.Services;
 namespace Happnin.Controllers
 {
     public class AttendeeController : BaseController<Attending, AttendingInput>
-    {
-        protected AttendeeController(IEntityService<Attending, AttendingInput> service) : base(service)
+    {  
+        public AttendeeController(IEntityService<Attending, AttendingInput> service) : base(service)
         {
         }
     }
