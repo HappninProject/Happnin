@@ -355,6 +355,8 @@ MigrationBackup/
 # database
 *.db*
 *.db
-Happnin/Happnin.db
+./Happnin/Happnin.db
 Happnin.db
-
+*/Happnin/Happnin.db
+*/Happnin.db
+**/Happnin.db
