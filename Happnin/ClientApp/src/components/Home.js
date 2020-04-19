@@ -1,24 +1,43 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HappninEvent } from "./Event/HappninEvent";
+import authService from './api-authorization/AuthorizeService';
 
 export class Home extends Component {
   static displayName = Home.name;
 
   constructor(props) {
     super(props);
-    this.state = { events: [], loading: true };
+    this.state = { 
+                    events: [], 
+                    isAuthenticated: false, 
+                    userId: '',
+                    loading: true };
   }
 
   componentDidMount() {
+    this.populateState();
     this.populateEventData();
   }
 
-  static renderEventsTable(events) {
+  async populateState() {
+    const [isAuthenticated, user] = await Promise.all([
+      authService.isAuthenticated(),
+      authService.getUser()
+    ]);
+    this.setState({
+      isAuthenticated,
+      userId: user && user.sub
+    });
+
+    console.log(user);
+  }
+
+  static renderEventsTable(events, userId) {
     return (
       <div>
         {events.map((eventinfo) => (
-          <HappninEvent key={eventinfo.id} {...eventinfo} />
+          <HappninEvent key={eventinfo.id} {...eventinfo} userId={userId}/>
         ))}
       </div>
     );
@@ -30,7 +49,7 @@ export class Home extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      Home.renderEventsTable(this.state.events)
+      Home.renderEventsTable(this.state.events, this.state.userId)
     );
     return (
       <div className="container-fluid card">
@@ -81,6 +100,8 @@ export class Home extends Component {
     console.log(time);
     const data = await response.json();
     console.log("Got Data", data);
+    console.log(this.state);
     this.setState({ events: data, loading: false });
+    console.log(this.state);
   }
 }

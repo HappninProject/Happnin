@@ -8,10 +8,4 @@ namespace Happnin.Business.Dto
     {
         public int Id { get; set; }
     }
-
-    public class AttendingInput
-    {
-        public int EventId { get; set; }
-        public string UserId { get; set; }
-    }
 }

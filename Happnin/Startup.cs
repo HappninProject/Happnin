@@ -36,7 +36,7 @@ namespace Happnin
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc()//.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
@@ -53,7 +53,6 @@ namespace Happnin
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
-            // using Microsoft.AspNetCore.Identity.UI.Services;
             services.AddIdentityServer()
                 .AddApiAuthorization<User, AppDbContext>();
 
@@ -64,6 +63,7 @@ namespace Happnin
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IAttendeeService, AttendeeService>();
 
             services.AddAutoMapper(new [] { typeof(AutomapperProfileConfiguration).Assembly});
 

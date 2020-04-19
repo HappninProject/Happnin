@@ -8,7 +8,7 @@ namespace Happnin.Controllers
     [ApiController]
     public class AttendeeController : BaseController<Attending, AttendingInput>
     {  
-        public AttendeeController(IEntityService<Attending, AttendingInput> service) : base(service)
+        public AttendeeController(IAttendeeService service) : base(service)
         {
         }
     }

@@ -18,11 +18,9 @@ namespace Happnin.Business
             CreateMap<Dto.EventInput, Event>();
             CreateMap<Category, Dto.Category>();
             CreateMap<Dto.CategoryInput, Category>();
-            CreateMap<Dto.AttendingInput, Dto.Attending>();
-            CreateMap<Dto.Attending, Dto.AttendingInput>();
-            CreateMap<Dto.Attending, Attending>();
             CreateMap<Attending, Dto.Attending>();
-            
+            CreateMap<Dto.AttendingInput, Attending>();
+           
             CreateMap<Event, Event>().ForMember(property => property.Id, option => option.Ignore());
             CreateMap<User, User>().ForMember(property => property.Id, option => option.Ignore());
             CreateMap<Location, Location>().ForMember(property => property.Id, option => option.Ignore());

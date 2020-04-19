@@ -44,10 +44,5 @@ namespace Happnin.Business.Tests.Services
             entity.UserId = update;
             return entity;
         }
-
-        public override Task Update_EntityUpdated_ShouldSaveToDatabase()
-        {
-            return null;
-        }
     }
 }

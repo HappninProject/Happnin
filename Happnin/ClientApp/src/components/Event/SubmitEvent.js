@@ -70,18 +70,19 @@ export class SubmitEvent extends Component {
           }
         })
           .then(res => res.json())
-          .then(response =>{ var responseJSON = JSON.stringify(response);
-                             console.log(responseJSON)
-                             console.log(response)
-                             this.setState({
-                               event: {
-                                 ...this.state.event,
-                                 locationId: response.id
-                               }
-                             })})
-          //.then(error => console.error("error:", error));
-          console.log(this.state);
-
+          .then(response =>
+            { 
+              var responseJSON = JSON.stringify(response);
+              console.log(responseJSON)
+              console.log(response)
+              this.setState({
+              event: {
+              ...this.state.event,
+              locationId: response.id
+            }
+          })})
+          
+        console.log(this.state);
       }
 
   handleInputLocationChange = event => {
