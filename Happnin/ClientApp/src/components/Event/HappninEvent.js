@@ -50,6 +50,7 @@ export class HappninEvent extends Component {
                                     Category: <b>{e.categoryId}</b> <br/>
                                         {startTime} - {endTime}  <br/></p>
                                         <button className="btn secondaryButton" >Add to Favorites</button>
+                                    <h4>{e.attending === true ?  "This is HAPPNIN!" : "This is not HAPPNIN..." }</h4>
                                     <button id="buyTicketsButton" className="btn btn-primary" onClick={this.attending} >Going!</button>
                             </div>
                         </div> 

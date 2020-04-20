@@ -15,12 +15,12 @@ namespace Happnin.Controllers
         {
         }
 
-        [HttpGet("{id}")]
-        [Route("AttendeeInfo")]
-        public async Task<List<Attending>> AttendeeInfo(string userId)
+        [HttpGet]
+        [Route("AttendeeInfo/{id}")]
+        public async Task<List<Attending>> AttendeeInfo(string id)
         {
             var attendees = await Service.FetchAllAsync();
-            var eventsAttended = attendees.Where(a => a.UserId == userId);
+            var eventsAttended = attendees.Where(a => a.UserId == id);
             return eventsAttended.ToList();
         }
 
