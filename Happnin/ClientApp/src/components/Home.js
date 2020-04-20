@@ -12,12 +12,16 @@ export class Home extends Component {
                     events: [], 
                     isAuthenticated: false, 
                     userId: '',
-                    loading: true };
+                    isAttending: [],
+                    loading: true 
+                  };
   }
 
   componentDidMount() {
+    this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
     this.populateEventData();
+    this.populateAttendingData();
   }
 
   async populateState() {
@@ -29,8 +33,11 @@ export class Home extends Component {
       isAuthenticated,
       userId: user && user.sub
     });
+  }
 
-    console.log(user);
+  async populateAttendingData(){
+     const response = await fetch(`api/Attendee/${this.state.userId}`);
+    console.log(response);
   }
 
   static renderEventsTable(events, userId) {
@@ -99,9 +106,6 @@ export class Home extends Component {
     const time = await fetch("api/Event/eventTime");
     console.log(time);
     const data = await response.json();
-    console.log("Got Data", data);
-    console.log(this.state);
     this.setState({ events: data, loading: false });
-    console.log(this.state);
   }
 }
