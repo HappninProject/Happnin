@@ -31,27 +31,27 @@ export default class Weather extends Component {
     render() {
         if(!this.state.loading)
         {
-            if(this.state.cond === "clear")
+            if(this.state.cond === "Clear")
             {
             this.setState({cond: "CLEAR_DAY"})
             }
-            else if(this.state.cond  == "Thunderstorm ")
+            else if(this.state.cond  === "Thunderstorm ")
             {
             this.setState({cond: "RAIN"})
             }
-            else if(this.state.cond  == "Drizzle")
+            else if(this.state.cond  === "Drizzle")
             {
             this.setState({cond: "RAIN"})
             }
-            else if(this.state.cond  == "Rain")
+            else if(this.state.cond  === "Rain")
             {
             this.setState({cond: "RAIN"})
             }
-            else if(this.state.cond  == "Snow")
+            else if(this.state.cond  === "Snow")
             {
             this.setState({cond: "SNOW"})
             }
-            else if(this.state.cond  =="Clouds")
+            else if(this.state.cond  === "Clouds")
             {
             this.setState({cond: "CLOUDY"})
             }
