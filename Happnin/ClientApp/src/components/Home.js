@@ -50,7 +50,7 @@ export class Home extends Component {
   static attendingEvent(eventId, attendedEvent){
       attendedEvent.forEach(e => 
         {
-          if(e.eventId == eventId){
+          if(e.eventId === eventId){
             return true;
           } 
         })
@@ -70,7 +70,7 @@ export class Home extends Component {
               console.log(attendedEvent)
               attendedEvent.forEach(e => 
               {
-                if(e.eventId == eventinfo.id){
+                if(e.eventId === eventinfo.id){
                   return true;
                 } 
               })
