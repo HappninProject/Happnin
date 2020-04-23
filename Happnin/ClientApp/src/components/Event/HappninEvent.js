@@ -6,9 +6,29 @@ import { Row, Col} from 'react-bootstrap';
 import moment from 'moment';
 
 export class HappninEvent extends Component {
+    
+    constructor(props){
+        super(props);
+        this.state = {};
+        console.log(this.props);
+        this.attending = this.attending.bind(this);
+    }
+
+    async attending(){
+        const attendInfo = {
+                            eventId: this.props.id,
+                            userId: this.props.userId
+                           }
+        await fetch("api/Attendee", {
+            method: "POST",
+            body: JSON.stringify(attendInfo),
+            headers: { "Content-Type" : "application/json" }
+        })
+        .then(res => res.json())
+    }
+    
     render() {
         const e = this.props;
-
         var startTime = moment(e.eventTime).format('LT').toString();
         var endTime = moment(e.endTime).format('LT').toString();
 
@@ -30,7 +50,8 @@ export class HappninEvent extends Component {
                                     Category: <b>{e.categoryId}</b> <br/>
                                         {startTime} - {endTime}  <br/></p>
                                         <button className="btn secondaryButton" >Add to Favorites</button>
-                                    <button id="buyTicketsButton" className="btn btn-primary" >Buy Tickets</button>
+                                    <h4>{e.attending === true ?  "This is HAPPNIN!" : "This is not HAPPNIN..." }</h4>
+                                    <button id="buyTicketsButton" className="btn btn-primary" onClick={this.attending} >Going!</button>
                             </div>
                         </div> 
                     </Col>

@@ -75,44 +75,6 @@ namespace Happnin.Controllers
             return await Service.DeleteAsync(id) ? (IActionResult) Ok() : NotFound();
         } 
 
-        public async Task<User> Post(UserInput userInput)
-        {
-            Data.User user = Mapper.Map<UserInput,Data.User>(userInput);
-            var result = await UserManager.CreateAsync(user, userInput.Password);
-
-            if (result.Succeeded)
-            {
-                var token = UserManager.GenerateEmailConfirmationTokenAsync(user);
-                var confirmationLink = Url.Action("ConfirmEmail", "User", new {userId = user.Id, token = token});
-
-                Logger.Log(LogLevel.Warning, confirmationLink);
-
-                await SignInManager.SignInAsync(user, false);
-            }
-
-            return await Task.FromResult(Mapper.Map<Data.User, User>(user));
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
-        {
-            if (userId == null || token == null)
-            {
-            }
-
-            var user = await UserManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-            }
-
-            var result = await UserManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-            }
-
-            return null;
-        }
-
         [HttpPost]
         [Route("SignOn")]
         public async Task<bool> SignOn(UserInput user)
