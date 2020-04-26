@@ -9,25 +9,61 @@ export class HappninEvent extends Component {
     
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = { 
+            attending: false,
+            attendingId: -1,
+            gotDerived: false
+        }
+        console.log("in the constructor");
         console.log(this.props);
         this.attending = this.attending.bind(this);
     }
 
+    static getDerivedStateFromProps(props, state){
+        console.log('we in getDerived')
+        console.log(props);
+        console.log(state);
+        if (state == null){
+            console.log("what the hellllll")
+        }    
+        return {attending: props.attending, attendingId: props.attendingId, gotDerived: true}
+    }
+
     async attending(){
-        const attendInfo = {
+        if (this.state.attending === false){
+            const attendInfo = {
                             eventId: this.props.id,
                             userId: this.props.userId
                            }
-        await fetch("api/Attendee", {
-            method: "POST",
-            body: JSON.stringify(attendInfo),
-            headers: { "Content-Type" : "application/json" }
-        })
-        .then(res => res.json())
+            await fetch("api/Attendee", {
+                method: "POST",
+                body: JSON.stringify(attendInfo),
+                headers: { "Content-Type" : "application/json" }
+            })
+            .then(res => res.json())
+            this.setState({attending: true})    
+        }
+        else {
+            const attendId = this.props.attendingId;
+            const response = await fetch(`api/Attendee/${attendId}`, {
+               method: "DELETE",
+            })
+            console.log(response);
+            this.setState({attending: false})    
+        }
+        console.log(this.state)
+        this.forceUpdate();
     }
+
+    // componentDidUpdate(prevProps, prevState){
+    //     console.log('component did update')
+    //     console.log(prevProps);
+    //     console.log(prevState);
+    //     //super.componentDidUpdate(prevProps, prevState);
+    // }
     
     render() {
+        //this.setState(this.props)
         const e = this.props;
         var startTime = moment(e.eventTime).format('LT').toString();
         var endTime = moment(e.endTime).format('LT').toString();
@@ -50,11 +86,14 @@ export class HappninEvent extends Component {
                                     Category: <b>{e.categoryId}</b> <br/>
                                         {startTime} - {endTime}  <br/></p>
                                         <button className="btn secondaryButton" >Add to Favorites</button>
-                                    <h4>{e.attending === true ?  "This is HAPPNIN!" : "This is not HAPPNIN..." }</h4>
-                                    <button id="buyTicketsButton" className="btn btn-primary" onClick={this.attending} >Going!</button>
+                                        <inline>{this.state.attending === true ?  "This is HAPPNIN!" : "This is not HAPPNIN..." }</inline>
+                                        <button id="buyTicketsButton" className="btn btn-primary" onClick={this.attending}>{this.state.attending === true ? "Going!" : "Go!" }</button>
                             </div>
                         </div> 
                     </Col>
+                    {console.log("in the dealio")}
+                    {console.log(this.props)}
+                    {console.log(this.state)}
                 </Row>
             </div>
         )

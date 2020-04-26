@@ -48,19 +48,27 @@ export class Home extends Component {
   }
 
   static attendingEvent(eventId, attendedEvent){
-      attendedEvent.forEach(e => 
+    console.log("in atteding events");
+    console.log(eventId)
+    console.log(attendedEvent); 
+    let attendId = -1; 
+    attendedEvent.forEach(e => 
         {
+          console.log(e.eventId);
+          console.log(e.eventId === eventId);
           if(e.eventId === eventId){
-            return true;
+            console.log("they matched")
+            console.log(e.id)
+            attendId = e.id;
           } 
         })
-      return false;
-
+      return attendId; // return negative one if event isn't being attended
   }
 
   static setGoing(events, attendedEvent){
     console.log(events);
     const attendedIds = attendedEvent.map(a => a.eventId);
+    console.log(attendedIds);
     events.forEach(e => {
       if(attendedIds.includes(e.id)){
         e.going = true;
@@ -77,6 +85,7 @@ export class Home extends Component {
         {Home.setGoing(events, attendedEvent)}
         {events.map((eventinfo) => (
           <HappninEvent key={eventinfo.id} {...eventinfo} 
+          attendingId={Home.attendingEvent(eventinfo.id, attendedEvent)}
           attending={eventinfo.going}
           userId={userId}/>
         ))}
