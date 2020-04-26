@@ -58,25 +58,27 @@ export class Home extends Component {
 
   }
 
+  static setGoing(events, attendedEvent){
+    console.log(events);
+    const attendedIds = attendedEvent.map(a => a.eventId);
+    events.forEach(e => {
+      if(attendedIds.includes(e.id)){
+        e.going = true;
+      }
+      else {
+        e.going = false;
+      }
+    })
+  }
+
   static renderEventsTable(events, userId, attendedEvent) {
     return (
       <div>
+        {Home.setGoing(events, attendedEvent)}
         {events.map((eventinfo) => (
           <HappninEvent key={eventinfo.id} {...eventinfo} 
-          attending={() => 
-            {
-              console.log("Trying to get conditional render");
-              console.log(eventinfo)
-              console.log(attendedEvent)
-              attendedEvent.forEach(e => 
-              {
-                if(e.eventId === eventinfo.id){
-                  return true;
-                } 
-              })
-          return false;
-        }
-        } userId={userId}/>
+          attending={eventinfo.going}
+          userId={userId}/>
         ))}
       </div>
     );
@@ -88,7 +90,7 @@ export class Home extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      Home.renderEventsTable(this.state.events, this.state.userId, this.state.attending)
+      Home.renderEventsTable(this.state.events, this.state.userId, this.state.isAttending)
     );
     return (
       <div className="container-fluid card">
