@@ -1,13 +1,12 @@
 ﻿@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css" );
+@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css");
 
- a.navbar-brand {
+a.navbar-brand {
   white-space: normal;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
 }
-
 
 @media (min-width: 768px) {
   html {
@@ -33,6 +32,11 @@
 header {
   background-color: #2ccb92;
 }
-.weather{
+.weather {
   padding-right: 10em;
+}
+
+#flex-icons {
+  display: flex;
+  justify-content: space-between;
 }

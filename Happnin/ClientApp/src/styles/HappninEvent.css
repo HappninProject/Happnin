@@ -1,0 +1,55 @@
+#inline-text {
+  display: inline;
+}
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.valid {
+  left: 10px;
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -40px;
+  content: "✔";
+}
+
+.invalid {
+  left: 10px;
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -40px;
+  content: "✖";
+}
+
+#passwordreq {
+  position: relative;
+  display: none;
+  padding: 10px;
+  left: -12px;
+}
+
+#usernamereq {
+  display: none;
+}
+
+/*changing placeholder color*/
+
+::placeholder {
+  color: #a0a0a0;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #a0a0a0;
+}
+
+::-ms-input-placeholder {
+  color: #a0a0a0;
+}
