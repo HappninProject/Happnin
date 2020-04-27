@@ -15,6 +15,7 @@ export class Home extends Component {
                     isAttending: [],
                     loading: true 
                   };
+    this.testSomething = this.testSomething.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,8 @@ export class Home extends Component {
       userId: user && user.sub
     });
     this.populateAttendingData();
+    console.log("Here comes test something");
+    this.testSomething();
   }
 
   async populateAttendingData(){
@@ -47,36 +50,53 @@ export class Home extends Component {
     this.setState({isAttending: attend});
   }
 
-  static attendingEvent(eventId, attendedEvent){
-      attendedEvent.forEach(e => 
-        {
-          if(e.eventId === eventId){
-            return true;
-          } 
-        })
-      return false;
-
+  testSomething = () => {
+    console.log("DOES THIS DO ANYTHING!!!!!!!!!!!!!!!!!")
+    this.populateAttendingData();
   }
 
-  static renderEventsTable(events, userId, attendedEvent) {
+  static attendingEvent(eventId, attendedEvent){
+    console.log("in atteding events");
+    console.log(eventId)
+    console.log(attendedEvent); 
+    let attendId = -1; 
+    attendedEvent.forEach(e => 
+        {
+          console.log(e.eventId);
+          console.log(e.eventId === eventId);
+          if(e.eventId === eventId){
+            console.log("they matched")
+            console.log(e.id)
+            attendId = e.id;
+          } 
+        })
+      return attendId; // return negative one if event isn't being attended
+  }
+
+  static setGoing(events, attendedEvent){
+    console.log(events);
+    const attendedIds = attendedEvent.map(a => a.eventId);
+    console.log(attendedIds);
+    events.forEach(e => {
+      if(attendedIds.includes(e.id)){
+        e.going = true;
+      }
+      else {
+        e.going = false;
+      }
+    })
+  }
+
+  static renderEventsTable(events, userId, attendedEvent, handler) {
     return (
       <div>
+        {Home.setGoing(events, attendedEvent)}
         {events.map((eventinfo) => (
           <HappninEvent key={eventinfo.id} {...eventinfo} 
-          attending={() => 
-            {
-              console.log("Trying to get conditional render");
-              console.log(eventinfo)
-              console.log(attendedEvent)
-              attendedEvent.forEach(e => 
-              {
-                if(e.eventId === eventinfo.id){
-                  return true;
-                } 
-              })
-          return false;
-        }
-        } userId={userId}/>
+          attendingId={Home.attendingEvent(eventinfo.id, attendedEvent)}
+          attending={eventinfo.going}
+          userId={userId}
+          handler={handler}/>
         ))}
       </div>
     );
@@ -88,7 +108,7 @@ export class Home extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      Home.renderEventsTable(this.state.events, this.state.userId, this.state.attending)
+      Home.renderEventsTable(this.state.events, this.state.userId, this.state.isAttending, this.testSomething)
     );
     return (
       <div className="container-fluid card">
