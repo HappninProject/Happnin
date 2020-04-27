@@ -15,6 +15,7 @@ export class Home extends Component {
                     isAttending: [],
                     loading: true 
                   };
+    this.testSomething = this.testSomething.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,8 @@ export class Home extends Component {
       userId: user && user.sub
     });
     this.populateAttendingData();
+    console.log("Here comes test something");
+    this.testSomething();
   }
 
   async populateAttendingData(){
@@ -45,6 +48,11 @@ export class Home extends Component {
     const response = await fetch(`api/Attendee/AttendeeInfo/${this.state.userId}`);
     let attend = await response.json();
     this.setState({isAttending: attend});
+  }
+
+  testSomething = () => {
+    console.log("DOES THIS DO ANYTHING!!!!!!!!!!!!!!!!!")
+    this.populateAttendingData();
   }
 
   static attendingEvent(eventId, attendedEvent){
@@ -79,7 +87,7 @@ export class Home extends Component {
     })
   }
 
-  static renderEventsTable(events, userId, attendedEvent) {
+  static renderEventsTable(events, userId, attendedEvent, handler) {
     return (
       <div>
         {Home.setGoing(events, attendedEvent)}
@@ -87,7 +95,8 @@ export class Home extends Component {
           <HappninEvent key={eventinfo.id} {...eventinfo} 
           attendingId={Home.attendingEvent(eventinfo.id, attendedEvent)}
           attending={eventinfo.going}
-          userId={userId}/>
+          userId={userId}
+          handler={handler}/>
         ))}
       </div>
     );
@@ -99,7 +108,7 @@ export class Home extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      Home.renderEventsTable(this.state.events, this.state.userId, this.state.isAttending)
+      Home.renderEventsTable(this.state.events, this.state.userId, this.state.isAttending, this.testSomething)
     );
     return (
       <div className="container-fluid card">

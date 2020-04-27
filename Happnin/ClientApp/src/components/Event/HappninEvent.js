@@ -23,13 +23,13 @@ export class HappninEvent extends Component {
         console.log('we in getDerived')
         console.log(props);
         console.log(state);
-        if (state == null){
-            console.log("what the hellllll")
-        }    
+        
         return {attending: props.attending, attendingId: props.attendingId, gotDerived: true}
     }
 
     async attending(){
+        console.log("in attending")
+        console.log(this.state)
         if (this.state.attending === false){
             const attendInfo = {
                             eventId: this.props.id,
@@ -41,7 +41,6 @@ export class HappninEvent extends Component {
                 headers: { "Content-Type" : "application/json" }
             })
             .then(res => res.json())
-            this.setState({attending: true})    
         }
         else {
             const attendId = this.props.attendingId;
@@ -49,21 +48,17 @@ export class HappninEvent extends Component {
                method: "DELETE",
             })
             console.log(response);
-            this.setState({attending: false})    
         }
-        console.log(this.state)
-        this.forceUpdate();
+        this.props.handler();
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    //     console.log('component did update')
-    //     console.log(prevProps);
-    //     console.log(prevState);
-    //     //super.componentDidUpdate(prevProps, prevState);
-    // }
+    componentDidUpdate(prevProps, prevState){
+        console.log('component did update')
+        console.log(prevProps);
+        console.log(prevState);
+    }
     
     render() {
-        //this.setState(this.props)
         const e = this.props;
         var startTime = moment(e.eventTime).format('LT').toString();
         var endTime = moment(e.endTime).format('LT').toString();
@@ -85,7 +80,7 @@ export class HappninEvent extends Component {
                                     Age Restriction: <b>{e.ageRestriction}</b> <br/> <br/> 
                                     Category: <b>{e.categoryId}</b> <br/>
                                         {startTime} - {endTime}  <br/></p>
-                                        <button className="btn secondaryButton" >Add to Favorites</button>
+                                        <button className="btn secondaryButton" onClick={this.props.handler}>Add to Favorites</button>
                                         <inline>{this.state.attending === true ?  "This is HAPPNIN!" : "This is not HAPPNIN..." }</inline>
                                         <button id="buyTicketsButton" className="btn btn-primary" onClick={this.attending}>{this.state.attending === true ? "Going!" : "Go!" }</button>
                             </div>
