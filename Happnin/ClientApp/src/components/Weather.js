@@ -6,43 +6,61 @@ export default class Weather extends Component {
   state = {
     weather: null,
     city_name: null,
-    latitude: null,
-    longitude: null,
+    latitude: 0,
+    longitude: 0,
     Cond: null,
     loading: true,
   };
   async componentDidMount() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+      let lat = position.coords.latitude
+      let lng = position.coords.longitude
+      this.getWeather(lat,lng);
+      
+    });
+    
+
+  }
+
+  
+  async getWeather(lat,lng)
+  {
     const url =
-      " https://api.openweathermap.org/data/2.5/weather?q=Spokane&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
+    "api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
+      
     console.log(url);
     const response = await fetch(url);
+    console.log(response);
     const data = await response.json();
-    console.log(data);
+     console.log(data);
+    if (data.weather[0].main === "Clear") {
+      this.setState({ cond: "CLEAR_DAY" });
+    } else if (data.weather[0].maind === "Thunderstorm ") {
+      this.setState({ cond: "RAIN" });
+    } else if (data.weather[0].main === "Drizzle") {
+      this.setState({ cond: "RAIN" });
+    } else if (data.weather[0].main === "Rain") {
+      this.setState({ cond: "RAIN" });
+    } else if (data.weather[0].main === "Snow") {
+      this.setState({ cond: "SNOW" });
+    } else if (data.weather[0].main === "Clouds") {
+      this.setState({ cond: "CLOUDY" });
+    }
+   
     this.setState({
-      cond: data.weather[0].main,
       weather: data.main,
       city_name: data.name,
       loading: false,
     });
+  
 
     console.log(this.state.cond);
+    console.log(this.state.cond);
   }
-
   render() {
     if (!this.state.loading) {
-      if (this.state.cond === "Clear") {
-        this.setState({ cond: "CLEAR_DAY" });
-      } else if (this.state.cond === "Thunderstorm ") {
-        this.setState({ cond: "RAIN" });
-      } else if (this.state.cond === "Drizzle") {
-        this.setState({ cond: "RAIN" });
-      } else if (this.state.cond === "Rain") {
-        this.setState({ cond: "RAIN" });
-      } else if (this.state.cond === "Snow") {
-        this.setState({ cond: "SNOW" });
-      } else if (this.state.cond === "Clouds") {
-        this.setState({ cond: "CLOUDY" });
-      }
+  
     }
     return (
       <div>
