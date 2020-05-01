@@ -5,7 +5,7 @@ using Happnin.Business.Dto;
 
 namespace Happnin.Business.Services
 {
-    interface IFriendshipService : IEntityService<Friendship, FriendshipInput>
+    public interface IFriendshipService : IEntityService<Friendship, FriendshipInput>
     {
     }
 }
