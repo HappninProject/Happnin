@@ -27,13 +27,10 @@ export default class Weather extends Component {
   async getWeather(lat,lng)
   {
     const url =
-    "api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
+    "HTTP://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
       
-    console.log(url);
     const response = await fetch(url);
-    console.log(response);
     const data = await response.json();
-     console.log(data);
     if (data.weather[0].main === "Clear") {
       this.setState({ cond: "CLEAR_DAY" });
     } else if (data.weather[0].maind === "Thunderstorm ") {
@@ -54,9 +51,6 @@ export default class Weather extends Component {
       loading: false,
     });
   
-
-    console.log(this.state.cond);
-    console.log(this.state.cond);
   }
   render() {
     if (!this.state.loading) {
