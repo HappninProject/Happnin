@@ -16,6 +16,7 @@ import { ContactUs } from "./components/ContactUs";
 import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
+import { FriendRequests } from "./components/User/FriendRequests";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -41,6 +42,7 @@ export default class App extends Component {
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
         <Route path="/privacy" component={Privacy} />
+        <Route path="/friend-request" component={FriendRequests}/>
       </Layout>
     );
   }

@@ -42,6 +42,9 @@ namespace Happnin.Data
                 }
             }
         }
+       
+        //0 pending, 1 accepted
+        public int Status { get; set; }
 
         public User Friend { get; set; }
 

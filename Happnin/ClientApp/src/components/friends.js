@@ -6,7 +6,7 @@ export class About extends Component {
       <div className="container-fluid card">
         <div className="header"> Friends</div>
         <div className="subheader">
-            this is where a list of your friends will go
+        
         </div>
       </div>
     );

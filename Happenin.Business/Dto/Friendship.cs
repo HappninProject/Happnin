@@ -13,5 +13,6 @@ namespace Happnin.Business.Dto
     {
         public string UserId { get; set; }
         public string FriendId { get; set; }
+        public int Status { get; set; }
     }
 }

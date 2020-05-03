@@ -1,24 +1,21 @@
 ﻿import React, { Component } from "react";
 import authService from '../api-authorization/AuthorizeService'
 
-export class FetchUserData extends Component {
-  static displayName = FetchUserData.name;
+export class FriendRequests extends Component {
 
   constructor(props) {
     super(props);
     this.state = { 
         isAuthenticated: false,
         userId: "",
+        friendRequests: [],
         users: [],
         loading: true 
       };
-    this.renderUsersTable = this.renderUsersTable.bind(this);
-    this.sendFriendRequest = this.sendFriendRequest.bind(this);
   }
 
   componentDidMount() {
     this.populateState();
-    this.populateUsersData();
   }
 
   async populateState() {
@@ -32,63 +29,42 @@ export class FetchUserData extends Component {
       userId: user && user.sub
     });
     console.log(user);
+    this.populateRequestData();
   }
 
-  renderUsersTable(users) {
-    return (
+  renderFriendRequestTable(requests) {
+    return ( 
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>User Name</th>
-            <th>First Name</th>
-            <th>LastName</th>
-            <th>Email</th>
-            <th>Friend Request</th>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Friend ID</th>
+            <th>Accept</th>
+            <th>Deny</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(u => (
-            <tr key={u.userName}>
-              <td>{u.userName}</td>
-              <td>{u.firstName}</td>
-              <td>{u.lastName}</td>
-              <td>{u.email}</td>
-              <td><button onClick={() => this.sendFriendRequest(u.id)}>Click-Here</button></td>
+          {requests.map(u => (
+            <tr key={u.id}>
+              <td>{u.id}</td>
+              <td>{u.userId}</td>
+              <td>{u.friendId}</td>
+              <td><button>Accept</button></td>
+              <td><button>Deny</button></td>
             </tr>
           ))}
         </tbody>
       </table>
     );
   }
-
-  async sendFriendRequest(id){
-    const friendRequest = {
-      userId: this.state.userId,
-      friendId: id,
-      status: 0
-    }
-    console.log(friendRequest);
-    let response = await fetch('api/Friendship/', {
-      method: 'POST',
-      body: JSON.stringify(friendRequest),
-      headers: {
-        'Content-Type' : 'application/json'
-      }
-    })
-
-    
-  }
-
-
-
-
   render() {
     let contents = this.state.loading ? (
       <p>
         <em>Loading...</em>
       </p>
     ) : (
-      this.renderUsersTable(this.state.users)
+      this.renderFriendRequestTable(this.state.friendRequests)
     );
 
     return (
@@ -103,12 +79,21 @@ export class FetchUserData extends Component {
   }
 
   async populateUsersData() {
+    
+  }
+ 
+  // TODO actually get to accept friend requests, show full friends
+  
+  async populateRequestData() {
     console.log("before fetch");
-    const response = await fetch("api/User");
+    console.log(this.state);
+    const userId = this.state.userId;
+    console.log(userId);
+    const response = await fetch(`api/Friendship/RequestsForUser/${userId}`);
     console.log(response);
     console.log("after fetch");
     const data = await response.json();
     console.log("Got Data", data);
-    this.setState({ users: data, loading: false });
+    this.setState({ friendRequests: data, loading: false });
   }
 }
