@@ -27,7 +27,14 @@ namespace Happnin.Controllers
         [Route("RequestsForUser/{id}")]
         public async Task<List<Friendship>> GetRequestsForUser(string id)
         {
-            return await FriendShipService.FetchUserRequests(id);
+            return await FriendShipService.FetchRequestsForUser(id);
+        }
+
+        [HttpGet]
+        [Route("Friends/{id}")]
+        public async Task<List<Friendship>> GetFriends(string id)
+        {
+            return await FriendShipService.FetchUsersFriends(id);
         }
  
     }

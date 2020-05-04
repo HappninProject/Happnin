@@ -10,5 +10,6 @@ namespace Happnin.Business.Services
     {
         Task<List<Friendship>> FetchUserRequests(string id);
         Task<List<Friendship>> FetchRequestsForUser(string id);
+        Task<List<Friendship>> FetchUsersFriends(string id);
     }
 }

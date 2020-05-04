@@ -105,7 +105,7 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
                 <LoginMenu></LoginMenu>
-                <NavbarBrand tag={Link} to="/friends" className="friends">
+                <NavbarBrand tag={Link} to="/friend-request" className="friends">
                   <img
                     id="friends"
                     class="d-inline-block mr-1"

@@ -42,16 +42,22 @@ namespace Happnin.Business.Services
 
         public Task<List<Friendship>> FetchUserRequests(string id)
         {
-            var requests = Query.Where(u => u.UserId == id);
+            var requests = Query.Where(u => u.UserId == id && (u.Status == 0));
             var list = requests.ToList();
             return Task.FromResult(MapList(list));
         }
 
         public Task<List<Friendship>> FetchRequestsForUser(string id)
         {
-            var requests = Query.Where(u => u.FriendId == id);
+            var requests = Query.Where(u => (u.FriendId == id) && (u.Status == 0));
             var list = requests.ToList();
             return Task.FromResult(MapList(list));
+        }
+
+        public Task<List<Friendship>> FetchUsersFriends(string id)
+        {
+            var requests = Query.Where(u => (u.UserId == id || u.FriendId == id) && (u.Status == 1));
+            return Task.FromResult(MapList(requests.ToList()));
         }
 
         private List<Dto.Friendship> MapList(List<Data.Friendship> dataList)
