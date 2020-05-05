@@ -62,7 +62,8 @@ export default class Weather extends Component {
           <div>loading weather</div>
         ) : (
           <div>
-            Weather in {this.state.city_name} : {this.state.weather.temp}°{" "}
+            Weather in {this.state.city_name}
+            <br /> {this.state.weather.temp}°{" "}
             <ReactAnimatedWeather
               icon={this.state.cond}
               size={32}

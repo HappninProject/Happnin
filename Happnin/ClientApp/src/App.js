@@ -5,7 +5,8 @@ import { Home } from "./components/Home";
 import { About } from "./components/About";
 import { Terms } from "./components/Terms";
 import { Privacy } from "./components/Privacy";
-import { FetchEventData } from "./components/Event/FetchEventData";
+// import { FetchEventData } from "./components/Event/FetchEventData";
+import FetchEventDataWithError404 from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
 import { SubmitEvent } from "./components/Event/SubmitEvent";
@@ -32,7 +33,7 @@ export default class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />
         <Route path="/BrowseEvents" component={BrowseEvents} />
-        <Route path="/fetch-event-data" component={FetchEventData} />
+        <Route path="/fetch-event-data" component={FetchEventDataWithError404} />
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
         <Route

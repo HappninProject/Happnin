@@ -53,3 +53,27 @@ body {
 ::-ms-input-placeholder {
   color: #a0a0a0;
 }
+
+@media screen and (max-width: 200px) {
+  .eventImage {
+    width: 90px;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .eventImage {
+    width: 160px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .eventImage {
+    width: 170px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .eventImage {
+    width: 110px;
+  }
+}

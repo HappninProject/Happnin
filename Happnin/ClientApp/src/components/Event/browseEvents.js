@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FetchEventData } from "./FetchEventData";
+// import { FetchEventData } from "./FetchEventData";
+import FetchEventDataWithError404 from "./FetchEventData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+//Getting the event
+import {HappninEvent} from "./HappninEvent";
 
 export class BrowseEvents extends Component {
   constructor(props) {
@@ -15,6 +18,7 @@ export class BrowseEvents extends Component {
       startDate: new Date(),
     };
   }
+
   handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
@@ -94,10 +98,12 @@ export class BrowseEvents extends Component {
               onChange={this.handleDateChange.bind(this, "startDate")}
             />
           </div>
+          {/* //! This button doesn't do anything currently */}
+          <button>Search</button>
         </div>
         <br />
         <div>
-          <FetchEventData></FetchEventData>
+          <FetchEventDataWithError404/>
         </div>
       </div>
     );
