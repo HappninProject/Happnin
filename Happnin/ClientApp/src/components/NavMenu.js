@@ -59,9 +59,9 @@ export class NavMenu extends Component {
           light
         >
           <Container className="navbar">
-            <div id="logoDiv" class="flexItem">
+            <div id="logoDiv" className="flexItem">
               <NavbarBrand tag={Link} to="/" className="logo">
-                <img id="logo" class="d-inline-block" alt="Logo" src={logo} />
+                <img id="logo" className="d-inline-block" alt="Logo" src={logo} />
               </NavbarBrand>
             </div>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />

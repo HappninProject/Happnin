@@ -12,12 +12,18 @@ export class HappninEvent extends Component {
       attending: false,
       attendingId: -1,
       gotDerived: false,
+      // have to add these to use in FetchEventData
+      eventName : this.props.eventName,
+      eventDescription: this.props.description,
+      category: this.props.categoryId,
+      startTime: this.props.eventTime
     };
     console.log("in the constructor");
     console.log(this.props);
     this.attending = this.attending.bind(this);
   }
 
+  //! get props from here
   static getDerivedStateFromProps(props, state) {
     console.log("we in getDerived");
     console.log(props);
