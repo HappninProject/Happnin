@@ -16,6 +16,14 @@ namespace Happnin.Data.Tests
         public const string CalebEmail = "Caleb@mail.com";
         public const string UserNameCaleb = "CalebIzKewl";
 
+        public static User UserJessica() => new User(Jessica, Holcomb);
+        public const string Jessica = "Jessica";
+        public const string Holcomb = "Holcomb";
+
+        public static User UserSalem() => new User(Salem, Fenn);
+        public const string Salem = "Salem";
+        public const string Fenn = "Fenn";
+
         public static User UserCaleb() => new User(Caleb, Walsh);
 
         public const string Street = "1234 street"; 

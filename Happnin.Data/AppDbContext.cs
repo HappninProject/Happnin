@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 
 namespace Happnin.Data
@@ -16,6 +17,8 @@ namespace Happnin.Data
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Attending> Attendees { get; set; }
+
+        public DbSet<Friendship> Friends { get; set; }
 
         public AppDbContext(DbContextOptions dbContext,  
             IOptions<OperationalStoreOptions> operationalStoreOptions): base(dbContext, operationalStoreOptions) { }

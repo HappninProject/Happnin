@@ -1,18 +1,40 @@
 ﻿import React, { Component } from "react";
+import authService from '../api-authorization/AuthorizeService'
 
 export class FetchUserData extends Component {
   static displayName = FetchUserData.name;
 
   constructor(props) {
     super(props);
-    this.state = { users: [], loading: true };
+    this.state = { 
+        isAuthenticated: false,
+        userId: "",
+        users: [],
+        loading: true 
+      };
+    this.renderUsersTable = this.renderUsersTable.bind(this);
+    this.sendFriendRequest = this.sendFriendRequest.bind(this);
   }
 
   componentDidMount() {
+    this.populateState();
     this.populateUsersData();
   }
 
-  static renderUsersTable(users) {
+  async populateState() {
+    const [isAuthenticated, user] = await Promise.all([
+      authService.isAuthenticated(),
+      authService.getUser()
+    ]);
+    console.log(user);
+    this.setState({
+      isAuthenticated,
+      userId: user && user.sub
+    });
+    console.log(user);
+  }
+
+  renderUsersTable(users) {
     return (
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
@@ -21,7 +43,7 @@ export class FetchUserData extends Component {
             <th>First Name</th>
             <th>LastName</th>
             <th>Email</th>
-            <th>Location Id</th>
+            <th>Friend Request</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +53,7 @@ export class FetchUserData extends Component {
               <td>{u.firstName}</td>
               <td>{u.lastName}</td>
               <td>{u.email}</td>
-              <td>{u.locationId}</td>
+              <td><button onClick={() => this.sendFriendRequest(u.id)}>Click-Here</button></td>
             </tr>
           ))}
         </tbody>
@@ -39,13 +61,34 @@ export class FetchUserData extends Component {
     );
   }
 
+  async sendFriendRequest(id){
+    const friendRequest = {
+      userId: this.state.userId,
+      friendId: id,
+      status: 0
+    }
+    console.log(friendRequest);
+    let response = await fetch('api/Friendship/', {
+      method: 'POST',
+      body: JSON.stringify(friendRequest),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+
+    
+  }
+
+
+
+
   render() {
     let contents = this.state.loading ? (
       <p>
         <em>Loading...</em>
       </p>
     ) : (
-      FetchUserData.renderUsersTable(this.state.users)
+      this.renderUsersTable(this.state.users)
     );
 
     return (

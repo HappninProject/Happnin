@@ -122,7 +122,7 @@ export class NavMenu extends Component {
                   <LoginMenu></LoginMenu>
                 </div>
                 <div class="flexItem">
-                  <NavbarBrand tag={Link} to="/friends" className="friends">
+                  <NavbarBrand tag={Link} to="/friend-request" className="friends">
                     <img id="friends" class="" alt="friends" src={friends} />
                   </NavbarBrand>
                 </div>

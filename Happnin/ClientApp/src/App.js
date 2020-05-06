@@ -19,6 +19,7 @@ import { Friends } from "./components/Friends";
 import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
+import { FriendRequests } from "./components/User/FriendRequests";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -41,7 +42,7 @@ export default class App extends Component {
           component={ApiAuthorizationRoutes}
         />
         <Route path="/messages" component={Messages}></Route>
-        <Route path="/friends" component={Friends}></Route>
+        <Route path="/friend-request" component={FriendRequests}/>
         <Route path="/contact-us" component={ContactUs} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />

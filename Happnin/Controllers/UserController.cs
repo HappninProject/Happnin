@@ -20,7 +20,6 @@ namespace Happnin.Controllers
         public SignInManager<Data.User> SignInManager { get; }
         protected IUserService Service { get; }
         public IMapper Mapper { get; } =  AutomapperProfileConfiguration.CreateMapper();
-
         private ILogger Logger { get; }
 
         public UserController(IUserService service,
@@ -48,7 +47,7 @@ namespace Happnin.Controllers
             {
                 return NotFound();
             }
-
+            
             return Ok(entity);
         }
 

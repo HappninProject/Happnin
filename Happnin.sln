@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business", "Happeni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business.Tests", "Happenin.Business.Tests\Happnin.Business.Tests.csproj", "{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Tests", "Happnin.Api.Tests\Happnin.Tests.csproj", "{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Tests", "Happnin.Api.Tests\Happnin.Tests.csproj", "{D14B9BC5-C293-43FA-A57C-1649D001C744}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22F7F5D8-C9E8-4A76-BFF8-580D8B5FEC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14B9BC5-C293-43FA-A57C-1649D001C744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14B9BC5-C293-43FA-A57C-1649D001C744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14B9BC5-C293-43FA-A57C-1649D001C744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14B9BC5-C293-43FA-A57C-1649D001C744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
