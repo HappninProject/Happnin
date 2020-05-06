@@ -1,15 +1,18 @@
 ﻿@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css" );
+@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css");
 
- a.navbar-brand {
+html {
+  box-sizing: border-box;
+}
+
+a.navbar-brand {
   white-space: normal;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
 }
 
-
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   html {
     font-size: 20px;
   }
@@ -31,8 +34,39 @@
 }
 
 header {
+  width: 100%;
   background-color: #2ccb92;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-.weather{
+.weather {
   padding-right: 10em;
+}
+
+#flex-icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#weatherInfo {
+  flex: 1;
+  text-align: center;
+}
+
+#weather {
+  width: 100%;
+}
+
+.flexItem {
+  justify-content: space-evenly;
 }

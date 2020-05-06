@@ -12,27 +12,26 @@ import { LoginMenu } from "./api-authorization/LoginMenu";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
-import Weather from './Weather';
+import Weather from "./Weather";
 import logo from "../images/happninHLogoCircle.png";
 import notification from "../images/bell.svg";
 import friends from "../images/users.svg";
 import messages from "../images/inbox.svg";
-import Dropdown from 'react-bootstrap/Dropdown'
+import Dropdown from "react-bootstrap/Dropdown";
 export class NavMenu extends Component {
-  
-    static displayName = NavMenu.name;
-    constructor(props) {
-        super(props);
-        this.toggleNavbar = this.toggleNavbar.bind(this);
-        this.state = {
-          collapsed: true,
-          //loading: true,
-        };
-        /*this.getLocation = this.getLocation.bind(this);
+  static displayName = NavMenu.name;
+  constructor(props) {
+    super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true,
+      //loading: true,
+    };
+    /*this.getLocation = this.getLocation.bind(this);
         this.getCordinates = this.getCordinates.bind(this);
         this.getLocation();*/
-    }
-   /* getLocation() {
+  }
+  /* getLocation() {
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(this.getCordinates);
       }
@@ -45,105 +44,121 @@ export class NavMenu extends Component {
       })
     }*/
 
-    toggleNavbar() {
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-    }
+  }
 
   render() {
     return (
-      <header className="container-fluid rounded shadow-sm">
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm mb-5" light>
+      <header className="rounded shadow-sm">
+        <Navbar
+          id="nav-container container-fluid"
+          className="navbar-expand-lg navbar-toggleable-lg"
+          light
+        >
           <Container className="navbar">
-            <NavbarBrand tag={Link} to="/" className="logo">
-              <img
-                id="logo"
-                class="d-inline-block mr-1"
-                alt="Logo"
-                src={logo}
-              />
-            </NavbarBrand>
+            <div id="logoDiv" className="flexItem">
+              <NavbarBrand tag={Link} to="/" className="logo">
+                <img id="logo" className="d-inline-block" alt="Logo" src={logo} />
+              </NavbarBrand>
+            </div>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse
-              className="d-sm-inline-flex flex-sm-row-reverse"
-              isOpen={!this.state.collapsed}
-              navbar
-            >
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="navHeader" to="/">
-                    Home
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    tag={Link}
-                    className="navHeader"
-                    to="/fetch-location-data"
-                  >
-                    Locations
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    tag={Link}
-                    className="navHeader"
-                    to="/fetch-user-data"
-                  >
-                    Users
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="navHeader" to="/submit-event">
-                    Submit Event
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="navHeader" to="/BrowseEvents">
-                    Events
-                  </NavLink>
-                </NavItem>
-                <LoginMenu></LoginMenu>
-                <NavbarBrand tag={Link} to="/friend-request" className="friends">
-                  <img
-                    id="friends"
-                    class="d-inline-block mr-1"
-                    alt="friends"
-                    src={friends}
-                  />
-                </NavbarBrand>
-
-                <NavbarBrand tag={Link} to="/messages" className="messages">
-                  <img
-                    id="messages"
-                    class="d-inline-block mr-1"
-                    alt="messages"
-                    src={messages}
-                  />
-                </NavbarBrand>
-
-                
-                <Dropdown>
-                  <Dropdown.Toggle variant="link" size ="sm" id="dropdown-basic"  background-color = "b1ed82">
-                  <img
-                    id="notification"
-                    class="d-inline-block mr-1"
-                    alt="notifications"
-                    src={notification}
-                  />
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1"> Woah its a notification</Dropdown.Item>
-                  </Dropdown.Menu>
-                  
-                </Dropdown>
+            <Collapse className="" isOpen={!this.state.collapsed} navbar>
+              <ul className="navbar-nav">
+                <div class="flexItem">
+                  <NavItem>
+                    <NavLink tag={Link} className="navHeader" to="/">
+                      Home
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div class="flexItem">
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="navHeader"
+                      to="/fetch-location-data"
+                    >
+                      Locations
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div class="flexItem">
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="navHeader"
+                      to="/fetch-user-data"
+                    >
+                      Users
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div class="flexItem">
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="navHeader"
+                      to="/submit-event"
+                    >
+                      Submit Event
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div class="flexItem">
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="navHeader"
+                      to="/BrowseEvents"
+                    >
+                      Events
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div class="flexItem">
+                  <LoginMenu></LoginMenu>
+                </div>
+                <div class="flexItem">
+                  <NavbarBrand tag={Link} to="/friend-request" className="friends">
+                    <img id="friends" class="" alt="friends" src={friends} />
+                  </NavbarBrand>
+                </div>
+                <div class="flexItem">
+                  <NavbarBrand tag={Link} to="/messages" className="messages">
+                    <img id="messages" class="" alt="messages" src={messages} />
+                  </NavbarBrand>
+                </div>
+                {/* not sure if this part should be included in div */}
+                <div class="flexItem">
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="link"
+                      size="sm"
+                      background-color="b1ed82"
+                    >
+                      <img
+                        id="notification"
+                        alt="notifications"
+                        src={notification}
+                      />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">
+                        {" "}
+                        Woah its a notification
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+                <div id="weatherInfo" class="flexItem">
+                  <Weather id="weather"></Weather>
+                </div>
               </ul>
             </Collapse>
           </Container>
-          <Weather id = "weather"></Weather>
-          
         </Navbar>
       </header>
     );
