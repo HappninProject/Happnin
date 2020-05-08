@@ -257,8 +257,6 @@ export class SubmitEvent extends Component {
                         class="form-control">
                     </input>
                 </div>
-
-                <button className="btn primaryButton" type="submit">Submit</button>
             </div>
             </form>
 

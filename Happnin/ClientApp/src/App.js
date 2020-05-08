@@ -14,11 +14,11 @@ import { BrowseEvents } from "./components/Event/BrowseEvents";
 import ApiAuthorizationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
 import { ApplicationPaths } from "./components/api-authorization/ApiAuthorizationConstants";
 import { ContactUs } from "./components/ContactUs";
-import { Messages } from "./components/Messages";
 import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
 import { FriendRequests } from "./components/User/FriendRequests";
+import { EventPage } from "./components/Event/EventPage";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -40,8 +40,8 @@ export default class App extends Component {
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
         />
-        <Route path="/messages" component={Messages}></Route>
-        <Route path="/friend-request" component={FriendRequests}/>
+        <Route path="/friend-request" component={FriendRequests} />
+        <Route path="/EventPage" component={EventPage} />
         <Route path="/contact-us" component={ContactUs} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
