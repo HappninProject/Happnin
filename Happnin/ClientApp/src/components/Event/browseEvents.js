@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import FetchEventDataWithError404 from "./FetchEventData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 //Getting the event
 import {HappninEvent} from "./HappninEvent";
 
@@ -163,7 +164,16 @@ export class BrowseEvents extends Component {
         {/* //!temporarily commented out */}
         {/* <div>
           <FetchEventDataWithError404/>
+<<<<<<< refs/remotes/HappninProject/master
         </div> */}
+=======
+        </div>
+
+        <div>
+                <li><Link to="/EventPage">test page</Link></li>
+        </div>
+
+>>>>>>> added an event page and did some refactoring
       </div>
     );
   }

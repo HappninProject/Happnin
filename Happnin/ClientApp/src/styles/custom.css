@@ -150,3 +150,7 @@ body {
 .eventImage{
   padding-top: 1000px;
 }
+
+#event-image{
+    width:100%;
+}
