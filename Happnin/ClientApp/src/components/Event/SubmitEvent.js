@@ -259,6 +259,10 @@ export class SubmitEvent extends Component {
                     </input>
                 </div>
 <<<<<<< refs/remotes/HappninProject/master
+<<<<<<< refs/remotes/HappninProject/master
+=======
+<<<<<<< refs/remotes/HappninProject/EditingEvents
+>>>>>>> added an event page and did some refactoring
 
 =======
 >>>>>>> added an event page and did some refactoring
