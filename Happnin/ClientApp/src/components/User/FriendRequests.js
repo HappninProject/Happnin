@@ -183,6 +183,7 @@ export class FriendRequests extends Component {
       })
 
     if (response.status === 200){
+      let realFriendsTemp = this.state.realFriends;
       const requests = this.state.friendRequests;
       let potentFriends = this.state.potentialFriends;
       for(let i = 0; i < requests.length; i++){
@@ -193,15 +194,19 @@ export class FriendRequests extends Component {
       } 
       for(let i = 0; i < potentFriends.length; i++){
       if(potentFriends[i].id === requestUserId){
+        realFriendsTemp.push(potentFriends[i]);
         potentFriends.splice(i, 1);
         break;
         }
       }
+
       console.log('potential friends')
       console.log(potentFriends)
       console.log('requests')
       console.log(requests)
-      this.setState({friendRequests: requests, potentialFriends: potentFriends});
+      this.setState({ friendRequests: requests, 
+                      potentialFriends: potentFriends,
+                      realFriends: realFriendsTemp });
     }
   }
 

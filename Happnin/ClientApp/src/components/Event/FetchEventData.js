@@ -1,7 +1,6 @@
 ﻿import React, { Component } from "react";
 import { HappninEvent } from "./HappninEvent";
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { BrowseEvents } from "./BrowseEvents";
 import Error404Page from "../Error404Page";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
