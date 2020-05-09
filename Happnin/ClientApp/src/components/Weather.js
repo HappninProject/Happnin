@@ -27,7 +27,7 @@ export default class Weather extends Component {
   async getWeather(lat,lng)
   {
     const url =
-    "HTTP://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
+    "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=c8f563efec9edd5b35f0b4324f97df52&units=imperial";
       
     const response = await fetch(url);
     const data = await response.json();
