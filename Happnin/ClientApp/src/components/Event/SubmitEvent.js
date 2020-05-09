@@ -43,6 +43,7 @@ export class SubmitEvent extends Component {
   }
 
   async handleSubmit(event) {
+    await this.handleSubmitLocation(event)
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
     await fetch("api/Event", {
@@ -158,7 +159,7 @@ export class SubmitEvent extends Component {
       <div class="submit container-fluid">
         <h1 class="header">Tell Us About Your Event</h1>
 
-        <form onSubmit={this.handleSubmitLocation}>
+        <form onSubmit={this.handleSubmit}>
             <div>
                 <h3>Where is your event?</h3>
                 <div class="form-group">
@@ -258,11 +259,7 @@ export class SubmitEvent extends Component {
                     </input>
                 </div>
 
-                <button className="btn primaryButton" type="submit">Submit</button>
             </div>
-            </form>
-
-        <form onSubmit={this.handleSubmit}>
         <h3>What is your event?</h3>
           <div class="form-group">
             <label for="inputName">Name:</label>
