@@ -10,19 +10,21 @@ export class HostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        event : {
-            id: this.props.id,
+           id: this.props.id,
+           event : {
             name: this.props.name,
             description: this.props.description,
             locationId: this.props.locationId,
             categoryId: this.props.locationId,
-            hostId: this.props.hostId,
+            hostId: this.props.userId,
             eventTime: this.props.eventTime,
             endTime: this.props.endTime,
             cost: this.props.cost,
             ageRestriction: this.props.ageRestriction
         }
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange = event => {
@@ -41,6 +43,21 @@ export class HostEvent extends Component {
     });
     console.log(this.state);
   };
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const happninEvent = this.state.event;
+    const id = this.state.id;
+    console.log(JSON.stringify(this.state.event));
+    let res = await fetch(`api/Event/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(happninEvent),
+      headers: { "Content-Type": "application/json" }
+    })
+    const data = await res.json();
+    console.log(data);
+    }
+
 
   render() {
     const e = this.props;
@@ -77,7 +94,7 @@ export class HostEvent extends Component {
                           Edit
                         </Accordion.Toggle>
                       <Accordion.Collapse eventKey="0">
-                          <form>
+                          <form onSubmit={this.handleSubmit}>
                           <div class="form-group">
                             <label for="inputName">Name:</label>
                             <input

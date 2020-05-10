@@ -30,7 +30,7 @@ export class HostedEvents extends Component {
       <div>
         {events.map((eventinfo) => (
           <HostEvent key={eventinfo.id} {...eventinfo} 
-          
+
           userId={userId}
           />
         ))}
@@ -56,7 +56,7 @@ export class HostedEvents extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      HostedEvents.renderEventsTable(this.state.Events, this.state.userId)
+      HostedEvents.renderEventsTable(this.state.Events, this.state.user)
     );
     return (
       <div className="container-fluid card">
