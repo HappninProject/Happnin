@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-<<<<<<< refs/remotes/HappninProject/master
 import { HostEvent } from "./HostEvent";
-=======
 import { HappninEvent } from "./HappninEvent";
->>>>>>> have to get the events to render
 import authService from '../api-authorization/AuthorizeService';
 
 export class HostedEvents extends Component {
@@ -51,7 +48,7 @@ export class HostedEvents extends Component {
     return (
       <div>
         {events.map((eventinfo) => (
-          <HappninEvent key={eventinfo.id} {...eventinfo} 
+          <HostEvent key={eventinfo.id} {...eventinfo} 
           attending={eventinfo.going}
 >>>>>>> have to get the events to render
           userId={userId}
