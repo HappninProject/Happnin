@@ -75,6 +75,8 @@ export class HostedEvents extends Component {
     console.log("user id" + userId)
     const response = await fetch(`api/Event/HostedEvent/${userId}`);
     const data = await response.json();
+    console.log("Data");
+    console.log(data);
     this.setState({ Events: data, loading: false });
   }
 
