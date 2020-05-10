@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { HappninEvent } from "./HappninEvent";
+import { HostEvent } from "./HostEvent";
 import authService from '../api-authorization/AuthorizeService';
 
 export class HostedEvents extends Component {
@@ -27,7 +27,7 @@ export class HostedEvents extends Component {
     return (
       <div>
         {events.map((eventinfo) => (
-          <HappninEvent key={eventinfo.id} {...eventinfo} 
+          <HostEvent key={eventinfo.id} {...eventinfo} 
           attending={eventinfo.going}
           userId={userId}
           />
