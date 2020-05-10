@@ -11,12 +11,13 @@ export class HostEvent extends Component {
     super(props);
     this.state = {
         event : {
+            id: this.props.id,
             name: this.props.name,
             description: this.props.description,
             locationId: this.props.locationId,
             categoryId: this.props.locationId,
             hostId: this.props.hostId,
-            eventTime: this.props.startTime,
+            eventTime: this.props.eventTime,
             endTime: this.props.endTime,
             cost: this.props.cost,
             ageRestriction: this.props.ageRestriction
@@ -72,14 +73,10 @@ export class HostEvent extends Component {
                 <p id="inline-text">
                 </p>
                   <Accordion>
-                    <Card>
-                      <Card.Header>
                         <Accordion.Toggle as={Button} variant="link" eventKey="0">
                           Edit
                         </Accordion.Toggle>
-                      </Card.Header>
                       <Accordion.Collapse eventKey="0">
-                        <Card.Body>
                           <form>
                           <div class="form-group">
                             <label for="inputName">Name:</label>
@@ -165,9 +162,7 @@ export class HostEvent extends Component {
                             Submit
                           </button>
                         </form>
-                        </Card.Body>
                       </Accordion.Collapse>
-                    </Card>
                   </Accordion>
               </div>
             </div>

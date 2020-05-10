@@ -30,7 +30,7 @@ export class HostedEvents extends Component {
       <div>
         {events.map((eventinfo) => (
           <HostEvent key={eventinfo.id} {...eventinfo} 
-          attending={eventinfo.going}
+          
           userId={userId}
           />
         ))}
