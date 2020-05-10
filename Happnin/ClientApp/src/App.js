@@ -5,6 +5,7 @@ import { Home } from "./components/Home";
 import { About } from "./components/About";
 import { Terms } from "./components/Terms";
 import { Privacy } from "./components/Privacy";
+import { HostedEvents } from "./components/Event/HostedEvents"
 // import { FetchEventData } from "./components/Event/FetchEventData";
 import FetchEventDataWithError404 from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
@@ -46,6 +47,7 @@ export default class App extends Component {
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
         <Route path="/privacy" component={Privacy} />
+        <Route path='/hosted-events' component={HostedEvents}/>
       </Layout>
     );
   }

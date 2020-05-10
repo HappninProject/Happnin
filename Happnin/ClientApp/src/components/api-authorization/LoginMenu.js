@@ -3,6 +3,7 @@ import { NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import authService from "./AuthorizeService";
 import { ApplicationPaths } from "./ApiAuthorizationConstants";
+import { HostedEvents } from '../Event/HostedEvents';
 
 export class LoginMenu extends Component {
   constructor(props) {
@@ -59,10 +60,15 @@ export class LoginMenu extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
+          <NavLink tag={Link} className="text-dark" to='/hosted-events'>
+            Hosted Events
+          </NavLink>
+         </NavItem>
+         <NavItem>
           <NavLink tag={Link} className="text-dark" to={logoutPath}>
             Logout
           </NavLink>
-        </NavItem>
+         </NavItem>
       </Fragment>
     );
   }
