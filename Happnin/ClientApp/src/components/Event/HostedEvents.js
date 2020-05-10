@@ -22,6 +22,7 @@ export class HostedEvents extends Component {
     }
 
 <<<<<<< refs/remotes/HappninProject/master
+<<<<<<< refs/remotes/HappninProject/master
     //TODO need to pull all the event information, like the location and such
 
   async componentDidMount(event) {
@@ -38,6 +39,10 @@ export class HostedEvents extends Component {
           <HostEvent key={eventinfo.id} {...eventinfo} 
           location = {this.GetRightLocation(eventinfo.locationId, location)} 
 =======
+=======
+    //TODO need to pull all the event information, like the location and such
+
+>>>>>>> added an accordian to the HostEvent
   async componentDidMount(event) {
     this._subscription = authService.subscribe(() => this.populateState());
     await this.populateState(); 
@@ -94,40 +99,15 @@ export class HostedEvents extends Component {
     );
     return (
       <div className="container-fluid card">
-        <h1 className="header">Welcome to Happnin</h1>
-
-        <table className="event-table">
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Upcoming Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Friends' Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Popular Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-        </table>
         <div className="submit">
           <h1 id="tabelLabel" className="header">
-            Events
+            Hosted Events
           </h1>
+<<<<<<< refs/remotes/HappninProject/master
           <p>Got these events from our server DAWG</p>
 >>>>>>> I got the table to be rendered. I might need to create a new class for this
+=======
+>>>>>>> added an accordian to the HostEvent
           {contents}
         </div>
       </div>

@@ -1,4 +1,8 @@
+<<<<<<< refs/remotes/HappninProject/master
 ﻿import React, {Button, Component, Form } from "react";
+=======
+﻿import React, {Button, Component } from "react";
+>>>>>>> added an accordian to the HostEvent
 import Accordion from 'react-bootstrap/Accordion'
 import Card from "react-bootstrap/Card";
 import "../../styles/HappninEvent.css";
@@ -10,6 +14,7 @@ export class HostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< refs/remotes/HappninProject/master
            id: this.props.id,
            event : {
             name: this.props.name,
@@ -80,6 +85,17 @@ export class HostEvent extends Component {
     const data = await res.json();
     console.log(data);
     }
+=======
+      // have to add these to use in FetchEventData
+      eventName : this.props.eventName,
+      eventDescription: this.props.description,
+      category: this.props.categoryId,
+      startTime: this.props.eventTime
+    };
+    console.log("in the constructor");
+    console.log(this.props);
+  }
+>>>>>>> added an accordian to the HostEvent
 
   render() {
     const e = this.props;
@@ -111,6 +127,7 @@ export class HostEvent extends Component {
                 </div>
                 <p id="inline-text">
                 </p>
+<<<<<<< refs/remotes/HappninProject/master
                   <Accordion>
                         <Accordion.Toggle as={Button} variant="link" eventKey="0">
                           Edit
@@ -299,6 +316,20 @@ export class HostEvent extends Component {
                         </form>
                       </Accordion.Collapse>
                   </Accordion>
+=======
+                <Accordion>
+                  <Card>
+                      <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                          Edit
+                        </Accordion.Toggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="0">
+                        <Card.Body> This is where I will put the stuff to edit</Card.Body>
+                      </Accordion.Collapse>
+                    </Card> 
+                </Accordion>  
+>>>>>>> added an accordian to the HostEvent
               </div>
             </div>
           </Col>
