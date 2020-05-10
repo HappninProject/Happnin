@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import { HappninEvent } from "./Event/HappninEvent";
+import { HappninEvent } from "./HappninEvent";
 import authService from '../api-authorization/AuthorizeService';
 
 export class HostedEvents extends Component {
@@ -10,15 +10,31 @@ export class HostedEvents extends Component {
         super(props);
         this.state = {
             isAuthenticated: false,
-            user: ''
+            user: '',
+            Events: [],
+            loading: true
         }
 
     }
 
-  componentDidMount = event => {
+  async componentDidMount(event) {
     this._subscription = authService.subscribe(() => this.populateState());
-    this.populateState();
+    await this.populateState(); 
+    this.GetHostedEvents(); 
   };
+
+  static renderEventsTable(events, userId) {
+    return (
+      <div>
+        {events.map((eventinfo) => (
+          <HappninEvent key={eventinfo.id} {...eventinfo} 
+          attending={eventinfo.going}
+          userId={userId}
+          />
+        ))}
+      </div>
+    );
+  }
 
   async populateState() {
     const [isAuthenticated, user] = await Promise.all([
@@ -33,9 +49,20 @@ export class HostedEvents extends Component {
   }
 
   render() {
-     return (
-        <div><h1>Here in my hosted events</h1></div>         
-     ) 
+    if(this.loading){
+        return (
+            <div><h1>Here in my hosted events</h1></div>         
+        ) 
+    }
+    return HostedEvents.renderEventsTable(this.state.event, this.state.userId);
+ }
+
+  async GetHostedEvents(){
+    const userId = this.state.user;
+    console.log("user id" + userId)
+    const response = await fetch(`api/Event/HostedEvent/${userId}`);
+    const data = await response.json();
+    this.setState({ Events: data, loading: false });
   }
 
 }
