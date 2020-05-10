@@ -49,12 +49,52 @@ export class HostedEvents extends Component {
   }
 
   render() {
-    if(this.loading){
-        return (
-            <div><h1>Here in my hosted events</h1></div>         
-        ) 
-    }
-    return HostedEvents.renderEventsTable(this.state.event, this.state.userId);
+   let contents = this.state.loading ? (
+      <p>
+        <em>Loading...</em>
+      </p>
+    ) : (
+      HostedEvents.renderEventsTable(this.state.Events, this.state.userId)
+    );
+    return (
+      <div className="container-fluid card">
+        <h1 className="header">Welcome to Happnin</h1>
+
+        <table className="event-table">
+          <td>
+            <div className="eventTable">
+              <th className="eventsHeader">Upcoming Events:</th>
+              <tr>
+                <td className="event"> test </td>
+              </tr>
+            </div>
+          </td>
+          <td>
+            <div className="eventTable">
+              <th className="eventsHeader">Friends' Events:</th>
+              <tr>
+                <td className="event"> test </td>
+              </tr>
+            </div>
+          </td>
+          <td>
+            <div className="eventTable">
+              <th className="eventsHeader">Popular Events:</th>
+              <tr>
+                <td className="event"> test </td>
+              </tr>
+            </div>
+          </td>
+        </table>
+        <div className="submit">
+          <h1 id="tabelLabel" className="header">
+            Events
+          </h1>
+          <p>Got these events from our server DAWG</p>
+          {contents}
+        </div>
+      </div>
+    );
  }
 
   async GetHostedEvents(){
