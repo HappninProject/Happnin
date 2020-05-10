@@ -131,10 +131,15 @@ export class HostedEvents extends Component {
     const response = await fetch(`api/Event/HostedEvent/${userId}`);
     const data = await response.json();
 <<<<<<< refs/remotes/HappninProject/master
+<<<<<<< refs/remotes/HappninProject/master
     console.log("Data");
     console.log(data);
 =======
 >>>>>>> have to get the events to render
+=======
+    console.log("Data");
+    console.log(data);
+>>>>>>> why the hell wont this work
     this.setState({ Events: data, loading: false });
   }
 

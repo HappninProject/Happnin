@@ -15,12 +15,17 @@ export class HostEvent extends Component {
     super(props);
     this.state = {
 <<<<<<< refs/remotes/HappninProject/master
+<<<<<<< refs/remotes/HappninProject/master
            id: this.props.id,
            event : {
+=======
+        event : {
+>>>>>>> why the hell wont this work
             name: this.props.name,
             description: this.props.description,
             locationId: this.props.locationId,
             categoryId: this.props.locationId,
+<<<<<<< refs/remotes/HappninProject/master
             hostId: this.props.userId,
             eventTime: this.props.eventTime,
             endTime: this.props.endTime,
@@ -91,11 +96,34 @@ export class HostEvent extends Component {
       eventDescription: this.props.description,
       category: this.props.categoryId,
       startTime: this.props.eventTime
+=======
+            hostId: this.props.hostId,
+            eventTime: this.props.startTime,
+            endTime: this.props.endTime,
+            cost: this.props.cost,
+            ageRestriction: this.props.ageRestriction
+        }
+>>>>>>> why the hell wont this work
     };
-    console.log("in the constructor");
-    console.log(this.props);
   }
 >>>>>>> added an accordian to the HostEvent
+
+  handleInputChange = event => {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    console.log(target.type)
+    console.log(value)
+    console.log(name)
+    this.setState({
+      event: {
+        ...this.state.event,
+        [name]: name === 'cost' || name === 'categoryId' || name === 'ageRestriction' ? parseFloat(value) : value
+      }
+    });
+    console.log(this.state);
+  };
 
   render() {
     const e = this.props;
@@ -318,16 +346,57 @@ export class HostEvent extends Component {
                   </Accordion>
 =======
                 <Accordion>
-                  <Card>
-                      <Card.Header>
-                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                          Edit
-                        </Accordion.Toggle>
-                      </Card.Header>
-                      <Accordion.Collapse eventKey="0">
-                        <Card.Body> This is where I will put the stuff to edit</Card.Body>
-                      </Accordion.Collapse>
-                    </Card> 
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                    Edit
+                   </Accordion.Toggle>
+                   <Accordion.Collapse eventKey="0">
+                   <div class="form-group">
+                    <label for="inputName">Name:</label>
+                    <input
+                      id="inputName"
+                      class="form-control"
+                      name="name"
+                      type="text"
+                      placeholder="Title"
+                      value={this.state.event.name}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label for="description">Description:</label>
+                      <textarea
+                        id="description"
+                        className="form-control"
+                        cols="50"
+                        rows="5"
+                        description="description"
+                        name="description"
+                        minLength="1"
+                        maxLength="200"
+                        value={this.state.event.description}
+                        onChange={this.handleInputChange}
+                        required
+                      ></textarea>
+                  </div>
+                    <div class="categorySelect">
+                      <label for="categorySelect">Event category:</label>
+                        <select
+                          id="categorySelect"
+                          value={this.state.event.categoryId}
+                          class="form-control"
+                          name="categoryId"
+                          onChange={this.handleInputChange}
+                        >
+                          <option value="1">Music</option>
+                          <option value="2">Comedy</option>
+                          <option value="3">Culture</option>
+                          <option value="4">Festival</option>
+                      </select>
+                    </div>
+
+
+                  </Accordion.Collapse>
                 </Accordion>  
 >>>>>>> added an accordian to the HostEvent
               </div>
