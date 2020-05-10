@@ -1,4 +1,5 @@
-﻿import React, { Component } from "react";
+﻿import React, {Button, Component } from "react";
+import Accordion from 'react-bootstrap/Accordion'
 import Card from "react-bootstrap/Card";
 import "../../styles/HappninEvent.css";
 import logo from "../../images/happninHLogoThumb.png";
@@ -9,9 +10,6 @@ export class HostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      attending: false,
-      attendingId: -1,
-      gotDerived: false,
       // have to add these to use in FetchEventData
       eventName : this.props.eventName,
       eventDescription: this.props.description,
@@ -20,49 +18,6 @@ export class HostEvent extends Component {
     };
     console.log("in the constructor");
     console.log(this.props);
-    this.attending = this.attending.bind(this);
-  }
-
-  //! get props from here
-  static getDerivedStateFromProps(props, state) {
-    console.log("we in getDerived");
-    console.log(props);
-    console.log(state);
-
-    return {
-      attending: props.attending,
-      attendingId: props.attendingId,
-      gotDerived: true,
-    };
-  }
-
-  async attending() {
-    console.log("in attending");
-    console.log(this.state);
-    if (this.state.attending === false) {
-      const attendInfo = {
-        eventId: this.props.id,
-        userId: this.props.userId,
-      };
-      await fetch("api/Attendee", {
-        method: "POST",
-        body: JSON.stringify(attendInfo),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-    } else {
-      const attendId = this.props.attendingId;
-      const response = await fetch(`api/Attendee/${attendId}`, {
-        method: "DELETE",
-      });
-      console.log(response);
-    }
-    this.props.handler();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("component did update");
-    console.log(prevProps);
-    console.log(prevState);
   }
 
   render() {
@@ -93,30 +48,23 @@ export class HostEvent extends Component {
                   Category: <b>{e.categoryId}</b> <br />
                   {startTime} - {endTime} <br />
                 </div>
-                <button
-                  className="btn secondaryButton"
-                  onClick={this.props.handler}
-                >
-                  Add to Favorites
-                </button>
                 <p id="inline-text">
-                  {this.state.attending === true
-                    ? "This is HAPPNIN!"
-                    : "This is not HAPPNIN..."}
                 </p>
-                <button
-                  id="buyTicketsButton"
-                  className="btn btn-primary"
-                  onClick={this.attending}
-                >
-                  {this.state.attending === true ? "Going!" : "Go!"}
-                </button>
+                <Accordion>
+                  <Card>
+                      <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                          Edit
+                        </Accordion.Toggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="0">
+                        <Card.Body> This is where I will put the stuff to edit</Card.Body>
+                      </Accordion.Collapse>
+                    </Card> 
+                </Accordion>  
               </div>
             </div>
           </Col>
-          {console.log("in the dealio")}
-          {console.log(this.props)}
-          {console.log(this.state)}
         </Row>
       </div>
     );

@@ -17,6 +17,8 @@ export class HostedEvents extends Component {
 
     }
 
+    //TODO need to pull all the event information, like the location and such
+
   async componentDidMount(event) {
     this._subscription = authService.subscribe(() => this.populateState());
     await this.populateState(); 
@@ -58,39 +60,10 @@ export class HostedEvents extends Component {
     );
     return (
       <div className="container-fluid card">
-        <h1 className="header">Welcome to Happnin</h1>
-
-        <table className="event-table">
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Upcoming Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Friends' Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Popular Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-        </table>
         <div className="submit">
           <h1 id="tabelLabel" className="header">
-            Events
+            Hosted Events
           </h1>
-          <p>Got these events from our server DAWG</p>
           {contents}
         </div>
       </div>
