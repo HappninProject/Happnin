@@ -331,7 +331,6 @@ export class SubmitEvent extends Component {
           <div class="form-group"> 
               <label for="costId">Cost:</label>
               <input 
-
                 type="number" 
                 name="cost"
                 value={this.state.event.cost}
