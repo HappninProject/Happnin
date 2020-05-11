@@ -93,12 +93,6 @@ export class HappninEvent extends Component {
                   Category: <b>{e.categoryId}</b> <br />
                   {startTime} - {endTime} <br />
                 </div>
-                <button
-                  className="btn secondaryButton"
-                  onClick={this.props.handler}
-                >
-                  Add to Favorites
-                </button>
                 <p id="inline-text">
                   {this.state.attending === true
                     ? "This is HAPPNIN!"

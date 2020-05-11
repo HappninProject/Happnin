@@ -1,4 +1,7 @@
-﻿using Happnin.Business.Dto;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Happnin.Business.Dto;
 using Happnin.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +13,14 @@ namespace Happnin.Controllers
     {
         public EventController(IEventService service) : base(service)
         {
+        }
+
+        [HttpGet]
+        [Route("HostedEvent/{id}")]
+        public Task<List<Event>> GetHostedEvents(string id)
+        {
+            var eventService = (IEventService)this.Service;
+            return eventService.FetchHostedEventsAsync(id);
         }
     }
 }
