@@ -18,6 +18,7 @@ import notification from "../images/bell.svg";
 import friends from "../images/users.svg";
 import messages from "../images/inbox.svg";
 import Dropdown from "react-bootstrap/Dropdown";
+
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
   constructor(props) {
@@ -67,14 +68,14 @@ export class NavMenu extends Component {
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav">
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavItem>
                     <NavLink tag={Link} className="navHeader" to="/">
                       Home
                     </NavLink>
                   </NavItem>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavItem>
                     <NavLink
                       tag={Link}
@@ -85,7 +86,7 @@ export class NavMenu extends Component {
                     </NavLink>
                   </NavItem>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavItem>
                     <NavLink
                       tag={Link}
@@ -96,7 +97,7 @@ export class NavMenu extends Component {
                     </NavLink>
                   </NavItem>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavItem>
                     <NavLink
                       tag={Link}
@@ -107,7 +108,7 @@ export class NavMenu extends Component {
                     </NavLink>
                   </NavItem>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavItem>
                     <NavLink
                       tag={Link}
@@ -118,21 +119,21 @@ export class NavMenu extends Component {
                     </NavLink>
                   </NavItem>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <LoginMenu></LoginMenu>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavbarBrand tag={Link} to="/friend-request" className="friends">
-                    <img id="friends" class="" alt="friends" src={friends} />
+                    <img id="friends" className="" alt="friends" src={friends} />
                   </NavbarBrand>
                 </div>
-                <div class="flexItem">
+                <div className="flexItem">
                   <NavbarBrand tag={Link} to="/messages" className="messages">
-                    <img id="messages" class="" alt="messages" src={messages} />
+                    <img id="messages" className="" alt="messages" src={messages} />
                   </NavbarBrand>
                 </div>
                 {/* not sure if this part should be included in div */}
-                <div class="flexItem">
+                <div className="flexItem">
                   <Dropdown>
                     <Dropdown.Toggle
                       variant="link"
@@ -153,7 +154,7 @@ export class NavMenu extends Component {
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
-                <div id="weatherInfo" class="flexItem">
+                <div id="weatherInfo" className="flexItem">
                   <Weather id="weather"></Weather>
                 </div>
               </ul>
