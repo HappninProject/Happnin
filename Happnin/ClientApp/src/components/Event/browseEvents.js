@@ -11,12 +11,30 @@ export class BrowseEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventNameSearch: "",
-      eventWordSearch: "",
-      eventZipSearch: "",
-      eventCategory: "",
       startDate: new Date(),
     };
+  }
+
+  //had to create different handlers to pass specific info to props in parent class
+  
+  handleNameSearchChange = (event) => {
+    console.log("State of name search: " + event.target.value);
+    let nameSearchValue = event.target.value;
+    //passing this to parent's props
+    this.props.onNameSearchChange(nameSearchValue);
+  };
+
+  handleWordSearchChange = (event) => {
+    console.log("State of word search: " + event.target.value);
+    let wordSearchValue = event.target.value;
+    //passing this to parent's props
+    this.props.onWordSearchChange(wordSearchValue);
+  }
+
+  handleCategoryChange = (event) => {
+    console.log("State of category search: " + event.target.value);
+    let categorySearchValue = event.target.value;
+    this.props.onCategorySearchChange(categorySearchValue);
   }
 
   handleInputChange = (event) => {
@@ -41,8 +59,7 @@ export class BrowseEvents extends Component {
               type="text"
               name="eventNameSearch"
               className="rounded"
-              value={this.state.eventNameSearch}
-              onChange={this.handleInputChange}
+              onChange={this.handleNameSearchChange}
             ></input>
           </div>
 
@@ -52,8 +69,7 @@ export class BrowseEvents extends Component {
               type="text"
               name="eventWordSearch"
               className="rounded"
-              value={this.state.eventWordSearch}
-              onChange={this.handleInputChange}
+              onChange={this.handleWordSearchChange}
             ></input>
           </div>
 
@@ -78,9 +94,10 @@ export class BrowseEvents extends Component {
             <select
               className="rounded"
               name="eventCategory"
-              value={this.state.category}
-              onChange={this.handleInputChange}
+              // value={this.state.category}
+              onChange={this.handleCategoryChange}
             >
+              <option value="All">All Categories</option>
               <option value="Music">Music</option>
               <option value="Comedy">Comedy</option>
               <option value="Culture">Culture</option>
@@ -98,13 +115,12 @@ export class BrowseEvents extends Component {
               onChange={this.handleDateChange.bind(this, "startDate")}
             />
           </div>
-          {/* //! This button doesn't do anything currently */}
-          <button>Search</button>
         </div>
         <br />
-        <div>
+        {/* //!temporarily commented out */}
+        {/* <div>
           <FetchEventDataWithError404/>
-        </div>
+        </div> */}
       </div>
     );
   }

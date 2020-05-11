@@ -3,8 +3,9 @@ import { HappninEvent } from "./HappninEvent";
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import Error404Page from "../Error404Page";
 
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-class FetchEventData extends Component {
+export class FetchEventData extends Component {
   static displayName = FetchEventData.name;
 
   constructor(props) {
@@ -17,81 +18,49 @@ class FetchEventData extends Component {
       lng: 0, 
       zoom: 13,
       //the filtered events
-      filteredEvents: [],
-      //these are used to filter
-      eventNames: [],
-      eventDescriptions: [],
-      eventTimes: [],
-      eventCategories: []
+      filteredEvents: []
     };
   }
-//!Uncomment later
-  // componentWillMount() {
-  //   this.setState({
-  //     events,
-  //     filteredEvents: events
-  //   })
-  // }
 
-  async componentDidMount() {
-    //adding the data from the events
-    const response = await fetch("api/Event");
-    console.log("Event response" + response);
-    const data = await response.json();
-    console.log("Got Data", data);
-    this.setState({ events: data});
-
-    //setting the filtered state to normal event state as default, will filter later
+    componentDidMount() {
+    this.populateEventData();
     this.setState({
-      filteredEvents: this.state.events
-    });
+      filteredEvents: this.state.events 
+    })
     navigator.geolocation.getCurrentPosition((position) => {
       console.log(position);
       let lat = position.coords.latitude;
       let lng = position.coords.longitude;
       this.setState({lng : lng, lat:lat});
     });
+  }
 
-    //this is the array of events on the database
-    const eventArray = this.state.events;
-    //so we want to extract the contents of each property in the events object array and set the state of each
-    //variable that is used to filter in filterEvents()
-
-    //getting the names
-    let names = eventArray.map(event => event.name);
-    console.log("Event names: " + names);
+  async populateEventData() {
+    const response = await fetch("api/Event");
+    console.log("Event response" + response);
+    const data = await response.json();
+    console.log("Got Data", data);
+    this.setState({ events: data, loading: false});
+    //have to set the state of filtered events after the events variable has already been populated
     this.setState({
-      eventNames: names
+      filteredEvents: this.state.events
     });
+  }
 
-    //getting the descriptions
-    let descriptions = eventArray.map(event => event.description);
-    console.log("Event descriptions: " + descriptions);
+  //setting the state
+  parseData(res){
+    return res.data;
+  }
+
+  onLoad = (data) => {
     this.setState({
-      eventDescriptions: descriptions
-    });
-
-    //getting the start times
-    let startTimes = eventArray.map(event => event.eventTime);
-    console.log("Event start times: " + startTimes);
-    this.setState({
-      eventTimes: startTimes
-    });
-
-    //getting the category
-    let categories = eventArray.map(event => event.categoryId);
-    console.log("Event categorys (IDs): " + categories);
-    this.setState({
-      eventCategories: categories
-    });
-
-    //Now loading is done
-    this.setState({loading: false});
+      events: this.parseData(data)
+    })
+    console.log("The data: " + data);
   }
 
   filterEvents = (filter) => {
     let filteredEvents = this.state.events;
-    console.log("Filtered events: " + filteredEvents)
 
     filteredEvents = filteredEvents.filter((event) => {
       //!testing, making title lowercase for now
@@ -105,30 +74,120 @@ class FetchEventData extends Component {
       })
     })
   }
-
+  
+// got rid of static
   static renderEventsTable(events) {
-    return (
+    if (events && events.length) {
+      return (
+        <div>
+          {events.map((eventinfo) => (
+            <HappninEvent key={eventinfo.id} {...eventinfo} 
+            />
+          ))}
+        </div>
+      );
+    }
+    else{
+      return <div>No events found right now!</div>
+    }
+  }
+
+  renderLoading(){
+    return(
       <div>
-        {events.map((eventinfo) => (
-          <HappninEvent key={eventinfo.id} {...eventinfo} 
-          />
-        ))}
+        <p>Loading...</p>
       </div>
     );
   }
 
+  renderFilteredEvents(events){
+
+    if (events && events.length) {
+      //convert to JSON
+      let filteredEvents = this.state.events;
+      //get the state of the variable
+      console.log("State of filtered events variable: " + JSON.stringify(this.state.filteredEvents));
+      console.log("Filtered events in renderFilteredEvents: " + filteredEvents);
+      console.log("Getting the first event: " + JSON.stringify(filteredEvents[0]));
+      console.log("Getting the first event's name: " + filteredEvents[0].name);
+
+      //displays event if event name contains entered input
+      if(this.props.name !== ""){
+        let name = this.props.name.toUpperCase();
+        filteredEvents = filteredEvents.filter((event) =>{
+          //checking if the event name contains a word
+          console.log("Name of event: " + event.name);
+          return event.name.toUpperCase().includes(name);
+        })
+      }
+
+      //displays event if it contains a word in name or description
+      if(this.props.word !== ""){
+        let word = this.props.word.toUpperCase();
+        filteredEvents = filteredEvents.filter((event) =>{
+          //checking if the event name contains a word
+          return event.name.toUpperCase().includes(word) || event.description.toUpperCase().includes(word);
+        })
+      }
+
+      //displays event if it fits the category the user has entered
+      if(this.props.category !== "All" && this.props.category !== "" ){
+        //converting between category name and category ID
+        let categoryID;
+        if(this.props.category === "Music"){
+          console.log("Category is Music");
+          categoryID = 1;
+        }
+        else if(this.props.category === "Comedy"){
+          console.log("Category is Comedy");
+          categoryID = 2;
+        }
+        else if(this.props.category === "Culture"){
+          console.log("Category is Culture");
+          categoryID = 3;
+        }
+        else if(this.props.category === "Festival"){
+          console.log("Category is Festival");
+          categoryID = 4;
+        }
+        //filtering based on the category ID
+        filteredEvents = filteredEvents.filter((event) =>{
+          //checking if category IDs match
+          console.log("Name of category: " + event.categoryId);
+          return event.categoryId === categoryID;
+        })
+      }
+
+      return (
+        <div>
+            {filteredEvents.map((eventinfo) => (
+            <HappninEvent key={eventinfo.id} {...eventinfo} 
+            />
+          ))}
+        </div>
+      );
+    }
+    else{
+      return <div>No events found right now!</div>
+    }
+  }
+
 
   render() {
-    let contents = this.state.loading ? (
-      <p>
-        <em>Loading...</em>
-      </p>
-    ) : (
-      FetchEventData.renderEventsTable(this.state.events)
-    );
+    const events = this.state.events;
+    //logging the data 
+    console.log("This is the data: " + events);
 
+    //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
+    let eventsData = events ?
+    FetchEventData.renderEventsTable(events) :
+    this.renderLoading();
+
+    //getting the filtered data
+    let filteredEventsData = events ?
+    this.renderFilteredEvents(events) :
+    this.renderLoading();
     
-
     return (
 
       <div>
@@ -148,35 +207,15 @@ class FetchEventData extends Component {
           Events
         </h1>
         <p>Got these events from our server DAWG</p>
-
-        {contents}
+        {eventsData}
         <div>
         {/* This is where the filtered data goes */}
-        <h1>Filtered Data Here</h1>
-        {/* //!uncomment eventually */}
-        {/* <BrowseEvents events={this.state.filteredEvents} onChange={this.filterEvents} /> */}
+        <h1 className="header">Filtered Events</h1>
+        {filteredEventsData}
         </div>
       </div>
     );
   }
-
-  //!Not being used
-  // async populateEventData() {
-  //   const response = await fetch("api/Event");
-  //   console.log("Event response" + response);
-  //   const data = await response.json();
-  //   console.log("Got Data", data);
-  //   this.setState({ events: data, loading: false});
-  //   //have to set the state of filtered events after the events variable has already been populated
-  //       this.setState({
-  //     filteredEvents: this.state.events
-  //   });
-  //   console.log("Filtered events: " + this.state.filteredEvents);
-  //           //!Testing
-  //           console.log("State of filtered events variable: " + JSON.stringify(this.state.filteredEvents));
-  //           console.log("Getting the first event: " + JSON.stringify(this.state.filteredEvents[0]));
-  //           console.log("Getting the first event's name: " + JSON.stringify(this.state.filteredEvents[0].name));
-  // }
 }
 
 export default function FetchEventDataWithError404(props) {
