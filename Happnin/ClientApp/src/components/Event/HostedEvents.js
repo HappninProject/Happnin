@@ -12,9 +12,9 @@ export class HostedEvents extends Component {
             isAuthenticated: false,
             user: '',
             Events: [],
+            Locations: [], 
             loading: true
         }
-
     }
 
     //TODO need to pull all the event information, like the location and such
@@ -22,15 +22,16 @@ export class HostedEvents extends Component {
   async componentDidMount(event) {
     this._subscription = authService.subscribe(() => this.populateState());
     await this.populateState(); 
-    this.GetHostedEvents(); 
+    await this.GetHostedEvents();
+    await this.GetLocations(); 
   };
 
-  static renderEventsTable(events, userId) {
+  static renderEventsTable(events, location, userId) {
     return (
       <div>
         {events.map((eventinfo) => (
           <HostEvent key={eventinfo.id} {...eventinfo} 
-
+          location = {this.GetRightLocation(eventinfo.locationId, location)} 
           userId={userId}
           />
         ))}
@@ -56,7 +57,7 @@ export class HostedEvents extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      HostedEvents.renderEventsTable(this.state.Events, this.state.user)
+      HostedEvents.renderEventsTable(this.state.Events, this.state.Locations,this.state.user)
     );
     return (
       <div className="container-fluid card">
@@ -80,4 +81,23 @@ export class HostedEvents extends Component {
     this.setState({ Events: data, loading: false });
   }
 
+  async GetLocations(){
+    const eventIds = this.state.Events.map(e => e.locationId);
+    let locations = [];
+    for (let i = 0; i < eventIds.length; i++){
+      let res = await fetch(`api/Location/${eventIds[i]}`); 
+      let data = await res.json();
+      locations.push(data);
+    }
+
+    this.setState({Locations: locations})
+  }
+
+  static GetRightLocation(locationId, locations){
+    for( var i of locations ){
+      if ( i.id === locationId){
+        return i;
+      }
+    }
+  }
 }
