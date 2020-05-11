@@ -125,15 +125,12 @@ export class BrowseEvents extends Component {
         </div> */}
 =======
         </div>
-
         <div>
                 <li><Link to="/EventPage">test page</Link></li>
         </div>
-
-<<<<<<< refs/remotes/HappninProject/master
->>>>>>> added an event page and did some refactoring
-=======
->>>>>>> added an event page and did some refactoring
+        <div>
+        </div>
+                <li><Link to="/EventPage">test page</Link></li>
       </div>
     );
   }

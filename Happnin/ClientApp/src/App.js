@@ -19,15 +19,8 @@ import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
 import { FriendRequests } from "./components/User/FriendRequests";
-<<<<<<< refs/remotes/HappninProject/master
-<<<<<<< refs/remotes/HappninProject/master
 import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
-=======
 import { EventPage } from "./components/Event/EventPage";
->>>>>>> added an event page and did some refactoring
-=======
-import { EventPage } from "./components/Event/EventPage";
->>>>>>> added an event page and did some refactoring
 
 export default class App extends Component {
   static displayName = App.name;

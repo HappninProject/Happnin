@@ -258,14 +258,6 @@ export class SubmitEvent extends Component {
                         class="form-control">
                     </input>
                 </div>
-<<<<<<< refs/remotes/HappninProject/master
-<<<<<<< refs/remotes/HappninProject/master
-=======
-<<<<<<< refs/remotes/HappninProject/EditingEvents
->>>>>>> added an event page and did some refactoring
-
-=======
->>>>>>> added an event page and did some refactoring
             </div>
         <h3>What is your event?</h3>
           <div class="form-group">
