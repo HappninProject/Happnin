@@ -20,6 +20,7 @@ import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
 import { FriendRequests } from "./components/User/FriendRequests";
+import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -33,8 +34,11 @@ export default class App extends Component {
       <Layout>
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />
-        <Route path="/BrowseEvents" component={BrowseEvents} />
-        <Route path="/fetch-event-data" component={FetchEventDataWithError404} />
+        {/* Commented this out */}
+        {/* <Route path="/BrowseEvents" component={BrowseEvents} /> */}
+        {/* added this */}
+        <Route path="/BrowseEvents" component={FetchBrowseEvents} />
+        {/* <Route path="/fetch-event-data" component={FetchEventDataWithError404} /> */}
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
         <Route
