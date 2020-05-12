@@ -18,23 +18,31 @@ export class BrowseEvents extends Component {
   //had to create different handlers to pass specific info to props in parent class
   
   handleNameSearchChange = (event) => {
-    console.log("State of name search: " + event.target.value);
     let nameSearchValue = event.target.value;
     //passing this to parent's props
     this.props.onNameSearchChange(nameSearchValue);
   };
 
   handleWordSearchChange = (event) => {
-    console.log("State of word search: " + event.target.value);
     let wordSearchValue = event.target.value;
     //passing this to parent's props
     this.props.onWordSearchChange(wordSearchValue);
   }
 
   handleCategoryChange = (event) => {
-    console.log("State of category search: " + event.target.value);
     let categorySearchValue = event.target.value;
     this.props.onCategorySearchChange(categorySearchValue);
+  }
+
+  handleAgeChange = (event) => {
+    let ageSearchValue = event.target.value;
+    this.props.onAgeSearchChange(ageSearchValue);
+
+  }
+
+  handleCostChange = (event) => {
+    let costSearchValue = event.target.value;
+    this.props.onCostSearchChange(costSearchValue);
   }
 
   handleInputChange = (event) => {
@@ -51,10 +59,10 @@ export class BrowseEvents extends Component {
   render() {
     return (
       <div className="container-fluid card">
-        <h1 className="header">Events</h1>
+        <h1 className="header">Search for Events</h1>
         <div className="text-center">
           <div id="filterName">
-            <label className="subHeader">Search by event name:&nbsp;</label>
+            <label className="subHeader">Event name:&nbsp;</label>
             <input
               type="text"
               name="eventNameSearch"
@@ -64,7 +72,7 @@ export class BrowseEvents extends Component {
           </div>
 
           <div id="filterWord">
-            <label className="subHeader">Search by word or phrase:&nbsp;</label>
+            <label className="subHeader">Word or phrase:&nbsp;</label>
             <input
               type="text"
               name="eventWordSearch"
@@ -75,7 +83,7 @@ export class BrowseEvents extends Component {
 
           <div id="filterZip">
             <label className="subHeader">
-              &nbsp;&nbsp;Search by zip code:&nbsp;
+              &nbsp;&nbsp;Zip code:&nbsp;
             </label>
             <input
               type="text"
@@ -87,6 +95,17 @@ export class BrowseEvents extends Component {
             ></input>
           </div>
 
+          <div id="filterDate">
+            <label className="subHeader">
+              &nbsp;&nbsp;Events by date:&nbsp;{this.state.eventSearch}
+            </label>
+            <DatePicker
+              popperPlacement="top-end"
+              selected={this.state.startDate}
+              onChange={this.handleDateChange.bind(this, "startDate")}
+            />
+          </div>
+
           <div id="filterCategory">
             <label className="subHeader">
               &nbsp;&nbsp;Events by category:&nbsp;
@@ -94,7 +113,6 @@ export class BrowseEvents extends Component {
             <select
               className="rounded"
               name="eventCategory"
-              // value={this.state.category}
               onChange={this.handleCategoryChange}
             >
               <option value="All">All Categories</option>
@@ -105,15 +123,40 @@ export class BrowseEvents extends Component {
             </select>
           </div>
 
-          <div id="filterDate">
+          {/* age restriction */}
+          <div id="filterAge">
             <label className="subHeader">
-              &nbsp;&nbsp;Events by date:&nbsp;{this.state.eventSearch}
+              &nbsp;&nbsp;Events by age restriction:&nbsp;
             </label>
-            <DatePicker
-              popperPlacement="top-end"
-              selected={this.state.startDate}
-              onChange={this.handleDateChange.bind(this, "startDate")}
-            />
+            <select
+              className="rounded"
+              name="eventAge"
+              // value={this.state.category}
+              onChange={this.handleAgeChange}
+            >
+              <option value="AllAges">All Ages</option>
+              <option value="18">18+</option>
+              <option value="21">21+</option>
+            </select>
+          </div>
+
+          {/* cost of event */}
+          <div id="filterCost">
+            <label className="subHeader">
+              &nbsp;&nbsp;Events by cost to attend:&nbsp;
+            </label>
+            <select
+              className="rounded"
+              name="eventCost"
+              onChange={this.handleCostChange}
+            >
+              <option value="AnyPrice">Any Price</option>
+              <option value="0">Free</option>
+              <option value="25">Between .50 and $25</option>
+              <option value="50">Between $25.50 and $50</option>
+              <option value="100">Between $50.50 and $100</option>
+              <option value="More">More than $100</option>
+            </select>
           </div>
         </div>
         <br />

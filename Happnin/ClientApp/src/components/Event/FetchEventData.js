@@ -17,12 +17,11 @@ export class FetchEventData extends Component {
       lat: 0, 
       lng: 0, 
       zoom: 13,
-      //the filtered events
       filteredEvents: []
     };
   }
 
-    componentDidMount() {
+  componentDidMount() {
     this.populateEventData();
     this.setState({
       filteredEvents: this.state.events 
@@ -46,36 +45,7 @@ export class FetchEventData extends Component {
       filteredEvents: this.state.events
     });
   }
-
-  //setting the state
-  parseData(res){
-    return res.data;
-  }
-
-  onLoad = (data) => {
-    this.setState({
-      events: this.parseData(data)
-    })
-    console.log("The data: " + data);
-  }
-
-  filterEvents = (filter) => {
-    let filteredEvents = this.state.events;
-
-    filteredEvents = filteredEvents.filter((event) => {
-      //!testing, making title lowercase for now
-      filteredEvents = filteredEvents.filter((event) => {
-        let eventName = event.eventName.toLowerCase();
-        return eventName.indexOf(
-          filter.toLowerCase()) !== -1
-      })
-      this.setState({
-        filteredEvents
-      })
-    })
-  }
   
-// got rid of static
   static renderEventsTable(events) {
     if (events && events.length) {
       return (
@@ -100,63 +70,132 @@ export class FetchEventData extends Component {
     );
   }
 
+  //displays event if event name contains entered input
+  filterName = (filteredEvents) => {
+    if(this.props.name !== ""){
+      let name = this.props.name.toUpperCase();
+      filteredEvents = filteredEvents.filter((event) =>{
+        //checking if the event name contains a word
+        return event.name.toUpperCase().includes(name);
+      })
+    }
+    return filteredEvents;
+  }
+
+  //displays event if word or phrase matches
+  filterWord = (filteredEvents) => {
+    if(this.props.word !== ""){
+      let word = this.props.word.toUpperCase();
+      filteredEvents = filteredEvents.filter((event) =>{
+        //checking if the event name contains a word
+        return event.name.toUpperCase().includes(word) || event.description.toUpperCase().includes(word);
+      })
+    }
+    return filteredEvents;
+  }
+
+  //displays event if it fits the category the user has entered
+  filterCategory = (filteredEvents) => {
+    if(this.props.category !== "All" && this.props.category !== "" ){
+      //converting between category name and category ID
+      let categoryID;
+      if(this.props.category === "Music"){
+        categoryID = 1;
+      }
+      else if(this.props.category === "Comedy"){
+        categoryID = 2;
+      }
+      else if(this.props.category === "Culture"){
+        categoryID = 3;
+      }
+      else if(this.props.category === "Festival"){
+        categoryID = 4;
+      }
+      //filtering based on the category ID
+      filteredEvents = filteredEvents.filter((event) =>{
+        //checking if category IDs match
+        return event.categoryId === categoryID;
+      })
+    }
+    return filteredEvents;
+  }
+
+  //displays event if it meets age restriction search
+  filterAge = (filteredEvents) => {
+    if(this.props.age !== "" && this.props.age !== "AllAges"){
+      // this will either be 18+ or 21+
+      let ageRestriction = this.props.age;
+      
+      //filtering based on age
+      filteredEvents = filteredEvents.filter((event) =>{
+        //checking if category IDs match
+        return event.ageRestriction == ageRestriction;
+      })
+
+    }
+    return filteredEvents;
+  }
+
+  //displays event if it meets cost search choice
+  filterCost = (filteredEvents) => {
+    if(this.props.cost !== "" && this.props.cost !== "AnyPrice"){
+      let cost = this.props.cost;
+      
+      //the minimum and maximum prices for filtering
+      let min;
+      let max;
+
+      //setting min and max variables
+      if(cost == 0){
+        min = 0;
+        max = 0;
+      }
+      else if(cost == 25){
+        min = .5;
+        max = 25;
+      }
+      else if(cost == 50){
+        min = 25.5;
+        max = 50;
+      }
+      else if(cost == 100){
+        min = 50.5;
+        max = 100;
+      }
+      else{
+        min = 100.5
+        max = 1000000;
+      }
+
+      //filtering based on cost
+      filteredEvents = filteredEvents.filter((event) =>{
+        console.log("This is the price: " + this.props.cost);
+        return event.cost >= min && event.cost <= max;
+      })
+
+    }
+    return filteredEvents;
+  }
+
   renderFilteredEvents(events){
 
     if (events && events.length) {
-      //convert to JSON
       let filteredEvents = this.state.events;
-      //get the state of the variable
-      console.log("State of filtered events variable: " + JSON.stringify(this.state.filteredEvents));
-      console.log("Filtered events in renderFilteredEvents: " + filteredEvents);
-      console.log("Getting the first event: " + JSON.stringify(filteredEvents[0]));
-      console.log("Getting the first event's name: " + filteredEvents[0].name);
 
-      //displays event if event name contains entered input
-      if(this.props.name !== ""){
-        let name = this.props.name.toUpperCase();
-        filteredEvents = filteredEvents.filter((event) =>{
-          //checking if the event name contains a word
-          console.log("Name of event: " + event.name);
-          return event.name.toUpperCase().includes(name);
-        })
-      }
+      //filtering by name of event
+      filteredEvents = this.filterName(filteredEvents);
 
-      //displays event if it contains a word in name or description
-      if(this.props.word !== ""){
-        let word = this.props.word.toUpperCase();
-        filteredEvents = filteredEvents.filter((event) =>{
-          //checking if the event name contains a word
-          return event.name.toUpperCase().includes(word) || event.description.toUpperCase().includes(word);
-        })
-      }
+      //filtering by a word or phrase
+      filteredEvents = this.filterWord(filteredEvents);
 
-      //displays event if it fits the category the user has entered
-      if(this.props.category !== "All" && this.props.category !== "" ){
-        //converting between category name and category ID
-        let categoryID;
-        if(this.props.category === "Music"){
-          console.log("Category is Music");
-          categoryID = 1;
-        }
-        else if(this.props.category === "Comedy"){
-          console.log("Category is Comedy");
-          categoryID = 2;
-        }
-        else if(this.props.category === "Culture"){
-          console.log("Category is Culture");
-          categoryID = 3;
-        }
-        else if(this.props.category === "Festival"){
-          console.log("Category is Festival");
-          categoryID = 4;
-        }
-        //filtering based on the category ID
-        filteredEvents = filteredEvents.filter((event) =>{
-          //checking if category IDs match
-          console.log("Name of category: " + event.categoryId);
-          return event.categoryId === categoryID;
-        })
-      }
+      //filtering by category
+      filteredEvents = this.filterCategory(filteredEvents);
+
+      //filtering by age
+      filteredEvents = this.filterAge(filteredEvents);
+
+      //filtering by cost
+      filteredEvents = this.filterCost(filteredEvents);
 
       return (
         <div>

@@ -6,34 +6,42 @@ export class FetchBrowseEvents extends Component{
     constructor(props){
         super(props);
         this.state = {
-             nameSearch: '',
-             wordSearch: '',
-            categorySearch: '' 
+            nameSearch: '',
+            wordSearch: '',
+            categorySearch: '',
+            ageSearch: '',
+            costSearch: ''
         }
     }
 
     handleNameSearch = (name) => {
         this.setState({nameSearch: name});
-        console.log("Name search change detected in parent class!");
     }
 
     handleWordFilterChange = (word) => {
         this.setState({wordSearch: word});
-        console.log("Word search change detected in parent class!");
     }
 
     handleCategorySearchChange = (category) => {
-        //!right now just printing it, state has not changed
         this.setState({categorySearch: category});
-        console.log("Category in parent: " + category);
+    }
+
+    handleAgeSearchChange = (age) => {
+        this.setState({ageSearch: age});
+    }
+
+    handleCostSearchChange = (cost) => {
+        this.setState({costSearch: cost});
     }
 
     render(){
         return(
             <div>
                 <BrowseEvents onNameSearchChange = {this.handleNameSearch} onWordSearchChange = {this.handleWordFilterChange} 
-                onCategorySearchChange={this.handleCategorySearchChange}/>
-                <FetchEventData name = {this.state.nameSearch} word = {this.state.wordSearch} category = {this.state.categorySearch}/>
+                onCategorySearchChange={this.handleCategorySearchChange} onAgeSearchChange={this.handleAgeSearchChange}
+                onCostSearchChange = {this.handleCostSearchChange}/>
+                <FetchEventData name = {this.state.nameSearch} word = {this.state.wordSearch} category = {this.state.categorySearch}
+                age = {this.state.ageSearch} cost = {this.state.costSearch}/>
             </div>
         )
     }
