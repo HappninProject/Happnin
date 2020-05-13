@@ -126,17 +126,6 @@ export class NavMenu extends Component {
                     <img id="friends" className="" alt="friends" src={friends} />
                   </NavbarBrand>
                 </div>
-<<<<<<< refs/remotes/HappninProject/master
-<<<<<<< refs/remotes/HappninProject/master
-                <div className="flexItem">
-                  <NavbarBrand tag={Link} to="/messages" className="messages">
-                    <img id="messages" className="" alt="messages" src={messages} />
-                  </NavbarBrand>
-                </div>
-=======
->>>>>>> added an event page and did some refactoring
-=======
->>>>>>> added an event page and did some refactoring
                 {/* not sure if this part should be included in div */}
                 <div className="flexItem">
                   <Dropdown>

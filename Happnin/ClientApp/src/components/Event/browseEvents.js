@@ -166,17 +166,12 @@ export class BrowseEvents extends Component {
           <FetchEventDataWithError404/>
 <<<<<<< refs/remotes/HappninProject/master
         </div> */}
-=======
-        </div>
 
-        <div>
+        </div>
                 <li><Link to="/EventPage">test page</Link></li>
-        </div>
+        <div>
 
-<<<<<<< refs/remotes/HappninProject/master
->>>>>>> added an event page and did some refactoring
-=======
->>>>>>> added an event page and did some refactoring
+        </div>
       </div>
     );
   }

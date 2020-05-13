@@ -1,4 +1,4 @@
-﻿import React, {Button, Component } from "react";
+﻿import React, {Button, Component, Form } from "react";
 import Accordion from 'react-bootstrap/Accordion'
 import Card from "react-bootstrap/Card";
 import "../../styles/HappninEvent.css";
@@ -10,99 +10,19 @@ export class HostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< refs/remotes/HappninProject/master
-<<<<<<< refs/remotes/HappninProject/master
-           id: this.props.id,
-           event : {
-=======
         event : {
->>>>>>> why the hell wont this work
             name: this.props.name,
             description: this.props.description,
             locationId: this.props.locationId,
             categoryId: this.props.locationId,
-<<<<<<< refs/remotes/HappninProject/master
-            hostId: this.props.userId,
-            eventTime: this.props.eventTime,
-            endTime: this.props.endTime,
-            cost: this.props.cost,
-            ageRestriction: this.props.ageRestriction },
-          location : {
-            address: "",
-            city: "",
-            state: "",
-            country: "",
-            zipCode: "" },
-          
-          locationChanged: false
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleInputChange = event => {
-    event.preventDefault();
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    console.log(target.type)
-    console.log(value)
-    console.log(name)
-    this.setState({
-      event: {
-        ...this.state.event,
-        [name]: name === 'cost' || name === 'categoryId' || name === 'ageRestriction' ? parseFloat(value) : value
-      }
-    });
-    console.log(this.state);
-  };
-
-  handleInputLocationChange = event => {
-        event.preventDefault();
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-    
-        this.setState({
-          location: {
-            ...this.state.location,
-            [name]: value
-          },
-          locationChanged: true
-        });
-        console.log(this.state);
-      };
-
-  async handleSubmit(event) {
-    event.preventDefault();
-    const happninEvent = this.state.event;
-    const id = this.state.id;
-    console.log(JSON.stringify(this.state.event));
-    let res = await fetch(`api/Event/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(happninEvent),
-      headers: { "Content-Type": "application/json" }
-    })
-    const data = await res.json();
-    console.log(data);
-    }
-=======
-      // have to add these to use in FetchEventData
-      eventName : this.props.eventName,
-      eventDescription: this.props.description,
-      category: this.props.categoryId,
-      startTime: this.props.eventTime
-=======
             hostId: this.props.hostId,
             eventTime: this.props.startTime,
             endTime: this.props.endTime,
             cost: this.props.cost,
             ageRestriction: this.props.ageRestriction
         }
->>>>>>> why the hell wont this work
     };
   }
->>>>>>> added an accordian to the HostEvent
 
   handleInputChange = event => {
     event.preventDefault();
@@ -151,55 +71,45 @@ export class HostEvent extends Component {
                 </div>
                 <p id="inline-text">
                 </p>
-                <Accordion>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    Edit
-                   </Accordion.Toggle>
-                   <Accordion.Collapse eventKey="0">
-                   <div class="form-group">
-                    <label for="inputName">Name:</label>
-                    <input
-                      id="inputName"
-                      class="form-control"
-                      name="name"
-                      type="text"
-                      placeholder="Title"
-                      value={this.state.event.name}
-                      onChange={this.handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="description">Description:</label>
-                      <textarea
-                        id="description"
-                        className="form-control"
-                        cols="50"
-                        rows="5"
-                        description="description"
-                        name="description"
-                        minLength="1"
-                        maxLength="200"
-                        value={this.state.event.description}
-                        onChange={this.handleInputChange}
-                        required
-                      ></textarea>
-                  </div>
-                    <div class="categorySelect">
-                      <label for="categorySelect">Event category:</label>
-                        <select
-                          id="categorySelect"
-                          value={this.state.event.categoryId}
-                          class="form-control"
-                          name="categoryId"
-                          onChange={this.handleInputChange}
-                        >
-                          <option value="1">Music</option>
-                          <option value="2">Comedy</option>
-                          <option value="3">Culture</option>
-                          <option value="4">Festival</option>
-                      </select>
-                    </div>
+                  <Accordion>
+                    <Card>
+                      <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                          Edit
+                        </Accordion.Toggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                          <form>
+                          <div class="form-group">
+                            <label for="inputName">Name:</label>
+                            <input
+                              id="inputName"
+                              class="form-control"
+                              name="name"
+                              type="text"
+                              placeholder="Title"
+                              value={this.state.event.name}
+                              onChange={this.handleInputChange}
+                              required
+                            />
+                          </div>
+                          <div className="form-group">
+                          <label for="description">Description:</label>
+                            <textarea
+                              id="description"
+                              className="form-control"
+                              cols="50"
+                              rows="5"
+                              description="description"
+                              name="description"
+                              minLength="1"
+                              maxLength="200"
+                              value={this.state.event.description}
+                              onChange={this.handleInputChange}
+                              required
+                            ></textarea>
+                        </div>
 
                         <div class="categorySelect">
                           <label for="categorySelect">Event category:</label>
@@ -226,8 +136,39 @@ export class HostEvent extends Component {
                               className="form-control"/>
                           </div>
 
-                  </Accordion.Collapse>
-                </Accordion>  
+                          <div class="form-group">
+                            <label>End Time:</label>
+                              <input 
+                              type="datetime-local"
+                              name="endTime"
+                              value={this.state.endTime}
+                              onChange={this.handleInputChange}
+                              className="form-control"/>
+                          </div>
+                          <div class="form-group"> 
+                            <label for="costId">Cost:</label>
+                              <input 
+                                type="number" 
+                                name="cost"
+                                value={this.state.event.cost}
+                                min="0.00" step="0.50" 
+                                data-number-to-fixed="4" 
+                                data-number-stepfactor="100" 
+                                class="form-control currency" 
+                                id="costId" 
+                                onChange={this.handleInputChange}/>
+                          </div>
+                          <div class="image">
+                            Image: <input id="imageUpload" type="file" />
+                          </div>
+                          <button className="btn primaryButton" type="submit">
+                            Submit
+                          </button>
+                        </form>
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Card>
+                  </Accordion>
               </div>
             </div>
           </Col>
