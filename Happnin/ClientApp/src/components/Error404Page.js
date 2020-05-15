@@ -1,6 +1,6 @@
 //most code from reactjs.org/docs/error-boundaries.html
 import React, { Component } from "react";
-import { Link, Redirect, navigate } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
 class Error404Page extends Component {
   state = { hasError: false, redirect: false };

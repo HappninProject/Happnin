@@ -294,7 +294,7 @@ export class FriendRequests extends Component {
     const friends = this.state.realFriendsRequest;
     const userId = this.state.userId;
     friends.forEach(f => {
-      if(f.userId == userId){
+      if(f.userId === userId){
         friendIds.push(f.friendId);
       }
       else {

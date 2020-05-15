@@ -119,6 +119,17 @@ export class NavMenu extends Component {
                   </NavItem>
                 </div>
                 <div className="flexItem">
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="navHeader"
+                      to="/Products"
+                    >
+                      Products
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div className="flexItem">
                   <LoginMenu></LoginMenu>
                 </div>
                 <div className="flexItem">

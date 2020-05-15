@@ -14,7 +14,6 @@ export class SubmitEvent extends Component {
     super(props);
     this.state = {
       isAuthenticated: false,
-      location: null,
       event: {
         name: "",
         description: "",
