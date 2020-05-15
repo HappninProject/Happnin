@@ -16,7 +16,6 @@ import Weather from "./Weather";
 import logo from "../images/happninHLogoCircle.png";
 import notification from "../images/bell.svg";
 import friends from "../images/users.svg";
-import messages from "../images/inbox.svg";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export class NavMenu extends Component {
@@ -120,16 +119,22 @@ export class NavMenu extends Component {
                   </NavItem>
                 </div>
                 <div className="flexItem">
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="navHeader"
+                      to="/Products"
+                    >
+                      Products
+                    </NavLink>
+                  </NavItem>
+                </div>
+                <div className="flexItem">
                   <LoginMenu></LoginMenu>
                 </div>
                 <div className="flexItem">
                   <NavbarBrand tag={Link} to="/friend-request" className="friends">
                     <img id="friends" className="" alt="friends" src={friends} />
-                  </NavbarBrand>
-                </div>
-                <div className="flexItem">
-                  <NavbarBrand tag={Link} to="/messages" className="messages">
-                    <img id="messages" className="" alt="messages" src={messages} />
                   </NavbarBrand>
                 </div>
                 {/* not sure if this part should be included in div */}

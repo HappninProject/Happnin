@@ -14,7 +14,6 @@ export class SubmitEvent extends Component {
     super(props);
     this.state = {
       isAuthenticated: false,
-      location: null,
       event: {
         name: "",
         description: "",
@@ -258,7 +257,6 @@ export class SubmitEvent extends Component {
                         class="form-control">
                     </input>
                 </div>
-
             </div>
         <h3>What is your event?</h3>
           <div class="form-group">

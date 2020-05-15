@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { FetchEventData } from "./FetchEventData";
-import FetchEventDataWithError404 from "./FetchEventData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 //Getting the event
-import {HappninEvent} from "./HappninEvent";
 
 export class BrowseEvents extends Component {
   constructor(props) {
@@ -164,6 +163,9 @@ export class BrowseEvents extends Component {
         {/* <div>
           <FetchEventDataWithError404/>
         </div> */}
+        <div>
+          <li><Link to="/EventPage">test page</Link></li>
+        </div>
       </div>
     );
   }

@@ -7,20 +7,21 @@ import { Terms } from "./components/Terms";
 import { Privacy } from "./components/Privacy";
 import { HostedEvents } from "./components/Event/HostedEvents"
 // import { FetchEventData } from "./components/Event/FetchEventData";
-import FetchEventDataWithError404 from "./components/Event/FetchEventData";
+//import FetchEventDataWithError404 from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
 import { SubmitEvent } from "./components/Event/SubmitEvent";
-import { BrowseEvents } from "./components/Event/BrowseEvents";
+//import { BrowseEvents } from "./components/Event/BrowseEvents";
 import ApiAuthorizationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
 import { ApplicationPaths } from "./components/api-authorization/ApiAuthorizationConstants";
 import { ContactUs } from "./components/ContactUs";
-import { Messages } from "./components/Messages";
 import "./styles/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/react_dates_overrides.css";
 import { FriendRequests } from "./components/User/FriendRequests";
 import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
+import { EventPage } from "./components/Event/EventPage";
+import {Products} from "./components/Products";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -45,13 +46,14 @@ export default class App extends Component {
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
         />
-        <Route path="/messages" component={Messages}></Route>
-        <Route path="/friend-request" component={FriendRequests}/>
+        <Route path="/friend-request" component={FriendRequests} />
+        <Route path="/EventPage" component={EventPage} />
         <Route path="/contact-us" component={ContactUs} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
         <Route path="/privacy" component={Privacy} />
         <Route path='/hosted-events' component={HostedEvents}/>
+        <Route path='/Products' component={Products}/>
       </Layout>
     );
   }

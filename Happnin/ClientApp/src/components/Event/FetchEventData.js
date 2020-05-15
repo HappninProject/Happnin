@@ -1,10 +1,9 @@
 ﻿import React, { Component } from "react";
 import { HappninEvent } from "./HappninEvent";
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { Map, TileLayer } from 'react-leaflet'
 import Error404Page from "../Error404Page";
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 export class FetchEventData extends Component {
   static displayName = FetchEventData.name;
 
@@ -129,7 +128,7 @@ export class FetchEventData extends Component {
       //filtering based on age
       filteredEvents = filteredEvents.filter((event) =>{
         //checking if category IDs match
-        return event.ageRestriction == ageRestriction;
+        return event.ageRestriction === ageRestriction;
       })
 
     }
@@ -146,19 +145,19 @@ export class FetchEventData extends Component {
       let max;
 
       //setting min and max variables
-      if(cost == 0){
+      if(cost === 0){
         min = 0;
         max = 0;
       }
-      else if(cost == 25){
+      else if(cost === 25){
         min = .5;
         max = 25;
       }
-      else if(cost == 50){
+      else if(cost === 50){
         min = 25.5;
         max = 50;
       }
-      else if(cost == 100){
+      else if(cost === 100){
         min = 50.5;
         max = 100;
       }
