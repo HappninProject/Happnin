@@ -4,6 +4,7 @@ import "../../styles/HappninEvent.css";
 import logo from "../../images/happninHLogoThumb.png";
 import { Row, Col } from "react-bootstrap";
 import moment from "moment";
+import { Category } from '../../shared/Category'
 
 export class HappninEvent extends Component {
   constructor(props) {
@@ -90,7 +91,7 @@ export class HappninEvent extends Component {
                   <p>{e.description}</p>
                   Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
                   <b>{e.ageRestriction}</b> <br /> <br />
-                  Category: <b>{e.categoryId}</b> <br />
+                  Category: <b>{Category(e.categoryId)}</b> <br />
                   {startTime} - {endTime} <br />
                 </div>
                 <p id="inline-text">
