@@ -161,7 +161,7 @@ export class BrowseEvents extends Component {
         <br />
         {/* //!temporarily commented out */}
         {/* <div>
-          <FetchEventDataWithError404/>
+          <EventDataWithError404/>
         </div> */}
         <div>
           <li><Link to="/EventPage">test page</Link></li>

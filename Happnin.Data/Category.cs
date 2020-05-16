@@ -22,6 +22,7 @@ namespace Happnin.Data
         Festival = 1,
         Comedy = 2,
         Culture = 3,
-        Other = 4
+        Other = 4,
+        Product = 5
     }
 }

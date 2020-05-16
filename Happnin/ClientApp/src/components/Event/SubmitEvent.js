@@ -151,7 +151,7 @@ export class SubmitEvent extends Component {
         await axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json', {
             params: {
                 address: addressString,
-                key: 'YOUR_KEY_HERE'
+                key: process.env.REACT_APP_GEOLOCATION_KEY
             }
         })
             .then(function (response) {
@@ -333,10 +333,12 @@ export class SubmitEvent extends Component {
               name="categoryId"
               onChange={this.handleInputChange}
             >
-              <option value="1">Music</option>
+              <option value="0">Music</option>
+              <option value="1">Festival</option>
               <option value="2">Comedy</option>
               <option value="3">Culture</option>
-              <option value="4">Festival</option>
+              <option value="4">Other</option>
+              <option value="5">Product</option>
             </select>
             </div>
 

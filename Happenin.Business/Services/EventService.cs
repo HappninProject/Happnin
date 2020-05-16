@@ -23,6 +23,18 @@ namespace Happnin.Business.Services
             return MapList(events.ToList());
         }
 
+        public async Task<List<Dto.Event>> FetchProductEventsAsync()
+        {
+            var events = Query.Where(e => e.CategoryId == 5);
+            return MapList(events.ToList());
+        }
+
+        public async Task<List<Dto.Event>> FetchEventsOnlyAsync()
+        {
+            var events = Query.Where(e => e.CategoryId != 5);
+            return MapList(events.ToList());
+        }
+
         // Todo, push this up to the EntityService/IEntityService class 
         private List<Dto.Event> MapList(List<Data.Event> dataList)
         {

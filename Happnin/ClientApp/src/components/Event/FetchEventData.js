@@ -99,6 +99,9 @@ export class FetchEventData extends Component {
       //converting between category name and category ID
       let categoryID;
       if(this.props.category === "Music"){
+        categoryID = 0;
+      }
+      else if(this.props.category === "Festival"){
         categoryID = 1;
       }
       else if(this.props.category === "Comedy"){
@@ -107,8 +110,8 @@ export class FetchEventData extends Component {
       else if(this.props.category === "Culture"){
         categoryID = 3;
       }
-      else if(this.props.category === "Festival"){
-        categoryID = 4;
+      else if(this.props.category === "Product"){
+        categoryID = 5;
       }
       //filtering based on the category ID
       filteredEvents = filteredEvents.filter((event) =>{
