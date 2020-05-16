@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, TileLayer, } from 'react-leaflet'
+import { HappninEvent } from './Event/HappninEvent';
 
 export class Products extends Component {
   constructor(props) {
@@ -34,6 +35,19 @@ export class Products extends Component {
     });
   };
 
+  static renderEventsTable(events, userId, attendedEvent, handler) {
+    return (
+      <div>
+        {events.map((eventinfo) => (
+          <HappninEvent key={eventinfo.id} {...eventinfo} 
+          attending={eventinfo.going}
+          userId={userId}
+          handler={handler}/>
+        ))}
+      </div>
+    );
+  }
+
   renderLoading(){
     return(
       <div>
@@ -41,6 +55,8 @@ export class Products extends Component {
       </div>
     );
   }
+
+  
   render() {
     return (
       <div className="container-fluid card">
@@ -83,7 +99,17 @@ export class Products extends Component {
                 </Map>
             </div>
           </div>
+          <div>
+
+          </div>
         </div>
     );
+  }
+  
+  async populateProductData() {
+    const response = await fetch("api/Event/Products/");
+    console.log(response);
+    const data = await response.json();
+    this.setState({ products: data, loading: false });
   }
 }

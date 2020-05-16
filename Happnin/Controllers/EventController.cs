@@ -22,5 +22,21 @@ namespace Happnin.Controllers
             var eventService = (IEventService)this.Service;
             return eventService.FetchHostedEventsAsync(id);
         }
+
+        [HttpGet]
+        [Route("EventsOnly/")]
+        public Task<List<Event>> GetEventsOnly()
+        {
+            var eventService = (IEventService) this.Service;
+            return eventService.FetchEventsOnlyAsync();
+        }
+
+        [HttpGet]
+        [Route("Products/")]
+        public Task<List<Event>> GetProducts()
+        {
+            var eventService = (IEventService) this.Service;
+            return eventService.FetchProductEventsAsync();
+        }
     }
 }

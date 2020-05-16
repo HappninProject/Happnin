@@ -7,5 +7,7 @@ namespace Happnin.Business.Services
     public interface IEventService : IEntityService<Event, EventInput>
     {
         Task<List<Event>> FetchHostedEventsAsync(string id);
+        Task<List<Event>> FetchProductEventsAsync();
+        Task<List<Event>> FetchEventsOnlyAsync();
     }
 }
