@@ -62,13 +62,22 @@ export default class Weather extends Component {
           <div>loading weather</div>
         ) : (
           <div>
-            Weather in {this.state.city_name}
-            <br /> {this.state.weather.temp}°{" "}
-            <ReactAnimatedWeather
-              icon={this.state.cond}
-              size={32}
-              animate={true}
-            ></ReactAnimatedWeather>
+          
+            <br/>
+            <div style = {{fontSize : "30px", paddingBottom: "5px"}}> 
+              {this.state.weather.temp | 0}°{" "}
+              <ReactAnimatedWeather
+                icon={this.state.cond}
+                size={25}
+                animate={true}
+              ></ReactAnimatedWeather>
+              
+            </div>
+          
+            <div style = {{fontSize : "12px"}}>
+            {this.state.city_name}
+            </div>
+             
           </div>
         )}
       </div>

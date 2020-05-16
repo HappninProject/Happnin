@@ -159,7 +159,7 @@ export class NavMenu extends Component {
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
-                <div id="weatherInfo" className="flexItem">
+                <div id="weatherInfo" className="flexItem" style = {{paddingLeft: "50px"}}>
                   <Weather id="weather"></Weather>
                 </div>
               </ul>
