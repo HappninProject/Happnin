@@ -151,7 +151,7 @@ export class SubmitEvent extends Component {
         await axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json', {
             params: {
                 address: addressString,
-                key: 'YOUR_KEY_HERE'
+                key: process.env.REACT_APP_GEOLOCATION_KEY
             }
         })
             .then(function (response) {
