@@ -41,10 +41,11 @@ namespace Happnin.Data
 
         private string _lat;
 
+        // TODO Figure out why lat and long are not being set on locations
         public string Lat
         {
             get => _lat;
-            set => _lat = value ?? throw new ArgumentNullException(nameof(Lat));
+            set => _lat = value;// ?? throw new ArgumentNullException(nameof(Lat));
         }
 
         private string _lng;
@@ -52,7 +53,7 @@ namespace Happnin.Data
         public string Lng
         {
             get => _lng;
-            set => _lng = value ?? throw new ArgumentNullException(nameof(Lng));
+            set => _lng = value; //?? throw new ArgumentNullException(nameof(Lng));
         }
 
         public Location(string address, string city, string state, string country, string zipCode, string lat, string lng)

@@ -3,8 +3,9 @@ import Card from "react-bootstrap/Card";
 import "../../styles/HappninEvent.css";
 import logo from "../../images/happninHLogoThumb.png";
 import { Row, Col } from "react-bootstrap";
-import moment from "moment";
 import { Category } from '../../shared/Category'
+import { Link } from "react-router-dom";
+import { EventPage } from './EventPage'
 
 export class HappninEvent extends Component {
   constructor(props) {
@@ -68,8 +69,8 @@ export class HappninEvent extends Component {
 
   render() {
     const e = this.props;
-    var startTime = moment(e.eventTime).format("LT").toString();
-    var endTime = moment(e.endTime).format("LT").toString();
+    let startTime = new Date(Date.parse(e.eventTime)).toDateString();
+    let endTime = new Date(Date.parse(e.eventTime)).toDateString();
 
     return (
       <div class="card">
@@ -87,6 +88,7 @@ export class HappninEvent extends Component {
             <div class="card-body" className="happninevent">
               <div className="eventinfo">
                 <h5 class="card-title">{e.name}</h5>
+                <Link to={`/EventPage/${e.id}`}>Event Page</Link>
                 <div class="card-text">
                   <p>{e.description}</p>
                   Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}

@@ -5,26 +5,62 @@ import attendies from "../../images/users.svg";
 import share from "../../images/Share.png";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Link } from "react-router-dom";
+import { Category } from '../../shared/Category';
 
 export class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          id: parseInt(this.props.match.params.eventId),  
+          event: {},
+          host: {},
+          location: {},
           lat: 0, 
           lng: 0, 
           zoom: 13,
           loading: true, 
         };
     }
-    async componentDidMount() {
 
+    async componentDidMount() {
+        await this.FetchEventData();
+        await this.FetchLocationAndHost();
     }
 
     
     handleAttendingChange = (event) => {
         let AttendingValue = event.target.value;
     }
+
+    async FetchEventData(){
+        const id = this.state.id;
+        const response = await fetch(`api/Event/${id}`);
+        console.log("Event response" + response);
+        const data = await response.json();
+        console.log("Got Data", data);
+        this.setState({ event: data, loading: false});
+    } 
+
+    async FetchLocationAndHost(){
+        const locationId = this.state.event.locationId;
+        const hostId = this.state.event.hostId;
+        const response = await fetch(`/api/Location/${locationId}`);
+        const data = await response.json();
+        this.setState({ location: data});
+        const hostResponse = await fetch(`/api/User/${hostId}`);
+        const hostData = await hostResponse.json();
+        this.setState({host: hostData})
+
+    }
+
+
     render() {
+        let e = this.state.event;
+        let location = this.state.location;
+        let host = this.state.host.userName;
+        var startTime = new Date(Date.parse(e.eventTime)).toDateString();
+        var endTime = new Date(Date.parse(e.eventTime)).toDateString();
+
         return (
             
             <div className="card container-fluid">
@@ -37,7 +73,7 @@ export class EventPage extends Component {
                 </div>
                 <div>
                     <Dropdown>
-                        <headder className="header">Event Name</headder>
+                        <header className="header">{e.name}</header>
                         <label className="subHeader">
                             &nbsp;&nbsp;attending status:&nbsp;
                         </label>
@@ -84,14 +120,14 @@ export class EventPage extends Component {
                 </div>
                 <div>
                     <div style= {{float:"left",}}>
-                        <h1 className="subHeader">Date: </h1>
-                        <h1 className="subHeader">Host: </h1>
-                        <h1 className="subHeader">Location: </h1>
-                        <h1 className="subHeader">Category: </h1>
-                        <h1 className="subHeader">Cost: </h1>
-                        <h1 className="subHeader">age restriction: </h1>
+                        <h1 className="subHeader">Date: {startTime} - {endTime} </h1>
+                        <h1 className="subHeader">Host: {host}</h1>
+                        <h1 className="subHeader">Location: {location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
+                        <h1 className="subHeader">Category: {Category(e.categoryId)} </h1>
+                        <h1 className="subHeader">Cost: {e.cost}</h1>
+                        <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
                         <h1 className="subHeader">Description: </h1>
-                        <div id = "descriptionContainer">some text will go here</div>
+                        <div id = "descriptionContainer">{e.description}</div>
                     </div>
 
                     <div style={{float:"right", marginTop : "10px"}}>
