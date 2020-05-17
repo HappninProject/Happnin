@@ -2,6 +2,7 @@
 import { HappninEvent } from "./HappninEvent";
 import { Map, TileLayer } from 'react-leaflet'
 import Error404Page from "../Error404Page";
+import authService  from '../api-authorization/AuthorizeService' 
 
 
 export class FetchEventData extends Component {
@@ -16,12 +17,18 @@ export class FetchEventData extends Component {
       lat: 0, 
       lng: 0, 
       zoom: 13,
-      filteredEvents: []
+      filteredEvents: [],
+      isAuthenticated: false,
+      userId: '',
+      isAttending: []
     };
   }
 
-  componentDidMount() {
-    this.populateEventData();
+  async componentDidMount() {
+    this._subscription = authService.subscribe(() => this.populateAuth());
+    await this.populateAuth();
+    await this.populateEventData();
+    await this.populateAttendingData();
     this.setState({
       filteredEvents: this.state.events 
     })
@@ -30,6 +37,31 @@ export class FetchEventData extends Component {
       let lat = position.coords.latitude;
       let lng = position.coords.longitude;
       this.setState({lng : lng, lat:lat});
+    });
+  }
+
+  static setGoing(events, attendedEvent){
+    console.log(events);
+    const attendedIds = attendedEvent.map(a => a.eventId);
+    console.log(attendedIds);
+    events.forEach(e => {
+      if(attendedIds.includes(e.id)){
+        e.going = true;
+      }
+      else {
+        e.going = false;
+      }
+    })
+  }
+
+  async populateAuth(){
+    const [isAuthenticated, user] = await Promise.all([
+      authService.isAuthenticated(),
+      authService.getUser()
+    ]);
+    this.setState({
+      isAuthenticated,
+      userId: user && user.sub
     });
   }
 
@@ -44,13 +76,23 @@ export class FetchEventData extends Component {
       filteredEvents: this.state.events
     });
   }
+
+  testSomething = () => {
+    console.log("DOES THIS DO ANYTHING!!!!!!!!!!!!!!!!!")
+    this.populateAttendingData();
+  }
   
-  static renderEventsTable(events) {
+  static renderEventsTable(events, userId, attendedEvent, handler) {
     if (events && events.length) {
       return (
         <div>
+          {FetchEventData.setGoing(events, attendedEvent)}
           {events.map((eventinfo) => (
             <HappninEvent key={eventinfo.id} {...eventinfo} 
+            attendingId={FetchEventData.attendingEvent(eventinfo.id, attendedEvent)}
+            attending={eventinfo.going}
+            userId={userId}
+            handler={handler}
             />
           ))}
         </div>
@@ -179,7 +221,7 @@ export class FetchEventData extends Component {
     return filteredEvents;
   }
 
-  renderFilteredEvents(events){
+  renderFilteredEvents(events, userId, attendedEvent, handler){
 
     if (events && events.length) {
       let filteredEvents = this.state.events;
@@ -201,8 +243,13 @@ export class FetchEventData extends Component {
 
       return (
         <div>
+            {FetchEventData.setGoing(events, attendedEvent)}
             {filteredEvents.map((eventinfo) => (
-            <HappninEvent key={eventinfo.id} {...eventinfo} 
+            <HappninEvent key={eventinfo.id} {...eventinfo}
+            attendingId={FetchEventData.attendingEvent(eventinfo.id, attendedEvent)}
+            attending={eventinfo.going}
+            userId={userId}
+            handler={handler} 
             />
           ))}
         </div>
@@ -213,6 +260,35 @@ export class FetchEventData extends Component {
     }
   }
 
+  async populateAttendingData(){
+    const user = this.state.userId;
+    console.log('what is going on?')
+    console.log(user)
+    console.log(this.state)
+    console.log('here in the attending data get')
+    console.log(`api/Attendee/AttendeeInfo/${this.state.userId}`)
+    const response = await fetch(`api/Attendee/AttendeeInfo/${this.state.userId}`);
+    let attend = await response.json();
+    this.setState({isAttending: attend});
+  }
+
+   static attendingEvent(eventId, attendedEvent){
+    console.log("in atteding events");
+    console.log(eventId)
+    console.log(attendedEvent); 
+    let attendId = -1; 
+    attendedEvent.forEach(e => 
+        {
+          console.log(e.eventId);
+          console.log(e.eventId === eventId);
+          if(e.eventId === eventId){
+            console.log("they matched")
+            console.log(e.id)
+            attendId = e.id;
+          } 
+        })
+      return attendId; // return negative one if event isn't being attended
+  }
 
   render() {
     const events = this.state.events;
@@ -221,12 +297,12 @@ export class FetchEventData extends Component {
 
     //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
     let eventsData = events ?
-    FetchEventData.renderEventsTable(events) :
+    FetchEventData.renderEventsTable(events, this.state.userId, this.state.isAttending, this.testSomething) :
     this.renderLoading();
 
     //getting the filtered data
     let filteredEventsData = events ?
-    this.renderFilteredEvents(events) :
+    this.renderFilteredEvents(events, this.state.userId, this.state.isAttending, this.testSomething) :
     this.renderLoading();
     
     return (
