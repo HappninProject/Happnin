@@ -156,7 +156,9 @@ export class SubmitEvent extends Component {
         })
             .then(function (response) {
                 console.log(response);
-
+                let res = response.JSON();
+                res = Promise.resolve(res);
+                console.log(res);
                 var latitude = JSON.stringify(response.data.results[0].geometry.location.lat);
                 var longitude = JSON.stringify(response.data.results[0].geometry.location.lng);
                 self.setState({
