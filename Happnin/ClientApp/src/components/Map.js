@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 import "../styles/Marker.css";
 import GoogleMapReact from "google-map-react";
-
+// A comment for test
 
 const Marker = props => {
     return <>
