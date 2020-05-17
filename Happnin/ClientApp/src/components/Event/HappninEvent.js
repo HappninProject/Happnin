@@ -69,8 +69,8 @@ export class HappninEvent extends Component {
 
   render() {
     const e = this.props;
-    var startTime = new Date(Date.parse(e.eventTime)).toDateString();
-    var endTime = new Date(Date.parse(e.eventTime)).toDateString();
+    let startTime = new Date(Date.parse(e.eventTime)).toDateString();
+    let endTime = new Date(Date.parse(e.eventTime)).toDateString();
 
     return (
       <div class="card">

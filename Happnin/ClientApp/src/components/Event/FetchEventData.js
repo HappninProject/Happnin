@@ -66,15 +66,15 @@ export class FetchEventData extends Component {
   }
 
   async populateEventData() {
-    const response = await fetch("api/Event");
-    console.log("Event response" + response);
-    const data = await response.json();
-    console.log("Got Data", data);
-    this.setState({ events: data, loading: false});
-    //have to set the state of filtered events after the events variable has already been populated
-    this.setState({
-      filteredEvents: this.state.events
-    });
+      const response = await fetch("api/Event");
+      console.log("Event response" + response);
+      const data = await response.json();
+      console.log("Got Data", data);
+      this.setState({ events: data, loading: false});
+      //have to set the state of filtered events after the events variable has already been populated
+      this.setState({
+        filteredEvents: this.state.events
+      });
   }
 
   testSomething = () => {

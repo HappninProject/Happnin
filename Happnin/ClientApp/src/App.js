@@ -48,7 +48,7 @@ export default class App extends Component {
           component={ApiAuthorizationRoutes}
         />
         <Route path="/friend-request" component={FriendRequests} />
-        <Route path="/EventPage" component={EventPage} />
+        <Route path="/EventPage/:eventId" component={EventPage} />
         <Route path="/contact-us" component={ContactUs} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
