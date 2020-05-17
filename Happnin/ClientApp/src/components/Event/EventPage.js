@@ -16,6 +16,7 @@ export class EventPage extends Component {
           loading: true, 
         };
     }
+
     async componentDidMount() {
 
     }
