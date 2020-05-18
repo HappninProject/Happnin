@@ -18,6 +18,7 @@ export class EventPage extends Component {
           lat: 0, 
           lng: 0, 
           zoom: 13,
+          attendingCount: 0,
           loading: true, 
         };
     }
@@ -25,9 +26,17 @@ export class EventPage extends Component {
     async componentDidMount() {
         await this.FetchEventData();
         await this.FetchLocationAndHost();
+        await this.FetchAttendingCount();
     }
 
-    
+    async FetchAttendingCount() {
+        const eventId = this.state.id;
+        const response = await fetch(`api/Attendee/Count/${eventId}`);
+        const count = await response.json();
+        this.setState({ attendingCount: count });
+        console.log("attendeeCount response: " + count);
+    }
+
     handleAttendingChange = (event) => {
         let AttendingValue = event.target.value;
     }
@@ -87,8 +96,11 @@ export class EventPage extends Component {
                                 <option value="Interested">Interested</option>
                                 <option value="Can't Attend">Can't Attend </option>
                         </select>
-                        <img id="attendies" className="" alt="attendies" src={attendies} style= {{width:"2%", margin: "10px"}} />
-                        <Link to="/Attendies">num of Attendies will go here</Link>
+                        <img id="attendies" className="" alt="attendies" src={attendies} style={{ width: "2%", margin: "10px" }} />
+                        <div>
+                            People attending: {this.state.attendingCount}
+                        </div>
+                        { /*<Link to="/Attendies">{this.state.attendingCount}</Link>  */}
                         
                             <Dropdown.Toggle
                             variant="link"
@@ -174,8 +186,6 @@ export class EventPage extends Component {
                 </div>
                 
             </div>
-
-
             );
     }
 }

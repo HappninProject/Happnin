@@ -3,25 +3,22 @@ import "../styles/NavMenu.css";
 import ReactAnimatedWeather from "react-animated-weather";
 
 export default class Weather extends Component {
-  state = {
-    weather: null,
-    city_name: null,
-    latitude: 0,
-    longitude: 0,
-    Cond: null,
-    loading: true,
-  };
-  async componentDidMount() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
-      let lat = position.coords.latitude
-      let lng = position.coords.longitude
-      this.getWeather(lat,lng);
-      
-    });
-    
-
-  }
+    state = {
+        weather: null,
+        city_name: null,
+        latitude: 0,
+        longitude: 0,
+        Cond: null,
+        loading: true,
+    };
+    async componentDidMount() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position);
+            let lat = position.coords.latitude
+            let lng = position.coords.longitude
+            this.getWeather(lat,lng);
+        });
+    }
 
   
   async getWeather(lat,lng)

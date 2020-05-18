@@ -24,5 +24,13 @@ namespace Happnin.Controllers
             return eventsAttended.ToList();
         }
 
+        [HttpGet]
+        [Route("Count/{id}")]
+        public async Task<int> Count(int id)
+        {
+            var attendeeService = (IAttendeeService)Service;
+            return await attendeeService.GetAttendingCount(id);
+        }
+
     }
 }
