@@ -1,48 +1,74 @@
 import React, { Component } from "react";
 import { BrowseEvents } from "./BrowseEvents";
-import {FetchEventData} from "./FetchEventData";
-export class FetchBrowseEvents extends Component{
+import { FetchEventData } from "./FetchEventData";
 
-    constructor(props){
-        super(props);
-        this.state = {
-            nameSearch: '',
-            wordSearch: '',
-            categorySearch: '',
-            ageSearch: '',
-            costSearch: ''
-        }
-    }
+// This is the parent class for FetchEventData and BrowseEvents
+//It's used to pass data between the two
 
-    handleNameSearch = (name) => {
-        this.setState({nameSearch: name});
-    }
+export class FetchBrowseEvents extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nameSearch: "",
+      wordSearch: "",
+      categorySearch: "",
+      ageSearch: "",
+      costSearch: "",
+      dateSearch: "",
+      zipSearch: ""
+    };
+  }
 
-    handleWordFilterChange = (word) => {
-        this.setState({wordSearch: word});
-    }
+  handleNameSearch = (name) => {
+    this.setState({ nameSearch: name });
+  };
 
-    handleCategorySearchChange = (category) => {
-        this.setState({categorySearch: category});
-    }
+  handleWordFilterChange = (word) => {
+    this.setState({ wordSearch: word });
+  };
 
-    handleAgeSearchChange = (age) => {
-        this.setState({ageSearch: age});
-    }
+  handleCategorySearchChange = (category) => {
+    this.setState({ categorySearch: category });
+  };
 
-    handleCostSearchChange = (cost) => {
-        this.setState({costSearch: cost});
-    }
+  handleAgeSearchChange = (age) => {
+    this.setState({ ageSearch: age });
+  };
 
-    render(){
-        return(
-            <div>
-                <BrowseEvents onNameSearchChange = {this.handleNameSearch} onWordSearchChange = {this.handleWordFilterChange} 
-                onCategorySearchChange={this.handleCategorySearchChange} onAgeSearchChange={this.handleAgeSearchChange}
-                onCostSearchChange = {this.handleCostSearchChange}/>
-                <FetchEventData name = {this.state.nameSearch} word = {this.state.wordSearch} category = {this.state.categorySearch}
-                age = {this.state.ageSearch} cost = {this.state.costSearch}/>
-            </div>
-        )
-    }
+  handleCostSearchChange = (cost) => {
+    this.setState({ costSearch: cost });
+  };
+
+  handleDateSearchChange = (date) => {
+    this.setState({dateSearch: date});
+  }
+
+  handleZipSearchChange = (zip) => {
+    this.setState({zipSearch: zip})
+  }
+
+  render() {
+    return (
+      <div>
+        <BrowseEvents
+          onNameSearchChange={this.handleNameSearch}
+          onWordSearchChange={this.handleWordFilterChange}
+          onCategorySearchChange={this.handleCategorySearchChange}
+          onAgeSearchChange={this.handleAgeSearchChange}
+          onCostSearchChange={this.handleCostSearchChange}
+          onDateSearchChange = {this.handleDateSearchChange}
+          onZipSearchChange = {this.handleZipSearchChange}
+        />
+        <FetchEventData
+          name={this.state.nameSearch}
+          word={this.state.wordSearch}
+          category={this.state.categorySearch}
+          age={this.state.ageSearch}
+          cost={this.state.costSearch}
+          date = {this.state.dateSearch}
+          zip = {this.state.zipSearch}
+        />
+      </div>
+    );
+  }
 }

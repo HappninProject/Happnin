@@ -12,23 +12,23 @@ export class FetchEventData extends Component {
     super(props);
     this.state = {
       //The unfiltered events
-      events: [], 
-      loading: true, 
-     /* lat: 0, 
+      events: [],
+      loading: true,
+      /* lat: 0, 
       lng: 0, 
       zoom: 13, */
-      filteredEvents: []
+      filteredEvents: [],
+      locationData: []
     };
   }
 
   componentDidMount() {
     this.populateEventData();
     this.setState({
-      filteredEvents: this.state.events 
-    })
+      filteredEvents: this.state.events,
+    });
 
-
-  /*  navigator.geolocation.getCurrentPosition((position) => {
+    /*  navigator.geolocation.getCurrentPosition((position) => {
       console.log(position);
       let lat = position.coords.latitude;
       let lng = position.coords.longitude;
@@ -38,44 +38,53 @@ export class FetchEventData extends Component {
 
   async populateEventData() {
     const response = await fetch("api/Event");
-  //  console.log("Event response" + response);
+    //  console.log("Event response" + response);
     const data = await response.json();
-  //  console.log("Got Data", data);
-    this.setState({ events: data, loading: false});
+    //  console.log("Got Data", data);
+    this.setState({ events: data, loading: false });
     //have to set the state of filtered events after the events variable has already been populated
     this.setState({
-      filteredEvents: this.state.events
+      filteredEvents: this.state.events,
     });
+
+    //!testing
+    //got the location data here, now have to match with the location IDs
+    const locationResponse = await fetch("/api/Location/");
+    console.log("Location response: " + JSON.stringify(locationResponse));
+    const locationData = await locationResponse.json();
+    console.log("Location data: " + JSON.stringify(locationData));
+
+    //setting the state of location data to the locations received
+    this.setState({locationData: locationData});
+    //!testing
   }
-  
+
   static renderEventsTable(events) {
     if (events && events.length) {
       return (
         <div>
           {events.map((eventinfo) => (
-            <HappninEvent key={eventinfo.id} {...eventinfo} 
-            />
+            <HappninEvent key={eventinfo.id} {...eventinfo} />
           ))}
         </div>
       );
-    }
-    else{
-      return <div>No events found right now!</div>
+    } else {
+      return <div>No events found right now!</div>;
     }
   }
 
-    static renderEvents(events) {
-        return (
-            <div>
-                {events.map(eventinfo => (
-                    <HappninEvent key={eventinfo.id} {...eventinfo} />
-                ))}
-            </div>
-        );
-    }
+  static renderEvents(events) {
+    return (
+      <div>
+        {events.map((eventinfo) => (
+          <HappninEvent key={eventinfo.id} {...eventinfo} />
+        ))}
+      </div>
+    );
+  }
 
-  renderLoading(){
-    return(
+  renderLoading() {
+    return (
       <div>
         <p>Loading...</p>
       </div>
@@ -84,121 +93,176 @@ export class FetchEventData extends Component {
 
   //displays event if event name contains entered input
   filterName = (filteredEvents) => {
-    if(this.props.name !== ""){
+    if (this.props.name !== "") {
       let name = this.props.name.toUpperCase();
-      filteredEvents = filteredEvents.filter((event) =>{
+      filteredEvents = filteredEvents.filter((event) => {
         //checking if the event name contains a word
         return event.name.toUpperCase().includes(name);
-      })
+      });
+    }
+    return filteredEvents;
+  };
+
+  //displays event if event in on the date entered
+  filterDate = (filteredEvents) => {
+    //!right now the date is always set to feb 26th (for some weird reason)
+    //!also this does not currently filtering within the range of dates (startTime-endTime), only startTime
+    //!also something needs to be changed where the current date is the default value, because currently it is empty at start
+    //!and you have to click on the date to start filtering
+    console.log("Date from FetchEventData: " + this.props.date);
+    let dateEntered = this.props.date;
+    if(dateEntered !== ""){
+      //creating a date object from the string that was passed in
+      let date = new Date(dateEntered);
+      let month = date.getMonth();
+      let day = date.getDate();
+      let year = date.getFullYear();
+
+      //now make sure that only the events are shown that are on the date entered
+      //filtering based on date
+      filteredEvents = filteredEvents.filter((event) => {
+        let eventDate = new Date(event.eventTime);
+        let eventMonth = eventDate.getMonth();
+        let eventDay = eventDate.getDate();
+        let eventYear = eventDate.getFullYear();
+        return eventMonth == month && eventDay == day && eventYear == year;
+      });
+
     }
     return filteredEvents;
   }
 
   //displays event if word or phrase matches
   filterWord = (filteredEvents) => {
-    if(this.props.word !== ""){
+    if (this.props.word !== "") {
       let word = this.props.word.toUpperCase();
-      filteredEvents = filteredEvents.filter((event) =>{
+      filteredEvents = filteredEvents.filter((event) => {
         //checking if the event name contains a word
-        return event.name.toUpperCase().includes(word) || event.description.toUpperCase().includes(word);
-      })
+        return (
+          event.name.toUpperCase().includes(word) ||
+          event.description.toUpperCase().includes(word)
+        );
+      });
+    }
+    return filteredEvents;
+  };
+
+  //displays event if zip matches what's entered
+  filterZip = (filteredEvents) => {
+    let zip = this.props.zip;
+    //if the user has entered a zip code
+    if(zip !== ""){
+      //getting the locations stringified
+      let locations = this.state.locationData;
+
+      //search through the events and if the zip code matches it's listed
+      locations = locations.filter((location) => {
+        return location.zipCode == zip;
+      });
+
+      //create an array with those IDs
+      let Ids = locations.map(location => location.id);
+      console.log("IDs here*: " + Ids);
+
+      //then if the zip codes match show all the zip codes with those IDs
+      filteredEvents = filteredEvents.filter((event) => {
+        console.log("This is the zip*: " + zip);
+        //checks if the location IDs match the zip code
+        return Ids.includes(event.locationId);
+      });
     }
     return filteredEvents;
   }
 
   //displays event if it fits the category the user has entered
   filterCategory = (filteredEvents) => {
-    if(this.props.category !== "All" && this.props.category !== "" ){
+    if (this.props.category !== "All" && this.props.category !== "") {
       //converting between category name and category ID
       let categoryID;
-      if(this.props.category === "Music"){
+      if (this.props.category === "Music") {
         categoryID = 0;
-      }
-      else if(this.props.category === "Festival"){
+      } else if (this.props.category === "Festival") {
         categoryID = 1;
-      }
-      else if(this.props.category === "Comedy"){
+      } else if (this.props.category === "Comedy") {
         categoryID = 2;
-      }
-      else if(this.props.category === "Culture"){
+      } else if (this.props.category === "Culture") {
         categoryID = 3;
-      }
-      else if(this.props.category === "Product"){
+      } else if (this.props.category === "Product") {
         categoryID = 5;
       }
       //filtering based on the category ID
-      filteredEvents = filteredEvents.filter((event) =>{
+      filteredEvents = filteredEvents.filter((event) => {
         //checking if category IDs match
         return event.categoryId === categoryID;
-      })
+      });
     }
     return filteredEvents;
-  }
+  };
 
   //displays event if it meets age restriction search
   filterAge = (filteredEvents) => {
-    if(this.props.age !== "" && this.props.age !== "AllAges"){
+    if (this.props.age !== "" && this.props.age !== "AllAges") {
       // this will either be 18+ or 21+
       let ageRestriction = this.props.age;
-      
+
       //filtering based on age
-      filteredEvents = filteredEvents.filter((event) =>{
+      filteredEvents = filteredEvents.filter((event) => {
         //checking if category IDs match
         return event.ageRestriction === ageRestriction;
-      })
-
+      });
     }
     return filteredEvents;
-  }
+  };
 
   //displays event if it meets cost search choice
   filterCost = (filteredEvents) => {
-    if(this.props.cost !== "" && this.props.cost !== "AnyPrice"){
+    if (this.props.cost !== "" && this.props.cost !== "AnyPrice") {
       let cost = this.props.cost;
-      
+
       //the minimum and maximum prices for filtering
       let min;
       let max;
 
       //setting min and max variables
-      if(cost === 0){
+      if (cost === 0) {
         min = 0;
         max = 0;
-      }
-      else if(cost === 25){
-        min = .5;
+      } else if (cost === 25) {
+        min = 0.5;
         max = 25;
-      }
-      else if(cost === 50){
+      } else if (cost === 50) {
         min = 25.5;
         max = 50;
-      }
-      else if(cost === 100){
+      } else if (cost === 100) {
         min = 50.5;
         max = 100;
-      }
-      else{
-        min = 100.5
+      } else {
+        min = 100.5;
         max = 1000000;
       }
 
+
       //filtering based on cost
-      filteredEvents = filteredEvents.filter((event) =>{
+      filteredEvents = filteredEvents.filter((event) => {
         console.log("This is the price: " + this.props.cost);
         return event.cost >= min && event.cost <= max;
-      })
-
+      });
     }
     return filteredEvents;
-  }
+  };
 
-  renderFilteredEvents(events){
-
+  renderFilteredEvents(events) {
     if (events && events.length) {
       let filteredEvents = this.state.events;
 
       //filtering by name of event
       filteredEvents = this.filterName(filteredEvents);
+
+      //filtering by zip
+      filteredEvents = this.filterZip(filteredEvents);
+
+      //filtering by date
+      filteredEvents = this.filterDate(filteredEvents);
 
       //filtering by a word or phrase
       filteredEvents = this.filterWord(filteredEvents);
@@ -214,50 +278,44 @@ export class FetchEventData extends Component {
 
       return (
         <div>
-            {filteredEvents.map((eventinfo) => (
-            <HappninEvent key={eventinfo.id} {...eventinfo} 
-            />
+          {filteredEvents.map((eventinfo) => (
+            <HappninEvent key={eventinfo.id} {...eventinfo} />
           ))}
         </div>
       );
-    }
-    else{
-      return <div>No events found right now!</div>
+    } else {
+      return <div>No events found right now!</div>;
     }
   }
 
-
   render() {
-    //const events = this.state.events;
-    ////logging the data 
-    //console.log("This is the data: " + events);
+    const events = this.state.events;
+    //logging the data
+    console.log("This is the data: " + events);
 
-    ////getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
-    //let eventsData = events ?
-    //FetchEventData.renderEventsTable(events) :
-    //this.renderLoading();
+    //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
+    let eventsData = events
+      ? FetchEventData.renderEventsTable(events)
+      : this.renderLoading();
 
-    ////getting the filtered data
-    //let filteredEventsData = events ?
-    //this.renderFilteredEvents(events) :
-    //this.renderLoading();
+    //getting the filtered data
+    let filteredEventsData = events
+      ? this.renderFilteredEvents(events)
+      : this.renderLoading();
 
-      let contents = this.state.loading ? (
-          <p>
-              <em>Loading...</em>
-          </p>
-      ) : (
-              FetchEventData.renderEvents(this.state.events)
-          );
-
-
+    let contents = this.state.loading ? (
+      <p>
+        <em>Loading...</em>
+      </p>
+    ) : (
+      FetchEventData.renderEvents(this.state.events)
+    );
 
     return (
+      <div>
+        <Map events={JSON.stringify(this.state.events)} />
 
-        <div>
-            <Map events={JSON.stringify(this.state.events)} />
-
-            {/*<div style={{ height: "100vh", width: "100%" }}>
+        {/*<div style={{ height: "100vh", width: "100%" }}>
         //<Map 
         //         center={[this.state.lat, this.state.lng]} 
         //         zoom={this.state.zoom} 
@@ -270,34 +328,18 @@ export class FetchEventData extends Component {
         //     </Map>
         //</div> */}
 
-
-            {/*    <h1 id="tableLabel" className="header">
-              Events
-            </h1>
-            <p>Got these events from our server DAWG</p>
+        <h1 id="tableLabel" className="header">
+          Events
+        </h1>
+        <p>Got these events from our server DAWG</p>
         {eventsData}
+
         <div>
-        {/* This is where the filtered data goes 
-        <h1 className="header">Filtered Events</h1>
-        {filteredEventsData}
-            </div> */}
-
-            <h1 id="tableLabel" className="header">
-                Events
-            </h1>
-            <p>Got these events from our server DAWG</p>
-
-            {contents}
-
+          {/* This is where the filtered data goes  */}
+          <h1 className="header">Filtered Events</h1>
+          {filteredEventsData}
         </div>
+      </div>
     );
   }
-}
-
-export default function FetchEventDataWithError404(props) {
-  return (
-    <Error404Page>
-      <FetchEventData {...props} />
-    </Error404Page>
-  );
 }
