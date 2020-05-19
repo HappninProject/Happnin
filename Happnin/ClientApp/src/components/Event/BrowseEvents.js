@@ -18,41 +18,44 @@ export class BrowseEvents extends Component {
   
   handleNameSearchChange = (event) => {
     let nameSearchValue = event.target.value;
-    //passing this to parent's props
+    //passing name to parent's props
     this.props.onNameSearchChange(nameSearchValue);
   };
 
   handleWordSearchChange = (event) => {
     let wordSearchValue = event.target.value;
-    //passing this to parent's props
+    //passing word to parent's props
     this.props.onWordSearchChange(wordSearchValue);
   }
 
   handleCategoryChange = (event) => {
     let categorySearchValue = event.target.value;
+    //passing category to parent's props
     this.props.onCategorySearchChange(categorySearchValue);
   }
 
   handleAgeChange = (event) => {
     let ageSearchValue = event.target.value;
+    //passing age to parent's props
     this.props.onAgeSearchChange(ageSearchValue);
 
   }
 
   handleCostChange = (event) => {
     let costSearchValue = event.target.value;
+    //passing cost to parent's props
     this.props.onCostSearchChange(costSearchValue);
   }
 
-  handleInputChange = (event) => {
-    event.preventDefault();
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
+  handleZipChange = (event) => {
+    let zipSearchValue = event.target.value;
+    //passing zip to parent's props
+    this.props.onZipSearchChange(zipSearchValue);
+  }
 
-  handleDateChange = (provider, date) => {
-    this.setState({ [provider]: date });
+  handleDateChange = (date) => {
+    //passing date to parent's props
+    this.props.onDateSearchChange(date);
   };
 
   render() {
@@ -90,7 +93,7 @@ export class BrowseEvents extends Component {
               name="eventZipSearch"
               className="rounded"
               value={this.state.eventZipSearch}
-              onChange={this.handleInputChange}
+              onChange={this.handleZipChange}
             ></input>
           </div>
 
@@ -101,7 +104,7 @@ export class BrowseEvents extends Component {
             <DatePicker
               popperPlacement="top-end"
               selected={this.state.startDate}
-              onChange={this.handleDateChange.bind(this, "startDate")}
+              onChange={this.handleDateChange}
             />
           </div>
 
@@ -130,7 +133,6 @@ export class BrowseEvents extends Component {
             <select
               className="rounded"
               name="eventAge"
-              // value={this.state.category}
               onChange={this.handleAgeChange}
             >
               <option value="AllAges">All Ages</option>
@@ -138,8 +140,6 @@ export class BrowseEvents extends Component {
               <option value="21">21+</option>
             </select>
           </div>
-
-          {/* cost of event */}
           <div id="filterCost">
             <label className="subHeader">
               &nbsp;&nbsp;Events by cost to attend:&nbsp;

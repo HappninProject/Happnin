@@ -68,6 +68,7 @@ export class SubmitEvent extends Component {
       await this.populateLocationData();
         console.log(this.state);
         console.log(JSON.stringify(this.state.location));
+
         await fetch("api/Location", {
           method: "POST",
           body: JSON.stringify(this.state.location),
