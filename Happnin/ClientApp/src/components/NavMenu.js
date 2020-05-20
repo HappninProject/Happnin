@@ -74,29 +74,7 @@ export class NavMenu extends Component {
                     </NavLink>
                   </NavItem>
                 </div>
-                <div className="flexItem">
-                  <NavItem>
-                    <NavLink
-                      tag={Link}
-                      className="navHeader"
-                      to="/fetch-location-data"
-                    >
-                      Locations
-                    </NavLink>
-                  </NavItem>
-                </div>
-                <div className="flexItem">
-                  <NavItem>
-                    <NavLink
-                      tag={Link}
-                      className="navHeader"
-                      to="/fetch-user-data"
-                    >
-                      Users
-                    </NavLink>
-                  </NavItem>
-                </div>
-                <div className="flexItem">
+                 <div className="flexItem">
                   <NavItem>
                     <NavLink
                       tag={Link}
