@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { FetchEventData } from "./FetchEventData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
@@ -163,9 +162,6 @@ export class BrowseEvents extends Component {
         {/* <div>
           <EventDataWithError404/>
         </div> */}
-        <div>
-          <li><Link to="/EventPage">test page</Link></li>
-        </div>
       </div>
     );
   }

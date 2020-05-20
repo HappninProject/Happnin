@@ -113,33 +113,6 @@ export class Home extends Component {
     return (
       <div className="container-fluid card">
         <h1 className="header">Welcome to Happnin</h1>
-
-        <table className="event-table">
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Upcoming Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Friends' Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Popular Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-        </table>
         <div className="submit">
           <h1 id="tabelLabel" className="header">
             Events
