@@ -68,7 +68,7 @@ export class EventPage extends Component {
         let location = this.state.location;
         let host = this.state.host.userName;
         var startTime = new Date(Date.parse(e.eventTime)).toDateString();
-        var endTime = new Date(Date.parse(e.eventTime)).toDateString();
+        var endTime = new Date(Date.parse(e.endTime)).toDateString();
 
         return (
             

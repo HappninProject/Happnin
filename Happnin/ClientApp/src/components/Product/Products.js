@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, TileLayer, } from 'react-leaflet'
-import { HappninEvent } from './Event/HappninEvent';
+import { HappninEvent } from '../Event/HappninEvent';
 
 export class Products extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ export class Products extends Component {
         <h1 className="header">Search for Products</h1>
         <div className="text-center">
           <div id="filterName">
-            <label className="subHeader">product name (nintendo switch, toilet paper, ect.):&nbsp;</label>
+            <label className="subHeader">Product:&nbsp;</label>
             <input
               type="text"
               name="eventNameSearch"
@@ -84,25 +84,25 @@ export class Products extends Component {
               onChange={this.handleInputChange}
             ></input>
           </div>
-        </div>
-          <div>
-            <div style={{ height: "100vh", width: "100%" }}>
-            <Map 
-                center={[this.state.lat, this.state.lng]} 
-                zoom={this.state.zoom} 
-                style={{ width: '100%', height: '100vh'}}
-                >
-                  <TileLayer
-                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
-                />
-                </Map>
-            </div>
+         <div id="filterCost">
+            <label className="subHeader">
+              &nbsp;&nbsp;Cost:&nbsp;
+            </label>
+            <select
+              className="rounded"
+              name="eventCost"
+              onChange={this.handleCostChange}
+            >
+              <option value="AnyPrice">Any Price</option>
+              <option value="0">Free</option>
+              <option value="25">Between .50 and $25</option>
+              <option value="50">Between $25.50 and $50</option>
+              <option value="100">Between $50.50 and $100</option>
+              <option value="More">More than $100</option>
+            </select>
           </div>
-          <div>
-
-          </div>
-        </div>
+         </div>
+       </div>
     );
   }
   
