@@ -63,7 +63,7 @@ export class Products extends Component {
         <h1 className="header">Search for Products</h1>
         <div className="text-center">
           <div id="filterName">
-            <label className="subHeader">product name (nintendo switch, toilet paper, ect.):&nbsp;</label>
+            <label className="subHeader">Product:&nbsp;</label>
             <input
               type="text"
               name="eventNameSearch"
@@ -83,6 +83,23 @@ export class Products extends Component {
               value={this.state.eventZipSearch}
               onChange={this.handleInputChange}
             ></input>
+          </div>
+         <div id="filterCost">
+            <label className="subHeader">
+              &nbsp;&nbsp;Cost:&nbsp;
+            </label>
+            <select
+              className="rounded"
+              name="eventCost"
+              onChange={this.handleCostChange}
+            >
+              <option value="AnyPrice">Any Price</option>
+              <option value="0">Free</option>
+              <option value="25">Between .50 and $25</option>
+              <option value="50">Between $25.50 and $50</option>
+              <option value="100">Between $50.50 and $100</option>
+              <option value="More">More than $100</option>
+            </select>
           </div>
          </div>
        </div>

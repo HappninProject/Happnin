@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 export class UserAccount extends Component {
   constructor(props) {
     super(props);
-    //TODO: eventually remove the hardcoded values
-    //These values are temporarily hard-coded to test editing them on the EditAccount page
+    
     this.state = {
       user: {
         userName: "fakeUser1",

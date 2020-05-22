@@ -121,6 +121,7 @@ export class BrowseEvents extends Component {
               <option value="Comedy">Comedy</option>
               <option value="Culture">Culture</option>
               <option value="Festival">Festival</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 

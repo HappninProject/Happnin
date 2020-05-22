@@ -6,12 +6,9 @@ import { About } from "./components/About";
 import { Terms } from "./components/Terms";
 import { Privacy } from "./components/Privacy";
 import { HostedEvents } from "./components/Event/HostedEvents"
-// import { FetchEventData } from "./components/Event/FetchEventData";
-//import FetchEventDataWithError404 from "./components/Event/FetchEventData";
 import { FetchUserData } from "./components/User/FetchUserData";
 import { FetchLocationData } from "./components/FetchLocationData";
 import { SubmitEvent } from "./components/Event/SubmitEvent";
-//import { BrowseEvents } from "./components/Event/BrowseEvents";
 import ApiAuthorizationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
 import { ApplicationPaths } from "./components/api-authorization/ApiAuthorizationConstants";
 import { ContactUs } from "./components/ContactUs";
@@ -21,8 +18,9 @@ import "./styles/react_dates_overrides.css";
 import { FriendRequests } from "./components/User/FriendRequests";
 import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
 import { EventPage } from "./components/Event/EventPage";
-import {Attendies} from "./components/Attendies";
 import { BrowseProducts } from './components/Product/BrowseProduct'
+import { UserAccount } from './components/User/UserAccount'
+
 
 export default class App extends Component {
   static displayName = App.name;
@@ -43,6 +41,7 @@ export default class App extends Component {
         {/* <Route path="/fetch-event-data" component={FetchEventDataWithError404} /> */}
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
+        <Route path="User/:userId" component=""/>
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
@@ -55,7 +54,6 @@ export default class App extends Component {
         <Route path="/privacy" component={Privacy} />
         <Route path='/hosted-events' component={HostedEvents}/>
         <Route path='/Products' component={ BrowseProducts }/>
-        <Route path='/Attendies' component={Attendies}/>
       </Layout>
     );
   }

@@ -52,11 +52,7 @@ export class BrowseProducts extends Component {
       <div>
         <Products
           onNameSearchChange={this.handleNameSearch}
-          onWordSearchChange={this.handleWordFilterChange}
-          onCategorySearchChange={this.handleCategorySearchChange}
-          onAgeSearchChange={this.handleAgeSearchChange}
           onCostSearchChange={this.handleCostSearchChange}
-          onDateSearchChange = {this.handleDateSearchChange}
           onZipSearchChange = {this.handleZipSearchChange}
         />
         <FetchProductData
