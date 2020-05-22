@@ -41,7 +41,7 @@ export default class App extends Component {
         {/* <Route path="/fetch-event-data" component={FetchEventDataWithError404} /> */}
         <Route path="/fetch-user-data" component={FetchUserData} />
         <Route path="/fetch-location-data" component={FetchLocationData} />
-        <Route path="User/:userId" component=""/>
+        <Route path="User/:userId" component={ UserAccount }/>
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}

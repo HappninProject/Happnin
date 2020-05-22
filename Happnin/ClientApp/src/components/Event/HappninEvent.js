@@ -70,7 +70,7 @@ export class HappninEvent extends Component {
   render() {
     const e = this.props;
     let startTime = new Date(Date.parse(e.eventTime)).toDateString();
-    let endTime = new Date(Date.parse(e.eventTime)).toDateString();
+    let endTime = new Date(Date.parse(e.endTime)).toDateString();
 
     return (
       <div class="card">

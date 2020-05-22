@@ -44,8 +44,8 @@ export class HostEvent extends Component {
 
   render() {
     const e = this.props;
-    var startTime = moment(e.eventTime).format("LT").toString();
-    var endTime = moment(e.endTime).format("LT").toString();
+    let startTime = new Date(Date.parse(e.eventTime)).toDateString();
+    let endTime = new Date(Date.parse(e.endTime)).toDateString();
 
     return (
       <div class="card">
