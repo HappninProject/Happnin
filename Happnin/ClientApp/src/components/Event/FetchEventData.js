@@ -1,7 +1,6 @@
 ﻿import React, { Component } from "react";
 import { HappninEvent } from "./HappninEvent";
 //import { Map, TileLayer } from 'react-leaflet'
-import Error404Page from "../Error404Page";
 import authService from '../api-authorization/AuthorizeService';
 
 import { Map } from "../Map";
@@ -45,7 +44,7 @@ export class FetchEventData extends Component {
   }
 
   async populateEventData() {
-    const response = await fetch("api/Event");
+    const response = await fetch("api/Event/EventsOnly/");
     const data = await response.json();
     //  console.log("Got Data", data);
     this.setState({ events: data, loading: false });

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, TileLayer, } from 'react-leaflet'
-import { HappninEvent } from './Event/HappninEvent';
+import { HappninEvent } from '../Event/HappninEvent';
 
 export class Products extends Component {
   constructor(props) {
@@ -84,25 +84,8 @@ export class Products extends Component {
               onChange={this.handleInputChange}
             ></input>
           </div>
-        </div>
-          <div>
-            <div style={{ height: "100vh", width: "100%" }}>
-            <Map 
-                center={[this.state.lat, this.state.lng]} 
-                zoom={this.state.zoom} 
-                style={{ width: '100%', height: '100vh'}}
-                >
-                  <TileLayer
-                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
-                />
-                </Map>
-            </div>
-          </div>
-          <div>
-
-          </div>
-        </div>
+         </div>
+       </div>
     );
   }
   

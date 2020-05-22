@@ -87,8 +87,9 @@ export class HappninEvent extends Component {
           <Col xs={10} horizontal="right">
             <div class="card-body" className="happninevent">
               <div className="eventinfo">
-                <h5 class="card-title">{e.name}</h5>
-                <Link to={`/EventPage/${e.id}`}>Event Page</Link>
+                <h5 class="card-title">
+                  <Link to={`/EventPage/${e.id}`}>{e.name}</Link>
+                </h5>
                 <div class="card-text">
                   <p>{e.description}</p>
                   Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}

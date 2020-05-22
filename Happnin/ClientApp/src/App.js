@@ -21,8 +21,8 @@ import "./styles/react_dates_overrides.css";
 import { FriendRequests } from "./components/User/FriendRequests";
 import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
 import { EventPage } from "./components/Event/EventPage";
-import {Products} from "./components/Products";
 import {Attendies} from "./components/Attendies";
+import { BrowseProducts } from './components/Product/BrowseProduct'
 
 export default class App extends Component {
   static displayName = App.name;
@@ -54,7 +54,7 @@ export default class App extends Component {
         <Route path="/terms" component={Terms} />
         <Route path="/privacy" component={Privacy} />
         <Route path='/hosted-events' component={HostedEvents}/>
-        <Route path='/Products' component={Products}/>
+        <Route path='/Products' component={ BrowseProducts }/>
         <Route path='/Attendies' component={Attendies}/>
       </Layout>
     );
