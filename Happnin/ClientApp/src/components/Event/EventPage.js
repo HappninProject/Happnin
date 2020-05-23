@@ -1,10 +1,9 @@
 ﻿import React, { Component } from "react";
 import image from "../../images/event-image.jpg";
-import { Map, TileLayer,} from 'react-leaflet'
+import { Map } from "../Map";
 import attendies from "../../images/users.svg";
 import share from "../../images/Share.png";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Link } from "react-router-dom";
 import { Category } from '../../shared/Category';
 
 export class EventPage extends Component {
@@ -20,6 +19,7 @@ export class EventPage extends Component {
           zoom: 13,
           attendingCount: 0,
           loading: true, 
+          AttendingValue: null,
         };
     }
 
@@ -38,7 +38,9 @@ export class EventPage extends Component {
     }
 
     handleAttendingChange = (event) => {
-        let AttendingValue = event.target.value;
+        this.setState({
+            AttendingValue: event.target.value,
+          });
     }
 
     async FetchEventData(){
@@ -76,7 +78,7 @@ export class EventPage extends Component {
                 <div id="event-image-container">
                         <img
                             id="event-image"
-                            alt="event image"
+                            alt=" "
                             src={image}
                         />
                 </div>
@@ -93,7 +95,6 @@ export class EventPage extends Component {
                             style = {{width: "20%"}}
                         >
                                 <option value="Attending">Attending</option>
-                                <option value="Interested">Interested</option>
                                 <option value="Can't Attend">Can't Attend </option>
                         </select>
                         <img id="attendies" className="" alt="attendies" src={attendies} style={{ width: "2%", margin: "10px" }} />
@@ -143,16 +144,7 @@ export class EventPage extends Component {
                     </div>
 
                     <div style={{float:"right", marginTop : "10px"}}>
-                            <Map 
-                                center={[this.state.lat, this.state.lng]} 
-                                zoom={this.state.zoom} 
-                                style={{ width: '52vh', height: '50vh',}}
-                                >
-                                <TileLayer
-                                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
-                                />
-                            </Map>
+                    <Map jsonEvent = {this.state.data} />
                     </div>
                 </div>
                 <div id = "updatesContainer">

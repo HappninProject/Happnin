@@ -4,7 +4,6 @@ import Card from "react-bootstrap/Card";
 import "../../styles/HappninEvent.css";
 import logo from "../../images/happninHLogoThumb.png";
 import { Row, Col } from "react-bootstrap";
-import moment from "moment";
 import { Category } from '../../shared/Category'
 
 export class HostEvent extends Component {

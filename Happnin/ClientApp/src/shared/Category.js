@@ -3,7 +3,6 @@ export function Category(categoryId) {
     switch(categoryId){
         case 0:
             return 'Music'
-            break
         case 1:  
             return 'Festival'
         case 2: 
