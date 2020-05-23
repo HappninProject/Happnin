@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Map, TileLayer, } from 'react-leaflet'
 import { HappninEvent } from '../Event/HappninEvent';
 
 export class Products extends Component {

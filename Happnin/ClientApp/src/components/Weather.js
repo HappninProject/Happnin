@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useContext}from "react";
 import "../styles/NavMenu.css";
 import ReactAnimatedWeather from "react-animated-weather";
+import { LocationContext } from './LocationContext';
 
 export default class Weather extends Component {
     state = {
@@ -12,10 +13,15 @@ export default class Weather extends Component {
         loading: true,
     };
     async componentDidMount() {
+     
         navigator.geolocation.getCurrentPosition((position) => {
+          const location =  useContext(LocationContext);
             console.log(position);
             let lat = position.coords.latitude
+            location.setLat(lat)
             let lng = position.coords.longitude
+            location.setLong(lng)
+            useContext(LocationContext).setLong(lng)
             this.getWeather(lat,lng);
         });
     }

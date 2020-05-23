@@ -190,7 +190,7 @@ export class FetchProductData extends Component {
         let eventMonth = eventDate.getMonth();
         let eventDay = eventDate.getDate();
         let eventYear = eventDate.getFullYear();
-        return eventMonth == month && eventDay == day && eventYear == year;
+        return eventMonth === month && eventDay === day && eventYear === year;
       });
 
     }
@@ -222,7 +222,7 @@ export class FetchProductData extends Component {
 
       //search through the events and if the zip code matches it's listed
       locations = locations.filter((location) => {
-        return location.zipCode == zip;
+        return location.zipCode === zip;
       });
 
       //create an array with those IDs
