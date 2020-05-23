@@ -1,6 +1,6 @@
 ﻿import React, { Component } from "react";
-import authService from '../api-authorization/AuthorizeService'
-
+import authService from '../api-authorization/AuthorizeService';
+import { Link } from "react-router-dom";
 export class FriendRequests extends Component {
 
   constructor(props) {
@@ -164,7 +164,7 @@ export class FriendRequests extends Component {
         <tbody>
           {friends.map(u => (
             <tr key={u.userName}>
-              <td>{u.userName}</td>
+              <td><Link to={`/User/${u.id}`}>{u.userName}</Link></td>
               <td>{u.firstName}</td>
               <td>{u.lastName}</td>
             </tr>

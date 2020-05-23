@@ -10,20 +10,54 @@ export class UserAccount extends Component {
     super(props);
     
     this.state = {
+      id: this.props.match.params.userId,      
       user: {
-        userName: "fakeUser1",
-        firstName: "Jane",
-        lastName: "Doe",
-        city: "Spokane",
-        birthday: "02/23/1995",
-        email: "fakeemail@gmail.com",
-        phone: "(509) 555-5555",
-        eventsOfInterest: ["Music", "Comedy", "Cultural"]
-      }
+        userName: "",
+        firstName: "",
+        lastName: "",
+        zipCode: -1,
+        email: ""
+      },
+      attending: [],
+      events: []
     };
   }
 
+  async componentDidMount(){
+    await this.FetchUserAccount(); 
+    await this.FetchAttending();
+    await this.FetchAttendingEvents();
+  }
+
+  async FetchUserAccount(){
+    const userId = this.state.id;
+    const response = await fetch(`api/User/${userId}`);
+    const tempUser = await response.json();
+    this.setState({ user: tempUser });
+  }
+
+  async FetchAttending(){
+    const userId = this.state.id;
+    const attending = await fetch(`api/Attendee/AttendeeInfo/${userId}`);
+    const tempAttend = await attending.json();
+    this.setState({ attending: tempAttend });
+  }
+
+  async FetchAttendingEvents(){
+    const attending = this.state.attending;
+    let events = [];
+    for(let i = 0; i < attending.length; i++){
+      let response = await fetch(`api/Event/${attending[i].eventId}`)
+      let event = await response.json();
+      events.push(event);
+    }
+    this.setState({events: events})
+
+  }
+
   render() {
+    const events = this.state.events;
+
     return (
       <div class="card">
         <div className="container-fluid">
@@ -38,12 +72,6 @@ export class UserAccount extends Component {
                 <h3 className="header mx-auto">
                   {this.state.user.firstName + " " + this.state.user.lastName}
                 </h3>
-              </div>
-              <div className="row-3">
-                <div className="col rounded white-div align-middle">
-                  <h4>User Bio</h4>
-                  <p>I think I'm stuck in a simulation</p>
-                </div>
               </div>
             </div>
             <div className="col-5 float-right border rounded white-div">
@@ -60,36 +88,18 @@ export class UserAccount extends Component {
                 </p>
               </div>
               <div>
-                <p className="subHeader">City: {this.state.user.city}</p>
-              </div>
-              <div>
-                <p className="subHeader">
-                  Birthday: {this.state.user.birthday}
-                </p>
+                <p className="subHeader">Zipcode: {this.state.user.zipCode}</p>
               </div>
               <div>
                 <p className="subHeader">Email: {this.state.user.email}</p>
               </div>
-              <div>
-                <p className="subHeader">
-                  Types of events I'm interested in:
-                  {this.state.user.eventsOfInterest.map(event => (
-                    <li key={event.id}>{event}</li>
-                  ))}
-                </p>
-              </div>
             </div>
             <div className="col-4 float-right border rounded white-div">
               <h1 className="header">Upcoming Events</h1>
-              <p>No upcoming events for you yet!</p>
+              {events.map((e) => (
+                <div><Link to={`/EventPage/${e.id}`}>{e.name}</Link></div>
+              ))}
             </div>
-          </div>
-          <div className="float-right mt-2">
-            <Link to="/edit-account">
-              <button id="btnEditAccount" className="btn secondaryButton">
-                Edit Profile
-              </button>
-            </Link>
           </div>
         </div>
       </div>
