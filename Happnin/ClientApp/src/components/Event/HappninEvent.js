@@ -5,7 +5,6 @@ import logo from "../../images/happninHLogoThumb.png";
 import { Row, Col } from "react-bootstrap";
 import { Category } from '../../shared/Category'
 import { Link } from "react-router-dom";
-import { EventPage } from './EventPage'
 
 export class HappninEvent extends Component {
   constructor(props) {
