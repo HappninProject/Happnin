@@ -35,6 +35,7 @@ export class SubmitEvent extends Component {
                 lat: "",
                 lng: ""
             },
+            img: {},
             redirectToHome: false
         };
 
@@ -125,6 +126,10 @@ export class SubmitEvent extends Component {
     console.log(this.state);
   };
 
+  handleImageChange = event => {
+    this.setState({img: event.target.files[0]});
+  }
+
   componentDidMount = event => {
     this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
@@ -179,6 +184,21 @@ export class SubmitEvent extends Component {
       console.log('location has been defined');
     })
     console.log(this.state)
+  }
+
+  async submitPhoto(e) {
+    e.preventDefault();
+
+    const url = `api/Upload/test`
+    const formData = new FormData();
+    formData.append('body', this.state.img);
+    const config = {
+      headers: {
+        'content-type' : 'multipart/form-data',
+      },
+    };
+    
+    return axios.post(url, formData, config);
   }
 
   render() {
@@ -374,11 +394,8 @@ export class SubmitEvent extends Component {
                 id="costId" 
                 onChange={this.handleInputChange}/>
           </div>
-
-          <div className="image">
-            Image: <input id="imageUpload" type="file" />
-          </div>
-
+         
+          
           {["checkbox"].map(type => (
             <div key={`inline-${type}`} className="mb-3">
               <Form.Check
@@ -407,6 +424,12 @@ export class SubmitEvent extends Component {
             </button>
           </form>
         </div>
+         <form onSubmit={ e => this.submitPhoto(e) }>
+            <div className="image">
+              Image: <input id="imageUpload" type="file" onChange={this.handleImageChange}/>
+            </div>
+            <button type="submit">Hit backend?</button>
+          </form>
       </div>
     );
   }
