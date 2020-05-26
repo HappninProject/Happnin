@@ -15,6 +15,8 @@ namespace Happnin.Business.Dto
         [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
         public double Cost { get; set; }
+
+        public int? EventImageId { get; set; }
         public int AgeRestriction { get; set; }
     }
 }

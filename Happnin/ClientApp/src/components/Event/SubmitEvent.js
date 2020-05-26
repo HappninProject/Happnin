@@ -21,6 +21,7 @@ export class SubmitEvent extends Component {
             locationId: 0,
             categoryId: 1,
             hostId: "",
+            eventImageId: null,
             eventTime: "2020-02-26T05:21:52.102Z",
             endTime: "2020-02-27T05:21:52.102Z",
             cost: 42.0,
@@ -35,6 +36,7 @@ export class SubmitEvent extends Component {
                 lat: "",
                 lng: ""
             },
+            img: {},
             redirectToHome: false
         };
 
@@ -49,6 +51,14 @@ export class SubmitEvent extends Component {
     await this.handleSubmitLocation(event)
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
+    let image = null;
+    if(this.state.img.name !== undefined){
+      let res = await this.submitPhoto();
+      console.log('res')
+      console.log(res.data)
+      image = res.data;
+    }
+   this.setState({event: {...this.state.event, eventImageId: image.id}})
     await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
@@ -61,6 +71,21 @@ export class SubmitEvent extends Component {
               this.setState({redirectToHome: true});
       })
   }
+
+  async submitPhoto() {
+
+    const url = `api/Upload/`
+    const formData = new FormData();
+    formData.append('body', this.state.img);
+    const config = {
+      headers: {
+        'content-type' : 'multipart/form-data',
+      },
+    };
+   
+    return await axios.post(url, formData, config);
+  }
+
 
     async handleSubmitLocation(event) {
       event.preventDefault();
@@ -125,6 +150,10 @@ export class SubmitEvent extends Component {
     console.log(this.state);
   };
 
+  handleImageChange = event => {
+    this.setState({img: event.target.files[0]});
+  }
+
   componentDidMount = event => {
     this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
@@ -180,6 +209,7 @@ export class SubmitEvent extends Component {
     })
     console.log(this.state)
   }
+
 
   render() {
     const redirectToHomeRef = this.state.redirectToHome;
@@ -374,11 +404,11 @@ export class SubmitEvent extends Component {
                 id="costId" 
                 onChange={this.handleInputChange}/>
           </div>
-
-          <div className="image">
-            Image: <input id="imageUpload" type="file" />
-          </div>
-
+          
+            <div className="image">
+              Image: <input id="imageUpload" type="file" multiple accept='image/*' onChange={this.handleImageChange}/>
+            </div> 
+          
           {["checkbox"].map(type => (
             <div key={`inline-${type}`} className="mb-3">
               <Form.Check

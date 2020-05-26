@@ -20,6 +20,8 @@ namespace Happnin.Data
 
         public DbSet<Friendship> Friends { get; set; }
 
+        public DbSet<EventImage> EventImages { get; set; }
+
         public AppDbContext(DbContextOptions dbContext,  
             IOptions<OperationalStoreOptions> operationalStoreOptions): base(dbContext, operationalStoreOptions) { }
         

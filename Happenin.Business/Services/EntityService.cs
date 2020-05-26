@@ -53,7 +53,7 @@ namespace Happnin.Business.Services
         {
             TEntity entity = Mapper.Map<TInputDto, TEntity>(dto);
             ApplicationDbContext.Add(entity);
-            await ApplicationDbContext.SaveChangesAsync();
+            var returned = await ApplicationDbContext.SaveChangesAsync();
             return Mapper.Map<TEntity, TDto>(entity);
         }
 
