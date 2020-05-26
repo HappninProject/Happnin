@@ -103,29 +103,23 @@ export class FetchEventData extends Component {
     return filteredEvents;
   };
 
-  //displays event if event in on the date entered
+  //displays event if event is on the date entered (including start and end range)
   filterDate = (filteredEvents) => {
-    //!right now the date is always set to feb 26th (for some weird reason)
-    //!also this does not currently filtering within the range of dates (startTime-endTime), only startTime
-    //!also something needs to be changed where the current date is the default value, because currently it is empty at start
-    //!and you have to click on the date to start filtering
     console.log("Date from FetchEventData: " + this.props.date);
     let dateEntered = this.props.date;
     if(dateEntered !== ""){
       //creating a date object from the string that was passed in
       let date = new Date(dateEntered);
-      let month = date.getMonth();
-      let day = date.getDate();
-      let year = date.getFullYear();
+      console.log("Filter date entered* (in FetchEventData): " + dateEntered);
 
       //now make sure that only the events are shown that are on the date entered
       //filtering based on date
       filteredEvents = filteredEvents.filter((event) => {
         let eventDate = new Date(event.eventTime);
-        let eventMonth = eventDate.getMonth();
-        let eventDay = eventDate.getDate();
-        let eventYear = eventDate.getFullYear();
-        return eventMonth == month && eventDay == day && eventYear == year;
+
+        //getting the end time for event
+        let eventEnd = new Date(event.endTime);
+        return date >= eventDate && date <= eventEnd;
       });
 
     }
@@ -251,6 +245,57 @@ export class FetchEventData extends Component {
     return filteredEvents;
   };
 
+  //displays event if it meets time search choice
+  filterTime = (filteredEvents) => {
+      //!currently does not account for overnight events (ex. start time at 9pm, end time at 8am)
+      let time = this.props.time;
+      //these will be in military time to compare
+      //maxTime is not inclusive
+      let minTime;
+      let maxTime;
+      if(time !== ""){
+        //if time is morning (5AM - 11:59AM)
+        if(time == "Morning"){
+          minTime = 5;
+          maxTime = 12;
+        }
+        //if time is afternoon (12PM - 5:59PM)
+        else if(time == "Afternoon"){
+          minTime = 12;
+          maxTime = 18;
+        }
+        //if time is night (6PM - 4:49AM)
+        else if (time == "Night"){
+          minTime = 18;
+          maxTime = 5;
+        }
+
+        //filtering by time of day
+        filteredEvents = filteredEvents.filter((event) => {
+          console.log("This is the time of the event*: " + event.eventTime);
+          //get the hour of the event
+          let eventHr = new Date(event.eventTime).getHours();
+          console.log("Event hour*: " + eventHr);
+          //edge case for night since the minTime is more than maxTime
+          //!this is temporary until I find a better fix
+          if(time == "Night"){
+            return eventHr >= minTime;
+          }
+          return eventHr >= minTime && eventHr < maxTime;
+        });
+      }
+
+    return filteredEvents;
+  }
+
+  sortEvents = (filteredEvents) => {
+    filteredEvents = filteredEvents.sort((event1, event2) => {
+      return new Date(event1.eventTime) - new Date(event2.eventTime);
+    })
+    return filteredEvents;
+  };
+
+  //!need to fix it where it reloads when filters are changed back to default (ex. any time for start time)
   renderFilteredEvents(events) {
     if (events && events.length) {
       let filteredEvents = this.state.events;
@@ -276,6 +321,21 @@ export class FetchEventData extends Component {
       //filtering by cost
       filteredEvents = this.filterCost(filteredEvents);
 
+      //filtering by time of day
+      filteredEvents = this.filterTime(filteredEvents)
+
+      //sorting the events by more recent to further in the future
+      filteredEvents = this.sortEvents(filteredEvents);
+
+    if (filteredEvents === undefined || filteredEvents.length == 0) {
+        return(
+          <div>
+            No events found with those search filters!
+          </div>
+        )
+    }
+
+
       return (
         <div>
           {filteredEvents.map((eventinfo) => (
@@ -291,7 +351,7 @@ export class FetchEventData extends Component {
   render() {
     const events = this.state.events;
     //logging the data
-    console.log("This is the data: " + events);
+    console.log("This is the data *: " + JSON.stringify(events));
 
     //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
     let eventsData = events
@@ -328,15 +388,16 @@ export class FetchEventData extends Component {
         //     </Map>
         //</div> */}
 
-        <h1 id="tableLabel" className="header">
+        {/*//!This will be deleted and replaced by filtered events eventually, kept and commented out for testing temporarily */}
+        {/* <h1 id="tableLabel" className="header">
           Events
-        </h1>
-        <p>Got these events from our server DAWG</p>
-        {eventsData}
+        </h1> */}
+        {/* <p>Got these events from our server DAWG</p>
+        {eventsData} */}
 
         <div>
           {/* This is where the filtered data goes  */}
-          <h1 className="header">Filtered Events</h1>
+          <h1 className="header">Events (filtered)</h1>
           {filteredEventsData}
         </div>
       </div>

@@ -10,7 +10,8 @@ export class BrowseEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
+      startDate: null,
+      defaultValue: ""
     };
   }
 
@@ -55,10 +56,22 @@ export class BrowseEvents extends Component {
 
   handleDateChange = (date) => {
     //passing date to parent's props
+    console.log("Filter date entered*: " + date);
+    this.setState({startDate: date});
     this.props.onDateSearchChange(date);
   };
 
+  handleTimeChange = (event) => {
+    let timeSearchValue = event.target.value;
+    //!remove log statement later
+    console.log("Time of day filter (in BrowseEvents)*: " + timeSearchValue);
+    //passing time to parent's props
+    this.props.onTimeSearchChange(timeSearchValue);
+  }
+
   render() {
+    //! temp
+    console.log("Filter date entered* state of startDate" + this.state.startDate);
     return (
       <div className="container-fluid card">
         <h1 className="header">Search for Events</h1>
@@ -74,7 +87,7 @@ export class BrowseEvents extends Component {
           </div>
 
           <div id="filterWord">
-            <label className="subHeader">Word or phrase:&nbsp;</label>
+            <label className="subHeader">Word or Phrase:&nbsp;</label>
             <input
               type="text"
               name="eventWordSearch"
@@ -85,7 +98,7 @@ export class BrowseEvents extends Component {
 
           <div id="filterZip">
             <label className="subHeader">
-              &nbsp;&nbsp;Zip code:&nbsp;
+              &nbsp;&nbsp;Zip Code:&nbsp;
             </label>
             <input
               type="text"
@@ -99,7 +112,7 @@ export class BrowseEvents extends Component {
 
           <div id="filterDate">
             <label className="subHeader">
-              &nbsp;&nbsp;Events by date:&nbsp;{this.state.eventSearch}
+              &nbsp;&nbsp;Date:&nbsp;{this.state.eventSearch}
             </label>
             <DatePicker
               popperPlacement="top-end"
@@ -108,9 +121,25 @@ export class BrowseEvents extends Component {
             />
           </div>
 
+          <div id="filterTime">
+            <label className="subHeader">
+              &nbsp;&nbsp;Time of Day (Start Time):&nbsp;
+            </label>
+            <select
+              className="rounded"
+              name="eventTime"
+              onChange={this.handleTimeChange}
+            >
+              <option value="Any">Any Time</option>
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Night">Night</option>
+            </select>
+          </div>
+
           <div id="filterCategory">
             <label className="subHeader">
-              &nbsp;&nbsp;Events by category:&nbsp;
+              &nbsp;&nbsp;Category:&nbsp;
             </label>
             <select
               className="rounded"
@@ -128,7 +157,7 @@ export class BrowseEvents extends Component {
           {/* age restriction */}
           <div id="filterAge">
             <label className="subHeader">
-              &nbsp;&nbsp;Events by age restriction:&nbsp;
+              &nbsp;&nbsp;Age Restriction:&nbsp;
             </label>
             <select
               className="rounded"
@@ -142,7 +171,7 @@ export class BrowseEvents extends Component {
           </div>
           <div id="filterCost">
             <label className="subHeader">
-              &nbsp;&nbsp;Events by cost to attend:&nbsp;
+              &nbsp;&nbsp;Cost to Attend:&nbsp;
             </label>
             <select
               className="rounded"

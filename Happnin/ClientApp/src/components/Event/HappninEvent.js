@@ -69,8 +69,28 @@ export class HappninEvent extends Component {
 
   render() {
     const e = this.props;
-    let startTime = new Date(Date.parse(e.eventTime)).toDateString();
-    let endTime = new Date(Date.parse(e.eventTime)).toDateString();
+    //changed this to show day and time of day
+    let startDay = new Date(Date.parse(e.eventTime)).toDateString();
+    //added this to show the start time of event
+    let eventDay = new Date(e.eventTime);
+    let startHrs = eventDay.getHours();
+    let startMins = eventDay.getMinutes();
+    //converting to 12 hr format
+    let amPm = startHrs >= 12 ? 'PM' : 'AM';
+    startHrs = (startHrs % 12) || 12;
+    let eventStartTime = startHrs + ":" + startMins + " " + amPm;
+
+
+
+    let endDay = new Date(Date.parse(e.endTime)).toDateString();
+    //added this to show the end time of event
+    let eventDayEnd = new Date(e.endTime);
+    let endHrs = eventDayEnd.getHours();
+    let endMins = eventDayEnd.getMinutes();
+    //converting to 12 hr format
+    let amPmEnd = endHrs >= 12 ? 'PM' : 'AM';
+    endHrs = (endHrs % 12) || 12;
+    let eventEndTime = endHrs + ":" + endMins + " " + amPm;
 
     return (
       <div class="card">
@@ -91,10 +111,10 @@ export class HappninEvent extends Component {
                 <Link to={`/EventPage/${e.id}`}>Event Page</Link>
                 <div class="card-text">
                   <p>{e.description}</p>
-                  Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
-                  <b>{e.ageRestriction}</b> <br /> <br />
+                  Cost: $ <b>{e.cost.toFixed(2)}</b> &ensp; Age Restriction:{" "}
+                  <b>{e.ageRestriction == 500 ? "All Ages": e.ageRestriction + "+"}</b> <br /> <br />
                   Category: <b>{Category(e.categoryId)}</b> <br />
-                  {startTime} - {endTime} <br />
+    {startDay} at {eventStartTime} - {endDay} at {eventEndTime}<br />
                 </div>
                 <p id="inline-text">
                   {this.state.attending === true

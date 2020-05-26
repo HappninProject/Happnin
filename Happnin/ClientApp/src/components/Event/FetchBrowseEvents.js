@@ -15,6 +15,7 @@ export class FetchBrowseEvents extends Component {
       ageSearch: "",
       costSearch: "",
       dateSearch: "",
+      timeSearch: "",
       zipSearch: ""
     };
   }
@@ -43,6 +44,10 @@ export class FetchBrowseEvents extends Component {
     this.setState({dateSearch: date});
   }
 
+  handleTimeSearchChange = (time) => {
+    this.setState({timeSearch: time});
+  }
+
   handleZipSearchChange = (zip) => {
     this.setState({zipSearch: zip})
   }
@@ -58,6 +63,7 @@ export class FetchBrowseEvents extends Component {
           onCostSearchChange={this.handleCostSearchChange}
           onDateSearchChange = {this.handleDateSearchChange}
           onZipSearchChange = {this.handleZipSearchChange}
+          onTimeSearchChange = {this.handleTimeSearchChange}
         />
         <FetchEventData
           name={this.state.nameSearch}
@@ -66,6 +72,7 @@ export class FetchBrowseEvents extends Component {
           age={this.state.ageSearch}
           cost={this.state.costSearch}
           date = {this.state.dateSearch}
+          time = {this.state.timeSearch}
           zip = {this.state.zipSearch}
         />
       </div>
