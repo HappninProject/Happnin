@@ -17,7 +17,9 @@ export class HappninEvent extends Component {
       eventName : this.props.eventName,
       eventDescription: this.props.description,
       category: this.props.categoryId,
-      startTime: this.props.eventTime
+      startTime: this.props.eventTime,
+      imageId: -1,
+      image: {}
     };
     console.log("in the constructor");
     console.log(this.props);
@@ -35,6 +37,10 @@ export class HappninEvent extends Component {
       attendingId: props.attendingId,
       gotDerived: true,
     };
+  }
+
+  async componentDidMount(){
+      await this.getPicture();
   }
 
   async attending() {
@@ -60,16 +66,30 @@ export class HappninEvent extends Component {
     this.props.handler();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("component did update");
-    console.log(prevProps);
-    console.log(prevState);
+  ImageToUse = () => {
+    const image = this.state.image;
+    if( image.image === undefined){
+      return logo;
+    }
+    else {
+      return `data:image/jpeg;base64,${image.image}`;
+    }
+  }
+
+  async getPicture(){
+    const imageId = this.props.eventImageId;
+    let response = await fetch(`api/Upload/${imageId}`)
+    console.log('response:')
+    console.log(response);
+    let image = await response.json();
+    this.setState({image: image});
   }
 
   render() {
     const e = this.props;
     let startTime = new Date(Date.parse(e.eventTime)).toDateString();
     let endTime = new Date(Date.parse(e.endTime)).toDateString();
+    let image = this.ImageToUse();
 
     return (
       <div class="card">
@@ -78,9 +98,9 @@ export class HappninEvent extends Component {
             <Card.Img
               className="eventImage"
               variant="left"
-              src={logo}
+              src={image}
               rounded="true"
-              style={{ padding: 5 }}
+              style={{ padding: 5, width: '164px', height: '188px' }}
             />
           </Col>
           <Col xs={10} horizontal="right">

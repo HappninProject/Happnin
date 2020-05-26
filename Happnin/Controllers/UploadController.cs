@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
+using Happnin.Business.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Happnin.Business.Dto;
 
 namespace Happnin.Controllers
 {
@@ -9,12 +12,18 @@ namespace Happnin.Controllers
     [ApiController]
     public class UploadController : ControllerBase
     {
+        private IEventImageService Service { get; }
+        public UploadController(IEventImageService service)
+        {
+            Service = service;
+        }
+
+
         [HttpPost]
-        [Route("{id}")]
-        public async Task<IActionResult> Post([FromRoute]string id, [FromForm]IFormFile body)
+        public async Task<EventImage> Post([FromForm]IFormFile body)
         {
             byte[] fileBytes;
-
+            
             using(var memoryStream = new MemoryStream())
             {
                 await body.CopyToAsync(memoryStream);
@@ -24,8 +33,24 @@ namespace Happnin.Controllers
             var filename = body.FileName;
             var contentType = body.ContentType;
             
+            var EventImage = new EventImageInput
+            {
+                DataType = contentType.ToString(),
+                FileName = filename.ToString(),
+                Image = fileBytes
+            };
 
-            return Ok();
+            var returned = await Service.InsertAsync(EventImage);
+
+            return returned;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<EventImageInput> Get(int id)
+        {
+            var result = await Service.FetchByIdAsync(id);
+            return result;
         }
     }
 }

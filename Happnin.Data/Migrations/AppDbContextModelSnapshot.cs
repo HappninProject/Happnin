@@ -68,6 +68,9 @@ namespace Happnin.Data.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("EventImageId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("EventTime")
                         .HasColumnType("TEXT");
 
@@ -84,11 +87,33 @@ namespace Happnin.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("EventImageId");
+
                     b.HasIndex("HostId");
 
                     b.HasIndex("LocationId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("Happnin.Data.EventImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DataType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("BLOB");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventImages");
                 });
 
             modelBuilder.Entity("Happnin.Data.Friendship", b =>
@@ -447,6 +472,10 @@ namespace Happnin.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Happnin.Data.EventImage", "EventImage")
+                        .WithMany()
+                        .HasForeignKey("EventImageId");
 
                     b.HasOne("Happnin.Data.User", "Host")
                         .WithMany()

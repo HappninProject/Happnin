@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Happnin.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200419022355_Attend")]
-    partial class Attend
+    [Migration("20200525030424_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,9 @@ namespace Happnin.Data.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("EventImageId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("EventTime")
                         .HasColumnType("TEXT");
 
@@ -86,11 +89,57 @@ namespace Happnin.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("EventImageId");
+
                     b.HasIndex("HostId");
 
                     b.HasIndex("LocationId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("Happnin.Data.EventImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DataType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("BLOB");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventImages");
+                });
+
+            modelBuilder.Entity("Happnin.Data.Friendship", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FriendId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FriendId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Friends");
                 });
 
             modelBuilder.Entity("Happnin.Data.Location", b =>
@@ -106,6 +155,12 @@ namespace Happnin.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Country")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Lat")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Lng")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("State")
@@ -420,6 +475,10 @@ namespace Happnin.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Happnin.Data.EventImage", "EventImage")
+                        .WithMany()
+                        .HasForeignKey("EventImageId");
+
                     b.HasOne("Happnin.Data.User", "Host")
                         .WithMany()
                         .HasForeignKey("HostId");
@@ -429,6 +488,17 @@ namespace Happnin.Data.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Happnin.Data.Friendship", b =>
+                {
+                    b.HasOne("Happnin.Data.User", "Friend")
+                        .WithMany()
+                        .HasForeignKey("FriendId");
+
+                    b.HasOne("Happnin.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Happnin.Data.User", b =>
