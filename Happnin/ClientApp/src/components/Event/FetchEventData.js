@@ -3,8 +3,17 @@ import { HappninEvent } from "./HappninEvent";
 //import { Map, TileLayer } from 'react-leaflet'
 import authService from '../api-authorization/AuthorizeService';
 
-import { Map } from "../Map";
+//import { Map } from "../Map";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+delete L.Icon.Default.prototype._getIconUrl;
 
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 export class FetchEventData extends Component {
   static displayName = FetchEventData.name;
 
@@ -15,10 +24,16 @@ export class FetchEventData extends Component {
       events: [],
       loading: true,
       filteredEvents: [],
-      locationData: [],
+      locations: [],
       isAuthenticated: false, 
       userId: '',
+      lat: 47.4874,
+      lng: -117.5758,
+      zoom: 15,
       isAttending: [],
+      markers: [],
+      locationIds: [],
+      eventsWithLocations: []
     };
   }
 
@@ -30,6 +45,44 @@ export class FetchEventData extends Component {
     this.setState({
       filteredEvents: this.state.events,
     });
+
+    const eventArray = this.state.filteredEvents;
+
+    eventArray.forEach(element => {
+        this.state.locationIds.push(element.locationId);
+    });
+
+    const locIds = this.state.locationIds;
+
+    let tempMarkers = [];
+
+    if (this.state.locations != null ) {
+        this.state.locations.forEach(loc => {
+            // console.log("locIds in loop: " + locIds);
+             if (locIds.includes(loc.id)) {
+                 var latLng = {};
+     
+                 var found = this.state.events.find(function(element) { 
+                     
+                     return element.locationId === loc.id; 
+                   }); 
+                 latLng["title"] = found.name;
+                 latLng["lat"] = loc.lat;
+                 latLng["lng"] = loc.lng;
+                 latLng["locationId"] = loc.id;
+                 tempMarkers.push(latLng);
+                // this.state.markers.push(latLng);
+             }
+         });
+    }
+
+
+    this.setState({
+        markers: tempMarkers,
+        loading: false
+    }); 
+
+
   }
 
   async populateState() {
@@ -56,24 +109,21 @@ export class FetchEventData extends Component {
     //!testing
     //got the location data here, now have to match with the location IDs
     const locationResponse = await fetch("/api/Location/");
-    console.log("Location response: " + JSON.stringify(locationResponse));
-    const locationData = await locationResponse.json();
-    console.log("Location data: " + JSON.stringify(locationData));
+  
+    
+    const locations = await locationResponse.json();
 
     //setting the state of location data to the locations received
-    this.setState({locationData: locationData});
-    //!testing
+    this.setState({locations: locations});
   }
   
-  testSomething = () => {
-    console.log("DOES THIS DO ANYTHING!!!!!!!!!!!!!!!!!")
+  refreshAttendingData = () => {
+
     this.populateAttendingData();
   }
 
   static attendingEvent(eventId, attendedEvent){
-    console.log("in atteding events");
-    console.log(eventId)
-    console.log(attendedEvent); 
+
     let attendId = -1; 
     attendedEvent.forEach(e => 
         {
@@ -104,11 +154,7 @@ export class FetchEventData extends Component {
 
   async populateAttendingData(){
     const user = this.state.userId;
-    console.log('what is going on?')
-    console.log(user)
-    console.log(this.state)
-    console.log('here in the attending data get')
-    console.log(`api/Attendee/AttendeeInfo/${this.state.userId}`)
+
     const response = await fetch(`api/Attendee/AttendeeInfo/${this.state.userId}`);
     let attend = await response.json();
     this.setState({isAttending: attend});
@@ -219,7 +265,7 @@ export class FetchEventData extends Component {
     //if the user has entered a zip code
     if(zip !== ""){
       //getting the locations stringified
-      let locations = this.state.locationData;
+      let locations = this.state.locations;
 
       //search through the events and if the zip code matches it's listed
       locations = locations.filter((location) => {
@@ -321,33 +367,78 @@ export class FetchEventData extends Component {
     if (events && events.length) {
       let filteredEvents = this.state.events;
 
-      //filtering by name of event
       filteredEvents = this.filterName(filteredEvents);
 
-      //filtering by zip
       filteredEvents = this.filterZip(filteredEvents);
 
-      //filtering by date
       filteredEvents = this.filterDate(filteredEvents);
 
-      //filtering by a word or phrase
       filteredEvents = this.filterWord(filteredEvents);
 
-      //filtering by category
       filteredEvents = this.filterCategory(filteredEvents);
 
-      //filtering by age
       filteredEvents = this.filterAge(filteredEvents);
 
-      //filtering by cost
       filteredEvents = this.filterCost(filteredEvents);
 
+      // Logic for rendering markers on maps
+      let locationIds = [];
+      filteredEvents.forEach(element => {
+          locationIds.push(element.locationId);
+      });
+  
+      let tempMarkers = [];
+  
+      this.state.locations.forEach(loc => {
+         // console.log("locIds in loop: " + locIds);
+          if (locationIds.includes(loc.id)) {
+              var latLng = {};
+  
+              var found = this.state.events.find(function(element) { 
+                  
+                  return element.locationId === loc.id; 
+                }); 
+              latLng["title"] = found.name;
+              latLng["lat"] = loc.lat;
+              latLng["lng"] = loc.lng;
+              latLng["locationId"] = loc.id;
+              tempMarkers.push(latLng);
+             // this.state.markers.push(latLng);
+          }
+      });
+
+
+
       return (
+
         <div>
-          {filteredEvents.map((eventinfo) => (
-            <HappninEvent key={eventinfo.id} {...eventinfo} />
-          ))}
+        <div style={{ height: "100vh", width: "100%" }}>
+            <Map
+                center={[this.state.lat, this.state.lng]}
+                zoom={this.state.zoom}
+                style={{ width: '100%', height: '100vh' }}
+            >
+                <TileLayer
+                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=106f5990b64f03"
+                />
+                {tempMarkers.map((marker, index) => (
+                    <Marker key={index} position={marker} > 
+                        <Popup>
+                            {marker.title} <br /> Easily customizable.
+                        </Popup>
+                    </Marker>
+                ))}
+            </Map>
         </div>
+
+      {filteredEvents.map((eventinfo) => (
+        <HappninEvent key={eventinfo.id} {...eventinfo} />
+      ))}
+        </div>
+
+    
+
       );
     } else {
       return <div>No events found right now!</div>;
@@ -361,43 +452,46 @@ export class FetchEventData extends Component {
 
     //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
     let eventsData = events
-      ? FetchEventData.renderEventsTable(events, this.state.userId, this.state.isAttending, this.testSomething)
+      ? FetchEventData.renderEventsTable(events, this.state.userId, this.state.isAttending, this.refreshAttendingData)
       : this.renderLoading();
 
     //getting the filtered data
     let filteredEventsData = events
-      ? this.renderFilteredEvents(events, this.state.userId, this.state.isAttending, this.testSomething)
+      ? this.renderFilteredEvents(events, this.state.userId, this.state.isAttending, this.refreshAttendingData)
       : this.renderLoading();
 
     return (
-      <div>
-        <Map events={JSON.stringify(this.state.events)} />
-
-        {/*<div style={{ height: "100vh", width: "100%" }}>
-        //<Map 
-        //         center={[this.state.lat, this.state.lng]} 
-        //         zoom={this.state.zoom} 
-        //         style={{ width: '100%', height: '100vh'}}
-        //      >
-        //        <TileLayer
-        //            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        //            url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
-        //        />
-        //     </Map>
-        //</div> */}
-
-        <h1 id="tableLabel" className="header">
-          Events
-        </h1>
-        <p>Got these events from our server DAWG</p>
-        {eventsData}
-
         <div>
-          {/* This is where the filtered data goes  */}
-          <h1 className="header">Filtered Events</h1>
-          {filteredEventsData}
+           {/* <div style={{ height: "100vh", width: "100%" }}>
+                <Map
+                    center={[this.state.lat, this.state.lng]}
+                    zoom={this.state.zoom}
+                    style={{ width: '100%', height: '100vh' }}
+                >
+                    <TileLayer
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                        url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=106f5990b64f03"
+                    />
+                    {markers.map((marker, index) => (
+                        <Marker key={index} position={marker} > 
+                            <Popup>
+                                {marker.title} <br /> Easily customizable.
+                            </Popup>
+                        </Marker>
+                    ))}
+                </Map>
+                    </div> */}
+
+           {/* <Map events={this.state.events} /> */}
+
+
+        
+            {/*eventsData*/}
+
+            <div>
+                {filteredEventsData}
+            </div>  
         </div>
-      </div>
     );
   }
 }
