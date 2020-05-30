@@ -3,6 +3,7 @@ import { NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import authService from "./AuthorizeService";
 import { ApplicationPaths } from "./ApiAuthorizationConstants";
+import friends from "../../images/users.svg";
 
 export class LoginMenu extends Component {
   constructor(props) {
@@ -54,19 +55,24 @@ export class LoginMenu extends Component {
     return (
       <Fragment>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={profilePath}>
+          <NavLink tag={Link} className="navHeader" to={profilePath}>
             Hello {userName}
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to='/hosted-events'>
+          <NavLink tag={Link} className="navHeader" to='/hosted-events'>
             Hosted Events
           </NavLink>
          </NavItem>
          <NavItem>
-          <NavLink tag={Link} className="text-dark" to={logoutPath}>
+          <NavLink tag={Link} className="navHeader" to={logoutPath}>
             Logout
           </NavLink>
+         </NavItem>
+         <NavItem>
+            <NavLink tag={Link} to="/friend-request" className="friends">
+              <img id="friends" className="" alt="friends" src={friends} />
+            </NavLink>
          </NavItem>
       </Fragment>
     );
@@ -76,12 +82,12 @@ export class LoginMenu extends Component {
     return (
       <Fragment>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={registerPath}>
+          <NavLink tag={Link} className="navHeader" to={registerPath}>
             Register
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={loginPath}>
+          <NavLink tag={Link} className="navHeader" to={loginPath}>
             Login
           </NavLink>
         </NavItem>
