@@ -101,8 +101,6 @@ export class EventPage extends Component {
                         <div>
                             People attending: {this.state.attendingCount}
                         </div>
-                        { /*<Link to="/Attendies">{this.state.attendingCount}</Link>  */}
-                        
                             <Dropdown.Toggle
                             variant="link"
                             size="sm"

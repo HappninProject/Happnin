@@ -59,8 +59,8 @@ export class BrowseEvents extends Component {
   render() {
     return (
       <div className="container-fluid card">
-        <h1 className="header">Search for Events</h1>
-        <div className="text-center">
+        <h1 className="header" style = {{textAlign : "center"}}>Search for Events</h1>
+        <div style = {{float:"left"}}>
           <div id="filterName">
             <label className="subHeader">Event name:&nbsp;</label>
             <input

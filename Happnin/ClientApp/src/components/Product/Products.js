@@ -60,7 +60,7 @@ export class Products extends Component {
     return (
       <div className="container-fluid card">
         <h1 className="header">Search for Products</h1>
-        <div className="text-center">
+        <div style = {{float: "left"}}>
           <div id="filterName">
             <label className="subHeader">Product:&nbsp;</label>
             <input
