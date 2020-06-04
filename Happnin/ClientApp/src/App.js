@@ -20,7 +20,7 @@ import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
 import { EventPage } from "./components/Event/EventPage";
 import { BrowseProducts } from './components/Product/BrowseProduct'
 import { UserAccount } from './components/User/UserAccount'
-
+import { FriendSearch } from './components/User/FriendSearch' 
 
 export default class App extends Component {
   static displayName = App.name;
@@ -47,6 +47,7 @@ export default class App extends Component {
           component={ApiAuthorizationRoutes}
         />
         <Route path="/friend-request" component={FriendRequests} />
+        <Route path="/friend-search" component={FriendSearch}/>
         <Route path="/EventPage/:eventId" component={EventPage} />
         <Route path="/contact-us" component={ContactUs} />
         <Route path="/about" component={About} />
