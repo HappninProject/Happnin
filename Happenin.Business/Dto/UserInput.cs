@@ -4,7 +4,6 @@ namespace Happnin.Business.Dto
 {
     public class UserInput
     {
-
         [Required]
         public string UserName { get; set; }
         
@@ -18,5 +17,9 @@ namespace Happnin.Business.Dto
         public string Email { get; set; }
         [Required]
         public string ZipCode { get; set; }
+
+        public byte[] Image { get; set; }
+        public string FileName { get; set; }
+        public string DataType { get; set; }
     }
 }
