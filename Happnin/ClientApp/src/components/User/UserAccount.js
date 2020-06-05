@@ -16,8 +16,7 @@ export class UserAccount extends Component {
         firstName: "",
         lastName: "",
         zipCode: -1,
-        email: "",
-        image: []
+        email: ""
       },
       attending: [],
       events: []
@@ -58,8 +57,6 @@ export class UserAccount extends Component {
 
   render() {
     const events = this.state.events;
-    const image = this.state.user.image;
-    const imageContent = `data:image/jpeg;base64,${image}`
 
     return (
       <div class="card">
@@ -68,7 +65,7 @@ export class UserAccount extends Component {
             <div className="col-sm border rounded white-div">
               <div className="row text-center">
                 <img
-                  src={imageContent}
+                  src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png"
                   className="img-fluid mt-0"
                   alt="User Avatar"
                 ></img>
