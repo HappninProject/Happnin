@@ -33,6 +33,9 @@ namespace Happnin.Data
             FirstName = firstName;
             LastName = lastName;
         }
+        public byte[] Image { get; set; }
+        public string FileName { get; set; }
+        public string DataType { get; set; }
 
         public bool AddFriend(User friend)
         {
