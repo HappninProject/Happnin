@@ -16,8 +16,7 @@ export class UserAccount extends Component {
         firstName: "",
         lastName: "",
         zipCode: -1,
-        email: "",
-        image: []
+        email: ""
       },
       attending: [],
       events: []
@@ -67,6 +66,7 @@ export class UserAccount extends Component {
     else {
       imageContent = "https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png";
     }
+
 
     return (
       <div class="card">

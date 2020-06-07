@@ -57,8 +57,10 @@ export class SubmitEvent extends Component {
       console.log('res')
       console.log(res.data)
       image = res.data;
+      this.setState({event: {...this.state.event, eventImageId: image.id}})
+      console.log(this.state)
     }
-   this.setState({event: {...this.state.event, eventImageId: image.id}})
+   
     await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
