@@ -59,7 +59,14 @@ export class UserAccount extends Component {
   render() {
     const events = this.state.events;
     const image = this.state.user.image;
-    const imageContent = `data:image/jpeg;base64,${image}`
+    let imageContent;
+
+    if (image.length > 0){
+      imageContent = `data:image/jpeg;base64,${image}`
+    }
+    else {
+      imageContent = "https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png";
+    }
 
     return (
       <div class="card">
