@@ -22,7 +22,6 @@ a {
 .subHeader {
   font-family: "Montserrat";
   font-size: 20px;
-  font-style: italic;
 }
 
 /* Makes body text and labels text Open Sans and 16px */
@@ -86,16 +85,10 @@ label {
   margin-bottom: 2em;
 }
 #filterName{
-  margin: auto;
+  margin-left: 0.5em;
 }
-#filterZip{
-  padding-left: 1.5em;
-}
-#filterCategory{
-  padding-right: 6em;
-}
-#filterDate{
-  padding-left: 4em;
+#filterWord{
+  margin-left: 0.5em;
 }
 html,
 body {
@@ -182,4 +175,25 @@ body {
   border-radius: 5px;
   border-width: thin;
   border-color: lightgray;
+}
+
+#attendingContainer {
+    width: 100%;
+    height: 100px;
+    background-color : lightblue;
+    border-radius : 10px; 
+}
+
+#weatherContainer {
+   margin-right: 30px;
+   margin-top: 20px; 
+    float:right;
+    width: 120px;
+    height: 100px;
+    background-color: lightblue;
+    border-radius: 10px;
+    text-align: center;
+}
+#weather{
+    padding-right: 10px;
 }

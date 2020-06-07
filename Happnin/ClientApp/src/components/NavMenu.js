@@ -14,8 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/NavMenu.css";
 import Weather from "./Weather";
 import logo from "../images/happninHLogoCircle.png";
-import notification from "../images/bell.svg";
-import friends from "../images/users.svg";
+
 import Dropdown from "react-bootstrap/Dropdown";
 
 export class NavMenu extends Component {
@@ -25,25 +24,8 @@ export class NavMenu extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true,
-      //loading: true,
     };
-    /*this.getLocation = this.getLocation.bind(this);
-        this.getCordinates = this.getCordinates.bind(this);
-        this.getLocation();*/
   }
-  /* getLocation() {
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(this.getCordinates);
-      }
-    }
-    getCordinates(position){
-      console.log(position.coords.latitude);
-      this.setState({
-        latitude:position.coords.latitude,
-        longitude:position.coords.longitude
-      })
-    }*/
-
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -107,39 +89,7 @@ export class NavMenu extends Component {
                     </NavLink>
                   </NavItem>
                 </div>
-                <div className="flexItem">
-                  <LoginMenu></LoginMenu>
-                </div>
-                <div className="flexItem">
-                  <NavbarBrand tag={Link} to="/friend-request" className="friends">
-                    <img id="friends" className="" alt="friends" src={friends} />
-                  </NavbarBrand>
-                </div>
-                {/* not sure if this part should be included in div */}
-                <div className="flexItem">
-                  <Dropdown>
-                    <Dropdown.Toggle
-                      variant="link"
-                      size="sm"
-                      background-color="b1ed82"
-                    >
-                      <img
-                        id="notification"
-                        alt="notifications"
-                        src={notification}
-                      />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-1">
-                        {" "}
-                        Woah its a notification
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </div>
-                <div id="weatherInfo" className="flexItem" style = {{paddingLeft: "50px"}}>
-                  <Weather id="weather"></Weather>
-                </div>
+                <LoginMenu></LoginMenu>
               </ul>
             </Collapse>
           </Container>

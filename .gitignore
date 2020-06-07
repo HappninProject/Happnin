@@ -362,3 +362,5 @@ Happnin.db
 **/Happnin.db
 .ENV
 .env
+.ENV*
+.env*

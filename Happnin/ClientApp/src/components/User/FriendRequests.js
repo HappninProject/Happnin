@@ -134,6 +134,7 @@ export class FriendRequests extends Component {
 
     return (
       <div className="card">
+        <Link to={'/friend-search'}>Send Request</Link>
         <h1 id="tabelLabel" className="header">
           Friend Requests
         </h1>

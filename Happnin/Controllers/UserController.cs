@@ -85,5 +85,18 @@ namespace Happnin.Controllers
             }
             return false;
         }
+
+        [HttpPost]
+        [Route("FriendSearch/{username}")]
+        public async Task<User> FriendSearch(string username)
+        {
+            var tempUser = await UserManager.FindByNameAsync(username); 
+            User mappedUser = Mapper.Map<Data.User,User>(tempUser);
+            mappedUser.FirstName = "";
+            mappedUser.LastName = "";
+            mappedUser.Email = "";
+            mappedUser.ZipCode = "";
+            return mappedUser;
+        }
     }
 }
