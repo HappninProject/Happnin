@@ -63,7 +63,7 @@ export class Products extends Component {
         <h1 className="header">Search for Products</h1>
         <div className="text-center">
           <div id="filterName">
-            <label className="subHeader">product name (nintendo switch, toilet paper, ect.):&nbsp;</label>
+            <label className="subHeader">Product Name (Nintendo Switch, toilet paper, etc.):&nbsp;</label>
             <input
               type="text"
               name="eventNameSearch"

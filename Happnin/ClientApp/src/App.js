@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router";
+import { Redirect, Route, Switch, BrowserRouter} from 'react-router-dom';
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
 import { About } from "./components/About";
@@ -23,6 +23,7 @@ import { FetchBrowseEvents } from "./components/Event/FetchBrowseEvents";
 import { EventPage } from "./components/Event/EventPage";
 import {Products} from "./components/Products";
 import {Attendies} from "./components/Attendies";
+import { PageNotFound } from "./components/PageNotFound";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -33,7 +34,9 @@ export default class App extends Component {
 
   render() {
     return (
+      <BrowserRouter>
       <Layout>
+        <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />
         {/* Commented this out */}
@@ -56,7 +59,10 @@ export default class App extends Component {
         <Route path='/hosted-events' component={HostedEvents}/>
         <Route path='/Products' component={Products}/>
         <Route path='/Attendies' component={Attendies}/>
+        <Route component={PageNotFound}/>
+        </Switch>
       </Layout>
+      </BrowserRouter>
     );
   }
 }
