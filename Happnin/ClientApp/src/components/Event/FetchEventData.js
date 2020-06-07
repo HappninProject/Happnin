@@ -1,12 +1,10 @@
 ﻿import React, { Component } from "react";
 import { HappninEvent } from "./HappninEvent";
-//import { Map, TileLayer } from 'react-leaflet'
 import authService from '../api-authorization/AuthorizeService';
-
-//import { Map } from "../Map";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -15,91 +13,88 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 export class FetchEventData extends Component {
-  static displayName = FetchEventData.name;
+    static displayName = FetchEventData.name;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      //The unfiltered events
-      events: [],
-      loading: true,
-      filteredEvents: [],
-      locations: [],
-      isAuthenticated: false, 
-      userId: '',
-      lat: 47.4874,
-      lng: -117.5758,
-      zoom: 15,
-      isAttending: [],
-      markers: [],
-      locationIds: [],
-      eventsWithLocations: []
-    };
-  }
-
-  async componentDidMount() {
-    this._subscription = authService.subscribe(() => this.populateState());
-    await this.populateEventData();
-    await this.populateState();
-    await this.populateAttendingData();
-    this.setState({
-      filteredEvents: this.state.events,
-    });
-
-    const eventArray = this.state.filteredEvents;
-
-    eventArray.forEach(element => {
-        this.state.locationIds.push(element.locationId);
-    });
-
-    const locIds = this.state.locationIds;
-
-    let tempMarkers = [];
-
-    if (this.state.locations != null ) {
-        this.state.locations.forEach(loc => {
-            // console.log("locIds in loop: " + locIds);
-             if (locIds.includes(loc.id)) {
-                 var latLng = {};
-     
-                 var found = this.state.events.find(function(element) { 
-                     
-                     return element.locationId === loc.id; 
-                   }); 
-                 latLng["title"] = found.name;
-                 latLng["lat"] = loc.lat;
-                 latLng["lng"] = loc.lng;
-                 latLng["locationId"] = loc.id;
-                 tempMarkers.push(latLng);
-                // this.state.markers.push(latLng);
-             }
-         });
+    constructor(props) {
+        super(props);
+        this.state = {
+            //The unfiltered events
+            events: [],
+            loading: true,
+            filteredEvents: [],
+            locations: [],
+            isAuthenticated: false, 
+            userId: '',
+            lat: 47.4874,
+            lng: -117.5758,
+            zoom: 15,
+            isAttending: [],
+            markers: [],
+            locationIds: [],
+            eventsWithLocations: []
+        };
     }
 
+    async componentDidMount() {
+        this._subscription = authService.subscribe(() => this.populateState());
+        await this.populateEventData();
+        await this.populateState();
+        await this.populateAttendingData();
+        this.setState({
+            filteredEvents: this.state.events,
+        });
 
-    this.setState({
-        markers: tempMarkers,
-        loading: false
-    }); 
+        const eventArray = this.state.filteredEvents;
 
+        eventArray.forEach(element => {
+            this.state.locationIds.push(element.locationId);
+        });
 
-  }
+        const locIds = this.state.locationIds;
 
-  async populateState() {
-    const [isAuthenticated, user] = await Promise.all([
-      authService.isAuthenticated(),
-      authService.getUser()
-    ]);
-    this.setState({
-      isAuthenticated,
-      userId: user && user.sub
-    });
-  }
+        let tempMarkers = [];
+
+        if (this.state.locations != null ) {
+            this.state.locations.forEach(loc => {
+                
+                    if (locIds.includes(loc.id)) {
+                        var latLng = {};
+            
+                        var found = this.state.events.find(function(element) { 
+                            
+                            return element.locationId === loc.id; 
+                        }); 
+                        latLng["title"] = found.name;
+                        latLng["description"] = found.description;
+                        latLng["lat"] = loc.lat;
+                        latLng["lng"] = loc.lng;
+                        latLng["locationId"] = loc.id;
+                        tempMarkers.push(latLng);
+                    }
+                });
+        }
+
+        this.setState({
+            markers: tempMarkers,
+            loading: false
+        }); 
+    }
+
+    async populateState() {
+        const [isAuthenticated, user] = await Promise.all([
+            authService.isAuthenticated(),
+            authService.getUser()
+        ]);
+        this.setState({
+            isAuthenticated,
+            userId: user && user.sub
+        });
+    }
 
   async populateEventData() {
     const response = await fetch("api/Event/EventsOnly/");
     const data = await response.json();
-    //  console.log("Got Data", data);
+    
     this.setState({ events: data, loading: false });
     //have to set the state of filtered events after the events variable has already been populated
     this.setState({
@@ -110,28 +105,22 @@ export class FetchEventData extends Component {
     //got the location data here, now have to match with the location IDs
     const locationResponse = await fetch("/api/Location/");
   
-    
     const locations = await locationResponse.json();
-
-    //setting the state of location data to the locations received
+    
     this.setState({locations: locations});
   }
   
-  refreshAttendingData = () => {
-
-    this.populateAttendingData();
-  }
+    refreshAttendingData = () => {
+        this.populateAttendingData();
+    }
 
   static attendingEvent(eventId, attendedEvent){
 
     let attendId = -1; 
     attendedEvent.forEach(e => 
         {
-          console.log(e.eventId);
-          console.log(e.eventId === eventId);
           if(e.eventId === eventId){
-            console.log("they matched")
-            console.log(e.id)
+
             attendId = e.id;
           } 
         })
@@ -208,7 +197,7 @@ export class FetchEventData extends Component {
     if (this.props.name !== "") {
       let name = this.props.name.toUpperCase();
       filteredEvents = filteredEvents.filter((event) => {
-        //checking if the event name contains a word
+        
         return event.name.toUpperCase().includes(name);
       });
     }
@@ -221,7 +210,7 @@ export class FetchEventData extends Component {
     //!also this does not currently filtering within the range of dates (startTime-endTime), only startTime
     //!also something needs to be changed where the current date is the default value, because currently it is empty at start
     //!and you have to click on the date to start filtering
-    console.log("Date from FetchEventData: " + this.props.date);
+
     let dateEntered = this.props.date;
     if(dateEntered !== ""){
       //creating a date object from the string that was passed in
@@ -353,7 +342,6 @@ export class FetchEventData extends Component {
         max = 1000000;
       }
 
-
       //filtering based on cost
       filteredEvents = filteredEvents.filter((event) => {
         console.log("This is the price: " + this.props.cost);
@@ -368,17 +356,11 @@ export class FetchEventData extends Component {
       let filteredEvents = this.state.events;
 
       filteredEvents = this.filterName(filteredEvents);
-
       filteredEvents = this.filterZip(filteredEvents);
-
       filteredEvents = this.filterDate(filteredEvents);
-
       filteredEvents = this.filterWord(filteredEvents);
-
       filteredEvents = this.filterCategory(filteredEvents);
-
       filteredEvents = this.filterAge(filteredEvents);
-
       filteredEvents = this.filterCost(filteredEvents);
 
       // Logic for rendering markers on maps
@@ -395,10 +377,10 @@ export class FetchEventData extends Component {
               var latLng = {};
   
               var found = this.state.events.find(function(element) { 
-                  
                   return element.locationId === loc.id; 
                 }); 
               latLng["title"] = found.name;
+              latLng["description"] = found.description;
               latLng["lat"] = loc.lat;
               latLng["lng"] = loc.lng;
               latLng["locationId"] = loc.id;
@@ -407,38 +389,34 @@ export class FetchEventData extends Component {
           }
       });
 
-
-
+    var key = process.env.REACT_APP_OPENMAP_KEY;
+    var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
       return (
-
         <div>
-        <div style={{ height: "100vh", width: "100%" }}>
-            <Map
-                center={[this.state.lat, this.state.lng]}
-                zoom={this.state.zoom}
-                style={{ width: '100%', height: '100vh' }}
-            >
-                <TileLayer
-                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=106f5990b64f03"
-                />
-                {tempMarkers.map((marker, index) => (
-                    <Marker key={index} position={marker} > 
-                        <Popup>
-                            {marker.title} <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                ))}
-            </Map>
+            <div style={{ height: "100vh", width: "100%" }}>
+                <Map
+                    center={[this.state.lat, this.state.lng]}
+                    zoom={this.state.zoom}
+                    style={{ width: '100%', height: '100vh' }}
+                >
+                    <TileLayer
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                        url={urlString}
+                    />
+                    {tempMarkers.map((marker, index) => (
+                        <Marker key={index} position={marker} > 
+                            <Popup>
+                                {marker.title} <br /> {marker.description}
+                            </Popup>
+                        </Marker>
+                    ))}
+                </Map>
+            </div>
+
+            {filteredEvents.map((eventinfo) => (
+                <HappninEvent key={eventinfo.id} {...eventinfo} />
+            ))}
         </div>
-
-      {filteredEvents.map((eventinfo) => (
-        <HappninEvent key={eventinfo.id} {...eventinfo} />
-      ))}
-        </div>
-
-    
-
       );
     } else {
       return <div>No events found right now!</div>;
@@ -447,8 +425,6 @@ export class FetchEventData extends Component {
 
   render() {
     const events = this.state.events;
-    //logging the data
-    console.log("This is the data: " + events);
 
     //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
     let eventsData = events
@@ -462,32 +438,6 @@ export class FetchEventData extends Component {
 
     return (
         <div>
-           {/* <div style={{ height: "100vh", width: "100%" }}>
-                <Map
-                    center={[this.state.lat, this.state.lng]}
-                    zoom={this.state.zoom}
-                    style={{ width: '100%', height: '100vh' }}
-                >
-                    <TileLayer
-                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=106f5990b64f03"
-                    />
-                    {markers.map((marker, index) => (
-                        <Marker key={index} position={marker} > 
-                            <Popup>
-                                {marker.title} <br /> Easily customizable.
-                            </Popup>
-                        </Marker>
-                    ))}
-                </Map>
-                    </div> */}
-
-           {/* <Map events={this.state.events} /> */}
-
-
-        
-            {/*eventsData*/}
-
             <div>
                 {filteredEventsData}
             </div>  

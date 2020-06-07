@@ -2,8 +2,16 @@
 import { HappninEvent } from "../Event/HappninEvent";
 import authService from '../api-authorization/AuthorizeService';
 
-import { Map } from "../Map";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+delete L.Icon.Default.prototype._getIconUrl;
 
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 export class FetchProductData extends Component {
   static displayName = FetchProductData.name;
 
@@ -14,22 +22,22 @@ export class FetchProductData extends Component {
       events: [],
       loading: true,
       filteredEvents: [],
-      locationData: [],
+      locations: [],
       isAuthenticated: false, 
       userId: '',
       isAttending: [],
     };
   }
 
-  async componentDidMount() {
-    this._subscription = authService.subscribe(() => this.populateState());
-    await this.populateProductData();
-    await this.populateState();
-    await this.populateAttendingData();
-    this.setState({
-      filteredEvents: this.state.events,
-    });
-  }
+    async componentDidMount() {
+        this._subscription = authService.subscribe(() => this.populateState());
+        await this.populateProductData();
+        await this.populateState();
+        await this.populateAttendingData();
+        this.setState({
+            filteredEvents: this.state.events,
+        });
+    }
 
   async populateState() {
     const [isAuthenticated, user] = await Promise.all([
@@ -218,7 +226,7 @@ export class FetchProductData extends Component {
     //if the user has entered a zip code
     if(zip !== ""){
       //getting the locations stringified
-      let locations = this.state.locationData;
+      let locations = this.state.locations;
 
       //search through the events and if the zip code matches it's listed
       locations = locations.filter((location) => {
@@ -320,43 +328,75 @@ export class FetchProductData extends Component {
     if (events && events.length) {
       let filteredEvents = this.state.events;
 
-      //filtering by name of event
       filteredEvents = this.filterName(filteredEvents);
-
-      //filtering by zip
       filteredEvents = this.filterZip(filteredEvents);
-
-      //filtering by date
       filteredEvents = this.filterDate(filteredEvents);
-
-      //filtering by a word or phrase
       filteredEvents = this.filterWord(filteredEvents);
-
-      //filtering by category
       filteredEvents = this.filterCategory(filteredEvents);
-
-      //filtering by age
       filteredEvents = this.filterAge(filteredEvents);
-
-      //filtering by cost
       filteredEvents = this.filterCost(filteredEvents);
+
+      let locationIds = [];
+      filteredEvents.forEach(element => {
+          locationIds.push(element.locationId);
+      });
+  
+      let tempMarkers = [];
+  
+      this.state.locations.forEach(loc => {
+         // console.log("locIds in loop: " + locIds);
+          if (locationIds.includes(loc.id)) {
+              var latLng = {};
+  
+              var found = this.state.events.find(function(element) { 
+                  return element.locationId === loc.id; 
+                }); 
+              latLng["title"] = found.name;
+              latLng["description"] = found.description;
+              latLng["lat"] = loc.lat;
+              latLng["lng"] = loc.lng;
+              latLng["locationId"] = loc.id;
+              tempMarkers.push(latLng);
+          }
+      });
+
+      var key = process.env.REACT_APP_OPENMAP_KEY;
+      var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
 
       return (
         <div>
-          {filteredEvents.map((eventinfo) => (
-            <HappninEvent key={eventinfo.id} {...eventinfo} />
-          ))}
+
+            <div style={{ height: "100vh", width: "100%" }}>
+                <Map
+                    center={[this.state.lat, this.state.lng]}
+                    zoom={this.state.zoom}
+                    style={{ width: '100%', height: '100vh' }}
+                >
+                    <TileLayer
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                        url={urlString}
+                    />
+                    {tempMarkers.map((marker, index) => (
+                        <Marker key={index} position={marker} > 
+                            <Popup>
+                                {marker.title} <br /> {marker.description}
+                            </Popup>
+                        </Marker>
+                    ))}
+                </Map>
+            </div>
+            {filteredEvents.map((eventinfo) => (
+                <HappninEvent key={eventinfo.id} {...eventinfo} />
+            ))}
         </div>
       );
     } else {
-      return <div>No events found right now!</div>;
+      return <div>No products found right now!</div>;
     }
   }
 
   render() {
     const events = this.state.events;
-    //logging the data
-    console.log("This is the data: " + events);
 
     //getting the unfiltered data (will eventually be completely replace by filter, kept for testing)
     let eventsData = events
@@ -370,20 +410,7 @@ export class FetchProductData extends Component {
 
     return (
       <div>
-        <Map events={JSON.stringify(this.state.events)} />
 
-        {/*<div style={{ height: "100vh", width: "100%" }}>
-        //<Map 
-        //         center={[this.state.lat, this.state.lng]} 
-        //         zoom={this.state.zoom} 
-        //         style={{ width: '100%', height: '100vh'}}
-        //      >
-        //        <TileLayer
-        //            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        //            url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
-        //        />
-        //     </Map>
-        //</div> */}
 
         <h1 id="tableLabel" className="header">
           Products
