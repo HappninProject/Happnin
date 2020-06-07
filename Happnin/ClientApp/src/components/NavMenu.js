@@ -90,11 +90,6 @@ export class NavMenu extends Component {
                   </NavItem>
                 </div>
                 <LoginMenu></LoginMenu>
-
-   
-                <div id="weatherInfo" className="flexItem" style = {{paddingLeft: "50px"}}>
-                  <Weather id="weather"></Weather>
-                </div>
               </ul>
             </Collapse>
           </Container>

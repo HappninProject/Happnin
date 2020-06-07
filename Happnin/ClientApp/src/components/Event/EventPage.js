@@ -1,8 +1,7 @@
 ﻿import React, { Component } from "react";
-import image from "../../images/event-image.jpg";
 import { Map } from "../Map";
 import attendies from "../../images/users.svg";
-import share from "../../images/Share.png";
+import logo from "../../images/happninHLogoThumb.png";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Category } from '../../shared/Category';
 
@@ -20,6 +19,8 @@ export class EventPage extends Component {
           attendingCount: 0,
           loading: true, 
           AttendingValue: null,
+          imageId: -1,
+          image: {}
         };
     }
 
@@ -27,6 +28,7 @@ export class EventPage extends Component {
         await this.FetchEventData();
         await this.FetchLocationAndHost();
         await this.FetchAttendingCount();
+        await this.getPicture();
     }
 
     async FetchAttendingCount() {
@@ -35,6 +37,24 @@ export class EventPage extends Component {
         const count = await response.json();
         this.setState({ attendingCount: count });
         console.log("attendeeCount response: " + count);
+    }
+    ImageToUse = () => {
+        const image = this.state.image;
+        if (image.image === undefined) {
+            return logo;
+        }
+        else {
+            return `data:image/jpeg;base64,${image.image}`;
+        }
+    }
+
+    async getPicture() {
+        const imageId = this.props.eventImageId;
+        let response = await fetch(`api/Upload/${imageId}`)
+        console.log('response:')
+        console.log(response);
+        let image = await response.json();
+        this.setState({ image: image });
     }
 
     handleAttendingChange = (event) => {
@@ -75,104 +95,54 @@ export class EventPage extends Component {
         return (
             
             <div className="card container-fluid">
-                <div id="event-image-container">
-                        <img
-                            id="event-image"
-                            alt=" "
-                            src={image}
-                        />
-                </div>
                 <div>
-                    <Dropdown>
-                        <header className="header">{e.name}</header>
+                    <img
+                        className="eventImage"
+                        variant="left"
+                        src={this.state.image}
+                        rounded="true"
+                        style={{ padding: 5, width: '300px', height: '300px', float: "left" }}
+                        />
+              
+                    <div style={{ textAlign: "center" }}>
+                            <h1 >{e.name}</h1>
+                            <h1 className="subHeader">{startTime} - {endTime} </h1>
+                            <h1 className="subHeader">{location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
+                    
+                    </div>
+
+
+
+                    <div style={{ float: "right", marginTop : " 70px" }}> 
+                       <h1 className="subHeader">Cost: {e.cost}</h1>
+                       <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
+                    </div>
+                </div>
+                <h1 className="subHeader" style={{ marginTop : "20px" }}>Description: </h1>
+
+       
+                <div id="attendingContainer">
+                    <Dropdown style={{ marginTop : "10px" }}>
                         <label className="subHeader">
                             &nbsp;&nbsp;attending status:&nbsp;
                         </label>
-                        <select 
+                        <select
                             className="rounded"
                             name="Attending"
                             onChange={this.handleAttendingChange}
-                            style = {{width: "20%"}}
+                            style={{ width: "20%" }}
                         >
-                                <option value="Attending">Attending</option>
-                                <option value="Can't Attend">Can't Attend </option>
+                            <option value="Attending">Attending</option>
+                            <option value="Can't Attend">Can't Attend </option>
                         </select>
-                        <img id="attendies" className="" alt="attendies" src={attendies} style={{ width: "2%", margin: "10px" }} />
-                        <div>
-                            People attending: {this.state.attendingCount}
-                        </div>
-                            <Dropdown.Toggle
-                            variant="link"
-                            size="sm"
-                            background-color="b1ed82"
-                            style = {{float: "right"}}
-                            >
-                            <img
-                                id="share"
-                                alt="share"
-                                src={share}
-                                style= {{width:"20px",margin: "10px"}}
-
-                                
-                            />
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">
-                                {" "}
-                                invite friends
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">
-                                {" "}
-                                copy link to event
-                            </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-
+                    </Dropdown>
+                    <div class="subHeader" style={{ marginLeft: " 13px" }}>{"people attending : " + this.state.attendingCount}</div>
                 </div>
-                <div>
-                    <div style= {{float:"left",}}>
-                        <h1 className="subHeader">Date: {startTime} - {endTime} </h1>
-                        <h1 className="subHeader">Host: {host}</h1>
-                        <h1 className="subHeader">Location: {location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
-                        <h1 className="subHeader">Category: {Category(e.categoryId)} </h1>
-                        <h1 className="subHeader">Cost: {e.cost}</h1>
-                        <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
-                        <h1 className="subHeader">Description: </h1>
-                        <div id = "descriptionContainer">{e.description}</div>
-                    </div>
-
-                    <div style={{float:"right", marginTop : "10px"}}>
-                    <Map jsonEvent = {this.state.data} />
-                    </div>
+                <div style={{ marginTop: "20px" }}>
+                    <div class="subHeader">{"hosted by " + host}</div>
                 </div>
-                <div id = "updatesContainer">
-                    <table style = {{width: "100%"}}>
-                        <h1 className="header"> Host updates: </h1>
-                        <tr>
-                            <th>date/time</th>
-                            <th>message</th>
-                        </tr>
-                        <tr> 
-                            <td>5/13/20 4:20 pm</td> 
-                            <td >"event cancelled due to corna"</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div id = "updatesContainer">
-                    <table style = {{width: "100%"}}>
-                        <h1 className="header"> user comments: </h1>
-                        <tr>
-                            <th>username</th>
-                            <th>date/time</th>
-                            <th>message</th>
-                        </tr>
-                        <tr > 
-                            <td>xXyoMamaxX</td>
-                            <td>5/13/20 4:25 pm</td> 
-                            <td >"dang i was looking forward to this"</td>
-                        </tr>
-                    </table>
+                <div id="mapContainer">
+                    <Map jsonEvent={this.state.data} />
                 </div>
                 
             </div>
