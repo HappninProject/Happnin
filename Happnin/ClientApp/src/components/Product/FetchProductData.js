@@ -360,6 +360,8 @@ export class FetchProductData extends Component {
           }
       });
 
+      var key = process.env.REACT_APP_OPENMAP_KEY;
+      var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
 
       return (
         <div>
@@ -372,7 +374,7 @@ export class FetchProductData extends Component {
                 >
                     <TileLayer
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=106f5990b64f03"
+                        url={urlString}
                     />
                     {tempMarkers.map((marker, index) => (
                         <Marker key={index} position={marker} > 
