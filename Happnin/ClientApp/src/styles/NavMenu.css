@@ -31,16 +31,27 @@ a.navbar-brand {
 .navHeader {
   font-family: Montserrat;
   font-size: 20px;
+  font-weight: 500;
+  color: #1f1f1f;
+}
+
+.navbarLogo {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 header {
   width: 100%;
-  background-color: #2ccb92;
+  height: 5rem;
+  background-color: #62fe69;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  overflow: hidden;
 }
 .weather {
   padding-right: 10em;
@@ -53,7 +64,7 @@ header {
 
 .navbar {
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
   display: flex;
   flex-flow: row wrap;
 }
@@ -63,7 +74,20 @@ header {
   text-align: center;
 }
 
-
 .flexItem {
   justify-content: space-evenly;
+}
+
+.login {
+    width: 20rem;
+    overflow: hidden;
+    list-style:none;
+}
+
+.loginSignUpBlock {
+    width: 100%;
+    display: flex-inline;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-bottom: 4rem;
 }

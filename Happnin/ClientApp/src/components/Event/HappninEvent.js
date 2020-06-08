@@ -100,7 +100,7 @@ export class HappninEvent extends Component {
               variant="left"
               src={image}
               rounded="true"
-              style={{ padding: 5, width: '164px', height: '188px' }}
+              style={{ padding: 1, width: '188px', height: '200px' }}
             />
           </Col>
           <Col xs={10} horizontal="right">
@@ -109,8 +109,8 @@ export class HappninEvent extends Component {
                 <h5 class="card-title">
                   <Link to={`/EventPage/${e.id}`}>{e.name}</Link>
                 </h5>
-                <div class="card-text">
-                  <p>{e.description}</p>
+                <div className="card-text">
+                  <p className="description">{e.description}</p>
                   Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
                   <b>{e.ageRestriction}</b> <br /> <br />
                   Category: <b>{Category(e.categoryId)}</b> <br />

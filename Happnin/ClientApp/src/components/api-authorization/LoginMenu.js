@@ -80,10 +80,10 @@ export class LoginMenu extends Component {
 
   anonymousView(registerPath, loginPath) {
     return (
-      <Fragment>
+      <Fragment className="loginSignUpBlock">
         <NavItem>
           <NavLink tag={Link} className="navHeader" to={registerPath}>
-            Register
+            Sign up
           </NavLink>
         </NavItem>
         <NavItem>

@@ -7,88 +7,118 @@
 
 @import url(https://unpkg.com/leaflet@1.6.0/dist/leaflet.css);
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .header {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 28px;
-  line-height: 41px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 41px;
+}
+
+.headerWelcome {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: medium;
+    font-size: 48px;
+    line-height: 41px;
+    margin-top: 2rem;
+    color: #1f1f1f;
+}
+
+.headerCreateAccount {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: medium;
+    font-size: 28px;
+}
+
+.headerSubWelcome {
+    font-size: 28px;
+    margin-bottom: 8rem;
+}
+
+.happninUnderline {
+    height: 1px;
+    margin-bottom: .7rem;
+    background-color: #d5d5d5;
 }
 
 /* For subheaders on page */
 .subHeader {
-  font-family: "Montserrat";
-  font-size: 20px;
+    font-family: "Montserrat";
+    font-size: 20px;
 }
 
 /* Makes body text and labels text Open Sans and 16px */
 body,
 label {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 19px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .form-control:not(#categorySelect) {
-  width: 40% !important;
+    width: 40% !important;
 }
 
 #categorySelect {
-  width: 40%;
+    width: 40%;
 }
 
 .category-select {
-  width: 200%;
+    width: 200%;
 }
 .eventTable {
-  border-style: solid;
-  border-radius: 6px;
-  border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    border-width: 1px;
 }
 .event-table {
-  border-collapse: separate;
+    border-collapse: separate;
 }
 
 /* Height of images in carousel is limited to 200px, the rest is hidden */
 .carousel {
-  overflow: hidden;
-  height: 200px;
+    overflow: hidden;
+    height: 300px;
 }
 
 .card {
-  border-radius: 20px;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 30px;
-  box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.2), 5px 5px 17px -5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.2), 5px 5px 17px -5px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+    font-size: 20px;
 }
 
 .happninevent {
-  border-radius: 20px;
-
-  overflow: hidden;
-
-  padding-left: 6rem !important;
+    border-radius: 20px;
+    overflow: hidden;
+    padding-left: 6rem !important;
 }
 .submit {
-  margin-bottom: 2em;
+    margin-bottom: 2em;
 }
 #accountform {
-  margin-bottom: 2em;
+    margin-bottom: 2em;
 }
 #filterName{
-  margin-left: 0.5em;
+    margin-left: 0.5em;
 }
 #filterWord{
-  margin-left: 0.5em;
+    margin-left: 0.5em;
 }
 html,
 body {
@@ -169,12 +199,12 @@ body {
 }
 
 #descriptionContainer{
-  width:550px; 
-  height: 250px;
-  border-style: solid;
-  border-radius: 5px;
-  border-width: thin;
-  border-color: lightgray;
+    width:550px; 
+    height: 250px;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: thin;
+    border-color: lightgray;
 }
 
 #attendingContainer {
@@ -185,15 +215,40 @@ body {
 }
 
 #weatherContainer {
-   margin-right: 30px;
-   margin-top: 20px; 
+    margin-right: 30px;
+    margin-top: 20px; 
     float:right;
-    width: 120px;
+    width: 8rem;
     height: 100px;
     background-color: lightblue;
     border-radius: 10px;
     text-align: center;
+    padding-top: .6rem;
 }
 #weather{
     padding-right: 10px;
 }
+
+.btnHomeSignUp {
+    width: 12rem;
+    margin-bottom: 2rem;
+    display: block;
+    margin: 30px auto;
+    font-size: 30px;
+}
+
+.alreadyHaveAccount {
+    display: block;
+    margin: 30px auto;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.homeDetails {
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 1rem;
+    overflow: hidden;
+}
+

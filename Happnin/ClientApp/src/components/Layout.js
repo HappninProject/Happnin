@@ -17,31 +17,6 @@ export class Layout extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div>
-          <Carousel
-            className="carousel"
-            infinite
-            autoPlay={20000}
-            animationSpeed={10000}
-          >
-            <img
-              className="item w-100"
-              src={nightLife}
-              alt="A busy urban street at night"
-            />
-            <img
-              className="item w-100"
-              src={crowd}
-              alt="A concert with people raising their hands up"
-            />
-            <img
-              className="item w-100"
-              src={microphone}
-              alt="A comedy club with a microphone in focus"
-            />
-            <img className="item w-100" src={fireworks} alt="Fireworks" />
-          </Carousel>
-        </div>
             <NavMenu />
             <div id="weatherContainer">
                 <Weather id="weather"></Weather>
