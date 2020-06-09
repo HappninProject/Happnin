@@ -80,7 +80,6 @@ namespace Happnin.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             
-            [Required]
             [Display(Name = "Image")]
             public IFormFile Image { get; set; }
         }
@@ -101,15 +100,16 @@ namespace Happnin.Areas.Identity.Pages.Account
                 var userUserNameExists = await  _userManager.FindByNameAsync(Input.UserName);
                 if (userUserNameExists == null && userEmailExists == null)
                 {
-                    var imageArray = await ConvertImage(Input.Image);
+                    
+                    var imageArray = Input.Image != null ? await ConvertImage(Input.Image) : null;
                     var user = new User(Input.FirstName, Input.LastName)
                         {
                             UserName = Input.UserName,
                             Email = Input.Email, 
                             ZipCode = Input.ZipCode,
                             Image = imageArray,
-                            FileName = Input.Image.FileName,
-                            DataType = Input.Image.ContentType
+                            FileName = Input.Image?.FileName,
+                            DataType = Input.Image?.ContentType
                         };
 
                     var result = await _userManager.CreateAsync(user, Input.Password);
