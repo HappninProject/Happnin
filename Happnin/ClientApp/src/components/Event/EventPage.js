@@ -1,8 +1,7 @@
 ﻿import React, { Component } from "react";
 import { Map } from "../Map";
-import attendies from "../../images/users.svg";
-import logo from "../../images/happninHLogoThumb.png";
 import Dropdown from "react-bootstrap/Dropdown";
+import logo from "../../images/happninHLogoThumb.png";
 import { Category } from '../../shared/Category';
 
 export class EventPage extends Component {
@@ -39,12 +38,14 @@ export class EventPage extends Component {
         console.log("attendeeCount response: " + count);
     }
     ImageToUse = () => {
-        const image = this.state.image;
-        if (image.image === undefined) {
+        const imageId = this.state.event.eventImageId;
+        console.log("imageId")
+        console.log(imageId)
+        if (imageId === null) {
             return logo;
         }
         else {
-            return `data:image/jpeg;base64,${image.image}`;
+            return `data:image/jpeg;base64,${this.state.event.image}`;
         }
     }
 
@@ -91,7 +92,9 @@ export class EventPage extends Component {
         let host = this.state.host.userName;
         var startTime = new Date(Date.parse(e.eventTime)).toDateString();
         var endTime = new Date(Date.parse(e.endTime)).toDateString();
-
+        let image = this.ImageToUse();
+        console.log("image")
+        console.log(image)
         return (
             
             <div className="card container-fluid">
@@ -99,7 +102,7 @@ export class EventPage extends Component {
                     <img
                         className="eventImage"
                         variant="left"
-                        src={this.state.image}
+                        src={image}
                         rounded="true"
                         style={{ padding: 5, width: '300px', height: '300px', float: "left" }}
                         />
