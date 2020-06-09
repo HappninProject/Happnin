@@ -80,7 +80,6 @@ namespace Happnin.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             
-            [Required]
             [Display(Name = "Image")]
             public IFormFile Image { get; set; }
         }

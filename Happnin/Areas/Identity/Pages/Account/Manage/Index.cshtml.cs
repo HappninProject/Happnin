@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Happnin.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -28,6 +30,10 @@ namespace Happnin.Areas.Identity.Pages.Account.Manage
         public string LastName { get; set; }
         public string ZipCode{ get; set; }
 
+        public string Email { get; set; }
+
+        public byte[] Image { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -36,23 +42,43 @@ namespace Happnin.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Required]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "UserName")]
+            public string UserName { get; set; }
+
+            [Required]
+            [Display(Name = "ZipCode")]
+            public string ZipCode { get; set; }
+
+            [Display(Name = "Image")] 
+            public IFormFile Image { get; set; }
         }
 
         private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             FirstName = user.FirstName;
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             LastName = user.LastName;
             ZipCode = user.ZipCode;
             Username = userName;
+            Image = user.Image;
+
+
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                UserName = userName,
+                FirstName = this.FirstName,
+                LastName =  this.LastName,
+                ZipCode = this.ZipCode,
             };
         }
 
@@ -70,6 +96,7 @@ namespace Happnin.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
+            bool changed = false;
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -82,20 +109,61 @@ namespace Happnin.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (Input.UserName != user.UserName)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+
+                var userNameExists = await  _userManager.FindByNameAsync(Input.UserName);
+                if (userNameExists == null)
                 {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+                    user.UserName = Input.UserName;
+                    changed = true;
                 }
+                else
+                {
+                    ModelState.AddModelError( "UserName", $"Username {Input.UserName} already exists");
+                }
+            } 
+            
+            if (Input.Image != null)
+            { 
+                user.Image = await ConvertImage(Input.Image);
+                changed = true;
+            }
+           
+            if (Input.FirstName != user.FirstName || Input.LastName != user.LastName || Input.ZipCode != user.ZipCode)
+            { 
+                user.FirstName = Input.FirstName; 
+                user.LastName = Input.LastName; 
+                user.ZipCode = Input.ZipCode;
+                changed = true;
             }
 
+            if (changed)
+            {
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                { 
+                    var userId = await _userManager.GetUserIdAsync(user); 
+                    throw new InvalidOperationException($"Unexpected error occurred while updating your profile '{userId}'.");
+                }
+            }    
+           
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
+        }
+
+        private async Task<byte[]> ConvertImage(IFormFile image)
+        {
+            byte[] fileBytes;
+            
+            using(var memoryStream = new MemoryStream())
+            {
+                await image.CopyToAsync(memoryStream);
+                fileBytes = memoryStream.ToArray();
+            }
+
+            return fileBytes;
         }
     }
 }
