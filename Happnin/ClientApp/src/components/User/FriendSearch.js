@@ -63,10 +63,14 @@ export class FriendSearch extends Component {
             method: "POST",
             }
         )
-
-        let friend = await response.json();
-        this.setState({friendToRequest: friend});
-    }
+        try {
+            let friend = await response.json();
+            this.setState({friendToRequest: friend});
+        }
+        catch(err){
+            console.log("error")
+        }
+   }
 
     render(){
         let content;
