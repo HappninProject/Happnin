@@ -393,12 +393,12 @@ export class FetchEventData extends Component {
     var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
         return (
             <div>
-                <div className="mapHappnin">
+                <div style={{ height: "100vh", width: "100%", marginLeft: "5rem" }}>
                     <Map
                         className="mapHappnin"
                         center={[this.state.lat, this.state.lng]}
                         zoom={this.state.zoom}
-                        style={{ width: '100%', height: '100vh' }}
+                        style={{ width: '80%', height: '80vh' }}
                     >
                         <TileLayer
                             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
