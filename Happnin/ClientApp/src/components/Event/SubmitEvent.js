@@ -251,7 +251,8 @@ export class SubmitEvent extends Component {
                 <div className="form-group">
                     <label for="state">State</label>
                     <select 
-                        className="form-control inputHeight" 
+                        className="form-control inputHeight inputSubmitText" 
+                        style={{paddingBottom: ".1rem"}}
                         id="state" 
                         name="state"
                         value={this.state.value}
@@ -358,11 +359,12 @@ export class SubmitEvent extends Component {
             </div>
 
           <div className="categorySelect">
-            <label for="categorySelect">Event category:</label>
+            <label for="categorySelect">Category:</label>
             <select
               id="categorySelect"
               value={this.state.event.categoryId}
-              className="form-control inputHeight"
+              className="form-control inputHeight inputSubmitText"
+              style={{paddingBottom: ".1rem"}}
               name="categoryId"
               onChange={this.handleInputChange}
             >
