@@ -391,33 +391,34 @@ export class FetchEventData extends Component {
 
     var key = process.env.REACT_APP_OPENMAP_KEY;
     var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
-      return (
-        <div>
-            <div style={{ height: "100vh", width: "100%" }}>
-                <Map
-                    center={[this.state.lat, this.state.lng]}
-                    zoom={this.state.zoom}
-                    style={{ width: '100%', height: '100vh' }}
-                >
-                    <TileLayer
-                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        url={urlString}
-                    />
-                    {tempMarkers.map((marker, index) => (
-                        <Marker key={index} position={marker} > 
-                            <Popup>
-                                {marker.title} <br /> {marker.description}
-                            </Popup>
-                        </Marker>
-                    ))}
-                </Map>
-            </div>
+        return (
+            <div>
+                <div className="mapHappnin">
+                    <Map
+                        className="mapHappnin"
+                        center={[this.state.lat, this.state.lng]}
+                        zoom={this.state.zoom}
+                        style={{ width: '100%', height: '100vh' }}
+                    >
+                        <TileLayer
+                            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                            url={urlString}
+                        />
+                        {tempMarkers.map((marker, index) => (
+                            <Marker key={index} position={marker} > 
+                                <Popup>
+                                    {marker.title} <br /> {marker.description}
+                                </Popup>
+                            </Marker>
+                        ))}
+                    </Map>
+                </div>
 
-            {filteredEvents.map((eventinfo) => (
-                <HappninEvent key={eventinfo.id} {...eventinfo} />
-            ))}
-        </div>
-      );
+                {filteredEvents.map((eventinfo) => (
+                    <HappninEvent key={eventinfo.id} {...eventinfo} />
+                ))}
+            </div>
+        );
     } else {
       return <div>No events found right now!</div>;
     }

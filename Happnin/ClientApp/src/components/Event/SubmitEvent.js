@@ -222,12 +222,12 @@ export class SubmitEvent extends Component {
 
     return (
       <div class="card">
-      <div class="submit container-fluid">
+      <div class="submit container-fluid submitEventContainer">
         <h1 class="header">Tell Us About Your Event</h1>
 
         <form onSubmit={this.handleSubmit}>
             <div>
-                <h3>Where is your event?</h3>
+                <h3>Where is it?</h3>
                 <div class="form-group">
                     <label>Address: </label>
                     <input
@@ -235,7 +235,7 @@ export class SubmitEvent extends Component {
                         name="address"
                         value={this.state.location.address}
                         onChange={this.handleInputLocationChange}
-                        class="form-control">
+                        className="form-control inputHeight">
                     </input>
                 </div>
                 <div class="form-group">
@@ -245,13 +245,13 @@ export class SubmitEvent extends Component {
                         name="city"
                         value={this.state.location.city}
                         onChange={this.handleInputLocationChange}
-                        class="form-control">
+                        className="form-control inputHeight">
                     </input>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="state">State</label>
                     <select 
-                        class="form-control" 
+                        className="form-control inputHeight" 
                         id="state" 
                         name="state"
                         value={this.state.value}
@@ -321,16 +321,16 @@ export class SubmitEvent extends Component {
                         name="zipCode"
                         value={this.state.location.zipCode}
                         onChange={this.handleInputLocationChange}
-                        className="form-control">
+                        className="form-control inputHeight">
                     </input>
                 </div>
             </div>
-        <h3>What is your event?</h3>
+        <h3>What is it?</h3>
           <div className="form-group">
             <label for="inputName">Name:</label>
             <input
               id="inputName"
-              class="form-control"
+              className="form-control inputHeight"
               name="name"
               type="text"
               placeholder="Title"
@@ -344,7 +344,7 @@ export class SubmitEvent extends Component {
               <label for="description">Description:</label>
               <textarea
                 id="description"
-                className="form-control"
+                className="form-control inputHeight"
                 cols="50"
                 rows="5"
                 description="description"
@@ -362,7 +362,7 @@ export class SubmitEvent extends Component {
             <select
               id="categorySelect"
               value={this.state.event.categoryId}
-              className="form-control"
+              className="form-control inputHeight"
               name="categoryId"
               onChange={this.handleInputChange}
             >
@@ -376,11 +376,11 @@ export class SubmitEvent extends Component {
           <div className="form-group">
             <label>Start Time:</label>
             <input 
-            type="datetime-local"
-            name="eventTime"
-            value={this.state.eventTime}
-            onChange={this.handleInputChange}
-            className="form-control"/>
+                type="datetime-local"
+                name="eventTime"
+                value={this.state.eventTime}
+                onChange={this.handleInputChange}
+                className="form-control inputHeight"/>
           </div>
           
           <div class="form-group">
@@ -390,7 +390,7 @@ export class SubmitEvent extends Component {
             name="endTime"
             value={this.state.endTime}
             onChange={this.handleInputChange}
-            className="form-control"/>
+            className="form-control inputHeight"/>
           </div>
 
           <div class="form-group"> 
@@ -402,7 +402,7 @@ export class SubmitEvent extends Component {
                 min="0.00" step="0.50" 
                 data-number-to-fixed="4" 
                 data-number-stepfactor="100" 
-                className="form-control currency" 
+                className="form-control currency inputHeight" 
                 id="costId" 
                 onChange={this.handleInputChange}/>
           </div>

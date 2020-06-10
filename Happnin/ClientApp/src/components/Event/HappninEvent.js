@@ -18,19 +18,15 @@ export class HappninEvent extends Component {
       eventDescription: this.props.description,
       category: this.props.categoryId,
       startTime: this.props.eventTime,
-      imageId: -1,
       image: {}
     };
-    console.log("in the constructor");
-    console.log(this.props);
+   
     this.attending = this.attending.bind(this);
   }
 
   //! get props from here
   static getDerivedStateFromProps(props, state) {
-    console.log("we in getDerived");
-    console.log(props);
-    console.log(state);
+
 
     return {
       attending: props.attending,
@@ -79,8 +75,6 @@ export class HappninEvent extends Component {
   async getPicture(){
     const imageId = this.props.eventImageId;
     let response = await fetch(`api/Upload/${imageId}`)
-    console.log('response:')
-    console.log(response);
     let image = await response.json();
     this.setState({image: image});
   }
@@ -92,7 +86,7 @@ export class HappninEvent extends Component {
     let image = this.ImageToUse();
 
     return (
-      <div class="card">
+      <div class="card cardHappninEvent">
         <Row around="xs">
           <Col xs={2}>
             <Card.Img
@@ -100,26 +94,32 @@ export class HappninEvent extends Component {
               variant="left"
               src={image}
               rounded="true"
-              style={{ padding: 1, width: '188px', height: '200px' }}
+              style={{ padding: 0, width: '188px', height: '188px' }}
             />
           </Col>
           <Col xs={10} horizontal="right">
-            <div class="card-body" className="happninevent">
-              <div className="eventinfo">
-                <h5 class="card-title">
-                  <Link to={`/EventPage/${e.id}`}>{e.name}</Link>
-                </h5>
+            <div className="card-body happninevent">
+              <div className="eventInfo">
+                <h2 class="card-title">
+                  <Link 
+                    to={`/EventPage/${e.id}`}>{e.name}</Link>
+                </h2>
                 <div className="card-text">
                   <p className="description">{e.description}</p>
                   Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
-                  <b>{e.ageRestriction}</b> <br /> <br />
-                  Category: <b>{Category(e.categoryId)}</b> <br />
+                  <b>{e.ageRestriction}</b> 
+
                   {startTime} - {endTime} <br />
                 </div>
+                <div className="category">
+                    {Category(e.categoryId)}
+                </div>
+
+
                 <p id="inline-text">
                   {this.state.attending === true
                     ? "This is HAPPNIN!"
-                    : "This is not HAPPNIN..."}
+                    : ""}
                 </p>
                 <button
                   id="buyTicketsButton"
@@ -131,9 +131,6 @@ export class HappninEvent extends Component {
               </div>
             </div>
           </Col>
-          {console.log("in the dealio")}
-          {console.log(this.props)}
-          {console.log(this.state)}
         </Row>
       </div>
     );

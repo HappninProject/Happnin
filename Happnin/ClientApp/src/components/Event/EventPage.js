@@ -1,9 +1,19 @@
 ﻿import React, { Component } from "react";
-import { Map } from "../Map";
 import attendies from "../../images/users.svg";
 import logo from "../../images/happninHLogoThumb.png";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Category } from '../../shared/Category';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 
 export class EventPage extends Component {
     constructor(props) {
@@ -13,13 +23,14 @@ export class EventPage extends Component {
           event: {},
           host: {},
           location: {},
+          locationId: {},
           lat: 0, 
           lng: 0, 
+          marker: {},
           zoom: 13,
           attendingCount: 0,
           loading: true, 
           AttendingValue: null,
-          imageId: -1,
           image: {}
         };
     }
@@ -29,6 +40,35 @@ export class EventPage extends Component {
         await this.FetchLocationAndHost();
         await this.FetchAttendingCount();
         await this.getPicture();
+
+        var locId = this.state.event.locationId;
+        this.setState({locationId: locId});
+
+        await this.getLocation();
+        const lat = this.state.location.lat;
+        const lng = this.state.location.lng;
+
+        this.setState({lat: lat});
+        this.setState({lng: lng});
+
+        var latLng = {};
+          
+        // var mark = L.marker(
+        //     L.latLng(
+        //       parseFloat(this.state.lat["Latitude"]),
+        //       parseFloat(this.state.lng["Longitude"])
+        //     )
+        // );
+
+       // mark["Latitude"] = this.state.lat;
+     //   mark["Longitude"] = this.state.lng;
+         latLng["title"] = this.state.event.name;
+         latLng["description"] = this.state.event.description;
+        // latLng["lat"] = this.state.lat;
+        // latLng["lng"] = this.state.lng;
+         latLng["locationId"] = this.state.locationId;
+
+        this.setState({ marker: latLng });
     }
 
     async FetchAttendingCount() {
@@ -36,7 +76,7 @@ export class EventPage extends Component {
         const response = await fetch(`api/Attendee/Count/${eventId}`);
         const count = await response.json();
         this.setState({ attendingCount: count });
-        console.log("attendeeCount response: " + count);
+        
     }
     ImageToUse = () => {
         const image = this.state.image;
@@ -48,11 +88,18 @@ export class EventPage extends Component {
         }
     }
 
+    async getLocation() {
+        const locId = this.state.locationId;
+        let response = await fetch(`/api/Location/${locId}`);
+  
+        let location = await response.json();
+        
+        this.setState({location: location});
+    }
+
     async getPicture() {
         const imageId = this.props.eventImageId;
         let response = await fetch(`api/Upload/${imageId}`)
-        console.log('response:')
-        console.log(response);
         let image = await response.json();
         this.setState({ image: image });
     }
@@ -66,9 +113,9 @@ export class EventPage extends Component {
     async FetchEventData(){
         const id = this.state.id;
         const response = await fetch(`api/Event/${id}`);
-        console.log("Event response" + response);
+       
         const data = await response.json();
-        console.log("Got Data", data);
+       
         this.setState({ event: data, loading: false});
     } 
 
@@ -81,7 +128,17 @@ export class EventPage extends Component {
         const hostResponse = await fetch(`/api/User/${hostId}`);
         const hostData = await hostResponse.json();
         this.setState({host: hostData})
+    }
 
+    
+    ImageToUse = () => {
+        const image = this.state.image;
+        if( image.image === undefined){
+        return logo;
+        }
+        else {
+        return `data:image/jpeg;base64,${image.image}`;
+        }
     }
 
 
@@ -92,6 +149,11 @@ export class EventPage extends Component {
         var startTime = new Date(Date.parse(e.eventTime)).toDateString();
         var endTime = new Date(Date.parse(e.endTime)).toDateString();
 
+        var key = process.env.REACT_APP_OPENMAP_KEY;
+        var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
+        const position = [this.state.lat, this.state.lng];
+        let image = this.ImageToUse();
+
         return (
             
             <div className="card container-fluid">
@@ -99,7 +161,7 @@ export class EventPage extends Component {
                     <img
                         className="eventImage"
                         variant="left"
-                        src={this.state.image}
+                        src={image}
                         rounded="true"
                         style={{ padding: 5, width: '300px', height: '300px', float: "left" }}
                         />
@@ -108,10 +170,7 @@ export class EventPage extends Component {
                             <h1 >{e.name}</h1>
                             <h1 className="subHeader">{startTime} - {endTime} </h1>
                             <h1 className="subHeader">{location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
-                    
                     </div>
-
-
 
                     <div style={{ float: "right", marginTop : " 70px" }}> 
                        <h1 className="subHeader">Cost: {e.cost}</h1>
@@ -120,7 +179,6 @@ export class EventPage extends Component {
                 </div>
                 <h1 className="subHeader" style={{ marginTop : "20px" }}>Description: </h1>
 
-       
                 <div id="attendingContainer">
                     <Dropdown style={{ marginTop : "10px" }}>
                         <label className="subHeader">
@@ -141,11 +199,26 @@ export class EventPage extends Component {
                 <div style={{ marginTop: "20px" }}>
                     <div class="subHeader">{"hosted by " + host}</div>
                 </div>
-                <div id="mapContainer">
-                    <Map jsonEvent={this.state.data} />
+                <div style={{ height: "100vh", width: "100%" }}>
+                    <Map
+                        className="mapHappnin"
+                        center={[this.state.lat, this.state.lng]}
+                        zoom={this.state.zoom}
+                        style={{ width: '100%', height: '100vh' }
+                    }
+                    >
+                        <TileLayer
+                            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                            url={urlString}
+                        />
+                        <Marker position={position} > 
+                            <Popup>
+                                <b>{this.state.marker.title}</b><br/> {this.state.marker.description}
+                            </Popup>
+                        </Marker> 
+                    </Map>
                 </div>
-                
             </div>
-            );
+        );
     }
 }
