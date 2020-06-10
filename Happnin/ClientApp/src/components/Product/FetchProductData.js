@@ -20,6 +20,9 @@ export class FetchProductData extends Component {
     this.state = {
       //The unfiltered events
       events: [],
+      lat: 47.4874,
+      lng: -117.5758,
+      zoom: 15,
       loading: true,
       filteredEvents: [],
       locations: [],
@@ -60,35 +63,28 @@ export class FetchProductData extends Component {
       filteredEvents: this.state.events,
     });
 
-    //!testing
+  
     //got the location data here, now have to match with the location IDs
     const locationResponse = await fetch("/api/Location/");
-    console.log("Location response: " + JSON.stringify(locationResponse));
+    
     const locationData = await locationResponse.json();
-    console.log("Location data: " + JSON.stringify(locationData));
 
     //setting the state of location data to the locations received
     this.setState({locationData: locationData});
-    //!testing
+  
   }
   
   testSomething = () => {
-    console.log("DOES THIS DO ANYTHING!!!!!!!!!!!!!!!!!")
     this.populateAttendingData();
   }
 
   static attendingEvent(eventId, attendedEvent){
-    console.log("in atteding events");
-    console.log(eventId)
-    console.log(attendedEvent); 
     let attendId = -1; 
     attendedEvent.forEach(e => 
         {
-          console.log(e.eventId);
-          console.log(e.eventId === eventId);
+
           if(e.eventId === eventId){
-            console.log("they matched")
-            console.log(e.id)
+
             attendId = e.id;
           } 
         })
@@ -96,9 +92,9 @@ export class FetchProductData extends Component {
   }
 
   static setGoing(events, attendedEvent){
-    console.log(events);
+  
     const attendedIds = attendedEvent.map(a => a.eventId);
-    console.log(attendedIds);
+    
     events.forEach(e => {
       if(attendedIds.includes(e.id)){
         e.going = true;
@@ -111,11 +107,7 @@ export class FetchProductData extends Component {
 
   async populateAttendingData(){
     const user = this.state.userId;
-    console.log('what is going on?')
-    console.log(user)
-    console.log(this.state)
-    console.log('here in the attending data get')
-    console.log(`api/Attendee/AttendeeInfo/${this.state.userId}`)
+
     const response = await fetch(`api/Attendee/AttendeeInfo/${this.state.userId}`);
     let attend = await response.json();
     this.setState({isAttending: attend});
@@ -410,10 +402,7 @@ export class FetchProductData extends Component {
 
     return (
       <div>
-        <h1 id="tableLabel" className="header">
-          Products
-        </h1>
-        {eventsData}
+        {/* {eventsData} */}
         <div>
           {/* This is where the filtered data goes  */}
           <h1 className="header">Filtered Products</h1>
