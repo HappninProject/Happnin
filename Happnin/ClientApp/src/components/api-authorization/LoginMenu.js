@@ -54,17 +54,18 @@ export class LoginMenu extends Component {
     authenticatedView(userName, profilePath, logoutPath) {
         return (
             <Fragment className="loginSignUpBlock">
-            <NavItem>
+                <div className="row" style={{float: "right"}}>
+                <NavItem>
                 <NavLink tag={Link} className="navHeader" to={profilePath}>
                 Hello {userName}
                 </NavLink>
             </NavItem>
-            {/* <NavItem>
+             <NavItem>
                 <NavLink tag={Link} className="navHeader" to='/hosted-events'>
                 Hosted Events
                 </NavLink>
-                </NavItem> */}
-                {/* <NavItem>
+                </NavItem> 
+                 <NavItem>
                 <NavLink tag={Link} className="navHeader" to={logoutPath}>
                 Logout
                 </NavLink>
@@ -73,7 +74,8 @@ export class LoginMenu extends Component {
                 <NavLink tag={Link} to="/friend-request" className="friends">
                     <img id="friends" className="" alt="friends" src={friends} />
                 </NavLink>
-                </NavItem> */}
+                </NavItem> 
+                </div>
             </Fragment>
         );
     }
