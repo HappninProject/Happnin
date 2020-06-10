@@ -16,7 +16,8 @@ export class UserAccount extends Component {
         firstName: "",
         lastName: "",
         zipCode: -1,
-        email: ""
+        email: "",
+        image: []
       },
       attending: [],
       events: []
@@ -59,8 +60,8 @@ export class UserAccount extends Component {
     const events = this.state.events;
     const image = this.state.user.image;
     let imageContent;
-
-    if (image.length > 0){
+    
+    if (image !== undefined && image.length > 0){
       imageContent = `data:image/jpeg;base64,${image}`
     }
     else {
