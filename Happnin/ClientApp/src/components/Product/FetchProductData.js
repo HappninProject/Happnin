@@ -410,8 +410,6 @@ export class FetchProductData extends Component {
 
     return (
       <div>
-
-
         <h1 id="tableLabel" className="header">
           Products
         </h1>
