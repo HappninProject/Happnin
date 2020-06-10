@@ -2,7 +2,6 @@
 import attendies from "../../images/users.svg";
 import logo from "../../images/happninHLogoThumb.png";
 import Dropdown from "react-bootstrap/Dropdown";
-import logo from "../../images/happninHLogoThumb.png";
 import { Category } from '../../shared/Category';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
