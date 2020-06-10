@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { HappninEvent } from '../Event/HappninEvent';
+import searchIcon from "../../images/searchIcon.png";
 
 export class Products extends Component {
   constructor(props) {
@@ -58,37 +59,35 @@ export class Products extends Component {
   
   render() {
     return (
-      <div className="container-fluid card">
-        <h1 className="header">Search for Products</h1>
-        <div style = {{float: "left"}}>
-          <div id="filterName">
-            <label className="subHeader">Product:&nbsp;</label>
+      <div className="container-fluid card cardSearch">
+          <div className="row" style={{marginBottom: "1rem"}}>
+            <h1 className="header">Search for Products</h1>
+            <img id="logo" className="d-inline-block searchIcon" alt="Logo" src={searchIcon} />
             <input
               type="text"
               name="eventNameSearch"
-              className="rounded"
+              className="form-control filterInput"
               onChange={this.handleNameSearchChange}
             ></input>
           </div>
-          <div id="filterZip">
+        <div style={{float: "left"}}>
+          <div className="row" style={{marginBottom: "1rem"}}>
             <label className="subHeader">
-              &nbsp;&nbsp;Zip code:&nbsp;
+                Postal Code:   
             </label>
             <input
               type="text"
               pattern="[0-9]*"
               name="eventZipSearch"
-              className="rounded"
+              className="form-control filterInput filterInputSmall"
               value={this.state.eventZipSearch}
               onChange={this.handleInputChange}
             ></input>
-          </div>
-         <div id="filterCost">
-            <label className="subHeader">
-              &nbsp;&nbsp;Cost:&nbsp;
+            <label className="subHeader" style={{marginLeft: "1rem"}}>
+                Cost:
             </label>
             <select
-              className="rounded"
+              className="form-control filterInput inputAgeText"
               name="eventCost"
               onChange={this.handleCostChange}
             >
