@@ -42,7 +42,6 @@ export class HappninEvent extends Component {
   }
 
   async attending() {
-    console.log("in attending");
     console.log(this.state);
     if (this.state.attending === false) {
       const attendInfo = {
@@ -59,7 +58,6 @@ export class HappninEvent extends Component {
       const response = await fetch(`api/Attendee/${attendId}`, {
         method: "DELETE",
       });
-      console.log(response);
     }
     this.props.handler();
   }

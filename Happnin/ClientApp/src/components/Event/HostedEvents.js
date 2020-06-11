@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HostEvent } from "./HostEvent";
 import authService from '../api-authorization/AuthorizeService';
+import { Link } from "react-router-dom";
 
 export class HostedEvents extends Component {
     static displayName = HostedEvents.name;
@@ -61,6 +62,9 @@ export class HostedEvents extends Component {
     return (
       <div className="container-fluid card">
         <div className="submit">
+          <h1 id="tabelLabel" className="header">
+          <Link to="/attended-events">Attended Events</Link>
+          </h1>
           <h1 id="tabelLabel" className="header">
             Hosted Events
           </h1>

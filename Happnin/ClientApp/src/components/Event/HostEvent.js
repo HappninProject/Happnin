@@ -56,8 +56,6 @@ export class HostEvent extends Component {
 
   ImageToUse = () => {
       const imageId = this.state.event.eventImageId;
-      console.log("imageId")
-      console.log(imageId)
       if (imageId === null) {
           return logo;
       }
