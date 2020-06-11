@@ -148,36 +148,28 @@ export class EventPage extends Component {
 
         return (
             
-            <div className="card container-fluid" style={{paddingLeft: "1rem", paddingRight: "1rem", paddingTop: "2rem"}}>
-                
-                    <div>
-                        <div className="row">
-                            <img
-                                className="eventImage"
-                                variant="left"
-                                src={image}
-                                rounded="true"
-                                style={{ padding: 5, width: '300px', height: '300px', float: "left" }}
-                                />
-                    
-                            <div className="eventPageTitle" style={{ textAlign: "left" }}>
-                                <div>
-                                    <h1 style={{paddingBottom: "2rem"}}>{e.name}</h1>
-                                </div>
-                                    
-                                    <h1 className="subHeader">{startTime} - {endTime} </h1>
-                                    <h1 className="subHeader">{location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
-                                    <h1 className="subHeader">Cost: {e.cost}</h1>
-                                    <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
-
-                            </div>
+            <div className="card container-fluid" style={{paddingLeft: "3rem", paddingRight: "1rem", paddingTop: "2rem"}}>
+                <div className="row">
+                    <img
+                        className="eventImage"
+                        variant="left"
+                        src={image}
+                        rounded="true"
+                        style={{ padding: 5, width: '300px', height: '300px', float: "center", marginLeft: "1rem" }}
+                        />
+            
+                    <div className="eventPageTitle" style={{ textAlign: "left" }}>
+                        <div>
+                            <h1 style={{paddingBottom: "2rem"}}>{e.name}</h1>
                         </div>
+                            
+                            <h1 className="subHeader">{startTime} - {endTime} </h1>
+                            <h1 className="subHeader">{location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
+                            <h1 className="subHeader">Cost: {e.cost}</h1>
+                            <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
 
-
-                        {/* <div style={{ float: "right", marginTop : " 70px", marginRight: "8rem" }}> 
-       
-                        </div> */}
                     </div>
+                </div>
                     <h1 className="subHeader" style={{ marginTop : "20px" }}>{e.description} </h1>
 
                     <div id="attendingContainer">
