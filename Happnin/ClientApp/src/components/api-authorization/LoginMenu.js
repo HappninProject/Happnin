@@ -62,7 +62,7 @@ export class LoginMenu extends Component {
             </NavItem>
              <NavItem>
                 <NavLink tag={Link} className="navHeader" to='/hosted-events'>
-                Hosted Events
+                Your Events
                 </NavLink>
                 </NavItem> 
                  <NavItem>

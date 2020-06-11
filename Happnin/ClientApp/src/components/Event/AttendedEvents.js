@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { HappninEvent } from "./HappninEvent";
 import authService from '../api-authorization/AuthorizeService';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import Card from "react-bootstrap/Card";
 
 export class AttendedEvents extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ export class AttendedEvents extends Component {
             user: "",
             isAuthenticated: false,
             Attending: [],
-            Events: []
+            Events: [],
         };
     }
 
@@ -25,6 +25,7 @@ export class AttendedEvents extends Component {
         console.log("what the heck")
         this.FetchAttendingEvents();
         this.forceUpdate();
+        window.location.reload(false);
     }
      
     async populateState() {
@@ -109,6 +110,7 @@ export class AttendedEvents extends Component {
         const attending = this.state.Attending;
         return (
         <div>
+          <Card>
             <h1>Attended Events</h1>
                 {events.map((eventinfo) => (
                     <HappninEvent key={eventinfo.id} {...eventinfo}
@@ -117,6 +119,7 @@ export class AttendedEvents extends Component {
                     userId={userId}
                     handler={this.refreshAttendingData}/>
                 ))}
+          </Card>
         </div>)
     }
 }
