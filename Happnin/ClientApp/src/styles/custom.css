@@ -100,8 +100,11 @@ label {
 
 .cardHappninEvent {
   max-width: 40rem;
-  max-height: 16rem;
-  padding-bottom: 0rem;
+  max-height: 14rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
 }
 
 .cardSearch {
@@ -110,14 +113,20 @@ label {
   padding-top: 1rem;
 }
 
-.description {
-  font-size: 14px;
-}
+.card-title {
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 2rem;
+    width: 14rem;
+  }
 
 .happninevent {
   border-radius: 20px;
   overflow: hidden;
-  padding-left: 6rem !important;
+  padding-left: 1rem;
+  width: 100%;
+  padding-top: 0rem;
+
 }
 
 .inputAgeText {
@@ -219,12 +228,6 @@ body {
   width: 6rem;
 }
 
-.card-title {
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
 .eventImage {
   padding-top: 1000px;
 }
@@ -294,8 +297,6 @@ body {
   font-size: 22px;
 }
 
-
-
 .alreadyHaveAccount {
   display: block;
   margin: 30px auto;
@@ -353,10 +354,6 @@ h5 {
     font-size: 1rem;
 }
 
-.category {
-  color: #4e4e4e;
-}
-
 .mapHappnin {
   height: "30vh";
   width: "50%";
@@ -382,6 +379,10 @@ h5 {
 }
 
 .eventPageTitle {
-    margin-left: 2rem;
-    padding-left: 2rem;
+    margin-left: 3rem;
+}
+
+.col-10 .col-8 {
+    margin-right: 0;
+    padding-right: 0;
 }

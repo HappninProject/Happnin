@@ -24,6 +24,8 @@ export class HappninEvent extends Component {
     this.attending = this.attending.bind(this);
   }
 
+
+
   //! get props from here
   static getDerivedStateFromProps(props, state) {
 
@@ -79,60 +81,80 @@ export class HappninEvent extends Component {
     this.setState({image: image});
   }
 
-  render() {
-    const e = this.props;
-    let startTime = new Date(Date.parse(e.eventTime)).toDateString();
-    let endTime = new Date(Date.parse(e.endTime)).toDateString();
-    let image = this.ImageToUse();
-
-    return (
-      <div class="card cardHappninEvent">
-        <Row around="xs">
-          <Col xs={2}>
-            <Card.Img
-              className="eventImage"
-              variant="left"
-              src={image}
-              rounded="true"
-              style={{ padding: 0, width: '188px', height: '188px' }}
-            />
-          </Col>
-          <Col xs={10} horizontal="right">
-            <div className="card-body happninevent">
-              <div className="eventInfo">
-                <h2 class="card-title">
-                  <Link 
-                    to={`/EventPage/${e.id}`}>{e.name}</Link>
-                </h2>
-                <div className="card-text">
-                  <p className="description">{e.description}</p>
-                  Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
-                  <b>{e.ageRestriction}</b><br/>
-
-                  {startTime} - {endTime} <br />
-                </div>
-                <div className="category">
-                    {Category(e.categoryId)}
-                </div>
+    render() {
+        const e = this.props;
 
 
-                <p id="inline-text">
-                  {this.state.attending === true
-                    ? "This is HAPPNIN!"
-                    : ""}
-                </p>
-                <button
-                  id="buyTicketsButton"
-                  className="btn btn-primary"
-                  onClick={this.attending}
-                >
-                  {this.state.attending === true ? "Going!" : "Go!"}
-                </button>
-              </div>
+        let startTime = "";
+        let endTime = "";
+
+        if (e.categoryId != 5) {
+            startTime = new Date(Date.parse(e.eventTime)).toDateString();
+            endTime = new Date(Date.parse(e.endTime)).toDateString();
+        }
+
+        let image = this.ImageToUse();
+
+        return (
+            <div class="card cardHappninEvent">
+                <Row around="xs">
+                    <Col xs={4}>
+                        <Card.Img
+                            className="eventImage"
+                            variant="left"
+                            src={image}
+                            rounded="true"
+                            style={{ padding: 0, width: '12rem', height: '12rem' }}
+                        />
+                    </Col>
+                    <Col xs={8} horizontal="right" style={{width: "100%"}} >
+                        <div className="happninevent">
+                            <div>
+                                <div className="row">
+                                    <h2 class="card-title">
+                                        <Link 
+                                            to={`/EventPage/${e.id}`}>{e.name}
+                                        </Link>
+                                    </h2>
+                                    <div className="category">
+                                        {Category(e.categoryId)}
+                                    </div>
+                                </div>
+                                <div className="descriptionContainer">
+                                        <p className="description">{e.description}</p>
+                                    </div>
+
+                                    <p id="inline-text">
+                                        {this.state.attending === true
+                                        ? "This is HAPPNIN!"
+                                        : ""}
+                                    </p>
+                                    <div style={{marginBottom: ".5rem"}}>
+                                        $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
+                                        <b>{e.ageRestriction}</b><br/>
+                                    </div>
+                                <div className="row">
+                                    <div style={{width: "60%"}}>
+                                        {startTime} - {endTime} <br />
+                                    </div>
+                                    
+   
+                                    <div className="btnContainer">
+                                        <button
+                                            style={{float: "right"}}
+                                            id="buyTicketsButton"
+                                            className="btn btn-primary float-right pull-right btnGo"
+                                            onClick={this.attending}
+                                        >
+                                            {this.state.attending === true ? "Going!" : "Go!"}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
             </div>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+        );
+    }
 }

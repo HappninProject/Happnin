@@ -89,7 +89,6 @@ export class FetchProductData extends Component {
         {
 
           if(e.eventId === eventId){
-
             attendId = e.id;
           } 
         })
