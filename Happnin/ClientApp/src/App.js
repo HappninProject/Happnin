@@ -67,7 +67,6 @@ function App () {
       <Layout>
       {/* <button onClick={toggleLightDarkTheme}>Toggle theme</button> */}
       <Toggle theme={theme} toggleTheme={toggleTheme} />
-      <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1>
         <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />

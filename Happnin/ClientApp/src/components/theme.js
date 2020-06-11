@@ -12,5 +12,8 @@ export const darkTheme = {
     toggleBorder: '#6B8096',
     gradient: 'linear-gradient(#091236, #1E215D)',
     card: '#1d241e',
-    otherText: '#FFFFFF'
+    otherText: '#FFFFFF',
+    navHeader: '#FFFFFF',
+    header: '#1d241e',
+    Link: '#FFFFFF'
 };
