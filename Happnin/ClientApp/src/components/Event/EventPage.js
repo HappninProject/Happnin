@@ -53,7 +53,6 @@ export class EventPage extends Component {
 
         var latLng = {};
           
-       
         latLng["title"] = this.state.event.name;
         latLng["description"] = this.state.event.description;
         latLng["locationId"] = this.state.locationId;
@@ -141,49 +140,52 @@ export class EventPage extends Component {
 
         return (
             
-            <div className="card container-fluid">
-                <div>
+            <div className="card container-fluid" style={{paddingLeft: "3rem", paddingRight: "1rem", paddingTop: "2rem"}}>
+                <div className="row">
                     <img
                         className="eventImage"
                         variant="left"
                         src={image}
                         rounded="true"
-                        style={{ padding: 5, width: '300px', height: '300px', float: "left" }}
+                        style={{ padding: 5, width: '300px', height: '300px', float: "center", marginLeft: "1rem" }}
                         />
-              
-                    <div style={{ textAlign: "center" }}>
-                            <h1 >{e.name}</h1>
+            
+                    <div className="eventPageTitle" style={{ textAlign: "left" }}>
+                        <div>
+                            <h1 style={{paddingBottom: "2rem"}}>{e.name}</h1>
+                        </div>
+                            
                             <h1 className="subHeader">{startTime} - {endTime} </h1>
                             <h1 className="subHeader">{location.address + ", " + location.city + ", " + location.state + ", " + location.zipCode} </h1>
-                    </div>
+                            <h1 className="subHeader">Cost: {e.cost}</h1>
+                            <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
 
-                    <div style={{ float: "right", marginTop : " 70px" }}> 
-                       <h1 className="subHeader">Cost: {e.cost}</h1>
-                       <h1 className="subHeader">age restriction: {e.ageRestriction} </h1>
                     </div>
                 </div>
-                <h1 className="subHeader" style={{ marginTop : "20px" }}>Description: </h1>
+                    <h1 className="subHeader" style={{ marginTop : "20px" }}>{e.description} </h1>
 
-                <div id="attendingContainer">
-                    <Dropdown style={{ marginTop : "10px" }}>
-                        <label className="subHeader">
-                            &nbsp;&nbsp;attending status:&nbsp;
-                        </label>
-                        <select
-                            className="rounded"
-                            name="Attending"
-                            onChange={this.handleAttendingChange}
-                            style={{ width: "20%" }}
-                        >
-                            <option value="Attending">Attending</option>
-                            <option value="Can't Attend">Can't Attend </option>
-                        </select>
-                    </Dropdown>
-                    <div class="subHeader" style={{ marginLeft: " 13px" }}>{"people attending : " + this.state.attendingCount}</div>
-                </div>
-                <div style={{ marginTop: "20px" }}>
-                    <div class="subHeader">{"hosted by " + host}</div>
-                </div>
+                    <div id="attendingContainer">
+                        <Dropdown style={{ marginTop : "10px" }}>
+                            <label className="subHeader">
+                                &nbsp;&nbsp;attending status:&nbsp;
+                            </label>
+                            <select
+                                className="rounded"
+                                name="Attending"
+                                onChange={this.handleAttendingChange}
+                                style={{ width: "20%" }}
+                            >
+                                <option value="Attending">Attending</option>
+                                <option value="Can't Attend">Can't Attend </option>
+                            </select>
+                        </Dropdown>
+                        <div class="subHeader" style={{ marginLeft: " 13px" }}>{"people attending : " + this.state.attendingCount}</div>
+                    </div>
+                    <div style={{ marginTop: "20px" }}>
+                        <div class="subHeader">{"hosted by " + host}</div>
+                    </div>
+                
+
                 <div style={{ height: "100vh", width: "100%" }}>
                     <Map
                         className="mapHappnin"
