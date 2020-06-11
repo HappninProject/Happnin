@@ -206,10 +206,6 @@ export class FetchEventData extends Component {
 
   //displays event if event in on the date entered
   filterDate = (filteredEvents) => {
-    //!right now the date is always set to feb 26th (for some weird reason)
-    //!also this does not currently filtering within the range of dates (startTime-endTime), only startTime
-    //!also something needs to be changed where the current date is the default value, because currently it is empty at start
-    //!and you have to click on the date to start filtering
 
     let dateEntered = this.props.date;
     if(dateEntered !== ""){
@@ -351,7 +347,7 @@ export class FetchEventData extends Component {
     return filteredEvents;
   };
 
-  renderFilteredEvents(events) {
+  renderFilteredEvents(events, userId, attendedEvent, handler) {
     if (events && events.length) {
       let filteredEvents = this.state.events;
 
@@ -413,9 +409,13 @@ export class FetchEventData extends Component {
                         ))}
                     </Map>
                 </div>
-
+                {FetchEventData.setGoing(events, attendedEvent)}
                 {filteredEvents.map((eventinfo) => (
-                    <HappninEvent key={eventinfo.id} {...eventinfo} />
+                    <HappninEvent key={eventinfo.id} {...eventinfo}
+                    attendingId={FetchEventData.attendingEvent(eventinfo.id, attendedEvent)}
+                    attending={eventinfo.going}
+                    userId={userId}
+                    handler={handler}/>
                 ))}
             </div>
         );
