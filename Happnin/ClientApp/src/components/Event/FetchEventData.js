@@ -27,7 +27,7 @@ export class FetchEventData extends Component {
             userId: '',
             lat: 47.4874,
             lng: -117.5758,
-            zoom: 15,
+            zoom: 12,
             isAttending: [],
             markers: [],
             locationIds: [],
@@ -36,6 +36,13 @@ export class FetchEventData extends Component {
     }
 
     async componentDidMount() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let lat = position.coords.latitude
+            let lng = position.coords.longitude
+            this.setState({lat: lat});
+            this.setState({lng: lng});
+        });
+
         this._subscription = authService.subscribe(() => this.populateState());
         await this.populateEventData();
         await this.populateState();
@@ -43,6 +50,9 @@ export class FetchEventData extends Component {
         this.setState({
             filteredEvents: this.state.events,
         });
+
+
+
 
         const eventArray = this.state.filteredEvents;
 
