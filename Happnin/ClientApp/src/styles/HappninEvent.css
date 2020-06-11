@@ -77,3 +77,34 @@ body {
     width: 110px;
   }
 }
+
+.category {
+    color: #4e4e4e;
+    font-size: .8rem;
+    width: 4rem;
+    height: 1.5rem;
+    float: right;
+    background-color: #ffccff;
+    padding-left: .3rem;
+    padding-top: .3rem;
+}
+
+.description {
+    font-size: 20px;
+    overflow: hidden;
+}
+
+.descriptionContainer {
+    height: 5rem;
+    overflow: hidden;
+}
+
+.btnGo {
+    margin-bottom: 3rem;
+}
+
+.btnContainer {
+    float: right !important;
+    text-align: right;
+    width: 40%;
+}

@@ -94,12 +94,22 @@ export class FriendSearch extends Component {
             )
         }
         return (
-        <div>
-            <label for="friendSearch">Friend Search</label>
-            <input type="text" name="username" id="username" onChange={this.handleInputUsernameSearch}/>
-            <input type="button" value="search" onClick={this.submitSearch}/>
-            {content}
-        </div> 
+            <div>
+                <div className="container-fluid card cardSearch">
+                    <h5 style={{marginLeft: "0rem", paddingLeft: "0rem"}}>Search for friends</h5>
+                    <div className="row" style={{marginBottom: "2rem", marginLeft: "0rem"}}>
+                        <label for="friendSearch">Username: </label>
+                        <input 
+                            style={{marginLeft: "1rem", marginRight: "1rem"}}
+                            type="text" 
+                            name="username" 
+                            id="username" 
+                            onChange={this.handleInputUsernameSearch}/>
+                        <input type="button" value="search" onClick={this.submitSearch}/>
+                    </div>
+                </div> 
+                {content}
+            </div>
         )
     }
 }

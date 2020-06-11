@@ -1,8 +1,6 @@
 ﻿import React, { Component } from "react";
-import attendies from "../../images/users.svg";
 import logo from "../../images/happninHLogoThumb.png";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Category } from '../../shared/Category';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -70,8 +68,6 @@ export class EventPage extends Component {
     
     ImageToUse = () => {
         const imageId = this.state.event.eventImageId;
-        console.log("imageId")
-        console.log(imageId)
         if (imageId === null) {
             return logo;
         }
@@ -135,19 +131,17 @@ export class EventPage extends Component {
         var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
         const position = [this.state.lat, this.state.lng];
         let image = this.ImageToUse();
-        console.log("image")
-        console.log(image)
 
         return (
             
-            <div className="card container-fluid" style={{paddingLeft: "3rem", paddingRight: "1rem", paddingTop: "2rem"}}>
+            <div className="card container-fluid" style={{paddingLeft: "3rem", paddingRight: "1rem", paddingTop: "3rem"}}>
                 <div className="row">
                     <img
                         className="eventImage"
                         variant="left"
                         src={image}
                         rounded="true"
-                        style={{ padding: 5, width: '300px', height: '300px', float: "center", marginLeft: "1rem" }}
+                        style={{ padding: 0, width: '300px', height: '300px', float: "center", marginLeft: "1rem" }}
                         />
             
                     <div className="eventPageTitle" style={{ textAlign: "left" }}>
@@ -162,7 +156,7 @@ export class EventPage extends Component {
 
                     </div>
                 </div>
-                    <h1 className="subHeader" style={{ marginTop : "20px" }}>{e.description} </h1>
+                    <h1 className="subHeader" style={{ marginTop : "3rem" }}>{e.description} </h1>
 
                     <div id="attendingContainer">
                         <Dropdown style={{ marginTop : "10px" }}>
@@ -179,12 +173,13 @@ export class EventPage extends Component {
                                 <option value="Can't Attend">Can't Attend </option>
                             </select>
                         </Dropdown>
-                        <div class="subHeader" style={{ marginLeft: " 13px" }}>{"people attending : " + this.state.attendingCount}</div>
+                        <div className="subHeader" style={{ marginLeft: " 13px" }}>
+                            {this.state.attendingCount + " people are going"}
+                        </div>
                     </div>
                     <div style={{ marginTop: "20px" }}>
-                        <div class="subHeader">{"hosted by " + host}</div>
+                        <div className="subHeader">{"hosted by " + host}</div>
                     </div>
-                
 
                 <div style={{ height: "100vh", width: "100%" }}>
                     <Map
