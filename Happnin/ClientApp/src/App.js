@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Redirect, Route, Switch, BrowserRouter} from 'react-router-dom';
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
@@ -25,17 +25,49 @@ import {Products} from "./components/Products";
 import {Attendies} from "./components/Attendies";
 import { PageNotFound } from "./components/PageNotFound";
 
-export default class App extends Component {
-  static displayName = App.name;
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './components/theme';
+import { GlobalStyles } from './components/global';
+import Toggle from './components/Toggle';
+import { useDarkMode } from './components/useDarkMode';
 
-  state = {
-    eventinfoarray: [],
-  };
+// export default class App extends Component {
+//   static displayName = App.name;
 
-  render() {
+//   state = {
+//     eventinfoarray: [],
+//   };
+
+function App () {
+  const [theme, toggleTheme] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+  // const toggleLightDarkTheme = () => {
+  //   if(theme == 'light'){
+  //     setTheme('dark');
+  //   }
+  //   else{
+  //     setTheme('light');
+  //   }
+  // }
+
+  //toggling the theme to the opposite on button press
+  // const toggleLightDarkTheme = () => {
+  //   theme == 'light' ? setTheme('dark'): setTheme('light');
+  // }
+
+
+  // render() {
+
     return (
       <BrowserRouter>
+      <ThemeProvider theme={themeMode}>
+      <>
+        <GlobalStyles />
       <Layout>
+      {/* <button onClick={toggleLightDarkTheme}>Toggle theme</button> */}
+      <Toggle theme={theme} toggleTheme={toggleTheme} />
+      <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1>
         <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/submit-event" component={SubmitEvent} />
@@ -62,7 +94,13 @@ export default class App extends Component {
         <Route component={PageNotFound}/>
         </Switch>
       </Layout>
+      </>
+      </ThemeProvider>
       </BrowserRouter>
+      
     );
-  }
+  // }
 }
+
+//!added
+export default App;

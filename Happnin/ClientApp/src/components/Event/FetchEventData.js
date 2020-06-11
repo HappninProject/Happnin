@@ -247,7 +247,6 @@ export class FetchEventData extends Component {
 
   //displays event if it meets time search choice
   filterTime = (filteredEvents) => {
-      //!currently does not account for overnight events (ex. start time at 9pm, end time at 8am)
       let time = this.props.time;
       //these will be in military time to compare
       //maxTime is not inclusive
@@ -272,14 +271,27 @@ export class FetchEventData extends Component {
 
         //filtering by time of day
         filteredEvents = filteredEvents.filter((event) => {
+          //getting the start date also to see if night event goes into next day
+          //hours will be set to 0 to test if they're the same date
+          let eventDate = new Date(event.eventTime);
+          let eventDateNoHrs = new Date(eventDate).setHours(0,0,0,0);
+          console.log("* event start time with hours: " + eventDate);
+          console.log("* event date no hours: " + eventDateNoHrs);
+          //getting end date
+          let endDate = new Date(event.endTime);
+          let endDateNoHrs = new Date(endDate).setHours(0,0,0,0);
+          console.log("* event end time: " + endDate);
+          console.log("* event end time with no hours: " + endDateNoHrs);
+
           console.log("This is the time of the event*: " + event.eventTime);
           //get the hour of the event
           let eventHr = new Date(event.eventTime).getHours();
           console.log("Event hour*: " + eventHr);
-          //edge case for night since the minTime is more than maxTime
-          //!this is temporary until I find a better fix
+          //edge case for night since the minTime is more than maxTime when it goes into AM
           if(time == "Night"){
-            return eventHr >= minTime;
+            return eventHr >= minTime || ((eventHr >= 18 && eventHr <= 24 || eventHr >= 1 && eventHr < 5) 
+            && Date.parse(eventDateNoHrs) < Date.parse(endDateNoHrs)) || ((eventHr >= 18 && eventHr <= 24 || eventHr >= 1 && eventHr < 5) 
+            && Date.parse(eventDate) < Date.parse(endDate));
           }
           return eventHr >= minTime && eventHr < maxTime;
         });
