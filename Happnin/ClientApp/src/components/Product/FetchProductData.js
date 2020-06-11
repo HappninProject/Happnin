@@ -69,7 +69,7 @@ export class FetchProductData extends Component {
     const locationData = await locationResponse.json();
 
     //setting the state of location data to the locations received
-    this.setState({locationData: locationData});
+    this.setState({locations: locationData});
   }
   
   testSomething = () => {
