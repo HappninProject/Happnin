@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Data.Tests", "Happn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin", "Happnin\Happnin.csproj", "{5D52C600-4941-46B1-92AF-C2048FDC9E44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business", "Happenin.Business\Happnin.Business.csproj", "{7FE35944-BCCF-45FB-ACBB-E011FADDFBF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business", "Happnin.Business\Happnin.Business.csproj", "{7FE35944-BCCF-45FB-ACBB-E011FADDFBF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business.Tests", "Happenin.Business.Tests\Happnin.Business.Tests.csproj", "{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Business.Tests", "Happnin.Business.Tests\Happnin.Business.Tests.csproj", "{88D102D1-F1E1-40C7-BF54-D8D10720E1FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happnin.Tests", "Happnin.Api.Tests\Happnin.Tests.csproj", "{D14B9BC5-C293-43FA-A57C-1649D001C744}"
 EndProject
