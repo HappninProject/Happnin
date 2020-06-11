@@ -22,7 +22,7 @@ export class FetchProductData extends Component {
       events: [],
       lat: 47.4874,
       lng: -117.5758,
-      zoom: 15,
+      zoom: 12,
       loading: true,
       filteredEvents: [],
       locations: [],
@@ -33,6 +33,13 @@ export class FetchProductData extends Component {
   }
 
     async componentDidMount() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let lat = position.coords.latitude
+            let lng = position.coords.longitude
+            this.setState({lat: lat});
+            this.setState({lng: lng});
+        });
+        
         this._subscription = authService.subscribe(() => this.populateState());
         await this.populateProductData();
         await this.populateState();
