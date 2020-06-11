@@ -31,7 +31,7 @@ export class EventPage extends Component {
           attendingCount: 0,
           loading: true, 
           AttendingValue: null,
-          image: {}
+          image: []
         };
     }
 
@@ -53,9 +53,9 @@ export class EventPage extends Component {
 
         var latLng = {};
           
-         latLng["title"] = this.state.event.name;
-         latLng["description"] = this.state.event.description;
-         latLng["locationId"] = this.state.locationId;
+        latLng["title"] = this.state.event.name;
+        latLng["description"] = this.state.event.description;
+        latLng["locationId"] = this.state.locationId;
 
         this.setState({ marker: latLng });
     }
@@ -67,6 +67,7 @@ export class EventPage extends Component {
         this.setState({ attendingCount: count });
         
     }
+    
     ImageToUse = () => {
         const imageId = this.state.event.eventImageId;
         console.log("imageId")
@@ -75,7 +76,7 @@ export class EventPage extends Component {
             return logo;
         }
         else {
-            return `data:image/jpeg;base64,${this.state.event.image}`;
+            return `data:image/jpeg;base64,${this.state.image.image}`;
         }
     }
 
@@ -89,7 +90,7 @@ export class EventPage extends Component {
     }
 
     async getPicture() {
-        const imageId = this.props.eventImageId;
+        const imageId = this.state.event.eventImageId;
         let response = await fetch(`api/Upload/${imageId}`)
         let image = await response.json();
         this.setState({ image: image });
@@ -121,17 +122,6 @@ export class EventPage extends Component {
         this.setState({host: hostData})
     }
 
-    
-    ImageToUse = () => {
-        const image = this.state.image;
-        if( image.image === undefined){
-        return logo;
-        }
-        else {
-        return `data:image/jpeg;base64,${image.image}`;
-        }
-    }
-
 
     render() {
         let e = this.state.event;
@@ -145,6 +135,8 @@ export class EventPage extends Component {
         var urlString = "https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=" + key;
         const position = [this.state.lat, this.state.lng];
         let image = this.ImageToUse();
+        console.log("image")
+        console.log(image)
 
         return (
             

@@ -24,8 +24,8 @@ export class SubmitEvent extends Component {
             eventImageId: null,
             eventTime: "2020-02-26T05:21:52.102Z",
             endTime: "2020-02-27T05:21:52.102Z",
-            cost: 42.0,
-            ageRestriction: 500
+            cost: 42.00,
+            ageRestriction: 0
             },
             location : { 
                 address: "",
