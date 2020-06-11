@@ -319,7 +319,7 @@ export class FetchProductData extends Component {
     return filteredEvents;
   };
 
-  renderFilteredEvents(events) {
+  renderFilteredEvents(events, userId, attendedEvent, handler) {
     if (events && events.length) {
       let filteredEvents = this.state.events;
 
@@ -381,7 +381,12 @@ export class FetchProductData extends Component {
                 </Map>
             </div>
             {filteredEvents.map((eventinfo) => (
-                <HappninEvent key={eventinfo.id} {...eventinfo} />
+                <HappninEvent key={eventinfo.id} {...eventinfo} 
+                attendingId={FetchProductData.attendingEvent(eventinfo.id, attendedEvent)}
+                attending={eventinfo.going}
+                userId={userId}
+                handler={handler}
+                />
             ))}
         </div>
       );
