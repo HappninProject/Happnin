@@ -128,9 +128,9 @@ export class FetchEventData extends Component {
   }
 
   static setGoing(events, attendedEvent){
-    console.log(events);
+   
     const attendedIds = attendedEvent.map(a => a.eventId);
-    console.log(attendedIds);
+   
     events.forEach(e => {
       if(attendedIds.includes(e.id)){
         e.going = true;
@@ -259,7 +259,7 @@ export class FetchEventData extends Component {
 
       //create an array with those IDs
       let Ids = locations.map(location => location.id);
-      console.log("IDs here*: " + Ids);
+      
 
       //then if the zip codes match show all the zip codes with those IDs
       filteredEvents = filteredEvents.filter((event) => {

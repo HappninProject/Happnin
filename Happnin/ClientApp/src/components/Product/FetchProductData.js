@@ -56,22 +56,20 @@ export class FetchProductData extends Component {
   async populateProductData() {
     const response = await fetch("api/Event/Products");
     const data = await response.json();
-    //  console.log("Got Data", data);
+   
     this.setState({ events: data, loading: false });
     //have to set the state of filtered events after the events variable has already been populated
     this.setState({
       filteredEvents: this.state.events,
     });
 
-  
     //got the location data here, now have to match with the location IDs
     const locationResponse = await fetch("/api/Location/");
     
     const locationData = await locationResponse.json();
 
     //setting the state of location data to the locations received
-    this.setState({locationData: locationData});
-  
+    this.setState({locations: locationData});
   }
   
   testSomething = () => {
@@ -174,7 +172,7 @@ export class FetchProductData extends Component {
     //!also this does not currently filtering within the range of dates (startTime-endTime), only startTime
     //!also something needs to be changed where the current date is the default value, because currently it is empty at start
     //!and you have to click on the date to start filtering
-    console.log("Date from FetchProductData: " + this.props.date);
+    
     let dateEntered = this.props.date;
     if(dateEntered !== ""){
       //creating a date object from the string that was passed in
@@ -215,7 +213,7 @@ export class FetchProductData extends Component {
   //displays event if zip matches what's entered
   filterZip = (filteredEvents) => {
     let zip = this.props.zip;
-    //if the user has entered a zip code
+    
     if(zip !== ""){
       //getting the locations stringified
       let locations = this.state.locations;
@@ -227,13 +225,11 @@ export class FetchProductData extends Component {
 
       //create an array with those IDs
       let Ids = locations.map(location => location.id);
-      console.log("IDs here*: " + Ids);
+     
 
       //then if the zip codes match show all the zip codes with those IDs
       filteredEvents = filteredEvents.filter((event) => {
-        console.log("This is the zip*: " + zip);
-        //checks if the location IDs match the zip code
-        return Ids.includes(event.locationId);
+        return Ids.includes(event.locationId); //checks if the location IDs match the zip code
       });
     }
     return filteredEvents;

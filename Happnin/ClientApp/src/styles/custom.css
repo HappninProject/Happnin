@@ -124,6 +124,10 @@ label {
   font-size: 0.5rem;
 }
 
+.inputSubmitText {
+    font-size: 0.8rem;
+}
+
 .inputMargin {
   margin-right: 1rem;
 }
@@ -212,7 +216,7 @@ body {
 #buyTicketsButton {
   float: right;
   margin-right: 20px;
-  width: 4rem;
+  width: 6rem;
 }
 
 .card-title {
