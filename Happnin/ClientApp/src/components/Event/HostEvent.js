@@ -19,9 +19,15 @@ export class HostEvent extends Component {
             eventTime: this.props.startTime,
             endTime: this.props.endTime,
             cost: this.props.cost,
-            ageRestriction: this.props.ageRestriction
+            ageRestriction: this.props.ageRestriction,
+            eventImageId: this.props.eventImageId
         },
+          image: {}
     };
+  }
+
+  async componentDidMount(){
+    await this.getPicture();
   }
 
   handleInputChange = event => {
@@ -41,11 +47,30 @@ export class HostEvent extends Component {
     console.log(this.state);
   };
 
+   async getPicture(){
+    const imageId = this.props.eventImageId;
+    let response = await fetch(`api/Upload/${imageId}`)
+    let image = await response.json();
+    this.setState({image: image});
+  }
+
+  ImageToUse = () => {
+      const imageId = this.state.event.eventImageId;
+      console.log("imageId")
+      console.log(imageId)
+      if (imageId === null) {
+          return logo;
+      }
+      else {
+          return `data:image/jpeg;base64,${this.state.image.image}`;
+      }
+    }
+
   render() {
     const e = this.props;
     let startTime = new Date(Date.parse(e.eventTime)).toDateString();
     let endTime = new Date(Date.parse(e.endTime)).toDateString();
-
+    let image = this.ImageToUse();
     return (
       <div class="card">
         <Row around="xs">
@@ -53,9 +78,9 @@ export class HostEvent extends Component {
             <Card.Img
               className="eventImage"
               variant="left"
-              src={logo}
+              src={image}
               rounded="true"
-              style={{ padding: 5 }}
+              style={{ padding: 5, width: '188px', height: '188px' }}
             />
           </Col>
           <Col xs={10} horizontal="right">

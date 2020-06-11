@@ -21,6 +21,7 @@ import { EventPage } from "./components/Event/EventPage";
 import { BrowseProducts } from './components/Product/BrowseProduct'
 import { UserAccount } from './components/User/UserAccount'
 import { FriendSearch } from './components/User/FriendSearch' 
+import { AttendedEvents } from './components/Event/AttendedEvents'
 
 export default class App extends Component {
   static displayName = App.name;
@@ -46,6 +47,7 @@ export default class App extends Component {
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
         />
+        <Route path="/attended-events" component= {AttendedEvents}/>
         <Route path="/friend-request" component={FriendRequests} />
         <Route path="/friend-search" component={FriendSearch}/>
         <Route path="/EventPage/:eventId" component={EventPage} />

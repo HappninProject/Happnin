@@ -107,7 +107,7 @@ export class HappninEvent extends Component {
                 <div className="card-text">
                   <p className="description">{e.description}</p>
                   Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
-                  <b>{e.ageRestriction}</b> 
+                  <b>{e.ageRestriction}</b><br/>
 
                   {startTime} - {endTime} <br />
                 </div>
