@@ -51,6 +51,8 @@ namespace Happnin.Data
                 }
             }
         }
+        public int? EventImageId { get; set; }
+        public EventImage EventImage { get; set; }
         public double Cost { get; set; }
         public int AgeRestriction { get; set; }
         public List<User> Attendees { get;  } = new List<User>();

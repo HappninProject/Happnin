@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Happnin.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -76,6 +79,9 @@ namespace Happnin.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            
+            [Display(Name = "Image")]
+            public IFormFile Image { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -94,8 +100,18 @@ namespace Happnin.Areas.Identity.Pages.Account
                 var userUserNameExists = await  _userManager.FindByNameAsync(Input.UserName);
                 if (userUserNameExists == null && userEmailExists == null)
                 {
+                    
+                    var imageArray = Input.Image != null ? await ConvertImage(Input.Image) : null;
                     var user = new User(Input.FirstName, Input.LastName)
-                        {UserName = Input.UserName, Email = Input.Email, ZipCode = Input.ZipCode};
+                        {
+                            UserName = Input.UserName,
+                            Email = Input.Email, 
+                            ZipCode = Input.ZipCode,
+                            Image = imageArray,
+                            FileName = Input.Image?.FileName,
+                            DataType = Input.Image?.ContentType
+                        };
+
                     var result = await _userManager.CreateAsync(user, Input.Password);
                     if (result.Succeeded)
                     {
@@ -144,6 +160,19 @@ namespace Happnin.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task<byte[]> ConvertImage(IFormFile image)
+        {
+            byte[] fileBytes;
+            
+            using(var memoryStream = new MemoryStream())
+            {
+                await image.CopyToAsync(memoryStream);
+                fileBytes = memoryStream.ToArray();
+            }
+
+            return fileBytes;
         }
     }
 }

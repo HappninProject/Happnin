@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HappninEvent } from "./Event/HappninEvent";
 import authService from './api-authorization/AuthorizeService';
+import Carousel from "@brainhubeu/react-carousel";
+import "@brainhubeu/react-carousel/lib/style.css";
+import fireworks from "../images/fireworks.jpeg";
+import crowd from "../images/crowd.jpg";
+import microphone from "../images/microphone.jpg";
+import nightLife from '../images/samvidh-ramanathan-9PaGKXIPUHQ-unsplash.jpg';
+import { Link } from "react-router-dom";
+import { ApplicationPaths } from "./api-authorization/ApiAuthorizationConstants";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -34,39 +42,28 @@ export class Home extends Component {
       userId: user && user.sub
     });
     this.populateAttendingData();
-    console.log("Here comes test something");
+
     this.testSomething();
   }
 
   async populateAttendingData(){
-    const user = this.state.userId;
-    console.log('what is going on?')
-    console.log(user)
-    console.log(this.state)
-    console.log('here in the attending data get')
-    console.log(`api/Attendee/AttendeeInfo/${this.state.userId}`)
     const response = await fetch(`api/Attendee/AttendeeInfo/${this.state.userId}`);
     let attend = await response.json();
     this.setState({isAttending: attend});
   }
 
   testSomething = () => {
-    console.log("DOES THIS DO ANYTHING!!!!!!!!!!!!!!!!!")
+    
     this.populateAttendingData();
   }
 
   static attendingEvent(eventId, attendedEvent){
-    console.log("in atteding events");
-    console.log(eventId)
-    console.log(attendedEvent); 
+
     let attendId = -1; 
     attendedEvent.forEach(e => 
         {
-          console.log(e.eventId);
-          console.log(e.eventId === eventId);
           if(e.eventId === eventId){
-            console.log("they matched")
-            console.log(e.id)
+ 
             attendId = e.id;
           } 
         })
@@ -110,43 +107,54 @@ export class Home extends Component {
     ) : (
       Home.renderEventsTable(this.state.events, this.state.userId, this.state.isAttending, this.testSomething)
     );
-    return (
-      <div className="container-fluid card">
-        <h1 className="header">Welcome to Happnin</h1>
 
-        <table className="event-table">
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Upcoming Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Friends' Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-          <td>
-            <div className="eventTable">
-              <th className="eventsHeader">Popular Events:</th>
-              <tr>
-                <td className="event"> test </td>
-              </tr>
-            </div>
-          </td>
-        </table>
-        <div className="submit">
-          <h1 id="tabelLabel" className="header">
-            Events
-          </h1>
-          <p>Got these events from our server DAWG</p>
-          {contents}
+
+    const registerPath = `${ApplicationPaths.Register}`;
+    const loginPath = `${ApplicationPaths.Login}`;
+    return (
+      <div className="container-fluid ">
+        <h1 id ='headerDL' className="headerWelcome">Welcome to Happnin</h1>
+        <hr className="happninUnderline"/>
+        <h2 className="headerSubWelcome">The site to find events and products near you</h2>
+        <h2 className="headerCreateAccount"><b>Create an account</b> to share events and products available</h2>
+
+        <Link to={registerPath}>
+            <button className="btn btn-primary btnHomeSignUp" type="button">
+                Sign up
+            </button>
+        </Link>
+        <Link className="alreadyHaveAccount" to={loginPath}>
+                Already have an account?
+        </Link>
+
+        <hr className="happninUnderline"/>
+        <pre className="homeDetails">   Concerts           |           Restaurants         |           Events          |           Products            |           More...</pre>
+        <div>
+          <Carousel
+            className="carousel"
+            infinite
+            autoPlay={20000}
+            animationSpeed={10000}
+          >
+            <img
+              className="item w-100"
+              src={nightLife}
+              alt="A busy urban street at night"
+            />
+            <img
+              className="item w-100"
+              src={crowd}
+              alt="A concert with people raising their hands up"
+            />
+            <img
+              className="item w-100"
+              src={microphone}
+              alt="A comedy club with a microphone in focus"
+            />
+            <img className="item w-100" src={fireworks} alt="Fireworks" />
+          </Carousel>
         </div>
+
       </div>
     );
   }

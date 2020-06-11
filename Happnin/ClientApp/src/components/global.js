@@ -9,9 +9,8 @@ export const GlobalStyles = createGlobalStyle`
   
 
   body {
-    background: ${({ theme }) => theme.body};
+    background: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text};
-    h1, h2, h3, h4, h5 : ${({ theme }) => theme.otherText};
     transition: all 0.25s linear;
   }
 
@@ -19,4 +18,8 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.card}; 
     transition: all 0.25s linear;
   }
+
+ pre #text {
+  background-color: ${({ theme }) => theme.homeDetails} !important;
+ }
   `

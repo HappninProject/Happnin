@@ -5,7 +5,6 @@ import logo from "../../images/happninHLogoThumb.png";
 import { Row, Col } from "react-bootstrap";
 import { Category } from '../../shared/Category'
 import { Link } from "react-router-dom";
-import { EventPage } from './EventPage'
 
 export class HappninEvent extends Component {
   constructor(props) {
@@ -18,24 +17,26 @@ export class HappninEvent extends Component {
       eventName : this.props.eventName,
       eventDescription: this.props.description,
       category: this.props.categoryId,
-      startTime: this.props.eventTime
+      startTime: this.props.eventTime,
+      image: {}
     };
-    console.log("in the constructor");
-    console.log(this.props);
+   
     this.attending = this.attending.bind(this);
   }
 
   //! get props from here
   static getDerivedStateFromProps(props, state) {
-    console.log("we in getDerived");
-    console.log(props);
-    console.log(state);
+
 
     return {
       attending: props.attending,
       attendingId: props.attendingId,
       gotDerived: true,
     };
+  }
+
+  async componentDidMount(){
+      await this.getPicture();
   }
 
   async attending() {
@@ -61,10 +62,21 @@ export class HappninEvent extends Component {
     this.props.handler();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("component did update");
-    console.log(prevProps);
-    console.log(prevState);
+  ImageToUse = () => {
+    const image = this.state.image;
+    if( image.image === undefined){
+      return logo;
+    }
+    else {
+      return `data:image/jpeg;base64,${image.image}`;
+    }
+  }
+
+  async getPicture(){
+    const imageId = this.props.eventImageId;
+    let response = await fetch(`api/Upload/${imageId}`)
+    let image = await response.json();
+    this.setState({image: image});
   }
 
   render() {
@@ -91,35 +103,44 @@ export class HappninEvent extends Component {
     let amPmEnd = endHrs >= 12 ? 'PM' : 'AM';
     endHrs = (endHrs % 12) || 12;
     let eventEndTime = endHrs + ":" + endMins + " " + amPm;
+    let image = this.ImageToUse();
 
     return (
-      <div class="card">
+      <div class="card cardHappninEvent">
         <Row around="xs">
           <Col xs={2}>
             <Card.Img
               className="eventImage"
               variant="left"
-              src={logo}
+              src={image}
               rounded="true"
-              style={{ padding: 5 }}
+              style={{ padding: 0, width: '188px', height: '188px' }}
             />
           </Col>
           <Col xs={10} horizontal="right">
-            <div class="card-body" className="happninevent">
-              <div className="eventinfo">
-                <h5 class="card-title">{e.name}</h5>
-                <Link to={`/EventPage/${e.id}`}>Event Page</Link>
-                <div class="card-text">
-                  <p>{e.description}</p>
-                  Cost: $ <b>{e.cost.toFixed(2)}</b> &ensp; Age Restriction:{" "}
+            <div className="card-body happninevent">
+              <div className="eventInfo">
+                <h2 class="card-title">
+                  <Link 
+                    to={`/EventPage/${e.id}`}>{e.name}</Link>
+                </h2>
+                <div className="card-text">
+                  <p className="description">{e.description}</p>
+                  Cost: $ <b>{e.cost}</b> &ensp; Age Restriction:{" "}
                   <b>{e.ageRestriction == 500 ? "All Ages": e.ageRestriction + "+"}</b> <br /> <br />
                   Category: <b>{Category(e.categoryId)}</b> <br />
-    {startDay} at {eventStartTime} - {endDay} at {eventEndTime}<br />
+                  {startDay} at {eventStartTime} - {endDay} at {eventEndTime}<br />
+>>>>>>> 0b455d267678ac6ba453889fbf75cfd2ab870949
                 </div>
+                <div className="category">
+                    {Category(e.categoryId)}
+                </div>
+
+
                 <p id="inline-text">
                   {this.state.attending === true
                     ? "This is HAPPNIN!"
-                    : "This is not HAPPNIN..."}
+                    : ""}
                 </p>
                 <button
                   id="buyTicketsButton"
@@ -131,9 +152,6 @@ export class HappninEvent extends Component {
               </div>
             </div>
           </Col>
-          {console.log("in the dealio")}
-          {console.log(this.props)}
-          {console.log(this.state)}
         </Row>
       </div>
     );

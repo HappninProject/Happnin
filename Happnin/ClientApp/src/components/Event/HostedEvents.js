@@ -17,7 +17,6 @@ export class HostedEvents extends Component {
         }
     }
 
-    //TODO need to pull all the event information, like the location and such
 
   async componentDidMount(event) {
     this._subscription = authService.subscribe(() => this.populateState());

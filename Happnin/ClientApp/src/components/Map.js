@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react";
 import "../styles/Marker.css";
 import GoogleMapReact from "google-map-react";
+//import { LocationContext } from './LocationContext';
 // A comment for test
 
 const Marker = props => {
@@ -10,7 +11,6 @@ const Marker = props => {
     </>
 }
 
-var myLatLng = { lat: 47.491255, lng: -117.582624 };
 
 export class Map extends Component {
 
@@ -53,7 +53,7 @@ export class Map extends Component {
     } */
 
     renderMarkers() {
-        {
+        
             this.state.markers.map((marker, index) => {
                 return (
                     <Marker key={index}
@@ -62,13 +62,13 @@ export class Map extends Component {
                     />
                 )
             })
-        }
+        
     }
 
     renderInfoWindow(map, maps) {
         this.state.locationIds.forEach(locId => {
             var latLng = {};
-            var test = this.state.locations.find(element => element.id == locId);
+            var test = this.state.locations.find(element => element.id === locId);
           //  console.log("test: " + test.id);
 
             latLng["lat"] = Number(test.lat);
@@ -145,7 +145,6 @@ export class Map extends Component {
                         bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_API_KEY }}
                             defaultCenter={this.props.center}
                             defaultZoom={14}
-                            onGoogleApiLoaded={({map, maps}) => this.renderMarkers()} 
                             onGoogleApiLoaded={({ map, maps }) => this.renderInfoWindow(map, maps)}
                             yesIWantToUseGoogleMapApiInternals
                     >

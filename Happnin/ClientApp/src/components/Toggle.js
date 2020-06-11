@@ -6,7 +6,7 @@ import ToggleContainer from './Toggle.styled';
 const Toggle = ({theme, toggleTheme}) => {
     let isLight = theme === 'light';
     return(
-        <ToggleContainer style={{float: 'right', 'margin-top': '4px', 'margin-bottom': '4px' }} onClick={toggleTheme}>
+        <ToggleContainer onClick={toggleTheme}>
             <p style={{'text-align': 'center',
 margin: 'auto', color: 'green'}}>
 Light/Dark Mode</p> 

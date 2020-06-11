@@ -21,10 +21,11 @@ export class SubmitEvent extends Component {
             locationId: 0,
             categoryId: 1,
             hostId: "",
+            eventImageId: null,
             eventTime: "2020-02-26T05:21:52.102Z",
             endTime: "2020-02-27T05:21:52.102Z",
-            cost: 42.0,
-            ageRestriction: 500
+            cost: 42.00,
+            ageRestriction: 0
             },
             location : { 
                 address: "",
@@ -35,6 +36,7 @@ export class SubmitEvent extends Component {
                 lat: "",
                 lng: ""
             },
+            img: {},
             redirectToHome: false
         };
 
@@ -49,6 +51,16 @@ export class SubmitEvent extends Component {
     await this.handleSubmitLocation(event)
     event.preventDefault();
     console.log(JSON.stringify(this.state.event));
+    let image = null;
+    if(this.state.img.name !== undefined){
+      let res = await this.submitPhoto();
+      console.log('res')
+      console.log(res.data)
+      image = res.data;
+      this.setState({event: {...this.state.event, eventImageId: image.id}})
+      console.log(this.state)
+    }
+   
     await fetch("api/Event", {
       method: "POST",
       body: JSON.stringify(this.state.event),
@@ -61,6 +73,21 @@ export class SubmitEvent extends Component {
               this.setState({redirectToHome: true});
       })
   }
+
+  async submitPhoto() {
+
+    const url = `api/Upload/`
+    const formData = new FormData();
+    formData.append('body', this.state.img);
+    const config = {
+      headers: {
+        'content-type' : 'multipart/form-data',
+      },
+    };
+   
+    return await axios.post(url, formData, config);
+  }
+
 
     async handleSubmitLocation(event) {
       event.preventDefault();
@@ -125,6 +152,10 @@ export class SubmitEvent extends Component {
     console.log(this.state);
   };
 
+  handleImageChange = event => {
+    this.setState({img: event.target.files[0]});
+  }
+
   componentDidMount = event => {
     this._subscription = authService.subscribe(() => this.populateState());
     this.populateState();
@@ -181,6 +212,7 @@ export class SubmitEvent extends Component {
     console.log(this.state)
   }
 
+
   render() {
     const redirectToHomeRef = this.state.redirectToHome;
     console.log(redirectToHomeRef)
@@ -190,12 +222,12 @@ export class SubmitEvent extends Component {
 
     return (
       <div class="card">
-      <div class="submit container-fluid">
+      <div class="submit container-fluid submitEventContainer">
         <h1 class="header">Tell Us About Your Event</h1>
 
         <form onSubmit={this.handleSubmit}>
             <div>
-                <h3>Where is your event?</h3>
+                <h3>Where is it?</h3>
                 <div class="form-group">
                     <label>Address: </label>
                     <input
@@ -203,7 +235,7 @@ export class SubmitEvent extends Component {
                         name="address"
                         value={this.state.location.address}
                         onChange={this.handleInputLocationChange}
-                        class="form-control">
+                        className="form-control inputHeight">
                     </input>
                 </div>
                 <div class="form-group">
@@ -213,13 +245,14 @@ export class SubmitEvent extends Component {
                         name="city"
                         value={this.state.location.city}
                         onChange={this.handleInputLocationChange}
-                        class="form-control">
+                        className="form-control inputHeight">
                     </input>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="state">State</label>
                     <select 
-                        class="form-control" 
+                        className="form-control inputHeight inputSubmitText" 
+                        style={{paddingBottom: ".1rem"}}
                         id="state" 
                         name="state"
                         value={this.state.value}
@@ -289,16 +322,16 @@ export class SubmitEvent extends Component {
                         name="zipCode"
                         value={this.state.location.zipCode}
                         onChange={this.handleInputLocationChange}
-                        className="form-control">
+                        className="form-control inputHeight">
                     </input>
                 </div>
             </div>
-        <h3>What is your event?</h3>
+        <h3>What is it?</h3>
           <div className="form-group">
             <label for="inputName">Name:</label>
             <input
               id="inputName"
-              class="form-control"
+              className="form-control inputHeight"
               name="name"
               type="text"
               placeholder="Title"
@@ -312,7 +345,7 @@ export class SubmitEvent extends Component {
               <label for="description">Description:</label>
               <textarea
                 id="description"
-                className="form-control"
+                className="form-control inputHeight"
                 cols="50"
                 rows="5"
                 description="description"
@@ -326,29 +359,32 @@ export class SubmitEvent extends Component {
             </div>
 
           <div className="categorySelect">
-            <label for="categorySelect">Event category:</label>
+            <label for="categorySelect">Category:</label>
             <select
               id="categorySelect"
               value={this.state.event.categoryId}
-              className="form-control"
+              className="form-control inputHeight inputSubmitText"
+              style={{paddingBottom: ".1rem"}}
               name="categoryId"
               onChange={this.handleInputChange}
             >
-              <option value="1">Music</option>
+              <option value="0">Music</option>
+              <option value="1">Festival</option>
               <option value="2">Comedy</option>
               <option value="3">Culture</option>
-              <option value="4">Festival</option>
+              <option value="4">Other</option>
+              <option value="5">Product</option>
             </select>
             </div>
 
           <div className="form-group">
             <label>Start Time:</label>
             <input 
-            type="datetime-local"
-            name="eventTime"
-            value={this.state.eventTime}
-            onChange={this.handleInputChange}
-            className="form-control"/>
+                type="datetime-local"
+                name="eventTime"
+                value={this.state.eventTime}
+                onChange={this.handleInputChange}
+                className="form-control inputHeight"/>
           </div>
           
           <div class="form-group">
@@ -358,7 +394,7 @@ export class SubmitEvent extends Component {
             name="endTime"
             value={this.state.endTime}
             onChange={this.handleInputChange}
-            className="form-control"/>
+            className="form-control inputHeight"/>
           </div>
 
           <div class="form-group"> 
@@ -370,15 +406,15 @@ export class SubmitEvent extends Component {
                 min="0.00" step="0.50" 
                 data-number-to-fixed="4" 
                 data-number-stepfactor="100" 
-                className="form-control currency" 
+                className="form-control currency inputHeight" 
                 id="costId" 
                 onChange={this.handleInputChange}/>
           </div>
-
-          <div className="image">
-            Image: <input id="imageUpload" type="file" />
-          </div>
-
+          
+            <div className="image">
+              Image: <input id="imageUpload" type="file" multiple accept='image/*' onChange={this.handleImageChange}/>
+            </div> 
+          
           {["checkbox"].map(type => (
             <div key={`inline-${type}`} className="mb-3">
               <Form.Check

@@ -6,7 +6,6 @@ using System.Transactions;
 using AutoMapper;
 using Happnin.Business.Dto;
 using Happnin.Data;
-using Happnin.Data.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop.Infrastructure;

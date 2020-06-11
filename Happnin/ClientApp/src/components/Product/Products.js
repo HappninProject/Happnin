@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Map, TileLayer, } from 'react-leaflet'
-import { HappninEvent } from './Event/HappninEvent';
+import { HappninEvent } from '../Event/HappninEvent';
+import searchIcon from "../../images/searchIcon.png";
 
 export class Products extends Component {
   constructor(props) {
@@ -59,50 +59,48 @@ export class Products extends Component {
   
   render() {
     return (
-      <div className="container-fluid card">
-        <h1 className="header">Search for Products</h1>
-        <div className="text-center">
-          <div id="filterName">
-            <label className="subHeader">Product Name (Nintendo Switch, toilet paper, etc.):&nbsp;</label>
+      <div className="container-fluid card cardSearch">
+          <div className="row" style={{marginBottom: "1rem"}}>
+            <h1 className="header">Search for Products</h1>
+            <img id="logo" className="d-inline-block searchIcon" alt="Logo" src={searchIcon} />
             <input
               type="text"
               name="eventNameSearch"
-              className="rounded"
+              className="form-control filterInput"
               onChange={this.handleNameSearchChange}
             ></input>
           </div>
-          <div id="filterZip">
+        <div style={{float: "left"}}>
+          <div className="row" style={{marginBottom: "1rem"}}>
             <label className="subHeader">
-              &nbsp;&nbsp;Zip code:&nbsp;
+                Postal Code:   
             </label>
             <input
               type="text"
               pattern="[0-9]*"
               name="eventZipSearch"
-              className="rounded"
+              className="form-control filterInput filterInputSmall"
               value={this.state.eventZipSearch}
               onChange={this.handleInputChange}
             ></input>
+            <label className="subHeader" style={{marginLeft: "1rem"}}>
+                Cost:
+            </label>
+            <select
+              className="form-control filterInput inputAgeText"
+              name="eventCost"
+              onChange={this.handleCostChange}
+            >
+              <option value="AnyPrice">Any Price</option>
+              <option value="0">Free</option>
+              <option value="25">Between .50 and $25</option>
+              <option value="50">Between $25.50 and $50</option>
+              <option value="100">Between $50.50 and $100</option>
+              <option value="More">More than $100</option>
+            </select>
           </div>
-        </div>
-          <div>
-            <div style={{ height: "100vh", width: "100%" }}>
-            <Map 
-                center={[this.state.lat, this.state.lng]} 
-                zoom={this.state.zoom} 
-                style={{ width: '100%', height: '100vh'}}
-                >
-                  <TileLayer
-                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    url="https://{s}-tiles.locationiq.com/v2/obk-en/r/{z}/{x}/{y}.png?key=b0b149aa2f9d3a"
-                />
-                </Map>
-            </div>
-          </div>
-          <div>
-
-          </div>
-        </div>
+         </div>
+       </div>
     );
   }
   

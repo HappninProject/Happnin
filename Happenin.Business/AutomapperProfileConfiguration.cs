@@ -22,7 +22,9 @@ namespace Happnin.Business
             CreateMap<Dto.AttendingInput, Attending>(); 
             CreateMap<Friendship, Dto.Friendship>();
             CreateMap<Dto.FriendshipInput, Friendship>();
-           
+            CreateMap<EventImage, Dto.EventImage>();
+            CreateMap<Dto.EventImageInput, EventImage>();
+
             CreateMap<Event, Event>().ForMember(property => property.Id, option => option.Ignore());
             CreateMap<User, User>().ForMember(property => property.Id, option => option.Ignore());
             CreateMap<Location, Location>().ForMember(property => property.Id, option => option.Ignore());

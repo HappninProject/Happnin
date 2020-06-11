@@ -72,7 +72,7 @@ export default class Weather extends Component {
             </div>
           
             <div style = {{fontSize : "12px"}}>
-            {this.state.city_name}
+                {this.state.city_name}
             </div>
              
           </div>

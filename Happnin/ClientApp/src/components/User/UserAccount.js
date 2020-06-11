@@ -3,28 +3,70 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/UserAccount.css";
 import { Link } from "react-router-dom";
 
-//need to figure out how to access user information from database and use those props in page
-
 export class UserAccount extends Component {
   constructor(props) {
     super(props);
-    //TODO: eventually remove the hardcoded values
-    //These values are temporarily hard-coded to test editing them on the EditAccount page
+    
     this.state = {
+      id: this.props.match.params.userId,      
       user: {
-        userName: "fakeUser1",
-        firstName: "Jane",
-        lastName: "Doe",
-        city: "Spokane",
-        birthday: "02/23/1995",
-        email: "fakeemail@gmail.com",
-        phone: "(509) 555-5555",
-        eventsOfInterest: ["Music", "Comedy", "Cultural"]
-      }
+        userName: "",
+        firstName: "",
+        lastName: "",
+        zipCode: -1,
+        email: "",
+        image: []
+      },
+      attending: [],
+      events: []
     };
   }
 
+  async componentDidMount(){
+    await this.FetchUserAccount(); 
+    await this.FetchAttending();
+    await this.FetchAttendingEvents();
+  }
+
+  async FetchUserAccount(){
+    const userId = this.state.id;
+    const response = await fetch(`api/User/${userId}`);
+    const tempUser = await response.json();
+    this.setState({ user: tempUser });
+  }
+
+  async FetchAttending(){
+    const userId = this.state.id;
+    const attending = await fetch(`api/Attendee/AttendeeInfo/${userId}`);
+    const tempAttend = await attending.json();
+    this.setState({ attending: tempAttend });
+  }
+
+  async FetchAttendingEvents(){
+    const attending = this.state.attending;
+    let events = [];
+    for(let i = 0; i < attending.length; i++){
+      let response = await fetch(`api/Event/${attending[i].eventId}`)
+      let event = await response.json();
+      events.push(event);
+    }
+    this.setState({events: events})
+
+  }
+
   render() {
+    const events = this.state.events;
+    const image = this.state.user.image;
+    let imageContent;
+    
+    if (image !== undefined && image.length > 0){
+      imageContent = `data:image/jpeg;base64,${image}`
+    }
+    else {
+      imageContent = "https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png";
+    }
+
+
     return (
       <div class="card">
         <div className="container-fluid">
@@ -32,19 +74,13 @@ export class UserAccount extends Component {
             <div className="col-sm border rounded white-div">
               <div className="row text-center">
                 <img
-                  src="https://cdn4.iconfinder.com/data/icons/social-media-and-networking/480/02_social_medis_profile_female_placeholder_image_profile_female-512.png"
+                  src={imageContent}
                   className="img-fluid mt-0"
                   alt="User Avatar"
                 ></img>
                 <h3 className="header mx-auto">
                   {this.state.user.firstName + " " + this.state.user.lastName}
                 </h3>
-              </div>
-              <div className="row-3">
-                <div className="col rounded white-div align-middle">
-                  <h4>User Bio</h4>
-                  <p>I think I'm stuck in a simulation</p>
-                </div>
               </div>
             </div>
             <div className="col-5 float-right border rounded white-div">
@@ -61,36 +97,18 @@ export class UserAccount extends Component {
                 </p>
               </div>
               <div>
-                <p className="subHeader">City: {this.state.user.city}</p>
-              </div>
-              <div>
-                <p className="subHeader">
-                  Birthday: {this.state.user.birthday}
-                </p>
+                <p className="subHeader">Zipcode: {this.state.user.zipCode}</p>
               </div>
               <div>
                 <p className="subHeader">Email: {this.state.user.email}</p>
               </div>
-              <div>
-                <p className="subHeader">
-                  Types of events I'm interested in:
-                  {this.state.user.eventsOfInterest.map(event => (
-                    <li key={event.id}>{event}</li>
-                  ))}
-                </p>
-              </div>
             </div>
             <div className="col-4 float-right border rounded white-div">
               <h1 className="header">Upcoming Events</h1>
-              <p>No upcoming events for you yet!</p>
+              {events.map((e) => (
+                <div><Link to={`/EventPage/${e.id}`}>{e.name}</Link></div>
+              ))}
             </div>
-          </div>
-          <div className="float-right mt-2">
-            <Link to="/edit-account">
-              <button id="btnEditAccount" className="btn secondaryButton">
-                Edit Profile
-              </button>
-            </Link>
           </div>
         </div>
       </div>

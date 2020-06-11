@@ -65,6 +65,7 @@ namespace Happnin
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IAttendeeService, AttendeeService>();
             services.AddScoped<IFriendshipService, FriendshipService>();
+            services.AddScoped<IEventImageService, EventImageService>();
 
             services.AddAutoMapper(new [] { typeof(AutomapperProfileConfiguration).Assembly});
 

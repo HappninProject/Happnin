@@ -1,6 +1,6 @@
 ﻿import React, { Component } from "react";
-import authService from '../api-authorization/AuthorizeService'
-
+import authService from '../api-authorization/AuthorizeService';
+import { Link } from "react-router-dom";
 export class FriendRequests extends Component {
 
   constructor(props) {
@@ -27,12 +27,10 @@ export class FriendRequests extends Component {
       authService.isAuthenticated(),
       authService.getUser()
     ]);
-    console.log(user);
     this.setState({
       isAuthenticated,
       userId: user && user.sub
     });
-    console.log(user);
     this.populateRequestData();
     this.populateYourRequests();
     this.populateFriends();
@@ -44,7 +42,6 @@ export class FriendRequests extends Component {
       let joined = {...potentialFriends[i], ...requests[i]}
       joinedArray.push(joined)
     }
-    console.log(joinedArray);
     return ( 
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
@@ -79,7 +76,6 @@ export class FriendRequests extends Component {
       let joined = {...potentialFriends[i], ...requests[i]}
       joinedArray.push(joined)
     }
-    console.log(joinedArray);
     return ( 
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
@@ -134,6 +130,7 @@ export class FriendRequests extends Component {
 
     return (
       <div className="card">
+        <Link to={'/friend-search'}>Send Request</Link>
         <h1 id="tabelLabel" className="header">
           Friend Requests
         </h1>
@@ -164,7 +161,7 @@ export class FriendRequests extends Component {
         <tbody>
           {friends.map(u => (
             <tr key={u.userName}>
-              <td>{u.userName}</td>
+              <td><Link to={`/User/${u.id}`}>{u.userName}</Link></td>
               <td>{u.firstName}</td>
               <td>{u.lastName}</td>
             </tr>
@@ -200,10 +197,6 @@ export class FriendRequests extends Component {
         }
       }
 
-      console.log('potential friends')
-      console.log(potentFriends)
-      console.log('requests')
-      console.log(requests)
       this.setState({ friendRequests: requests, 
                       potentialFriends: potentFriends,
                       realFriends: realFriendsTemp });
@@ -240,14 +233,11 @@ export class FriendRequests extends Component {
       const data = await response.json();
       potential.push(data);
     }
-    console.log("potential friends?");
-    console.log(potential);
     this.setState({potentialFriends: potential})
   }
 
   async populateYourRequests(){
     const userId = this.state.userId;
-    console.log(userId);
     const response = await fetch(`api/Friendship/UserRequests/${userId}`);
     const data = await response.json();
     this.setState({yourRequests: data});
@@ -262,20 +252,13 @@ export class FriendRequests extends Component {
       const data = await response.json();
       potential.push(data);
     }
-    console.log("Requested friends?");
-    console.log(potential);
     this.setState({requestedFriends: potential})   
   }
   
   async populateRequestData() {
-    console.log("before fetch");
     const userId = this.state.userId;
-    console.log(userId);
     const response = await fetch(`api/Friendship/RequestsForUser/${userId}`);
-    console.log(response);
-    console.log("after fetch");
     const data = await response.json();
-    console.log("Got Data", data);
     this.setState({ friendRequests: data });
     this.populateFriendData();
   }

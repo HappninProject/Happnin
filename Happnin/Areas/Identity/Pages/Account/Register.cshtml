@@ -8,11 +8,11 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
             <h4>Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
-            
+
             <div class="form-group">
                 <label asp-for="Input.FirstName">First Name</label>
                 <input asp-for="Input.FirstName" class="form-control" />
@@ -47,6 +47,10 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Image">Profile Image</label>
+                <input asp-for="Input.Image" for="customImage" multiple accept="image/*" class="form-control" />
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

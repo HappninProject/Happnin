@@ -22,26 +22,46 @@ a.navbar-brand {
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
 
+.btnSubmitEvent {
+    margin-bottom: 3rem;
+}
+
 .logo {
   font-family: Montserrat;
   font-style: bold;
   font-size: 32px;
+  margin-bottom: 2rem;
 }
 
 .navHeader {
   font-family: Montserrat;
-  font-size: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f1f1f;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.navbarLogo {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 4rem;
 }
 
 header {
   width: 100%;
-  background-color: #2ccb92;
+  height: 6rem;
+  background-color: #62fe69;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  overflow: hidden;
 }
+
 .weather {
   padding-right: 10em;
 }
@@ -52,10 +72,13 @@ header {
 }
 
 .navbar {
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  flex-flow: row wrap;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    padding-bottom: 4rem !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
 }
 
 #weatherInfo {
@@ -63,10 +86,66 @@ header {
   text-align: center;
 }
 
-#weather {
-  width: 100%;
-}
-
 .flexItem {
   justify-content: space-evenly;
+}
+
+.login {
+    width: 40rem;
+    overflow: hidden;
+    list-style:none;
+    text-align: right;
+    display: inline-block !important;
+    margin-bottom: 3rem;
+}
+
+.loginContainer {
+    overflow: visible;
+}
+
+.loginSignUpBlock {
+    width: 100%;
+    display: inline-block;
+    overflow: visible;
+    white-space: nowrap;
+    vertical-align:top;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.navbar-nav > .active{
+    background-image: none;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    background-color: blue !important;
+}
+
+.active a{
+    background-image: none !important;
+    background-color: blue !important;
+    color: blue !important;
+}
+
+.navItem {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    display: inline-block !important;
+}
+
+.navItem.active {
+    background-image: none !important;
+    background-color: blue !important;
+}
+
+.submitEventBtnText {
+
+}
+
+.navSubmitEvent {
+    height: 1rem;
+    margin-bottom: 4rem;
+    padding-bottom: 1rem;
 }
